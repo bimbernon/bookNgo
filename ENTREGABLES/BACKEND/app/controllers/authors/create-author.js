@@ -15,14 +15,12 @@ async function createAuthor(req, res) {
   try {
 
     const {
-      idautor,
       nombreautor,
       apel1,
       apel2,
     } = req.body;
 
     const author = {
-        idautor,
         nombreautor,
         apel1,
         apel2,
@@ -30,11 +28,14 @@ async function createAuthor(req, res) {
 
     const authors = await authorRepository.addAuthor(author);
 
-    res.status(201).send(authors);
+    res.status(201).send({
+      nombreautor,
+      apel1,
+      apel2,
+    });
 
   } catch (err) {
-    res.status(err.status || 500);
-    res.send({ error: err.message });
+    res.status(400).send({ error: err.message });
   }
 }
 
