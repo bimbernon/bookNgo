@@ -6,7 +6,7 @@ const { createAuthor } = require('../controllers/authors/create-author');
 const { getAuthors } = require('../controllers/authors/get-authors');
 const { getAuthorById } = require('../controllers/authors/get-author-by-id');
 const { getAuthorByName } = require('../controllers/authors/get-author-by-name');
-const { deleteById } = require('../repositories/author-repository');
+const { removeAuthorById } = require('../controllers/authors/delete-autor-by-id');
 
 const router = express.Router();
 
@@ -17,7 +17,7 @@ router.route('/')
 
 router.route('/id/:idAuthor')
 .get((req, res) => getAuthorById(req, res))
-.delete((req, res) => deleteById(req, res))
+.delete((req, res) => removeAuthorById(req, res))
 
 router.route('/authors/name/:authorName')
 .get((req, res) => getAuthorByName(req, res))

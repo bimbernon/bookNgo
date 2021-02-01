@@ -72,7 +72,7 @@ async function addAuthor (author) {
 async function deleteById (id) {
     
     const pool = await database.getPool();
-    const deleteQuery = `DELETE FROM autor WHERE idautor=?`;
+    const deleteQuery = `DELETE FROM autor WHERE idautor = ?`;
     const [ deletedAuthor ] = await pool.query(deleteQuery, id);
 
     return true;

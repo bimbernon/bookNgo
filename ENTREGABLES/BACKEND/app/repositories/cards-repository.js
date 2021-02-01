@@ -28,9 +28,9 @@ async function findLastCardId() {
 async function addCard(cards) {
 
     const pool = await database.getPool();
-    const id = findLastCardId();
+    const id = await findLastCardId();
+
     const { 
-        idtarjeta, 
         numerotarjeta,
         idusuario, 
         fechaExpiracion, 
@@ -40,7 +40,6 @@ async function addCard(cards) {
 
     const [ card ] = await pool.query(query, [
         id,
-        idtarjeta,
         numerotarjeta,
         idusuario,
         fechaExpiracion,

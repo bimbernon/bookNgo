@@ -14,7 +14,6 @@ async function createCard(req, res) {
     try {
 
         const {
-            idtarjeta,
             numerotarjeta,
             idusuario,
             fechaExpiracion,
@@ -22,16 +21,20 @@ async function createCard(req, res) {
         } = req.body;
 
         const cards = {
-            idtarjeta,
             numerotarjeta,
             idusuario,
             fechaExpiracion,
             csv,
         }
+        
+        await cardsRepository.addCard(cards);
 
-        const card = await cardsRepository.addCard();
-
-        res.status(200).send(card);
+        res.status(200).send({
+          numerotarjeta,
+          idusuario,
+          fechaExpiracion,
+          csv,
+        });
 
     } catch(err) {
         res.status(400).send({ error: err.message });
