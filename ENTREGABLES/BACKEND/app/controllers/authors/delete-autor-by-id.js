@@ -18,8 +18,9 @@ async function removeAuthorById(res, req) {
         }
 
         await deleteById(parseInt(idAuthor));
-        console.log(author);
-        res.status(200).send(`El autor ha sido eliminado correctamente.`);
+
+        res.send({ message:`El autor ha sido eliminado correctamente.` });
+        
     } catch(err) {
         res.status(400).send({ error: err.message });
     }
