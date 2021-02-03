@@ -83,7 +83,7 @@ create table donacion (
 iddonacion int (6) not null,
 idusuario int (6) not null,
 titulo varchar(40) not null,
-nombreaAutor varchar (40) not null,
+nombreautor varchar (40) not null,
 fechadonacion datetime,
 revisado boolean not null default false,
 correcto boolean not null default false,
