@@ -13,6 +13,7 @@ create table usuario (
   apel1 varchar (40) not null,
   apel2 varchar (40) not null,
   email varchar(40) not null unique,
+  direccion varchar(80) not null,
   codFoto varchar (20) null
   
 )
@@ -103,7 +104,7 @@ create table factura (
   idusuario int(6) not null references usuario (idusuario),
   fecha datetime,
   iva float(4,2) not null,
-  precioenvio float not null (4,2),
+  precioenvio float (4,2) not null,
   total float (4,2),
 constraint `fk_UsuarioFactura` FOREIGN KEY (`idusuario` ) REFERENCES `proyectoFinalHACKABOSS`.`usuario` (`idusuario` )
 );
