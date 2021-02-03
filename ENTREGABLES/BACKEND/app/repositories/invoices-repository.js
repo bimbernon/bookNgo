@@ -2,7 +2,6 @@
 const database = require('../infrastructure/database');
 const { createDetail,readDetailsByInvoce } = require('../repositories/details-repository');
 
-
 async function readInvoicesByUser(userID) {
     const pool = await database.getPool();
     const query = 'select f.*,u.* from factura f inner join detalle d on f.idfactura=d.idfactura inner join libro l on d.idlibro=l.idlibro inner join usuario u on u.idusuario=l.idusuario where u.idusuario=? group by f.idfactura';
@@ -19,10 +18,10 @@ async function readInvoicesByUser(userID) {
 async function insertInvoice(invoice, details) {
     const pool = await database.getPool();
     try {
-        
         await pool.query('START TRANSACTION')
     
         const query = 'INSERT INTO factura (idfactura,idusuario,fecha,iva,precioenvio,total) values (?,?,?,?,?,?)';
+        
         const {
             idfactura,
             idusuario,
@@ -31,6 +30,7 @@ async function insertInvoice(invoice, details) {
             precioenvio,
             total
         } = invoice;
+
         const [invoices] = await pool.query(query, [idfactura, idusuario, fecha, iva, precioenvio, total]);
         let totalR = total;
         
@@ -57,4 +57,4 @@ async function updateInvoice(total, idfactura) {
     const update = await pool.query(query, [total,idfactura]);
     return update;
 }
-module.exports = { readInvoicesByUser, insertInvoice,updateInvoice };
+module.exports = { readInvoicesByUser,insertInvoice,updateInvoice };

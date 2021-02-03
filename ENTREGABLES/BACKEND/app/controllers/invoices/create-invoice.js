@@ -14,7 +14,6 @@ const schema = Joi.object().keys({
         idlibro:Joi.number().positive().required(),
         precio:Joi.number().positive().required()
     }))
-
 });
 
 async function createInvoice(req, res) {
@@ -28,7 +27,6 @@ async function createInvoice(req, res) {
             iva,
             precioenvio,
             detalles
-
         } = req.body;
 
         await schema.validateAsync(req.body);
