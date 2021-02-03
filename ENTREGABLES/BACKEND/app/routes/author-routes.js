@@ -19,11 +19,11 @@ router.route('/')
 router.route('/name/:authorsName')
 .get((req, res) => getAuthorByName(req, res))
 
-router.route('/:idAuthor')
+router.route('/id/:idAuthor')
 .get((req, res) => getAuthorById(req, res))
 .put((req, res) => updateAuthorById(req, res));
 
-router.route('/:idAuthor')
+router.route('/id/:idAuthor')
 .delete((req, res) => removeAuthorById(req, res))
 
 

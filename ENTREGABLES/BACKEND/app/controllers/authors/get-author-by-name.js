@@ -9,11 +9,11 @@ const schema = Joi.string().required();
 async function getAuthorByName(req, res) {
     try {
 
-        const { name } = req.params;
-    
-        await schema.validateAsync(name);
+        const { authorsName } = req.params;
+    console.log(authorsName);
+        await schema.validateAsync(authorsName);
 
-        const authorName = await findByName(name);
+        const authorName = await findByName(authorsName);
         console.log(authorName);
 
         if(!authorName) {

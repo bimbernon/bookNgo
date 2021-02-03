@@ -2,7 +2,7 @@
 
 const Joi = require('joi');
 
-const reservesRepository = require('../../repositories/reserve-repository');
+const reserveRepository = require('../../repositories/reserve-repository');
 
 
 // const schema = Joi.object().keys({
@@ -20,7 +20,12 @@ async function createReserve(req, res) {
             fechareserva,
             fechadevolucion,
             rating,
-        }
+        } = req.body;
+
+        // const now = new Date();
+        // const reserveDate = now;
+        // const reserveDevolution = now.setMonth(now.getMonth() + 1);
+        // console.log(reserveDate, reserveDevolution);
     
         const reserve = {
             idusuario,
@@ -29,19 +34,23 @@ async function createReserve(req, res) {
             fechadevolucion,
             rating,
         }
+        console.log(reserve);
+
+        const newReserve = await reserveRepository.addReserve(reserve);
     
-        const reserves = await reservesRepository.addReserve(reserve);
-    
-        res.status(200).send({
+        res
+          .status(200)
+          .send({
             idusuario,
             idlibro,
             fechareserva,
             fechadevolucion,
             rating,
-        })
+          });
 
     } catch(err) {
-        res.status(400).send({ error: err.message });
+         res.status(err.status || 500);
+         res.send({ error: err.message });
     }
 
 }

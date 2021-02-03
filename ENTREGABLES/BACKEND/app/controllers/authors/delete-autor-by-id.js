@@ -5,7 +5,7 @@ const { deleteById, findById } = require('../../repositories/author-repository')
 
 const schema = Joi.number().positive().required();
 
-async function removeAuthorById(res, req) {
+async function removeAuthorById(req, res) {
     try {
         const { idAuthor } = req.params;
 
@@ -19,7 +19,7 @@ async function removeAuthorById(res, req) {
 
         await deleteById(parseInt(idAuthor));
 
-        res.send({ message:`El autor ha sido eliminado correctamente.` });
+        res.status(200).send( 'El autor ha sido eliminado correctamente' );
         
     } catch(err) {
         res.status(400).send({ error: err.message });

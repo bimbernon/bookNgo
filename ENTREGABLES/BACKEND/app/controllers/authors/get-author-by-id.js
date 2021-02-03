@@ -14,7 +14,9 @@ async function getAuthorById (req, res) {
         const author = await findById(parseInt(idAuthor));
 
         if(!author) {
-            throw new Error('No se encontro el autor con ese Id');
+            const error = new Error('No se encontro el autor con ese Id');
+            error.status = 400;
+            throw error;
         }
 
         res.status(201).send(author);

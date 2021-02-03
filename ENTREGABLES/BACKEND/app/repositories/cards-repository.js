@@ -18,11 +18,19 @@ async function readAll() {
 async function findLastCardId() {
 
   const pool = await database.getPool();
-  const query = "SELECT max(idtarjeta) as ultimoID from tarjeta";
+  const query = `SELECT max(idtarjeta) as ultimoID FROM tarjeta`;
   let [ id ] = await pool.query(query);
 
   const generateNewId = id[0].ultimoID + 1;
   return generateNewId;
+}
+
+async function findCardById(id) {
+  const pool = await database.getPool();
+  const query = `SELECT * FROM tarjeta WHERE idtarjeta=?`;
+  const [ card ] = await pool.query(query, id);
+
+  return card;
 }
 
 async function addCard(cards) {
@@ -49,9 +57,42 @@ async function addCard(cards) {
     return card;
 }
 
+async function modifiyCardById (cardId, card) {
+
+    const {
+        numerotarjeta,
+        fechaExpiracion,
+        csv,
+    } = card;
+    console.log(numerotarjeta, fechaExpiracion, csv, card);
+
+    const pool = await database.getPool();
+    const query = `UPDATE tarjeta SET numerotarjeta=?, fechaExpiracion=?, csv=? WHERE idtarjeta=?`;
+
+    await pool.query(query, [
+        numerotarjeta,
+        fechaExpiracion,
+        csv,
+        cardId,
+    ])
+
+    return true;
+}
+
+async function deleteCardById(cardId) {
+    const pool = await database.getPool();
+    const query = `DELETE FROM tarjeta WHERE idtarjeta=?`;
+    const [ card ] = await pool.query(query, cardId);
+
+    return card;
+}
+
 
 
 module.exports = {
     readAll,
     addCard,
+    deleteCardById,
+    findCardById,
+    modifiyCardById,
 }

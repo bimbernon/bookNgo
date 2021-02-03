@@ -19,8 +19,8 @@ async function readAll() {
 async function findById (id) {
     
     const pool = await database.getPool();
-    const query = `SELECT * FROM autor WHERE idautor=${id}`;
-    const [ authorId ] = await pool.query(query);
+    const query = "select * from autor where idautor=?";
+    const [ authorId ] = await pool.query(query, id);
 
     return authorId;
 }
@@ -28,10 +28,10 @@ async function findById (id) {
 async function findByName (name) {
 
     const pool = await database.getPool();
-    const query = "SELECT * FROM autor WHERE nombreautor=?";
+    const query = "SELECT titulo FROM libro JOIN autor using(idautor) WHERE nombreautor=?";
     const [ authorName ] = await pool.query(query, name);
 
-    return authorName[0];
+    return authorName;
 }
 
 async function findLastAuthorId() {
@@ -77,13 +77,13 @@ async function updateAuthorById(idAuthor, updateAuthor) {
   } = updateAuthor;
 
   const pool = await database.getPool();
-  const query = `UPDATE autor SET idautor=?, nombreautor=?, apel1=?, apel2=? WHERE idautor=?`;
-
+  const query = `UPDATE autor SET nombreautor=?, apel1=?, apel2=? WHERE idautor=?`;
+  
   await pool.query(query, [
-    idAuthor,
     nombreautor,
     apel1,
     apel2,
+    idAuthor
   ]);
 
   return true;
@@ -95,12 +95,8 @@ async function deleteById (idAuthor) {
     const deleteQuery = `DELETE FROM autor WHERE idautor = ?`;
     const [ deletedAuthor ] = await pool.query(deleteQuery, idAuthor);
 
-    return true;
+    return deletedAuthor;
 }
-
-
-
-
 
 
 
