@@ -1,8 +1,8 @@
 'use strict'
 const { readInvoicesByUser } = require('../../repositories/invoices-repository');
 const {formatArrayInvoices} = require('../../helpers/invoices/usefulMethods');
-const joi = require('Joi');
-const schemaId = joi.number().positive().required();
+const Joi = require('joi');
+const schemaId = Joi.number().positive().required();
 async function getInvoicesByUser(req, res) {
     try {
         const { userID } = req.params;
