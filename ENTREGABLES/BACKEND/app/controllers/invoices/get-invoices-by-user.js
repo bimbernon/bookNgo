@@ -5,6 +5,7 @@ async function getInvoicesByUser(req, res) {
     try {
         const { userID } = req.params;
         const invoices = await readInvoicesByUser(userID);
+     
         if (!invoices) { // Preguntar por que no entra por este if
             throw new Error('No se encontraron libros para esa editorial')
         }

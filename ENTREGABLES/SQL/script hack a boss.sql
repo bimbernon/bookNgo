@@ -68,16 +68,33 @@ Create table reserva (
     constraint `fk_LibroReserva` FOREIGN KEY (`idlibro` ) REFERENCES `proyectoFinalHACKABOSS`.`libro` (`idlibro`) on delete restrict
 );
 
-create table donacion (
-	idusuario int(6) not null,
-    idlibro int (6) not null,
-    fechadonacion datetime,
-	revisado boolean not null default false,
-    primary key (idusuario,idlibro),
-    constraint `fk_UsuarioDonacion` FOREIGN KEY (`idusuario` ) REFERENCES `proyectoFinalHACKABOSS`.`usuario` (`idusuario` ),
-    constraint `fk_LibroDonacion` FOREIGN KEY (`idlibro` ) REFERENCES `proyectoFinalHACKABOSS`.`libro` (`idlibro`) on delete restrict
+-- create table donacion (
+-- 	idusuario int(6) not null,
+ --    idlibro int (6) not null,
+ --    fechadonacion datetime,
+-- 	revisado boolean not null default false,
+ --    primary key (idusuario,idlibro),
+ --    constraint `fk_UsuarioDonacion` FOREIGN KEY (`idusuario` ) REFERENCES `proyectoFinalHACKABOSS`.`usuario` (`idusuario` ),
+ --    constraint `fk_LibroDonacion` FOREIGN KEY (`idlibro` ) REFERENCES `proyectoFinalHACKABOSS`.`libro` (`idlibro`) on delete restrict
     
+-- );
+
+create table donacion (
+iddonacion int (6) not null,
+idusuario int (6) not null,
+titulo varchar(40) not null,
+nombreaAutor varchar (40) not null,
+fechadonacion datetime,
+revisado boolean not null default false,
+correcto boolean not null default false,
+primary key (iddonacion),
+constraint `fk_UsuarioDonacion` FOREIGN KEY (`idusuario` ) REFERENCES `proyectoFinalHACKABOSS`.`usuario` (`idusuario` )
+
 );
+
+
+
+
 
 
 
@@ -85,8 +102,8 @@ create table factura (
   idfactura int(6)  not null primary key,
   idusuario int(6) not null references usuario (idusuario),
   fecha datetime,
-  iva float(4,2),
-  precioenvio float (4,2),
+  iva float(4,2) not null,
+  precioenvio float not null (4,2),
   total float (4,2),
 constraint `fk_UsuarioFactura` FOREIGN KEY (`idusuario` ) REFERENCES `proyectoFinalHACKABOSS`.`usuario` (`idusuario` )
 );
@@ -121,11 +138,7 @@ INSERT INTO `proyectofinalhackaboss`.`factura` (`idfactura`, `idusuario`, `fecha
 INSERT INTO `proyectofinalhackaboss`.`detalle` (`idfactura`, `iddetalle`, `idlibro`, `precio`) VALUES ('1', '1', '1', '20.0');
 INSERT INTO `proyectofinalhackaboss`.`detalle` (`idfactura`, `iddetalle`, `idlibro`, `precio`) VALUES ('1', '2', '1', '30.0');
 INSERT INTO `proyectofinalhackaboss`.`detalle` (`idfactura`, `iddetalle`, `idlibro`, `precio`) VALUES ('1', '3', '1', '50.0');
-
-
-
-
-
-
-
-
+-- Se inserta el libro enviado por el usuario 
+INSERT INTO proyectoFinalHACKABOSS.donacion  values (1,1,"Harry Potter donado" ,"Autor1","2020-05-10",1,0)
+-- Se revisa (modificando el atributo revisado) y a continuacion se modifica el atributo correcto
+-- Si esta todo correcto insertamos el libro con los datos completos .
