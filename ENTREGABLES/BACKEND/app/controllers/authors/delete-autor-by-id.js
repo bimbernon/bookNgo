@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 const Joi = require('joi');
 const { deleteById, findById } = require('../../repositories/author-repository')
@@ -9,7 +9,7 @@ async function removeAuthorById(req, res) {
     try {
         const { idAuthor } = req.params;
 
-        await schema.validateAsync(idAuthor);
+    await schema.validateAsync(idAuthor);
 
         const author = await findById(idAuthor);
 
@@ -17,7 +17,7 @@ async function removeAuthorById(req, res) {
             throw new Error("No se ha encontrado autor con ese id");
         }
 
-        await deleteById(parseInt(idAuthor));
+    await deleteById(parseInt(idAuthor));
 
         res.status(200).send( 'El autor ha sido eliminado correctamente' );
         
@@ -26,7 +26,6 @@ async function removeAuthorById(req, res) {
     }
 }
 
-
 module.exports = {
-    removeAuthorById,
-}
+  removeAuthorById,
+};

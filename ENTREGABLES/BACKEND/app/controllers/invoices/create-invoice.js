@@ -1,6 +1,20 @@
 "use strict";
 
 const { insertInvoice } = require('../../repositories/invoices-repository');
+const Joi = require('joi');
+const schema = Joi.object().keys({
+    idfactura : Joi.number().positive().required(),
+    idusuario: Joi.number().positive().required(),
+    fecha: Joi.date().required(),
+    iva:Joi.number().positive().required(),
+    precioenvio: Joi.number().positive().required(),
+    detalles: Joi.array().items(Joi.object({
+        idfactura:Joi.number().positive().required(),
+        iddetalle:Joi.number().positive().required(),
+        idlibro:Joi.number().positive().required(),
+        precio:Joi.number().positive().required()
+    }))
+});
 
 async function createInvoice(req, res) {
     try {
@@ -13,8 +27,9 @@ async function createInvoice(req, res) {
             iva,
             precioenvio,
             detalles
-
         } = req.body;
+
+        await schema.validateAsync(req.body);
 
         const invoice = {
             idfactura,
@@ -25,9 +40,8 @@ async function createInvoice(req, res) {
             total
         };
    
-        console.log("ANTES DE CREAR LA FACTURA EL NUMERO DE FACTURA VALE " +invoice.idfactura)
-         await insertInvoice(invoice,detalles)
-         res.send('BIEN CREADA LA FACTURA');
+         await insertInvoice(invoice,detalles);
+         res.send('SE HA AÑADIDO CORRECTAMENTE LA FACTURA');
          
     } catch (err) {
         res.status(err.status || 500);

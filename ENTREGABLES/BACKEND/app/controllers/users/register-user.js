@@ -8,20 +8,20 @@ const {
   findUserByEmail,
 } = require("../../repositories/users-repository");
 
-// const schema = Joi.object().keys({
-//   name: Joi.string().alphanum().min(3).max(20).required(),
-//   userProfileName: Joi.string().alphanum().min(3).max(20).required(),
-//   password: Joi.string().min(3).max(40).required(),
-//   // repeatPassword: Joi.string().min(3).max(20).required(),
-//   lastName1: Joi.string().alphanum().min(3).max(20).required(),
-//   lastName2: Joi.string().alphanum().min(3).max(20).required(),
-//   email: Joi.string().email().required(),
-//   photoCod: Joi.string().alphanum(),
-// });
+const schema = Joi.object().keys({
+  name: Joi.string().alphanum().min(3).max(20).required(),
+  userProfileName: Joi.string().alphanum().min(3).max(20).required(),
+  password: Joi.string().min(3).max(40).required(),
+  // repeatPassword: Joi.string().min(3).max(20).required(),
+  lastName1: Joi.string().alphanum().min(3).max(20).required(),
+  lastName2: Joi.string().alphanum().min(3).max(20).required(),
+  email: Joi.string().email().required(),
+  photoCod: Joi.string().alphanum(),
+});
 
 async function registerUser(req, res) {
   try {
-    // await schema.validateAsync(req.body);
+    await schema.validateAsync(req.body);
 
     const {
       name,
@@ -57,7 +57,16 @@ async function registerUser(req, res) {
 
     await createUser(user);
 
-    res.status(201).send("hola");
+    res.status(201).send({
+      name,
+      admin,
+      userProfileName,
+      passwordHash,
+      lastName1,
+      lastName2,
+      email,
+      photoCod,
+    });
   } catch (err) {
     res.status(400).send({ error: err.message });
   }

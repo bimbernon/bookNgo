@@ -1,5 +1,6 @@
 "use strict";
 
+// const { async } = require("crypto-random-string");
 const database = require("../infrastructure/database");
 
 async function findAllUsers() {
@@ -8,14 +9,6 @@ async function findAllUsers() {
   const [users] = await pool.query(query);
 
   return users;
-}
-
-async function findUserById(id) {
-  const pool = await database.getPool();
-  const query = "SELECT * FROM usuario WHERE idusuario = ?";
-  const [users] = await pool.query(query, id);
-
-  return users[0];
 }
 
 async function findUserByEmail(email) {
@@ -33,6 +26,14 @@ async function findLastUserId() {
 
   const generatedId = id[0].lastUserId + 1;
   return generatedId;
+}
+
+async function findUserById(userId) {
+  const pool = await database.getPool();
+  const query = "SELECT * FROM usuario WHERE idusuario = ?";
+  const [users] = await pool.query(query, userId);
+
+  return users[0];
 }
 
 async function createUser(user) {
@@ -65,15 +66,40 @@ async function createUser(user) {
     photoCod,
   ]);
 
-  console.log([createdUser]);
-
   return createdUser;
+}
+
+async function eraseUser(userId) {
+  const pool = await database.getPool();
+  const query = "DELETE FROM usuario WHERE idusuario = ?";
+  await pool.query(query, userId);
+
+  return true;
+}
+
+async function updateUser(data) {
+  const { name, userProfileName, passwordHash, lastName1, lastName2 } = data;
+  const pool = await database.getPool();
+  const updateQuery = `UPDATE usuario 
+  SET nombreusuario = ?, nombreperfilusuario = ?, contraseña = ?, apel1 = ?, apel2 = ? 
+  WHERE idusuario = ?`;
+  await pool.query(updateQuery, [
+    name,
+    userProfileName,
+    passwordHash,
+    lastName1,
+    lastName2,
+  ]);
+
+  return true;
 }
 
 module.exports = {
   createUser,
+  eraseUser,
   findAllUsers,
   findLastUserId,
   findUserById,
   findUserByEmail,
+  updateUser,
 };

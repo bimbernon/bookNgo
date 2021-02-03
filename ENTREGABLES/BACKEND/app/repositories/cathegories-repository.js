@@ -36,4 +36,26 @@ async function insertCathegory(cathegory) {
   return insertedCathegory;
 }
 
-module.exports = { findAllCathegories, insertCathegory, findLastCathegoryId };
+async function eraseCathegory(cathegoryId) {
+  const pool = await database.getPool();
+  const query = "DELETE FROM categoria WHERE idcategoria = ?";
+  await pool.query(query, cathegoryId);
+
+  return true;
+}
+
+async function findCathegoryById(cathegoryId) {
+  const pool = await database.getPool();
+  const query = "SELECT * FROM categoria WHERE idcategoria = ?";
+  const [cathegories] = await pool.query(query, cathegoryId);
+
+  return cathegories[0];
+}
+
+module.exports = {
+  eraseCathegory,
+  findCathegoryById,
+  findAllCathegories,
+  findLastCathegoryId,
+  insertCathegory,
+};

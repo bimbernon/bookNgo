@@ -10,7 +10,7 @@ async function getBooksByYearPublication(req, res) {
         const { yearPublication } = req.params;
         schema.validateAsync(yearPublication);
         const books = await findBookByYearPublication(yearPublication);
-        if (!books) { // Preguntar por que no entra por este if
+        if (!books) { 
             throw new Error('No se encontraron libros para esa editorial')
         }
         const booksFormateados = formatArrayBooks(books);
