@@ -94,6 +94,22 @@ async function updateUser(data) {
   return true;
 }
 
+async function findUserProfileImage(userId) {
+  const pool = await database.getPool();
+  const query = "SELECT codFoto FROM users WHERE idusuario = ?";
+  const [users] = await pool.query(query, userId);
+
+  return users[0];
+}
+
+async function uploadImageProfile(userId, image) {
+  const pool = await database.getPool();
+  const updateQuery = "UPDATE users SET codFoto = ? WHERE idusuario = ?";
+  await pool.query(updateQuery, [image, userId]);
+
+  return true;
+}
+
 module.exports = {
   createUser,
   eraseUser,
@@ -102,4 +118,6 @@ module.exports = {
   findUserById,
   findUserByEmail,
   updateUser,
+  findUserProfileImage,
+  uploadImageProfile,
 };
