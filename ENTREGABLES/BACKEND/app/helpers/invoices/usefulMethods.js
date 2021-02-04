@@ -3,41 +3,41 @@
 function formatArrayInvoices(arrayInvoices) {
 
     const formattedInvoices = arrayInvoices.map((invoice) => {
-    
-        const formattedDetails = invoice.details.map((detail)=>{
+
+        const formattedDetails = invoice.details.map((detail) => {
             const formattedDetail = {
-                idDetalle:detail.iddetalle,
-                precio:detail.precio,
-                
-                Libro: {
-                    titulo:detail.titulo,
-                    editorial : detail.editorial,
-                    Categoria: {
-                        nombreCategoria:detail.nombrecategoria,
-                        descripcionCategoria:detail.descripcioncategoria
+                idDetail: detail.iddetalle,
+                price: detail.precio,
+
+                Book: {
+                    title: detail.titulo,
+                    editorial: detail.editorial,
+                    Category: {
+                        nameCategory: detail.nombrecategoria,
+                        descriptionCategory: detail.descripcioncategoria
                     }
                 },
-                
+
             }
             return formattedDetail;
         });
         const formattedInvoice = {
-            idfactura: invoice.idfactura,
-            fechaFactura : invoice.fecha,
-            ivaFactura: invoice.iva,
-            precioEnvio : invoice.precioenvio,
-            
-            Usuario: {
-                nombre: invoice.nombreusuario,
-                apellido1: invoice.apel1,
-                apellido2: invoice.apel2,
-                nombrePerfil: invoice.nombreperfilusuario,
-                email:invoice.email,
-                foto: invoice.codFoto
-            },
-            Detalle: formattedDetails,
+            idinvoice: invoice.idfactura,
+            DateInvoice: invoice.fecha,
+            vatInvoice: invoice.iva,
+            priceShipping: invoice.precioenvio,
+
+            // Usuario: {
+            //     nombre: invoice.nombreusuario,
+            //     apellido1: invoice.apel1,
+            //     apellido2: invoice.apel2,
+            //     nombrePerfil: invoice.nombreperfilusuario,
+            //     email:invoice.email,
+            //     foto: invoice.codFoto
+            // },
+            Detail: formattedDetails,
             Total: invoice.total,
-           
+
         }
         return formattedInvoice;
     });
@@ -45,4 +45,4 @@ function formatArrayInvoices(arrayInvoices) {
 
 }
 
-module.exports = {formatArrayInvoices};
+module.exports = { formatArrayInvoices };
