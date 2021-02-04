@@ -5,6 +5,13 @@ const joi = require('Joi');
 const schemaId = joi.number().positive().required();
 async function getInvoicesByUser(req, res) {
     try {
+        const { admin } = req.auth;
+
+        if (admin !== 1) {
+            const error = new Error("No tienes permisos para realizar esta acción");
+            error.status = 403;
+            throw error;
+        }
         const { userID } = req.params;
         await schemaId.validateAsync(userID);
         const invoices = await readInvoicesByUser(userID);

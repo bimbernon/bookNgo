@@ -21,6 +21,13 @@ async function updateBookById(req, res) {
     try {
         const { idBook } = req.params;
         await schemaId.validateAsync(idBook);
+        const { admin } = req.auth;
+
+        if (admin !== 1) {
+            const error = new Error("No tienes permisos para realizar esta acción");
+            error.status = 403;
+            throw error;
+        }
         const book = await bookRepository.findBookById(idBook);
         if (book[0] === undefined) {
             throw new Error('No se encontro ese libro con ese id');
