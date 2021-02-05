@@ -14,7 +14,8 @@ create table usuario (
   apel2 varchar (40) not null,
   email varchar(40) not null unique,
   direccion varchar(80) not null,
-  codFoto varchar (20) null
+  codFoto varchar (20) null,
+  monedero int(6) not null default 0
   
 )
 ;
@@ -120,9 +121,9 @@ create table detalle (
   constraint `fk_idFactura` FOREIGN KEY (`idfactura` ) REFERENCES `proyectoFinalHACKABOSS`.`factura` (`idfactura` ) on delete restrict
 );
 
-INSERT INTO proyectoFinalHACKABOSS.usuario values (1,true,"Jose","JOSELF","abc123.","Lopez","Fernandez","usuario1@gmail.com","cod1");
-INSERT INTO proyectoFinalHACKABOSS.usuario values (2,true,"Barbara","BARI","abc123.","Imbernon","loquesea","usuario2@gmail.com","cod2");
-INSERT INTO proyectoFinalHACKABOSS.usuario values (3,true,"Jose","JOSESI","abc123.","Santos","Iglesias","usuario3@gmail.com","cod3");
+INSERT INTO proyectoFinalHACKABOSS.usuario values (1,true,"Jose","JOSELF","abc123.","Lopez","Fernandez","usuario1@gmail.com","C/Ejemplo","cod1",0);
+INSERT INTO proyectoFinalHACKABOSS.usuario values (2,true,"Barbara","BARI","abc123.","Imbernon","loquesea","usuario2@gmail.com","C/Ejemplo","cod2",0);
+INSERT INTO proyectoFinalHACKABOSS.usuario values (3,true,"Jose","JOSESI","abc123.","Santos","Iglesias","usuario3@gmail.com","C/Ejemplo","cod3",0);
 INSERT INTO proyectoFinalHACKABOSS.categoria values (1,"Terror","Categoria destinada a los libros de terror");
 INSERT INTO proyectoFinalHACKABOSS.categoria values (2,"Fantasia","Categoria destinada a los libros de fantasia");
 INSERT INTO proyectoFinalHACKABOSS.categoria values (3,"Aventura","Categoria destinada a los libros de aventura");
@@ -134,7 +135,7 @@ INSERT INTO proyectoFinalHACKABOSS.tarjeta values (1,"4000 1234 5673 9875",1,"04
 
 INSERT INTO proyectoFinalHACKABOSS.reserva values (1,1,"1996-07-10",null,5);
 
-INSERT INTO `proyectofinalhackaboss`.`factura` (`idfactura`, `idusuario`, `fecha`, `iva`) VALUES ('1', '1', '2021-01-04', '20.00');
+INSERT INTO `proyectofinalhackaboss`.`factura` (`idfactura`, `idusuario`, `fecha`, `iva`,`precioenvio`) VALUES ('1', '1', '2021-01-04', '20.00',3);
 
 INSERT INTO `proyectofinalhackaboss`.`detalle` (`idfactura`, `iddetalle`, `idlibro`, `precio`) VALUES ('1', '1', '1', '20.0');
 INSERT INTO `proyectofinalhackaboss`.`detalle` (`idfactura`, `iddetalle`, `idlibro`, `precio`) VALUES ('1', '2', '1', '30.0');
@@ -143,3 +144,5 @@ INSERT INTO `proyectofinalhackaboss`.`detalle` (`idfactura`, `iddetalle`, `idlib
 INSERT INTO proyectoFinalHACKABOSS.donacion  values (1,1,"Harry Potter donado" ,"Autor1","2020-05-10",1,0)
 -- Se revisa (modificando el atributo revisado) y a continuacion se modifica el atributo correcto
 -- Si esta todo correcto insertamos el libro con los datos completos .
+
+
