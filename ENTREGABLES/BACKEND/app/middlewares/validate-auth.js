@@ -7,7 +7,6 @@ function validateAuth(req, res, next) {
   try {
     const { authorization } = req.headers;
 
-
     if (!authorization || !authorization.startsWith("Bearer")) {
       const error = new Error("No has iniciado sesión");
       error.status = 403;
@@ -22,7 +21,6 @@ function validateAuth(req, res, next) {
     console.log(req.auth.idusuario, req.auth.nombreusuario, req.auth.admin);
     next();
   } catch (err) {
-
     res.status(401);
     res.send({ error: err.message });
   }

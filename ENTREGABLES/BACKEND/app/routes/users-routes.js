@@ -13,18 +13,23 @@ const { getUserProfile } = require("../controllers/users/get-user-profile");
 
 const router = express.Router();
 
+//PUBLICAS
+router.route("/register").post((req, res) => registerUser(req, res));
+router.route("/login").post((req, res) => loginUser(req, res));
+
+//PRIVADAS-TODOS
+
+//PRIVADAS-ADMIN
 router
   .route("/")
   .all(validateAuth)
   .get((req, res) => getUsers(req, res));
 router.route("/id/:userId").get((req, res) => getUserById(req, res));
 router.route("/email/:userEmail").get((req, res) => getUserByEmail(req, res));
-router.route("/register").post((req, res) => registerUser(req, res));
 router
-  .route("/:userId")
+  .route("/id/:userId")
   .all(validateAuth)
   .delete((req, res) => deleteUserById(req, res));
-router.route("/login").post((req, res) => loginUser(req, res));
 router.route("/update/:userId").patch((req, res) => updateUserById(req, res));
 router.route("/profile").put((req, res) => getUserProfile(req, res));
 

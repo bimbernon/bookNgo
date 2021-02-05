@@ -20,12 +20,6 @@ async function deleteUserById(req, res) {
 
     const user = await findUserById(userId);
 
-    // if (user.admin !== 0) {
-    //   const error = new Error("No tienes permisos para realizar esta acción");
-    //   error.status = 403;
-    //   throw error;
-    // }
-
     if (!user) {
       const error = new Error("Usuario no existe");
       error.status = 400;

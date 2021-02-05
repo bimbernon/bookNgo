@@ -11,8 +11,12 @@ const {
 const {
   updateDonationById,
 } = require("../controllers/donations/update-donation-by-id");
+const { validateAuth } = require("../middlewares/validate-auth");
 
-router.route("/").post((req, res) => createDonation(req, res));
+router
+  .route("/")
+  .all(validateAuth)
+  .post((req, res) => createDonation(req, res));
 router.route("/").get((req, res) => findDonations(req, res));
 router.route("/:userId").get((req, res) => getDonationsByUserId(req, res));
 router

@@ -32,6 +32,8 @@ async function insertDonation(donation) {
     donationReviewed,
   } = donation;
 
+  // console.log(userId);
+
   const insertQuery =
     "INSERT INTO donacion (iddonacion, idusuario, titulo, nombreautor, fechadonacion, revisado, correcto) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
