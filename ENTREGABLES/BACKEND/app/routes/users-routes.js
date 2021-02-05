@@ -24,7 +24,10 @@ router
   .route("/:userId")
   .all(validateAuth)
   .delete((req, res) => deleteUserById(req, res));
-router.route("/login").post((req, res) => loginUser(req, res));
+router
+  .route("/login")
+  .all(validateAuth)
+  .post((req, res) => loginUser(req, res));
 router.route("/update/:userId").put((req, res) => updateUserById(req, res));
 router.route("/profile").put((req, res) => getUserProfile(req, res));
 

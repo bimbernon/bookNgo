@@ -1,8 +1,7 @@
-'use strict';
+"use strict";
 
-const { func } = require('joi');
-const database = require('../infrastructure/database');
-
+const Joi = require("joi");
+const database = require("../infrastructure/database");
 
 async function findUserId(userId) {
   const pool = await database.getPool();
@@ -13,19 +12,19 @@ async function findUserId(userId) {
 }
 
 async function readAll() {
-    const pool = await database.getPool();
-    const query = `SELECT * FROM reserva`;
-    const [ reserve ] = await pool.query(query);
+  const pool = await database.getPool();
+  const query = `SELECT * FROM reserva`;
+  const [reserve] = await pool.query(query);
 
-    return reserve;
+  return reserve;
 }
 
 async function findReserveByUserId(reserve) {
-    const pool = await database.getPool();
-    const query = `select fechareserva, fechadevolucion from reserva join usuario using(idusuario) where idusuario=?`;
-    const [ reserveByUser ] = await pool.query(query, reserve);
+  const pool = await database.getPool();
+  const query = `select fechareserva, fechadevolucion from reserva join usuario using(idusuario) where idusuario=?`;
+  const [reserveByUser] = await pool.query(query, reserve);
 
-    return reserveByUser[0];
+  return reserveByUser[0];
 }
 
 async function findReserveId(id) {
@@ -37,7 +36,6 @@ async function findReserveId(id) {
 }
 
 async function findLastReserveId() {
-
   const pool = await database.getPool();
   const query = "SELECT max(idreserva) as lastReserveId from reserva";
   let [id] = await pool.query(query);
@@ -46,76 +44,55 @@ async function findLastReserveId() {
   return generatedId;
 }
 
-
 async function addReserve(reserve) {
-    
-    const pool = await database.getPool();
-    const idreserva = await findLastReserveId();
-    console.log(idreserva);
+  const pool = await database.getPool();
+  const idreserva = await findLastReserveId();
+  console.log(idreserva);
 
-    const {
-        idusuario,
-        idlibro,
-        fechareserva,
-        fechadevolucion,
-        rating,
-    } = reserve;
+  const { idusuario, idlibro, fechareserva, fechadevolucion, rating } = reserve;
 
-    const query = `INSERT INTO reserva (idreserva, idusuario, idlibro, fechareserva, fechadevolucion, rating) VALUES (?,?,?,?,?,?)`;
+  const query = `INSERT INTO reserva (idreserva, idusuario, idlibro, fechareserva, fechadevolucion, rating) VALUES (?,?,?,?,?,?)`;
 
-    const [ addedreserve ]  = await pool.query(query, [
-        idreserva,
-        idusuario,
-        idlibro,
-        fechareserva,
-        fechadevolucion,
-        rating,
-    ]);
+  const [addedreserve] = await pool.query(query, [
+    idreserva,
+    idusuario,
+    idlibro,
+    fechareserva,
+    fechadevolucion,
+    rating,
+  ]);
 
-    return true;
+  return true;
 }
 
 async function modifyReserveById(reserveId, updateReserve) {
+  const { fechareserva, fechadevolucion, rating } = updateReserve;
 
-    const { 
-        fechareserva, 
-        fechadevolucion, 
-        rating
-    } = updateReserve;
+  console.log(updateReserve);
 
-    console.log(updateReserve);
+  const pool = await database.getPool();
+  const query = `UPDATE reserva SET fechareserva=?, fechadevolucion=?, rating=? WHERE idreserva=?`;
 
-    const pool = await database.getPool();
-    const query = `UPDATE reserva SET fechareserva=?, fechadevolucion=?, rating=? WHERE idreserva=?`;
+  await pool.query(query, [fechareserva, fechadevolucion, rating, reserveId]);
 
-    await pool.query(query, [
-        fechareserva,
-        fechadevolucion,
-        rating,
-        reserveId,
-    ])
-
-    return true;
+  return true;
 }
 
 async function deleteReserve(reserveId) {
-    const pool =  await database.getPool();
-    const query = `DELETE FROM reserva WHERE idreserva=?`;
-    const [ deletedReserve ] = await pool.query(query, reserveId);
+  const pool = await database.getPool();
+  const query = `DELETE FROM reserva WHERE idreserva=?`;
+  const [deletedReserve] = await pool.query(query, reserveId);
 
-    return true;
+  return true;
 }
-
-
-
 
 module.exports = {
-    addReserve,
-    deleteReserve,
-    findUserId,
-    findLastReserveId,
-    findReserveId,
-    findReserveByUserId,
-    modifyReserveById,
-    readAll,
-}
+  addReserve,
+  deleteReserve,
+  findUserId,
+  findLastReserveId,
+  findReserveId,
+  findReserveByUserId,
+  modifyReserveById,
+  readAll,
+};

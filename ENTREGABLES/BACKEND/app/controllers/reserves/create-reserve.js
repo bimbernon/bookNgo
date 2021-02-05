@@ -1,9 +1,8 @@
-'use strict';
+"use strict";
 
-const Joi = require('joi');
+const Joi = require("joi");
 
-const reserveRepository = require('../../repositories/reserve-repository');
-
+const reserveRepository = require("../../repositories/reserve-repository");
 
 // const schema = Joi.object().keys({
 //     fechareserva: Joi.date().required(),
@@ -12,51 +11,44 @@ const reserveRepository = require('../../repositories/reserve-repository');
 // })
 
 async function createReserve(req, res) {
-    try {
+  try {
+    const {
+      idusuario,
+      idlibro,
+      fechareserva,
+      fechadevolucion,
+      rating,
+    } = req.body;
 
-        const {
-            idusuario,
-            idlibro,
-            fechareserva,
-            fechadevolucion,
-            rating,
-        } = req.body;
+    // const now = new Date();
+    // const reserveDate = now;
+    // const reserveDevolution = now.setMonth(now.getMonth() + 1);
+    // console.log(reserveDate, reserveDevolution);
 
-        // const now = new Date();
-        // const reserveDate = now;
-        // const reserveDevolution = now.setMonth(now.getMonth() + 1);
-        // console.log(reserveDate, reserveDevolution);
-    
-        const reserve = {
-            idusuario,
-            idlibro,
-            fechareserva,
-            fechadevolucion,
-            rating,
-        }
-        console.log(reserve);
+    const reserve = {
+      idusuario,
+      idlibro,
+      fechareserva,
+      fechadevolucion,
+      rating,
+    };
+    console.log(reserve);
 
-        const newReserve = await reserveRepository.addReserve(reserve);
-    
-        res
-          .status(200)
-          .send({
-            idusuario,
-            idlibro,
-            fechareserva,
-            fechadevolucion,
-            rating,
-          });
+    const newReserve = await reserveRepository.addReserve(reserve);
 
-    } catch(err) {
-         res.status(err.status || 500);
-         res.send({ error: err.message });
-    }
-
+    res.status(200).send({
+      idusuario,
+      idlibro,
+      fechareserva,
+      fechadevolucion,
+      rating,
+    });
+  } catch (err) {
+    res.status(err.status || 500);
+    res.send({ error: err.message });
+  }
 }
-
-
 
 module.exports = {
-    createReserve,
-}
+  createReserve,
+};

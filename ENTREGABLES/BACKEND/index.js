@@ -4,14 +4,12 @@ require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const morgan = require("morgan");
-const fileUpload = require('express-fileupload');
+const fileUpload = require("express-fileupload");
 const express = require("express");
 const app = express();
 
 app.use(express.json());
 app.use(fileUpload());
-
-
 
 const authorsRouter = require("./app/routes/author-routes");
 const booksRouter = require("./app/routes/books-routes");
@@ -20,6 +18,7 @@ const cardsRouter = require("./app/routes/cards-routes");
 const reservesRouter = require("./app/routes/reserve-routes");
 const invoicesRouter = require("./app/routes/invoices-routes");
 const usersRouter = require("./app/routes/users-routes");
+const donationsRouter = require("./app/routes/donations-routes");
 
 const port = process.env.SERVER_PORT || 3080;
 
@@ -37,5 +36,6 @@ app.use("/api/v1/cards", cardsRouter);
 app.use("/api/v1/invoices", invoicesRouter);
 app.use("/api/v1/reserves", reservesRouter);
 app.use("/api/v1/users/", usersRouter);
+app.use("/api/v1/donations/", donationsRouter);
 
 app.listen(port, () => console.log(`Listening  ${port}...`));

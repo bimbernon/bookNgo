@@ -1,10 +1,7 @@
 "use strict";
 
 const Joi = require("joi");
-const {
-  insertDonation,
-  findLastDonationId,
-} = require("../../repositories/donations-repository");
+const { insertDonation } = require("../../repositories/donations-repository");
 
 // const schema = Joi.object().keys({
 //   title: Joi.string().min(3).max(40).required(),
@@ -16,14 +13,24 @@ const {
 
 async function createDonation(req, res) {
   try {
+    // const { userId } = req.auth;
+    const { userId, title, authorsName, donationDate } = req.body;
     // await schema.validateAsync(req.body);
 
-    const { title, authorsName, donationDate } = req.body;
+    const donationCheck = 0;
+    const donationReviewed = 0;
 
-    const donation = { title, authorsName, donationDate };
+    const donation = {
+      userId,
+      title,
+      authorsName,
+      donationDate,
+      donationCheck,
+      donationReviewed,
+    };
 
     await insertDonation(donation);
-    res.status(201).send({ title, authorsName, donationDate });
+    res.status(201).send({ userId, title, authorsName, donationDate });
   } catch (err) {
     res.status(400).send({ error: err.message });
   }
