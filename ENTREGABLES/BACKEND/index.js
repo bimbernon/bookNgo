@@ -35,7 +35,7 @@ app.use("/api/v1/cathegories/", cathegoriesRouter);
 app.use("/api/v1/cards", cardsRouter);
 app.use("/api/v1/invoices", invoicesRouter);
 app.use("/api/v1/reserves", reservesRouter);
-app.use("/api/v1/users/", usersRouter);
+app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/donations/", donationsRouter);
 
 app.listen(port, () => console.log(`Listening  ${port}...`));

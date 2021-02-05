@@ -19,6 +19,7 @@ async function loginUser(req, res) {
     const { email, password } = req.body;
 
     const user = await findUserByEmail(email);
+
     if (!user) {
       const error = new Error("Usuario no registrado");
       error.status = 403;
