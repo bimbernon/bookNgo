@@ -5,13 +5,13 @@ const Joi = require('joi');
 const schemaId = Joi.number().positive().required();
 async function getInvoicesByUser(req, res) {
     try {
-        const { admin } = req.auth;
+        // const { admin } = req.auth;
 
-        if (admin !== 1) {
-            const error = new Error("No tienes permisos para realizar esta acción");
-            error.status = 403;
-            throw error;
-        }
+        // if (admin !== 1) {
+        //     const error = new Error("No tienes permisos para realizar esta acción");
+        //     error.status = 403;
+        //     throw error;
+        // }
         const { userID } = req.params;
         await schemaId.validateAsync(userID);
         const invoices = await readInvoicesByUser(userID);
@@ -33,13 +33,9 @@ async function getInvoicesByUser(req, res) {
             Invoice
         }
         res.send(resultinvoice);
+
     } catch (err) {
         res.status(400).send({ error: err.message });
     }
-    const formattedInvoices = formatArrayInvoices(invoices);
-    res.send(formattedInvoices);
-  } catch (err) {
-    res.status(400).send({ error: err.message });
-  }
 }
 module.exports = { getInvoicesByUser };

@@ -7,7 +7,7 @@ const { createInvoice } = require('../controllers/invoices/create-invoice');
 const router = express.Router();
 
 router.route('/user/:userID')
-    .all(validateAuth)
+    //  .all(validateAuth)
     .get((req, res) => getInvoicesByUser(req, res));
 
 router.route('/')
