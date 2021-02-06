@@ -4,8 +4,6 @@ const { findAllUsers } = require("../../repositories/users-repository");
 
 async function getUsers(req, res) {
   try {
-    // const { admin } = req.auth;
-    console.log(req.auth);
     if (req.auth.admin !== 1) {
       const error = new Error("No tienes permisos para realizar esta acción");
       error.status = 403;

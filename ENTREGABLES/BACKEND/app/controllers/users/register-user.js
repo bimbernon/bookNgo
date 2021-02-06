@@ -16,6 +16,8 @@ const schema = Joi.object().keys({
   lastName1: Joi.string().alphanum().min(3).max(20).required(),
   lastName2: Joi.string().alphanum().min(3).max(20).required(),
   email: Joi.string().email().required(),
+  address: Joi.string().min(5).max(80).required(),
+  purse: Joi.number().positive().optional(),
   photoCod: Joi.string().alphanum(),
 });
 
@@ -30,6 +32,7 @@ async function registerUser(req, res) {
       lastName1,
       lastName2,
       email,
+      address,
       photoCod,
     } = req.body;
 
@@ -41,6 +44,7 @@ async function registerUser(req, res) {
     }
 
     const admin = false;
+    const purse = 0;
 
     const passwordHash = await bcrypt.hash(password, 2);
 
@@ -52,6 +56,8 @@ async function registerUser(req, res) {
       lastName1,
       lastName2,
       email,
+      address,
+      purse,
       photoCod,
     };
 
@@ -65,6 +71,8 @@ async function registerUser(req, res) {
       lastName1,
       lastName2,
       email,
+      address,
+      purse,
       photoCod,
     });
   } catch (err) {

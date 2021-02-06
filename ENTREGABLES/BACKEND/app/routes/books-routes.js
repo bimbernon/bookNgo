@@ -17,6 +17,7 @@ const { createBook } = require("../controllers/books/create-book");
 const { deleteBookById } = require("../controllers/books/delete-book-by-id");
 const { getBookById } = require("../controllers/books/get-book-by-id");
 const { updateBookById } = require("../controllers/books/update-book-by-id");
+const { uploadImageBook } = require("../controllers/books/upload-image-book");
 const router = express.Router();
 
 router.route("/").get((req, res) => getBooks(req, res));
@@ -35,10 +36,11 @@ router
   .get((req, res) => getBooksByYearPublication(req, res));
 router.route("/id/:idBook").get((req, res) => getBookById(req, res));
 
-router.route("/").all(validateAuth).post((req, res) => createBook(req, res));
+router.route("/").post((req, res) => createBook(req, res));
 
-router.route("/:idBook").all(validateAuth).delete((req, res) => deleteBookById(req, res));
+router.route("/:idBook").delete((req, res) => deleteBookById(req, res));
 
-router.route("/:idBook").all(validateAuth).put((req, res) => updateBookById(req, res));
+router.route("/:idBook").put((req, res) => updateBookById(req, res));
 
+router.route("/image/upload").put((req, res) => uploadImageBook(req, res));
 module.exports = router;

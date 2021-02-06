@@ -31,8 +31,8 @@ async function uploadImageUserProfile(req, res) {
     }
 
     const { HTTP_SERVER_DOMAIN, PATH_USER_IMAGE } = process.env;
-    const user = await findUserProfileImage(userId);
-    const pathProfileImageFolder = `${__dirname}/../../../images/userImages/${PATH_USER_IMAGE}`;
+    const user = await findUserByUserId(userId);
+    const pathProfileImageFolder = `${__dirname}/../../../${PATH_USER_IMAGE}`;
 
     //FALTA HACER EL BORRADO DE LA ANTERIOR, PERO COMO VA CON CODIGO DE FOTO NO SE COMO PLANTEARLO
 

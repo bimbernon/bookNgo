@@ -1,10 +1,11 @@
-'use strict';
+"use strict";
 
 const { date } = require('joi');
 const Joi = require('joi');
 
 const reserveRepository = require('../../repositories/reserve-repository');
 
+const reserveRepository = require("../../repositories/reserve-repository");
 
 const schema = Joi.object().keys({
   idusuario: Joi.number().positive().required(),
@@ -74,8 +75,6 @@ async function createReserve(req, res) {
 
 }
 
-
-
 module.exports = {
-    createReserve,
-}
+  createReserve,
+};

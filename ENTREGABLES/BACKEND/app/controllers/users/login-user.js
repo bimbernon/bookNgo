@@ -19,6 +19,7 @@ async function loginUser(req, res) {
     const { email, password } = req.body;
 
     const user = await findUserByEmail(email);
+
     if (!user) {
       const error = new Error("Usuario no registrado");
       error.status = 403;
@@ -34,7 +35,7 @@ async function loginUser(req, res) {
 
     const secret = process.env.JWT_SECRET;
     const { idusuario, nombreusuario, admin } = user;
-    const jwtTokenExpiration = "30m";
+    const jwtTokenExpiration = "5m";
     const payload = { idusuario, nombreusuario, admin };
 
     const token = jwt.sign(payload, secret, { expiresIn: jwtTokenExpiration });

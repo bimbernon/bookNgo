@@ -1,11 +1,10 @@
-'use strict';
+"use strict";
 
-const Joi = require('joi');
+const Joi = require("joi");
 
-const reservesRepository = require('../../repositories/reserve-repository');
+const reservesRepository = require("../../repositories/reserve-repository");
 
 const schema = Joi.number().positive().required();
-
 
 async function getReservesByUserId(req, res) {
     try {
@@ -25,10 +24,16 @@ async function getReservesByUserId(req, res) {
     } catch(err) {
         res.status(400).send({ error: err.message });
     }
+
+    const reserve = await reservesRepository.findReserveByUserId(userId);
+    console.log(reserve);
+
+    res.status(200).send(reserve);
+  } catch (err) {
+    res.status(400).send({ error: err.message });
+  }
 }
-
-
 
 module.exports = {
-    getReservesByUserId,
-}
+  getReservesByUserId,
+};

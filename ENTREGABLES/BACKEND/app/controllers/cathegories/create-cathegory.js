@@ -13,6 +13,11 @@ const schema = Joi.object().keys({
 
 async function createCathegory(req, res) {
   try {
+    if (req.auth.admin !== 1) {
+      const error = new Error("No tienes permisos para realizar esta acción");
+      error.status = 403;
+      throw error;
+    }
     await schema.validateAsync(req.body);
 
     const { cathegoryName, cathegoryDescription } = req.body;
