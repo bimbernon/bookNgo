@@ -6,11 +6,15 @@ const Joi = require('joi');
 
 const { findCardById } = require('../../repositories/cards-repository');
 
+const schema = Joi.number().positive().required();
+
 async function getCardById(req, res) {
     try {
 
         const { idCard } = req.params;
-        console.log(idCard);
+
+        await schema.validateAsync(idCard);
+
         const card = await findCardById(idCard);
 
         if(!card) {

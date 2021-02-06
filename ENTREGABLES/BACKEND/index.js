@@ -13,7 +13,7 @@ const authorsRouter = require("./app/routes/author-routes");
 const booksRouter = require("./app/routes/books-routes");
 const cathegoriesRouter = require("./app/routes/cathegory-routes");
 const cardsRouter = require("./app/routes/cards-routes");
-const reservesRouter = require('./app/routes/reserve-routes');
+const reservesRouter = require("./app/routes/reserve-routes");
 const invoicesRouter = require("./app/routes/invoices-routes");
 const usersRouter = require("./app/routes/users-routes");
 
@@ -30,7 +30,8 @@ app.use("/api/v1/authors", authorsRouter);
 app.use("/api/v1/books", booksRouter);
 app.use("/api/v1/cathegories/", cathegoriesRouter);
 app.use("/api/v1/cards", cardsRouter);
-app.use("/api/v1/invoices",invoicesRouter);
+app.use("/api/v1/invoices", invoicesRouter);
 app.use("/api/v1/reserves", reservesRouter);
+app.use("/api/v1/users/", usersRouter);
 
 app.listen(port, () => console.log(`Listening  ${port}...`));

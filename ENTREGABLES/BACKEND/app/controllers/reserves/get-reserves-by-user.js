@@ -11,21 +11,16 @@ async function getReservesByUserId(req, res) {
     try {
 
         const { userId } = req.params;
-        console.log(userId);
 
         await schema.validateAsync(userId);
 
-        const user = await reservesRepository.findUserId(userId);
-        console.log(user);
+        const userReserve = await reservesRepository.findReserveByUserId(userId);
 
-        if(!user) {
+        if(!userReserve) {
             throw new Error('No se ha encontrado reserva asociada a este usuario.')
         }
 
-        const reserve = await reservesRepository.findReserveByUserId(userId);
-        console.log(reserve);
-
-        res.status(200).send(reserve);
+        res.status(200).send(userReserve);
 
     } catch(err) {
         res.status(400).send({ error: err.message });

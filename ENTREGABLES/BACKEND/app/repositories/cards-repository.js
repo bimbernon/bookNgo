@@ -33,6 +33,14 @@ async function findCardById(id) {
   return card;
 }
 
+async function findCardByUserId (cardId) {
+    const pool = await database.getPool();
+    const query = `SELECT u.nombreusuario, u.apel1, u.apel2, t.numerotarjeta, t.fechaExpiracion FROM usuario u INNER JOIN tarjeta t ON u.idusuario = t.idusuario WHERE u.idusuario=?`;
+    const [ cardByUser ] = await pool.query(query, cardId);
+
+    return cardByUser;
+}
+
 async function addCard(cards) {
 
     const pool = await database.getPool();
@@ -64,7 +72,6 @@ async function modifiyCardById (cardId, card) {
         fechaExpiracion,
         csv,
     } = card;
-    console.log(numerotarjeta, fechaExpiracion, csv, card);
 
     const pool = await database.getPool();
     const query = `UPDATE tarjeta SET numerotarjeta=?, fechaExpiracion=?, csv=? WHERE idtarjeta=?`;
@@ -94,5 +101,6 @@ module.exports = {
     addCard,
     deleteCardById,
     findCardById,
+    findCardByUserId,
     modifiyCardById,
 }

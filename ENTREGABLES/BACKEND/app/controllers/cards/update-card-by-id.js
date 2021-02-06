@@ -6,13 +6,17 @@ const Joi = require('joi');
 
 const cardsRepository = require('../../repositories/cards-repository');
 
+const schema = Joi.number().positive().required();
+
 
 async function updateCardById(req, res) {
     try {
 
         const { idCard } = req.params;
 
-        const card = await cardsRepository.findById(idCard);
+        await schema.validateAsync(idCard);
+
+        const card = await cardsRepository.findCardById(idCard);
 
         if(card[0] === undefined) {
             throw new Error('No se ha encontrado tarjeta con ese id.')
@@ -25,6 +29,11 @@ async function updateCardById(req, res) {
             fechaExpiracion,
             csv,
         } = req.body;
+
+        if(req.body) {
+            const error = new Error('Informacion de la tarjeta ya existente');
+            throw error;
+        }
 
         const updatedCard = {
             idtarjeta,

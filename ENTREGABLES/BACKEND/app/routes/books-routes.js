@@ -1,5 +1,5 @@
 "use strict";
-
+const { validateAuth } = require("../middlewares/validate-auth");
 const express = require("express");
 const { getBooks } = require("../controllers/books/get-books");
 const { getBookByTitle } = require("../controllers/books/get-book-by-title");
@@ -35,10 +35,10 @@ router
   .get((req, res) => getBooksByYearPublication(req, res));
 router.route("/id/:idBook").get((req, res) => getBookById(req, res));
 
-router.route("/").post((req, res) => createBook(req, res));
+router.route("/").all(validateAuth).post((req, res) => createBook(req, res));
 
-router.route("/:idBook").delete((req, res) => deleteBookById(req, res));
+router.route("/:idBook").all(validateAuth).delete((req, res) => deleteBookById(req, res));
 
-router.route("/:idBook").put((req, res) => updateBookById(req, res));
+router.route("/:idBook").all(validateAuth).put((req, res) => updateBookById(req, res));
 
 module.exports = router;

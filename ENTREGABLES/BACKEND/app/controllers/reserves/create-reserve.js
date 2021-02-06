@@ -1,15 +1,18 @@
 'use strict';
 
+const { date } = require('joi');
 const Joi = require('joi');
 
 const reserveRepository = require('../../repositories/reserve-repository');
 
 
-// const schema = Joi.object().keys({
-//     fechareserva: Joi.date().required(),
-//     fechadevolucion: Joi.date().required(),
-//     rating: Joi.number().required(),
-// })
+const schema = Joi.object().keys({
+  idusuario: Joi.number().positive().required(),
+  idlibro: Joi.number().positive().required(),
+  fechareserva: Joi.required(),
+  fechadevolucion: Joi.required(),
+  rating: Joi.number().required(),
+});
 
 async function createReserve(req, res) {
     try {
@@ -22,21 +25,36 @@ async function createReserve(req, res) {
             rating,
         } = req.body;
 
+        // if(req.body) {
+        //   const error = new Error('Esta reserva ya existe.');
+        //   throw error;
+        // }
+
+        const reserveStock = await reserveRepository.checkStock(req.body.idlibro);
+
+        if(!reserveStock) {
+          const error = new Error('Este libro no esta disponible actualmente.');
+          throw error;
+        }
+
+        const decreaseStock = await reserveRepository.decreaseBookStock(req.body.idlibro);
+
+        await schema.validateAsync(req.body);
+
         // const now = new Date();
-        // const reserveDate = now;
+        // const reserveDate = req.body.fechareserva;
         // const reserveDevolution = now.setMonth(now.getMonth() + 1);
         // console.log(reserveDate, reserveDevolution);
-    
+        
         const reserve = {
-            idusuario,
-            idlibro,
-            fechareserva,
-            fechadevolucion,
-            rating,
+          idusuario,
+          idlibro,
+          fechareserva,
+          fechadevolucion,
+          rating,
         }
-        console.log(reserve);
 
-        const newReserve = await reserveRepository.addReserve(reserve);
+        await reserveRepository.addReserve(reserve);
     
         res
           .status(200)
@@ -47,6 +65,7 @@ async function createReserve(req, res) {
             fechadevolucion,
             rating,
           });
+
 
     } catch(err) {
          res.status(err.status || 500);

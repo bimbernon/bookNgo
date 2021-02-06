@@ -15,7 +15,7 @@ async function readAll() {
 async function findById (id) {
     
     const pool = await database.getPool();
-    const query = "select * from autor where idautor=?";
+    const query = "select nombreautor, apel1, apel2 from autor where idautor=?";
     const [ authorId ] = await pool.query(query, id);
 
   return authorId;
@@ -24,7 +24,7 @@ async function findById (id) {
 async function findByName (name) {
 
     const pool = await database.getPool();
-    const query = "SELECT titulo FROM libro JOIN autor using(idautor) WHERE nombreautor=?";
+    const query = "SELECT titulo FROM libro JOIN autor using(idlibro) WHERE nombreautor=?";
     const [ authorName ] = await pool.query(query, name);
 
   return authorName;
@@ -41,7 +41,7 @@ async function findLastAuthorId() {
 
 async function addAuthor(author) {
   const pool = await database.getPool();
-  const id = await findLastAuthorId();
+  const idAuthor = await findLastAuthorId();
 
   const {
     nombreautor,
@@ -49,11 +49,10 @@ async function addAuthor(author) {
     apel2
   } = author;
 
-  const query =
-    "INSERT INTO autor ( idautor, nombreautor, apel1, apel2 ) VALUES (?,?,?,?)";
+  const query = "INSERT INTO autor ( idautor, nombreautor, apel1, apel2 ) VALUES (?,?,?,?)";
   
     const [ authors ] = await pool.query(query, [
-    id,
+    idAuthor,
     nombreautor,
     apel1,
     apel2,

@@ -7,17 +7,17 @@ const authorRepository = require('../../repositories/author-repository');
 
 const schemaId = Joi.number().positive().required();
 
-// const schema = Joi.object().keys({
-//   nombreautor: Joi.string().min(2).max(40).required(),
-//   apel1: Joi.string().min(2).max(40).required(),
-//   apel2: Joi.string().min(2).max(40).required(),
-// });
+const schema = Joi.object().keys({
+  nombreautor: Joi.string().min(2).max(40).required(),
+  apel1: Joi.string().min(2).max(40).required(),
+  apel2: Joi.string().min(2).max(40).required(),
+});
 
 async function updateAuthorById(req, res) {
     try {
         const { idAuthor } = req.params;
 
-        // await schemaId.validateAsync(idAuthor);
+        await schemaId.validateAsync(idAuthor);
 
         const author = await authorRepository.findById(idAuthor);
 
@@ -25,13 +25,18 @@ async function updateAuthorById(req, res) {
             throw new Error('No se ha encontrado autor con ese id.');
         }
 
-        // await schema.validateAsync(idAuthor);
-
         const {
             nombreautor,
             apel1,
             apel2,
         } = req.body;
+
+        if(req.body) {
+            const error = new Error('Has introducido los mismos datos de autor.');
+            throw error;
+        }
+
+        await schema.validateAsync(req.body);
 
         const updatedAuthor = {
             nombreautor,

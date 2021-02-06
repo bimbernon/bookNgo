@@ -10,7 +10,6 @@ async function getCard(req, res) {
         const card = await cardsRepository.readAll();
 
         res.send(card);
-        console.log(card);
 
     } catch {
         res.status(400).send({ error: error.message });

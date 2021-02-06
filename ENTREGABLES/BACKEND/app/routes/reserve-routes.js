@@ -4,7 +4,7 @@ const express = require('express');
 
 const { createReserve } = require('../controllers/reserves/create-reserve');
 const { deleteReserveById } = require('../controllers/reserves/delete-reserve');
-const { updateReserveById } = require('../controllers/reserves/update-reserve');
+const { updateReserveById } = require('../controllers/reserves/update-reserve-by-id');
 const { getReservesByUserId } = require('../controllers/reserves/get-reserves-by-user');
 const { getAllReserves } = require('../controllers/reserves/get-all-reserves');
 
