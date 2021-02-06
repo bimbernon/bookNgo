@@ -2,7 +2,6 @@
 
 const { removeBookById, findBookById } = require('../../repositories/books-repository');
 const Joi = require('joi');
-const { object } = require('joi');
 
 const schema = Joi.number().positive().required();
 

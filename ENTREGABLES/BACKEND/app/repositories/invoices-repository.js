@@ -39,7 +39,6 @@ async function insertInvoice(invoice, details) {
             const stock = await checkStockBook(details[i].idlibro);
             if (stock > 0) {
                 await createDetail(details[i]);
-                await updateStockBook(details[i].idlibro, stock - 1);
                 totalR = totalR + parseInt(details[i].precio);
             } else {
                 throw new Error("Error, no hay stock del siguiente identificador del libro" + details[i].idlibro);

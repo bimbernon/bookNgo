@@ -18,13 +18,7 @@ const schema = Joi.object().keys({
 
 async function createInvoice(req, res) {
     try {
-        const { admin } = req.auth;
 
-        if (admin !== 1) {
-            const error = new Error("No tienes permisos para realizar esta acción");
-            error.status = 403;
-            throw error;
-        }
         const total = 0.00;
 
         const {
@@ -48,6 +42,7 @@ async function createInvoice(req, res) {
         };
 
         await insertInvoice(invoice, detalles);
+
         res.send('SE HA AÑADIDO CORRECTAMENTE LA FACTURA');
 
     } catch (err) {
