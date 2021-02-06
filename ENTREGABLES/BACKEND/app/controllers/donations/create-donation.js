@@ -39,8 +39,6 @@ async function createDonation(req, res) {
       donationReviewed,
     };
 
-    console.log(donation);
-
     await insertDonation(donation);
     res
       .status(201)

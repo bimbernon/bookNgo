@@ -1,53 +1,50 @@
 " use strict";
 
-const fileUpload = require("express-fileupload");
 const path = require("path");
 const fs = require("fs");
-
-const {
-  findUserProfileImage,
-  uploadImageProfile,
-} = require("../../repositories/users-repository");
-
-const validExtensions = [".jpeg", ".jpg", ".png"];
+const { uploadImage } = require("../../helpers/users/usefulMethods");
+const { findLastUserId } = require("../../repositories/users-repository");
 
 async function uploadImageUserProfile(req, res) {
   try {
-    const { userId } = req.auth;
+    const { userId } = req.params;
+    const authentifiedUserId = req.auth.idusuario;
 
-    if (!req.files || Object.keys(req.files).length === 0) {
+    if (req.auth.admin !== 1) {
+      if (authentifiedUserId !== parseInt(userId)) {
+        const error = new Error(
+          "No tienes permisos para realizar esta acción."
+        );
+        throw error;
+      }
+    }
+
+    const userImage = req.files.userImage;
+
+    if (!req.files || !userImage) {
       const error = new Error("No se ha subido ninguna imagen.");
       error.status = 400;
       throw error;
     }
 
-    const profileImage = req.files.codFoto;
-    const extension = path.extname(profileImage.name);
-
-    if (!validExtensions.includes(extension)) {
-      const error = new Error("Formato no válido");
+    if (!userImage.mimetype.startsWith("image")) {
+      const error = new Error("Formato no válido.");
       error.status = 400;
       throw error;
     }
 
-    const { HTTP_SERVER_DOMAIN, PATH_USER_IMAGE } = process.env;
-    const user = await findUserByUserId(userId);
-    const pathProfileImageFolder = `${__dirname}/../../../${PATH_USER_IMAGE}`;
-
-    //FALTA HACER EL BORRADO DE LA ANTERIOR, PERO COMO VA CON CODIGO DE FOTO NO SE COMO PLANTEARLO
-
-    //SE INSERTA LA FOTO
-    const pathImage = `${pathProfileImageFolder}/${userId.codFoto}${extension}`;
-    profileImage.mv(pathImage, async function (err) {
-      if (err) return res.status(500).send(err);
-      await uploadImageProfile(userId, `${userId}${extension}`);
-      res.send({
-        url: `${HTTP_SERVER_DOMAIN}/${PATH_USER_IMAGE}/${userId}${extension}`,
-      });
+    await uploadImage({
+      imageData: userImage.data,
+      destination: process.env.PATH_USER_IMAGE,
+      width: 300,
+      hegith: 300,
+      codFoto: authentifiedUserId,
     });
+
+    res.send("Se ha subido la foto correctamente");
   } catch (err) {
     res.status(400).send({ error: err.message });
   }
 }
 
-module.exports = { uploadImageProfile };
+module.exports = { uploadImageUserProfile };
