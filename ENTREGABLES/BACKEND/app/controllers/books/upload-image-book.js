@@ -7,7 +7,13 @@ const { findLastBookId } = require('../../repositories/books-repository');
 
 async function uploadImageBook(req, res) {
     try {
-        console.log('llega');
+        const { admin } = req.auth;
+
+        if (admin !== 1) {
+            const error = new Error("No tienes permisos para realizar esta acción");
+            error.status = 403;
+            throw error;
+        }
         const lastBookId = await findLastBookId();
         const photoBook = req.files.photoBook;
 

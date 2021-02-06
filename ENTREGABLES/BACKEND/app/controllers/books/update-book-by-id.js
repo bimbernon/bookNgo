@@ -6,7 +6,6 @@ const schemaId = Joi.number().positive().required();
 
 const schema = Joi.object().keys({
     idcategoria: Joi.number().positive().required(),
-    idusuario: Joi.number().positive().required(),
     idautor: Joi.number().positive().required(),
     titulo: Joi.string().min(4).max(40).required(),
     stock: Joi.number().positive().required(),
@@ -22,6 +21,7 @@ async function updateBookById(req, res) {
         const { idBook } = req.params;
         await schemaId.validateAsync(idBook);
         const { admin } = req.auth;
+        const { idusuario } = req.auth;
 
         if (admin !== 1) {
             const error = new Error("No tienes permisos para realizar esta acción");
@@ -34,8 +34,9 @@ async function updateBookById(req, res) {
         }
         await schema.validateAsync(req.body);
 
-        const { idcategoria, idusuario, idautor, titulo, stock, precio, editorial, añopublicacion } = req.body;
+        const { idcategoria, idautor, titulo, stock, precio, editorial, añopublicacion } = req.body;
         const existTitleEditorial = await bookRepository.findBookByTitleEditorial(titulo, editorial);
+
 
         if (existTitleEditorial && existTitleEditorial.idlibro !== parseInt(idBook)) {
             const error = new Error(`Ya existe ese titulo en el id ${existTitleEditorial.idlibro}`);
@@ -55,6 +56,7 @@ async function updateBookById(req, res) {
         }
 
         await bookRepository.updateBookById(idBook, updateBook);
+
         res.status(200).send({ idBook, idcategoria, idusuario, idautor, titulo, stock, precio, editorial, añopublicacion });
 
 

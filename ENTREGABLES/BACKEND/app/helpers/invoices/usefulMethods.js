@@ -26,15 +26,6 @@ function formatArrayInvoices(arrayInvoices) {
             DateInvoice: invoice.fecha,
             vatInvoice: invoice.iva,
             priceShipping: invoice.precioenvio,
-
-            // Usuario: {
-            //     nombre: invoice.nombreusuario,
-            //     apellido1: invoice.apel1,
-            //     apellido2: invoice.apel2,
-            //     nombrePerfil: invoice.nombreperfilusuario,
-            //     email:invoice.email,
-            //     foto: invoice.codFoto
-            // },
             Detail: formattedDetails,
             Total: invoice.total,
 

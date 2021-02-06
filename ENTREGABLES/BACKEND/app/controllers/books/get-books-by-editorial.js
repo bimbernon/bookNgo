@@ -10,14 +10,13 @@ async function getBooksByEditorial(req, res) {
         const { nameEditorial } = req.params;
         schema.validateAsync(nameEditorial);
         const books = await findBookByEditorial(nameEditorial);
-        if (!books) { 
+        if (!books) {
             throw new Error('No se encontraron libros para esa editorial')
         }
-
         const booksFormateados = formatArrayBooks(books);
         res.send(booksFormateados);
     } catch (err) {
         res.status(400).send({ error: err.message });
     }
 }
-module.exports = {getBooksByEditorial};
+module.exports = { getBooksByEditorial };
