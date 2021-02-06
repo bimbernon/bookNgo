@@ -13,6 +13,11 @@ const schema = Joi.object().keys({
 
 async function updateDonationById(req, res) {
   try {
+    if (req.auth.admin !== 1) {
+      const error = new Error("No tienes permisos para realizar esta acción");
+      error.status = 403;
+      throw error;
+    }
     const { donationId } = req.params;
     console.log(donationId);
 

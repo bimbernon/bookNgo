@@ -17,10 +17,17 @@ router
   .route("/")
   .all(validateAuth)
   .post((req, res) => createDonation(req, res));
-router.route("/").get((req, res) => findDonations(req, res));
-router.route("/:userId").get((req, res) => getDonationsByUserId(req, res));
+router
+  .route("/")
+  .all(validateAuth)
+  .get((req, res) => findDonations(req, res));
+router
+  .route("/:userId")
+  .all(validateAuth)
+  .get((req, res) => getDonationsByUserId(req, res));
 router
   .route("/update/:donationId")
+  .all(validateAuth)
   .patch((req, res) => updateDonationById(req, res));
 
 module.exports = router;

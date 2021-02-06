@@ -10,6 +10,11 @@ const schema = Joi.number().positive();
 
 async function deleteCathegoryById(req, res) {
   try {
+    if (req.auth.admin !== 1) {
+      const error = new Error("No tienes permisos para realizar esta acción");
+      error.status = 403;
+      throw error;
+    }
     const { cathegoryId } = req.params;
 
     await schema.validateAsync(cathegoryId);
