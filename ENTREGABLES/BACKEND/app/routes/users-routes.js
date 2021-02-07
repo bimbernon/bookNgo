@@ -40,7 +40,7 @@ router
   .all(validateAuth)
   .get((req, res) => getUserByEmail(req, res));
 router
-  .route("/id/:userId")
+  .route("/delete/:userId")
   .all(validateAuth)
   .delete((req, res) => deleteUserById(req, res));
 router

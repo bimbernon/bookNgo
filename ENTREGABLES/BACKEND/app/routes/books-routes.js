@@ -3,7 +3,7 @@ const { validateAuth } = require("../middlewares/validate-auth");
 const express = require("express");
 const { getBooks } = require("../controllers/books/get-books");
 const { getBookByTitle } = require("../controllers/books/get-book-by-title");
-const { getBookByAuthor } = require("../controllers/books/get-books-by-autor");
+const { getBookByAuthor } = require("../controllers/books/get-books-by-author");
 const {
   getBooksByCathegory,
 } = require("../controllers/books/get-books-by-cathegory");
@@ -34,13 +34,28 @@ router
 router
   .route("/yearpublication/:yearPublication")
   .get((req, res) => getBooksByYearPublication(req, res));
-router.route("/id/:idBook").all(validateAuth).get((req, res) => getBookById(req, res));
+router
+  .route("/id/:idBook")
+  .all(validateAuth)
+  .get((req, res) => getBookById(req, res));
 
-router.route("/").all(validateAuth).post((req, res) => createBook(req, res));
+router
+  .route("/")
+  .all(validateAuth)
+  .post((req, res) => createBook(req, res));
 
-router.route("/:idBook").all(validateAuth).delete((req, res) => deleteBookById(req, res));
+router
+  .route("/delete/:idBook")
+  .all(validateAuth)
+  .delete((req, res) => deleteBookById(req, res));
 
-router.route("/:idBook").all(validateAuth).put((req, res) => updateBookById(req, res));
+router
+  .route("/book/:idBook")
+  .all(validateAuth)
+  .put((req, res) => updateBookById(req, res));
 
-router.route("/image/upload").all(validateAuth).put((req, res) => uploadImageBook(req, res));
+router
+  .route("/book/image/upload")
+  .all(validateAuth)
+  .put((req, res) => uploadImageBook(req, res));
 module.exports = router;

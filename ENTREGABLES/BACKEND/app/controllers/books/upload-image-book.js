@@ -38,16 +38,6 @@ async function uploadImageBook(req, res) {
     });
 
     res.send("Se ha creado la foto correctamente");
-
-    // const pathBookImageFolder = `${__dirname}/../../../images/userImages/${PATH_USER_IMAGE}`;
-
-    // if (book.codfoto != null) {
-    //     await fs.unlink(`${pathBookImageFolder}/${lastBookId}`, () => {
-    //         console.log('la imagen se ha eliminado con exito');
-    //     });
-    // }
-
-    //FALTA HACER EL BORRADO DE LA ANTERIOR, PERO COMO VA CON CODIGO DE FOTO NO SE COMO PLANTEARLO
   } catch (err) {
     res.status(400).send({ error: err.message });
   }

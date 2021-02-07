@@ -20,7 +20,7 @@ router
   .all(validateAuth)
   .post((req, res) => createCathegory(req, res));
 router
-  .route("/:cathegoryId")
+  .route("/delete/:cathegoryId")
   .all(validateAuth)
   .delete((req, res) => deleteCathegoryById(req, res));
 

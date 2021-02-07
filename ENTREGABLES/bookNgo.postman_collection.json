@@ -1,0 +1,1500 @@
+{
+	"info": {
+		"_postman_id": "c02f51c4-d829-48db-9791-71997df9b9fc",
+		"name": "bookNgo",
+		"description": "bookNgo is a online library composed by thousand of second hand books giving them the chance to live twice or more.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "getBooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookByTitle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/books/title/Harry Potter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"title",
+								"Harry Potter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookByAuthor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/books/author/Joanne",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"author",
+								"Joanne"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookByCathegory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/books/category/nameCategory/Aventura",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"category",
+								"nameCategory",
+								"Aventura"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBooksByEditorial",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/books/editorial/santillana",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"editorial",
+								"santillana"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createBook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idcategoria\":\"2\",\n    \"idautor\":\"1\",\n    \"titulo\":\"Señor de lo anillos\",\n    \"stock\":\"3\",\n    \"precio\":\"30\",\n    \"editorial\":\"Santillana\",\n    \"añopublicacion\":\"2001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/books/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBookById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/books/delete/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"delete",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/books/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBookById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idcategoria\":\"2\",\n    \"idautor\":\"1\",\n    \"titulo\":\"Harry Potter\",\n    \"stock\":\"1\",\n    \"precio\":\"30\",\n    \"editorial\":\"Santillana\",\n    \"añopublicacion\":\"2001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/books/book/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"book",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "uploadBookImage",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photoBook",
+									"type": "file",
+									"src": "/home/hab01/Descargas/fotoPerfil.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/books/book/image/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"book",
+								"image",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "getUsers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/users/id/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"id",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserByEmail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/users/email/usuario2@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"email",
+								"usuario2@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registerUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n        \"name\": \"Nana\",\n        \"userProfileName\": \"nana26\",\n        \"password\": \"abc123.\",\n        \"lastName1\": \"Alvariño\",\n        \"lastName2\": \"Suarez\",\n        \"email\": \"usuario6@gmail.com\",\n        \"address\": \"Avenida Marina n2\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/users/register/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/users/delete/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"delete",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"usuario7@gmail.com\",\n    \"password\": \"abc123.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/users/login/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUserById",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n  \"lastName1\": \"perez\",\n  \"lastName2\": \"martinez\"   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/users/update/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"update",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "uploadUserProfile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userImage",
+									"type": "file",
+									"src": "/home/hab01/Descargas/fotoPerfil.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/users/image/upload/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"image",
+								"upload",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserProfileById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/users/profile/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"profile",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "author",
+			"item": [
+				{
+					"name": "getAuthors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/authors/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createAuthor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombreautor\": \"Carlos\",\n    \"apel1\": \"Ruiz\",\n    \"apel2\": \"Zafon\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/authors/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAuthorByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/authors/name/Joanne",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"name",
+								"Joanne"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAuthorById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/authors/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAuthorById",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombreautor\": \"Miguel\",\n    \"apel1\": \"Cervantes\",\n    \"apel2\": \"Saavedra\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/authors/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAuthorById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/authors/delete/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"delete",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "card",
+			"item": [
+				{
+					"name": "getCards",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/cards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idusuario\":\"1\",\n    \"numerotarjeta\": \"2222333322666665555\",\n    \"fechaExpiracion\": \"05/22\",\n    \"csv\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/cards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCardById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"numerotarjeta\": \"9999888877772222\",\n    \"idusuario\": \"\",\n    \"fechaExpiracion\": \"04/21\",\n    \"csv\": \"343\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/cards/update/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"cards",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCardById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/cards/delete/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"cards",
+								"delete",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCardById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/cards/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"cards",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCardByUserId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/cards/user/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"cards",
+								"user",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cathegory",
+			"item": [
+				{
+					"name": "getCathegories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/cathegories/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"cathegories",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCathegory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cathegoryName\": \"Historia\", \n    \"cathegoryDescription\": \"Categoria destinada a los libros históricos\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/cathegories/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"cathegories",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCathegory",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/cathegories/delete/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"cathegories",
+								"delete",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reserves",
+			"item": [
+				{
+					"name": "getReservesByUserId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/reserves/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"reserves",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteReserveByBookId",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/reserves/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"reserves",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createReserve",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idlibro\": \"4\",\n    \"fechareserva\": \"2018-11-20\",\n    \"fechadevolucion\": \"2018-12-20\",\n    \"rating\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/reserves/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"reserves",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateReserve",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rating\": \"4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/reserves/4/2018-11-20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"reserves",
+								"4",
+								"2018-11-20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllReserves",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/reserves/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"reserves",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReservesByUserDateBook",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/reserves/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"reserves",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "donations",
+			"item": [
+				{
+					"name": "createDonations",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"title\": \"Fuimos recuerdos\", \n    \"authorsName\": \"ELisabet Benavent\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/donations/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"donations",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDonations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/donations/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"donations",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDonationsByUserId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3080/api/v1/donations/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"donations",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDonationById",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"donationCheck\": 2,\n      \"donationReviewed\": 1\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/donations/update/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"donations",
+								"update",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "invoices",
+			"item": [
+				{
+					"name": "getInvoicesByUserId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/invoices/user/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"invoices",
+								"user",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createInvoice",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idfactura\":\"3\",\n    \"fecha\":\"2021-01-04\",\n    \"iva\":\"21\",\n    \"precioenvio\":\"3\",\n    \"detalles\":[\n        {\"idfactura\":\"3\",\"iddetalle\":\"1\",\"idlibro\":\"1\",\"precio\":\"20.00\"},\n        {\"idfactura\":\"3\",\"iddetalle\":\"2\",\"idlibro\":\"2\",\"precio\":\"20.00\"},\n        {\"idfactura\":\"3\",\"iddetalle\":\"3\",\"idlibro\":\"3\",\"precio\":\"30.00\"}\n            ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3080/api/v1/invoices/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3080",
+							"path": [
+								"api",
+								"v1",
+								"invoices",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

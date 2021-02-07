@@ -18,7 +18,7 @@ function validateAuth(req, res, next) {
     const payload = jwt.verify(accessToken, JWT_SECRET);
     const { idusuario, nombreusuario, admin } = payload;
     req.auth = { idusuario, nombreusuario, admin };
-    console.log(req.auth.idusuario, req.auth.nombreusuario, req.auth.admin);
+
     next();
   } catch (err) {
     res.status(401);
