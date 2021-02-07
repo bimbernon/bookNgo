@@ -26,7 +26,7 @@ function formatArrayBooks(array) {
       stock: book.stock,
       price: book.precio,
       editorial: book.editorial,
-      Category: {
+      Cathegory: {
         name: book.nombrecategoria,
         description: book.descripcioncategoria,
       },

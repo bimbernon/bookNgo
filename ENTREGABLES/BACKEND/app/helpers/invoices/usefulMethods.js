@@ -12,9 +12,9 @@ function formatArrayInvoices(arrayInvoices) {
                 Book: {
                     title: detail.titulo,
                     editorial: detail.editorial,
-                    Category: {
-                        nameCategory: detail.nombrecategoria,
-                        descriptionCategory: detail.descripcioncategoria
+                    Cathegory: {
+                        nameCathegory: detail.nombrecategoria,
+                        descriptionCathegory: detail.descripcioncategoria
                     }
                 },
 
