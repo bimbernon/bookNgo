@@ -2,20 +2,35 @@
 
 const Joi = require('joi');
 
-const { deleteCardById, findById }= require('../../repositories/cards-repository');
+const cardsRepository = require('../../repositories/cards-repository');
+
+const schema = Joi.number().positive().required();
 
 async function removeCarById (req, res) {
     try {
+         const { userId } = req.params;
+         const authentifiedUserId = req.auth.idusuario;
+
+         if (req.auth.admin !== 1) {
+           if (authentifiedUserId !== parseInt(userId)) {
+             const error = new Error(
+               "No tienes permisos para realizar esta acción."
+             );
+             throw error;
+           }
+         }
 
         const { idCard } = req.params;
-        console.log(idCard);
-        const card = await findById(idCard);
-        console.log(card);
+
+        await schema.validateAsync(idCard);
+
+        const card = await cardsRepository.findCardById(idCard);
+
         if (card[0] === undefined) {
             throw new Error(' No se ha encontrado tarjeta con ese id.');
         }
 
-        const deletedCard = await deleteCardById(parseInt(idCard));
+        const deletedCard = await cardsRepository.deleteCardById(parseInt(idCard));
 
         res.status(200).send('La tarjeta ha sido borrada con exito.')
 

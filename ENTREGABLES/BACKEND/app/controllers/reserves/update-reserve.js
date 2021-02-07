@@ -2,44 +2,51 @@
 
 const Joi = require('joi');
 
-const reservesRepository = require('../../repositories/reserve-repository');
+const reserveRepository = require('../../repositories/reserve-repository');
 
-
-async function updateReserveById(req, res) {
+async function updateReserve(req, res) {
     try {
+        const authentifiedUserId = req.auth.idusuario;
 
-        const { reserveId } = req.params;
-
-        const reserve = await reservesRepository.findReserveId(reserveId);
-
-        if(!reserve) {
-            throw new Error('No se ha encontrado reserva con ese id.');
+        if (req.auth.admin !== 1) {
+          if (authentifiedUserId !== parseInt(userId)) {
+            const error = new Error(
+              "No tienes permisos para realizar esta acción."
+            );
+            throw error;
+          }
         }
 
-        const {
-            fechareserva,
-            fechadevolucion,
-            rating,
-        } = req.body;
+        const { idusuario } = req.auth;
+
+        const { bookId, reserveDate } = req.params;
+        console.log(req.params);
+
+        const {fechareserva, fechadevolucion, rating } = req.body;
 
         const updatedReserve = {
             fechareserva,
             fechadevolucion,
             rating,
         }
-        // console.log(updatedReserve);
+        console.log(updatedReserve, 'hola');// aqui llegamos
 
-        await reservesRepository.modifyReserveById(reserveId, updatedReserve);
+        await reserveRepository.modifyReserve(idusuario, bookId, reserveDate, updatedReserve);
 
-        res.status(200).send({ message: 'La reserva se ha modificado correctamente.' })
+        res.status(200).send({
+            idusuario,
+            bookId,
+            fechareserva,
+            fechadevolucion,
+            rating,
+        });
 
     } catch(err) {
-        res.status(400).send({ error: err.message });
+        res.status(400).send( { err: err.message });
     }
 }
 
 
-
 module.exports = {
-    updateReserveById,
+    updateReserve,
 }

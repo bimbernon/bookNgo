@@ -7,6 +7,14 @@ const schema = Joi.number().positive().required();
 
 async function removeAuthorById(req, res) {
     try {
+        if (req.auth.admin !== 1) {
+          const error = new Error(
+            "No tienes permisos para realizar esta acción"
+          );
+          error.status = 403;
+          throw error;
+        }
+
         const { idAuthor } = req.params;
 
     await schema.validateAsync(idAuthor);

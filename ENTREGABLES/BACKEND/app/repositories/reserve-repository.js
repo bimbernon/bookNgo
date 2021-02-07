@@ -1,98 +1,105 @@
 "use strict";
 
+const { isError } = require("joi");
 const Joi = require("joi");
 const database = require("../infrastructure/database");
 
-async function findUserId(userId) {
-  const pool = await database.getPool();
-  const query = `SELECT idusuario FROM reserva WHERE idusuario=?`;
-  const [reserve] = await pool.query(query, userId);
-
-  return reserve;
-}
-
 async function readAll() {
-  const pool = await database.getPool();
-  const query = `SELECT * FROM reserva`;
-  const [reserve] = await pool.query(query);
+    const pool = await database.getPool();
+    const query = `select r.idreserva, u.idusuario, u.nombreusuario, l.titulo, r.fechareserva, r.fechadevolucion, r.rating from reserva r inner join libro l on r.idlibro = l.idlibro inner join usuario u on r.idusuario = u.idusuario`;
+    const [ reserve ] = await pool.query(query);
 
   return reserve;
 }
 
-async function findReserveByUserId(reserve) {
-  const pool = await database.getPool();
-  const query = `select fechareserva, fechadevolucion from reserva join usuario using(idusuario) where idusuario=?`;
-  const [reserveByUser] = await pool.query(query, reserve);
+async function findReserveByUserId(userId) {
+    const pool = await database.getPool();
+    const query = `select l.titulo, r.fechareserva, r.fechadevolucion, l.precio from libro l inner join reserva r on l.idlibro = r.idlibro where r.idusuario=?`;
+    const [ reserveByUser ] = await pool.query(query, userId);
 
-  return reserveByUser[0];
-}
-
-async function findReserveId(id) {
-  const pool = await database.getPool();
-  const query = `SELECT * FROM reserva WHERE idreserva=?`;
-  const [reserve] = await pool.query(query, id);
-
-  return reserve;
-}
-
-async function findLastReserveId() {
-  const pool = await database.getPool();
-  const query = "SELECT max(idreserva) as lastReserveId from reserva";
-  let [id] = await pool.query(query);
-
-  const generatedId = id[0].lastReserveId + 1;
-  return generatedId;
+    return reserveByUser;
 }
 
 async function addReserve(reserve) {
-  const pool = await database.getPool();
-  const idreserva = await findLastReserveId();
-  console.log(idreserva);
+    
+    const pool = await database.getPool();
 
-  const { idusuario, idlibro, fechareserva, fechadevolucion, rating } = reserve;
+    const {
+        idusuario,
+        idlibro,
+        fechareserva,
+        fechadevolucion,
+        rating,
+    } = reserve;
 
-  const query = `INSERT INTO reserva (idreserva, idusuario, idlibro, fechareserva, fechadevolucion, rating) VALUES (?,?,?,?,?,?)`;
+    const query = `INSERT INTO reserva ( idusuario, idlibro, fechareserva, fechadevolucion, rating) VALUES (?,?,?,?,?)`;
 
-  const [addedreserve] = await pool.query(query, [
-    idreserva,
-    idusuario,
-    idlibro,
-    fechareserva,
-    fechadevolucion,
-    rating,
-  ]);
+    const [ addedReserve ]  = await pool.query(query, [
+        idusuario,  
+        idlibro,
+        fechareserva,
+        fechadevolucion,
+        rating,
+    ]);
 
-  return true;
+    return addedReserve;
 }
 
-async function modifyReserveById(reserveId, updateReserve) {
+async function checkStock() {
+    const pool = await database.getPool();
+    const query = `select stock, if (stock > 0, "Hay stock", "No hay stock") as disponibilidad from libro;`;
+    const [ stock ] = await pool.query(query);
+
+    return stock[0].stock;
+}
+
+async function decreaseBookStock(idlibro) {
+    const pool = await database.getPool();
+    const query = `update libro set stock = stock - 1 where idlibro = ?`;
+    const [ bookStock ] = await pool.query(query, idlibro);
+
+    return true;
+}
+
+async function modifyReserve(userId, bookId, originalDate, updateReserve) {
+
   const { fechareserva, fechadevolucion, rating } = updateReserve;
 
-  console.log(updateReserve);
-
   const pool = await database.getPool();
-  const query = `UPDATE reserva SET fechareserva=?, fechadevolucion=?, rating=? WHERE idreserva=?`;
-
-  await pool.query(query, [fechareserva, fechadevolucion, rating, reserveId]);
+  const query = `UPDATE reserva SET fechareserva=?, fechadevolucion=?, rating=? WHERE idusuario=? AND idlibro=? AND fechareserva=?`;
+  await pool.query(query,[fechareserva, fechadevolucion, rating, userId, bookId, originalDate] );
 
   return true;
 }
 
-async function deleteReserve(reserveId) {
+async function eraseReserve(userId, bookId) {
+    const idusuario = userId;
+    const idlibro = bookId;
   const pool = await database.getPool();
-  const query = `DELETE FROM reserva WHERE idreserva=?`;
-  const [deletedReserve] = await pool.query(query, reserveId);
+  const query = `DELETE FROM reserva WHERE idusuario=${userId} AND idlibro=${bookId}`;
+  const [deletedReserve] = await pool.query(query);
 
   return true;
 }
+
+async function checkReserveDate(idlibro) {
+    const pool = await database.getPool();
+    const query = `select idlibro, fechareserva, fechadevolucion, if(fechareserva < fechadevolucion, "Libro no disponible para estas fechas", "Libro disponible para su reserva") as reservar from reserva`;
+    const  [ reserveDate ] = pool.query(query, idlibro);
+
+    return reserveDate;
+}
+
+
+
 
 module.exports = {
-  addReserve,
-  deleteReserve,
-  findUserId,
-  findLastReserveId,
-  findReserveId,
-  findReserveByUserId,
-  modifyReserveById,
-  readAll,
-};
+    addReserve,
+    checkStock,
+    checkReserveDate,
+    decreaseBookStock,
+    eraseReserve,
+    findReserveByUserId,
+    modifyReserve,
+    readAll,
+}

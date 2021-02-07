@@ -43,7 +43,7 @@ async function registerUser(req, res) {
     const admin = false;
     const purse = 0;
 
-    const passwordHash = await bcrypt.hash(password, 1);
+    const passwordHash = await bcrypt.hash(password, 2);
 
     const user = {
       name,

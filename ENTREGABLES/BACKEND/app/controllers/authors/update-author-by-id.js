@@ -7,25 +7,36 @@ const authorRepository = require('../../repositories/author-repository');
 
 const schemaId = Joi.number().positive().required();
 
-// const schema = Joi.object().keys({
-//   nombreautor: Joi.string().min(2).max(40).required(),
-//   apel1: Joi.string().min(2).max(40).required(),
-//   apel2: Joi.string().min(2).max(40).required(),
-// });
+const schema = Joi.object().keys({
+  nombreautor: Joi.string().min(2).max(40).required(),
+  apel1: Joi.string().min(2).max(40).required(),
+  apel2: Joi.string().min(2).max(40).required(),
+});
 
 async function updateAuthorById(req, res) {
     try {
+
+          const { userId } = req.params;
+          const authentifiedUserId = req.auth.idusuario;
+
+          if (req.auth.admin !== 1) {
+            if (authentifiedUserId !== parseInt(userId)) {
+              const error = new Error(
+                "No tienes permisos para realizar esta acción."
+              );
+              throw error;
+            }
+          }
+
         const { idAuthor } = req.params;
 
-        // await schemaId.validateAsync(idAuthor);
+        await schemaId.validateAsync(idAuthor);
 
         const author = await authorRepository.findById(idAuthor);
 
-        if(author[0] === undefined) {
+        if(!author) {
             throw new Error('No se ha encontrado autor con ese id.');
         }
-
-        // await schema.validateAsync(idAuthor);
 
         const {
             nombreautor,
@@ -33,13 +44,16 @@ async function updateAuthorById(req, res) {
             apel2,
         } = req.body;
 
+        await schema.validateAsync(req.body);
+
         const updatedAuthor = {
             nombreautor,
             apel1,
             apel2,
         };
 
-        await authorRepository.updateAuthorById(idAuthor, updatedAuthor);
+        await authorRepository.modifyAuthorById(idAuthor, updatedAuthor);
+
         res.status(200).send({ 
             idAuthor,
             nombreautor,
@@ -48,7 +62,7 @@ async function updateAuthorById(req, res) {
         });
 
     } catch(err) {
-        res.status(400).send({ error: err.message});
+        res.status(400).send({ error: err.message });
     }
 }
 

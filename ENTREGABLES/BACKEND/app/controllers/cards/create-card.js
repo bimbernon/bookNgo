@@ -4,14 +4,23 @@ const Joi = require('joi');
 
 const cardsRepository = require('../../repositories/cards-repository');
 
-// const schema = Joi.object().keys({
-//     nombreautor: Joi.string().alphanum().required(),
-//     apel1: Joi.string().alphanum().min(1).max(20).required(),
-//     apel2: Joi.string().alphanum().min(1).max(20),
-// });
+const schema = Joi.object().keys({
+  numerotarjeta: Joi.string()
+    .length(16)
+    .pattern(/^[0-9]+$/)
+    .required(),
+  idusuario: Joi.number().required(),
+  fechaExpiracion: Joi.required(),
+  csv: Joi.string().length(3).pattern(/^[0-9]+$/),
+});
 
 async function createCard(req, res) {
     try {
+
+       if (!req.auth) {
+         const error = new Error('No tienes permisos para realizar esta accion.');
+         throw error;
+       }
 
         const {
             numerotarjeta,
@@ -19,6 +28,8 @@ async function createCard(req, res) {
             fechaExpiracion,
             csv,
         } = req.body;
+
+        await schema.validateAsync(req.body);
 
         const cards = {
             numerotarjeta,
