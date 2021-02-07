@@ -28,7 +28,7 @@ async function findBookByAuthor(nombreAutor) {
   return books;
 }
 
-async function findBookByCategory(nombreCategoria) {
+async function findBookByCathegory(nombreCategoria) {
   const pool = await database.getPool();
   const query =
     "select l.*,u.nombreusuario,u.nombreperfilusuario,u.apel1 as apellido1usuario, u.apel2 as apellido2usuario,u.email,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join usuario u on l.idusuario=u.idusuario inner join autor aut on l.idautor=aut.idautor where c.nombrecategoria=?";
@@ -161,7 +161,7 @@ module.exports = {
   readAll,
   findByName,
   findBookByAuthor,
-  findBookByCategory,
+  findBookByCathegory,
   findBookByEditorial,
   findBookByYearPublication,
   findLastBookId,

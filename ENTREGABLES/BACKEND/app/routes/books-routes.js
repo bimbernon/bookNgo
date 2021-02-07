@@ -5,8 +5,8 @@ const { getBooks } = require("../controllers/books/get-books");
 const { getBookByTitle } = require("../controllers/books/get-book-by-title");
 const { getBookByAuthor } = require("../controllers/books/get-books-by-autor");
 const {
-  getBooksByCategory,
-} = require("../controllers/books/get-books-by-category");
+  getBooksByCathegory,
+} = require("../controllers/books/get-books-by-cathegory");
 const {
   getBooksByEditorial,
 } = require("../controllers/books/get-books-by-editorial");
@@ -26,8 +26,8 @@ router
   .route("/author/:nameAuthor")
   .get((req, res) => getBookByAuthor(req, res));
 router
-  .route("/category/nameCategory/:nameCategory")
-  .get((req, res) => getBooksByCategory(req, res));
+  .route("/cathegory/nameCathegory/:nameCathegory")
+  .get((req, res) => getBooksByCathegory(req, res));
 router
   .route("/editorial/:nameEditorial")
   .get((req, res) => getBooksByEditorial(req, res));

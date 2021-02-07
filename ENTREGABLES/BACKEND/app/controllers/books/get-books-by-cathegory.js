@@ -1,15 +1,15 @@
 'use strict';
 const Joi = require('joi');
-const { findBookByCategory } = require('../../repositories/books-repository');
+const { findBookByCathegory } = require('../../repositories/books-repository');
 const { formatArrayBooks } = require('../../helpers/books/usefulMethods');
 
 const schema = Joi.string().min(4).max(40).required();
 
-async function getBooksByCategory(req, res) {
+async function getBooksByCathegory(req, res) {
     try {
-        const { nameCategory } = req.params;
-        schema.validateAsync(nameCategory);
-        const books = await findBookByCategory(nameCategory);
+        const { nameCathegory } = req.params;
+        schema.validateAsync(nameCathegory);
+        const books = await findBookByCathegory(nameCathegory);
 
         if (!books) {
             throw new Error('No se encontraron libros para esa categoria')
@@ -20,4 +20,4 @@ async function getBooksByCategory(req, res) {
         res.status(400).send({ error: err.message });
     }
 }
-module.exports = { getBooksByCategory }
+module.exports = { getBooksByCathegory }
