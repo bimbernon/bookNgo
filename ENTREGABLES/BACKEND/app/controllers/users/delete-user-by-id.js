@@ -10,12 +10,17 @@ const schema = Joi.number().positive();
 
 async function deleteUserById(req, res) {
   try {
-    if (req.auth.admin !== 1) {
-      const error = new Error("No tienes permisos para realizar esta acción");
-      error.status = 403;
-      throw error;
-    }
     const { userId } = req.params;
+    const authentifiedUserId = req.auth.idusuario;
+
+    if (req.auth.admin !== 1) {
+      if (authentifiedUserId !== parseInt(userId)) {
+        const error = new Error(
+          "No tienes permisos para realizar esta acción."
+        );
+        throw error;
+      }
+    }
     await schema.validateAsync(userId);
 
     const user = await findUserById(userId);

@@ -10,16 +10,9 @@ const schema = Joi.object().keys({
 
 async function createDonation(req, res) {
   try {
-    const { userId } = req.params;
-    const authentifiedUserId = req.auth.idusuario;
-
-    if (req.auth.admin !== 1) {
-      if (authentifiedUserId !== parseInt(userId)) {
-        const error = new Error(
-          "No tienes permisos para realizar esta acción."
-        );
-        throw error;
-      }
+    if (!req.auth) {
+      const error = new Error("No tienes permisos para realizar esta acción.");
+      throw error;
     }
 
     const userLoggedId = req.auth.idusuario;
