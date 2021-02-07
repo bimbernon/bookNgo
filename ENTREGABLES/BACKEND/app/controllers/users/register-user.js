@@ -18,7 +18,6 @@ const schema = Joi.object().keys({
   email: Joi.string().email().required(),
   address: Joi.string().min(5).max(80).required(),
   purse: Joi.number().positive().optional(),
-  photoCod: Joi.string().alphanum(),
 });
 
 async function registerUser(req, res) {
@@ -33,7 +32,6 @@ async function registerUser(req, res) {
       lastName2,
       email,
       address,
-      photoCod,
     } = req.body;
 
     const existUser = await findUserByEmail(email);
@@ -58,7 +56,6 @@ async function registerUser(req, res) {
       email,
       address,
       purse,
-      photoCod,
     };
 
     await createUser(user);
@@ -73,7 +70,6 @@ async function registerUser(req, res) {
       email,
       address,
       purse,
-      photoCod,
     });
   } catch (err) {
     res.status(400).send({ error: err.message });

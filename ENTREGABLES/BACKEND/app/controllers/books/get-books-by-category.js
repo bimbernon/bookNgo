@@ -10,8 +10,8 @@ async function getBooksByCategory(req, res) {
         const { nameCategory } = req.params;
         schema.validateAsync(nameCategory);
         const books = await findBookByCategory(nameCategory);
-        console.log(books);
-        if (!books) { // Preguntar por que no entra por este if
+
+        if (!books) {
             throw new Error('No se encontraron libros para esa categoria')
         }
         const booksFormateados = formatArrayBooks(books);
@@ -20,4 +20,4 @@ async function getBooksByCategory(req, res) {
         res.status(400).send({ error: err.message });
     }
 }
-module.exports= {getBooksByCategory}
+module.exports = { getBooksByCategory }

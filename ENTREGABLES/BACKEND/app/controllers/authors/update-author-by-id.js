@@ -15,13 +15,26 @@ const schema = Joi.object().keys({
 
 async function updateAuthorById(req, res) {
     try {
+
+          const { userId } = req.params;
+          const authentifiedUserId = req.auth.idusuario;
+
+          if (req.auth.admin !== 1) {
+            if (authentifiedUserId !== parseInt(userId)) {
+              const error = new Error(
+                "No tienes permisos para realizar esta acción."
+              );
+              throw error;
+            }
+          }
+
         const { idAuthor } = req.params;
 
         await schemaId.validateAsync(idAuthor);
 
         const author = await authorRepository.findById(idAuthor);
 
-        if(author[0] === undefined) {
+        if(!author) {
             throw new Error('No se ha encontrado autor con ese id.');
         }
 
@@ -31,11 +44,6 @@ async function updateAuthorById(req, res) {
             apel2,
         } = req.body;
 
-        if(req.body) {
-            const error = new Error('Has introducido los mismos datos de autor.');
-            throw error;
-        }
-
         await schema.validateAsync(req.body);
 
         const updatedAuthor = {
@@ -44,7 +52,8 @@ async function updateAuthorById(req, res) {
             apel2,
         };
 
-        await authorRepository.updateAuthorById(idAuthor, updatedAuthor);
+        await authorRepository.modifyAuthorById(idAuthor, updatedAuthor);
+
         res.status(200).send({ 
             idAuthor,
             nombreautor,
@@ -53,7 +62,7 @@ async function updateAuthorById(req, res) {
         });
 
     } catch(err) {
-        res.status(400).send({ error: err.message});
+        res.status(400).send({ error: err.message });
     }
 }
 

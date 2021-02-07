@@ -8,10 +8,6 @@ const schema = Joi.string().max(20).required();
 
 async function getAuthorByName(req, res) {
     try {
-      if(!req.auth) {
-          const error = new Error('No estas logueado.');
-          throw error;
-      }
 
       const { authorsName } = req.params;
 

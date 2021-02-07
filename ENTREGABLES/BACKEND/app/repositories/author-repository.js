@@ -61,7 +61,7 @@ async function addAuthor(author) {
   return authors;
 }
 
-async function updateAuthorById(idAuthor, updateAuthor) {
+async function modifyAuthorById(idAuthor, updateAuthor) {
   
   const {
     nombreautor,
@@ -100,5 +100,5 @@ module.exports = {
     findById,
     findByName,
     readAll,
-    updateAuthorById,
+    modifyAuthorById,
 }

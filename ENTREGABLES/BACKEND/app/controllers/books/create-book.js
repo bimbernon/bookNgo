@@ -5,18 +5,18 @@ const Joi = require('joi');
 
 const schema = Joi.object().keys({
   idcategoria: Joi.number().positive().required(),
-  idusuario: Joi.number().positive().required(),
   idautor: Joi.number().positive().required(),
   titulo: Joi.string().min(4).max(40).required(),
   stock: Joi.number().positive().required(),
   precio: Joi.number().positive().required(),
   editorial: Joi.string().min(4).max(40).required(),
-  añopublicacion: Joi.number().min(1900).max(new Date().getFullYear()).positive().required(),
+  añopublicacion: Joi.number().min(1900).max(new Date().getFullYear()).positive().required()
 });
 
 async function createBook(req, res) {
   try {
     const { admin } = req.auth;
+    const { idusuario } = req.auth;
 
     if (admin !== 1) {
       const error = new Error("No tienes permisos para realizar esta acción");
@@ -25,13 +25,12 @@ async function createBook(req, res) {
     }
     const {
       idcategoria,
-      idusuario,
       idautor,
       titulo,
       stock,
       precio,
       editorial,
-      añopublicacion,
+      añopublicacion
     } = req.body;
     await schema.validateAsync(req.body);
     const book = {
@@ -42,7 +41,7 @@ async function createBook(req, res) {
       stock,
       precio,
       editorial,
-      añopublicacion,
+      añopublicacion
     };
 
     const books = await bookRepository.createBook(book);

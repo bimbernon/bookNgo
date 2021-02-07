@@ -1,5 +1,6 @@
 "use strict";
 
+const { isError } = require("joi");
 const Joi = require("joi");
 const database = require("../infrastructure/database");
 
@@ -13,33 +14,15 @@ async function readAll() {
 
 async function findReserveByUserId(userId) {
     const pool = await database.getPool();
-    const query = `select r.idreserva, l.titulo, r.fechareserva, r.fechadevolucion, l.precio from libro l inner join reserva r on l.idlibro = r.idlibro where r.idusuario=?`;
+    const query = `select l.titulo, r.fechareserva, r.fechadevolucion, l.precio from libro l inner join reserva r on l.idlibro = r.idlibro where r.idusuario=?`;
     const [ reserveByUser ] = await pool.query(query, userId);
 
     return reserveByUser;
 }
 
-async function findReserveId(id) {
-  const pool = await database.getPool();
-  const query = `SELECT * FROM reserva WHERE idreserva=?`;
-  const [reserve] = await pool.query(query, id);
-
-  return reserve;
-}
-
-async function findLastReserveId() {
-  const pool = await database.getPool();
-  const query = "SELECT max(idreserva) as lastReserveId from reserva";
-  let [id] = await pool.query(query);
-
-  const generatedId = id[0].lastReserveId + 1;
-  return generatedId;
-}
-
 async function addReserve(reserve) {
     
     const pool = await database.getPool();
-    const idreserva = await findLastReserveId();
 
     const {
         idusuario,
@@ -49,18 +32,17 @@ async function addReserve(reserve) {
         rating,
     } = reserve;
 
-    const query = `INSERT INTO reserva (idreserva, idusuario, idlibro, fechareserva, fechadevolucion, rating) VALUES (?,?,?,?,?,?)`;
+    const query = `INSERT INTO reserva ( idusuario, idlibro, fechareserva, fechadevolucion, rating) VALUES (?,?,?,?,?)`;
 
-    const [ addedreserve ]  = await pool.query(query, [
-        idreserva,
-        idusuario,
+    const [ addedReserve ]  = await pool.query(query, [
+        idusuario,  
         idlibro,
         fechareserva,
         fechadevolucion,
         rating,
     ]);
 
-    return true;
+    return addedReserve;
 }
 
 async function checkStock() {
@@ -74,28 +56,28 @@ async function checkStock() {
 async function decreaseBookStock(idlibro) {
     const pool = await database.getPool();
     const query = `update libro set stock = stock - 1 where idlibro = ?`;
-    const [ bookStock ] = pool.query(query, idlibro);
+    const [ bookStock ] = await pool.query(query, idlibro);
 
-    return bookStock;
+    return true;
 }
 
-async function modifyReserveById(reserveId, updateReserve) {
+async function modifyReserve(userId, bookId, originalDate, updateReserve) {
+
   const { fechareserva, fechadevolucion, rating } = updateReserve;
 
-  console.log(updateReserve);
-
   const pool = await database.getPool();
-  const query = `UPDATE reserva SET fechareserva=?, fechadevolucion=?, rating=? WHERE idreserva=?`;
-
-  await pool.query(query, [fechareserva, fechadevolucion, rating, reserveId]);
+  const query = `UPDATE reserva SET fechareserva=?, fechadevolucion=?, rating=? WHERE idusuario=? AND idlibro=? AND fechareserva=?`;
+  await pool.query(query,[fechareserva, fechadevolucion, rating, userId, bookId, originalDate] );
 
   return true;
 }
 
-async function deleteReserve(reserveId) {
+async function eraseReserve(userId, bookId) {
+    const idusuario = userId;
+    const idlibro = bookId;
   const pool = await database.getPool();
-  const query = `DELETE FROM reserva WHERE idreserva=?`;
-  const [deletedReserve] = await pool.query(query, reserveId);
+  const query = `DELETE FROM reserva WHERE idusuario=${userId} AND idlibro=${bookId}`;
+  const [deletedReserve] = await pool.query(query);
 
   return true;
 }
@@ -116,10 +98,8 @@ module.exports = {
     checkStock,
     checkReserveDate,
     decreaseBookStock,
-    deleteReserve,
-    findLastReserveId,
-    findReserveId,
+    eraseReserve,
     findReserveByUserId,
-    modifyReserveById,
+    modifyReserve,
     readAll,
 }

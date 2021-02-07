@@ -13,16 +13,21 @@ const schema = Joi.object().keys({
 
 async function createAuthor(req, res) {
   try {
+        const { admin } = req.auth;
+
+        if (admin !== 1) {
+          const error = new Error(
+            "No tienes permisos para realizar esta acción"
+          );
+          error.status = 403;
+          throw error;
+        }
 
     const {
       nombreautor,
       apel1,
       apel2,
     } = req.body;
-
-    if(req.body) {
-      throw new Error('Este autor ya existe.')
-    }
 
     await schema.validateAsync(req.body);
 

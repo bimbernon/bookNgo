@@ -34,13 +34,13 @@ router
 router
   .route("/yearpublication/:yearPublication")
   .get((req, res) => getBooksByYearPublication(req, res));
-router.route("/id/:idBook").get((req, res) => getBookById(req, res));
+router.route("/id/:idBook").all(validateAuth).get((req, res) => getBookById(req, res));
 
-router.route("/").post((req, res) => createBook(req, res));
+router.route("/").all(validateAuth).post((req, res) => createBook(req, res));
 
-router.route("/:idBook").delete((req, res) => deleteBookById(req, res));
+router.route("/:idBook").all(validateAuth).delete((req, res) => deleteBookById(req, res));
 
-router.route("/:idBook").put((req, res) => updateBookById(req, res));
+router.route("/:idBook").all(validateAuth).put((req, res) => updateBookById(req, res));
 
-router.route("/image/upload").put((req, res) => uploadImageBook(req, res));
+router.route("/image/upload").all(validateAuth).put((req, res) => uploadImageBook(req, res));
 module.exports = router;

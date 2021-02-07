@@ -33,7 +33,6 @@ async function findUserById(userId) {
   const query = "SELECT * FROM usuario WHERE idusuario = ?";
   const [users] = await pool.query(query, userId);
 
-  console.log(users[0]);
   return users[0];
 }
 
@@ -51,11 +50,12 @@ async function createUser(user) {
     email,
     address,
     purse,
-    photoCod,
   } = user;
 
   const insertQuery =
     "INSERT INTO usuario ( idusuario, admin, nombreusuario, nombreperfilusuario, contraseña, apel1, apel2, email, direccion, monedero, codFoto ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+  const photoCod = userId;
 
   const [createdUser] = await pool.query(insertQuery, [
     userId,
@@ -109,10 +109,10 @@ async function findUserProfileImage(userId) {
   return users[0];
 }
 
-async function uploadImageProfile(userId, image) {
+async function rechargePurse(userId, ammount) {
   const pool = await database.getPool();
-  const updateQuery = "UPDATE users SET codFoto = ? WHERE idusuario = ?";
-  await pool.query(updateQuery, [image, userId]);
+  const updateQuery = "UPDATE usuaruio SET monedero = ? WHERE idusuario = ?";
+  await pool.query(updateQuery, [userId, ammount]);
 
   return true;
 }
@@ -122,9 +122,9 @@ module.exports = {
   eraseUser,
   findAllUsers,
   findLastUserId,
-  findUserById,
   findUserByEmail,
-  updateUser,
+  findUserById,
   findUserProfileImage,
-  uploadImageProfile,
+  rechargePurse,
+  updateUser,
 };

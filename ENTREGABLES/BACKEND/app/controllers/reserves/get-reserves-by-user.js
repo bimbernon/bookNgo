@@ -8,8 +8,17 @@ const schema = Joi.number().positive().required();
 
 async function getReservesByUserId(req, res) {
     try {
+      const { userId } = req.params;
+      const authentifiedUserId = req.auth.idusuario;
 
-        const { userId } = req.params;
+      if (req.auth.admin !== 1) {
+        if (authentifiedUserId !== parseInt(userId)) {
+          const error = new Error(
+            "No tienes permisos para realizar esta acción."
+          );
+          throw error;
+        }
+      }
 
         await schema.validateAsync(userId);
 
@@ -21,17 +30,9 @@ async function getReservesByUserId(req, res) {
 
         res.status(200).send(userReserve);
 
-    } catch(err) {
-        res.status(400).send({ error: err.message });
+    } catch (err) {
+      res.status(400).send({ error: err.message });
     }
-
-    const reserve = await reservesRepository.findReserveByUserId(userId);
-    console.log(reserve);
-
-    res.status(200).send(reserve);
-  } catch (err) {
-    res.status(400).send({ error: err.message });
-  }
 }
 
 module.exports = {

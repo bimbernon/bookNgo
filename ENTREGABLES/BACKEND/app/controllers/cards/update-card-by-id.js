@@ -12,6 +12,18 @@ const schema = Joi.number().positive().required();
 async function updateCardById(req, res) {
     try {
 
+        const { userId } = req.params;
+        const authentifiedUserId = req.auth.idusuario;
+
+        if (req.auth.admin !== 1) {
+          if (authentifiedUserId !== parseInt(userId)) {
+            const error = new Error(
+              "No tienes permisos para realizar esta acción."
+            );
+            throw error;
+          }
+        }
+
         const { idCard } = req.params;
 
         await schema.validateAsync(idCard);

@@ -8,21 +8,24 @@ const reservesRepository = require('../../repositories/reserve-repository');
 const schema = Joi.number().positive().required();
 
 
-async function deleteReserveById(req, res) {
+async function deleteReserve(req, res) {
     try {
+         const authentifiedUserId = req.auth.idusuario;
 
-        const { reserveId } = req.params;
-        console.log(reserveId);
+         if (req.auth.admin !== 1) {
+           if (authentifiedUserId !== parseInt(userId)) {
+             const error = new Error(
+               "No tienes permisos para realizar esta acción."
+             );
+             throw error;
+           }
+         }
 
-        await schema.validateAsync(reserveId);
+        const { idusuario } = req.auth;
 
-        const reserveUserId = await reservesRepository.findLastReserveId(reserveId);
+        const { bookId } = req.params;
 
-        if(!reserveUserId) {
-            throw new Error('No se ha encontrado reserva con ese id.');
-        }
-
-        await reservesRepository.deleteReserve(reserveId);
+        await reservesRepository.eraseReserve(idusuario, bookId);
 
         res.status(200).send({ message: 'La reserva se ha eliminado correctamente.'})
 
@@ -34,5 +37,5 @@ async function deleteReserveById(req, res) {
 
 
 module.exports = {
-    deleteReserveById,
+    deleteReserve,
 }

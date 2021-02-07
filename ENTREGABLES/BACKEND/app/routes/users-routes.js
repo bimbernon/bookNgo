@@ -10,6 +10,9 @@ const { loginUser } = require("../controllers/users/login-user");
 const { registerUser } = require("../controllers/users/register-user");
 const { updateUserById } = require("../controllers/users/update-user");
 const { getUserProfile } = require("../controllers/users/get-user-profile");
+const {
+  uploadImageUserProfile,
+} = require("../controllers/users/upload-image-user-profile");
 
 const router = express.Router();
 
@@ -22,7 +25,10 @@ router
   .route("/update/:userId")
   .all(validateAuth)
   .patch((req, res) => updateUserById(req, res));
-router.route("/profile").put((req, res) => getUserProfile(req, res));
+router
+  .route("/profile/:userId")
+  .all(validateAuth)
+  .get((req, res) => getUserProfile(req, res));
 
 //PRIVADAS-ADMIN
 router
@@ -41,5 +47,9 @@ router
   .route("/id/:userId")
   .all(validateAuth)
   .get((req, res) => getUserById(req, res));
+router
+  .route("/image/upload/:userId")
+  .all(validateAuth)
+  .put((req, res) => uploadImageUserProfile(req, res));
 
 module.exports = router;

@@ -17,17 +17,17 @@ const schema = Joi.object().keys({
 async function createCard(req, res) {
     try {
 
+       if (!req.auth) {
+         const error = new Error('No tienes permisos para realizar esta accion.');
+         throw error;
+       }
+
         const {
             numerotarjeta,
             idusuario,
             fechaExpiracion,
             csv,
         } = req.body;
-
-        if(req.body) {
-          const error = new Error('Esta tarjeta ya existe');
-          throw error;
-        }
 
         await schema.validateAsync(req.body);
 
