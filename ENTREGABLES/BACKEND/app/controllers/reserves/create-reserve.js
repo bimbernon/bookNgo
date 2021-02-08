@@ -4,12 +4,12 @@ const Joi = require('joi');
 
 const reserveRepository = require('../../repositories/reserve-repository');
 
-const schema = Joi.object().keys({
-  idlibro: Joi.number().positive().required(),
-  fechareserva: Joi.required(),
-  fechadevolucion: Joi.required(),
-  rating: Joi.number().required(),
-});
+// const schema = Joi.object().keys({
+//   idlibro: Joi.number().positive().required(),
+//   fechareserva: Joi.required(),
+//   fechadevolucion: Joi.required(),
+//   rating: Joi.number().required(),
+// });
 
 async function createReserve(req, res) {
     try {
@@ -23,14 +23,14 @@ async function createReserve(req, res) {
             rating,
         } = req.body;
 
-        await schema.validateAsync(req.body);
+        // await schema.validateAsync(req.body);
 
         const reserveStock = await reserveRepository.checkStock(req.body.idlibro);
 
         if(!reserveStock) {
           const error = new Error('Este libro no esta disponible actualmente.');
           throw error;
-        } 
+        }
 
         await reserveRepository.decreaseBookStock(req.body.idlibro);
 
@@ -42,8 +42,6 @@ async function createReserve(req, res) {
           rating,
         }
 
-        await reserveRepository.addReserve(reserve);
-      
         res
           .status(200)
           .send({

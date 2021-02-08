@@ -4,6 +4,12 @@ const Joi = require('joi');
 
 const reserveRepository = require('../../repositories/reserve-repository');
 
+// const schema = Joi.object.keys({
+//     fechareserva: Joi.required(),
+//     fechadevolucion: Joi.require(),
+//     rating: Joi.number().positive(),
+// })
+
 async function updateReserve(req, res) {
     try {
         const authentifiedUserId = req.auth.idusuario;
