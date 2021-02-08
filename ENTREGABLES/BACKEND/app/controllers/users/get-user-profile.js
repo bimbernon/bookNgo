@@ -7,6 +7,7 @@ async function getUserProfile(req, res) {
   try {
     const { userId } = req.params;
     const authentifiedUserId = req.auth.idusuario;
+    let user = await findUserById(authentifiedUserId);
 
     if (req.auth.admin !== 1) {
       if (authentifiedUserId !== parseInt(userId)) {
@@ -15,12 +16,11 @@ async function getUserProfile(req, res) {
         );
         throw error;
       }
+    } else {
+      user = await findUserById(userId);
     }
 
     const { HTTP_SERVER_DOMAIN, PATH_USER_IMAGE } = process.env;
-    // Recogemos el Id del accessToken así no usamos ni tenemos que fiarnos de la URL
-
-    const user = await findUserById(authentifiedUserId);
 
     const image = `${HTTP_SERVER_DOMAIN}/${PATH_USER_IMAGE}/${user.codFoto}`;
     const { ...userInfo } = user;

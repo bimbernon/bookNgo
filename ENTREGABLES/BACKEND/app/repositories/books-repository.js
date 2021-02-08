@@ -146,14 +146,15 @@ async function findBookByTitleEditorial(title, editorial) {
 
 async function checkStockBook(idlibro) {
   const pool = await database.getPool();
-  const query = 'select l.* from libro l inner join detalle d on l.idlibro=d.idlibro where l.idlibro=? group by l.idlibro';
+  const query = "select l.stock from libro l where l.idlibro=?";
   const [book] = await pool.query(query, idlibro);
+
   return book[0].stock;
 }
 
 async function updateStockBook(idlibro, stock) {
   const pool = await database.getPool();
-  const update = 'UPDATE libro set stock=? where idlibro=?';
+  const update = "UPDATE libro set stock=? where idlibro=?";
   await pool.query(update, [stock, idlibro]);
 }
 
@@ -171,5 +172,5 @@ module.exports = {
   findBookByTitleEditorial,
   updateBookById,
   checkStockBook,
-  updateStockBook
+  updateStockBook,
 };
