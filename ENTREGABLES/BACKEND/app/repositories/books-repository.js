@@ -96,8 +96,8 @@ async function createBook(book) {
 async function removeBookById(idBook) {
   const pool = await database.getPool();
   const deleteQuery = "DELETE FROM libro WHERE idlibro = ?";
-  await pool.query(deleteQuery, idBook);
-  return true;
+  const book = await pool.query(deleteQuery, idBook);
+  return book;
 }
 
 async function findBookById(idBook) {
@@ -122,7 +122,7 @@ async function updateBookById(idBook, updateBook) {
   const pool = await database.getPool();
   const query =
     "UPDATE libro set idcategoria=?,idusuario=?,idautor=?,titulo=?,stock=?,precio=?,editorial=?,añopublicacion=? where idlibro=?";
-  await pool.query(query, [
+  const resBookUpdate =await pool.query(query, [
     idcategoria,
     idusuario,
     idautor,
@@ -134,7 +134,7 @@ async function updateBookById(idBook, updateBook) {
     idBook,
   ]);
 
-  return true;
+  return resBookUpdate;
 }
 
 async function findBookByTitleEditorial(title, editorial) {

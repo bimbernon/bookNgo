@@ -1,16 +1,13 @@
 "use strict";
-
+const {dateFormatted} = require("../../helpers/date");
 const { insertInvoice } = require("../../repositories/invoices-repository");
 const Joi = require("joi");
 const schema = Joi.object().keys({
   idfactura: Joi.number().positive().required(),
-  fecha: Joi.date().required(),
   iva: Joi.number().positive().required(),
   precioenvio: Joi.number().positive().required(),
   detalles: Joi.array().items(
     Joi.object({
-      idfactura: Joi.number().positive().required(),
-      iddetalle: Joi.number().positive().required(),
       idlibro: Joi.number().positive().required(),
       precio: Joi.number().positive().required(),
     })
@@ -21,9 +18,9 @@ async function createInvoice(req, res) {
   try {
     const { idusuario } = req.auth;
     const total = 0.0;
-
-    const { idfactura, fecha, iva, precioenvio, detalles } = req.body;
-
+    const fecha = dateFormatted(new Date(),"-");
+    const { idfactura, iva, precioenvio, detalles } = req.body;
+  
     await schema.validateAsync(req.body);
 
     const invoice = {
@@ -35,9 +32,9 @@ async function createInvoice(req, res) {
       total,
     };
 
-    await insertInvoice(invoice, detalles);
+    const invoiceCreated = await insertInvoice(invoice, detalles);
 
-    res.send("SE HA AÑADIDO CORRECTAMENTE LA FACTURA");
+    res.send({invoiceCreated});
   } catch (err) {
     res.status(err.status || 500);
     res.send({ error: err.message });
