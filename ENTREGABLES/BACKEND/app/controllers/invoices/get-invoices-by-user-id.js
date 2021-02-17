@@ -23,8 +23,8 @@ async function getInvoicesByUser(req, res) {
     await schemaId.validateAsync(userID);
     const invoices = await readInvoicesByUser(userID);
 
-    if (!invoices) {
-      throw new Error("No se encontraron libros para esa editorial");
+    if (invoices.length===0 ){
+      throw new Error("No se encontraron facturas de ese usuario");
     }
     const User = {
       name: invoices[0].nombreusuario,

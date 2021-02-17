@@ -55,9 +55,9 @@ async function updateBookById(req, res) {
             añopublicacion
         }
 
-        await bookRepository.updateBookById(idBook, updateBook);
+       const resBookUpdate= await bookRepository.updateBookById(idBook, updateBook);
 
-        res.status(200).send({ idBook, idcategoria, idusuario, idautor, titulo, stock, precio, editorial, añopublicacion });
+        res.status(200).send({ resBookUpdate});
 
 
     } catch (err) {

@@ -4,10 +4,7 @@ const {
   createDetail,
   readDetailsByInvoce,
 } = require("../repositories/details-repository");
-const {
-  checkStockBook,
-  updateStockBook,
-} = require("../repositories/books-repository");
+
 
 async function readInvoicesByUser(userID) {
   console.log(userID);
@@ -26,6 +23,7 @@ async function readInvoicesByUser(userID) {
 
 async function insertInvoice(invoice, details) {
   const pool = await database.getPool();
+  
   try {
     await pool.query("START TRANSACTION");
 
@@ -45,6 +43,8 @@ async function insertInvoice(invoice, details) {
     let totalR = total;
 
     for (let i = 0; i < details.length; i++) {
+      details[i].idfactura=idfactura;
+      details[i].iddetalle=i+1;
       await createDetail(details[i]);
       totalR = totalR + parseInt(details[i].precio);
     }
@@ -52,6 +52,7 @@ async function insertInvoice(invoice, details) {
 
     await updateInvoice(parseInt(totalR), idfactura);
     await pool.query("COMMIT");
+
     return invoices;
   } catch (err) {
     await pool.query("ROLLBACK");
