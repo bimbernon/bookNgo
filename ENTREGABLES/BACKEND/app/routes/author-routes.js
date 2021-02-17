@@ -14,6 +14,9 @@ const {
   updateAuthorById,
 } = require("../controllers/authors/update-author-by-id");
 const { validateAuth } = require("../middlewares/validate-auth");
+const {
+  getAuthorByNameAndLastName,
+} = require("../controllers/authors/get-author-by-name-and-last-name");
 
 const router = express.Router();
 
@@ -23,12 +26,18 @@ router
   .all(validateAuth)
   .post((req, res) => createAuthor(req, res));
 
+router.route("/name").get((req, res) => getAuthorByNameAndLastName(req, res));
+
+router
+  .route("/:idAuthor")
+  .all(validateAuth)
+  .get((req, res) => getAuthorById(req, res));
+
 router.route("/name/:authorsName").get((req, res) => getAuthorByName(req, res)); // PUBLICO
 
 router
   .route("/update/:idAuthor")
   .all(validateAuth)
-  .get((req, res) => getAuthorById(req, res))
   .put((req, res) => updateAuthorById(req, res));
 
 router

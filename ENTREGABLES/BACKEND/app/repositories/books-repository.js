@@ -3,12 +3,9 @@ const database = require("../infrastructure/database");
 
 async function readAll() {
   const pool = await database.getPool();
-  console.log("jose");
   const query =
     "select l.*,u.nombreusuario,u.nombreperfilusuario,u.apel1 as apellido1usuario, u.apel2 as apellido2usuario,u.email,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join usuario u on l.idusuario=u.idusuario inner join autor aut on l.idautor=aut.idautor";
-  console.log(query);
   const [books] = await pool.query(query);
-  console.log(books);
   return books;
 }
 
@@ -46,7 +43,6 @@ async function findBookByEditorial(nombreEditorial) {
 
 async function findBookByYearPublication(añoPublicacion) {
   const pool = await database.getPool();
-  console.log(añoPublicacion);
   const query =
     "select l.*,u.nombreusuario,u.nombreperfilusuario,u.apel1 as apellido1usuario, u.apel2 as apellido2usuario,u.email,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join usuario u on l.idusuario=u.idusuario inner join autor aut on l.idautor=aut.idautor where l.añopublicacion=?";
   const [books] = await pool.query(query, añoPublicacion);

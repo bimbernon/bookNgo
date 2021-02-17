@@ -24,10 +24,19 @@ async function findById (id) {
 async function findByName (name) {
 
     const pool = await database.getPool();
-    const query = "SELECT titulo FROM libro JOIN autor using(idlibro) WHERE nombreautor=?";
+    const query = "SELECT titulo FROM libro JOIN autor using(idautor) WHERE nombreautor=?";
     const [ authorName ] = await pool.query(query, name);
 
   return authorName;
+}
+
+async function findAuthorByNameAndLastName (author) {
+  const { name, lastName1, lastName2 } = author;
+  const pool = await database.getPool();
+  const query = `SELECT * FROM autor WHERE nombreautor=? AND apel1=? AND apel2=?`;
+  const  [ insertedAuthor ] = await pool.query(query, [name, lastName1, lastName2]);
+
+  return insertedAuthor;
 }
 
 async function findLastAuthorId() {
@@ -49,7 +58,7 @@ async function addAuthor(author) {
     apel2
   } = author;
 
-  const query = "INSERT INTO autor ( idautor, nombreautor, apel1, apel2 ) VALUES (?,?,?,?)";
+  const query = "INSERT IGNORE INTO autor ( idautor, nombreautor, apel1, apel2 ) VALUES (?,?,?,?)";
   
     const [ authors ] = await pool.query(query, [
     idAuthor,
@@ -99,6 +108,7 @@ module.exports = {
     deleteById,
     findById,
     findByName,
+    findAuthorByNameAndLastName,
     readAll,
     modifyAuthorById,
 }

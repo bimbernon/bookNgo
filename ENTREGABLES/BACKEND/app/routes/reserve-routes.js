@@ -12,6 +12,7 @@ const {
 } = require("../controllers/reserves/get-reserves-by-user-id");
 const { getAllReserves } = require("../controllers/reserves/get-all-reserves");
 const { validateAuth } = require("../middlewares/validate-auth");
+const { getReserveByUserDateBook } = require('../controllers/reserves/get-reserves-by-user-date-book');
 
 const router = express.Router();
 
@@ -19,7 +20,11 @@ router
   .route("/")
   .all(validateAuth)
   .post((req, res) => createReserve(req, res))
-  .get((req, res) => getAllReserves(req, res));
+  .get((req, res) => getAllReserves(req, res))
+
+  router.route('/search')
+  .all(validateAuth)
+  .get((req, res) => getReserveByUserDateBook(req, res));
 
 router
   .route("/:bookId/:reserveDate")
@@ -34,6 +39,6 @@ router
 router
   .route("/:userId")
   .all(validateAuth)
-  .get((req, res) => getReservesByUserId(req, res));
+  .get((req, res) => getReservesByUserId(req, res))
 
 module.exports = router;

@@ -16,17 +16,29 @@ async function createReserve(req, res) {
 
     const { idlibro } = req.body;
 
-    await schema.validateAsync(req.body);
 
-    const reserveStock = await checkStockBook(req.body.idlibro);
+    await schema.validateAsync(req.body);
+    
+    let lookPurse = await reserveRepository.checkPurse(idusuario)
+
+    if(lookPurse < 1) {
+      const error = new Error('Saldo insuficiente. Recarga tu monedero para continuar con la reserva');
+      throw error;
+    }
+
+    let updatePurse = await reserveRepository.decreasePurse(idusuario);
+
+    const reserveStock = await checkStockBook(idlibro);
 
     if (reserveStock === 0) {
       const error = new Error("Este libro no esta disponible actualmente.");
       throw error;
     }
+
+
     const reserveDate = new Date();
     const reserveDevolution = addDateDays(new Date(), 30);
-    const rating = 0;
+    const rating = null;
 
     const reserve = {
       idusuario: idusuario,

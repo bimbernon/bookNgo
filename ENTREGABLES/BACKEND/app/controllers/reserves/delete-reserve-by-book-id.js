@@ -11,23 +11,32 @@ async function deleteReserve(req, res) {
     const authentifiedUserId = req.auth.idusuario;
 
     if (!req.auth) {
-      //COMPROBAR QUE EL ID DE LA RESERVA DEL PARAMS CORRESPONDA CON UNA RESERVA DEL USUARIO AUTENTIFICADO
       const error = new Error("No tienes permisos para realizar esta acción");
-      // if (authentifiedUserId !== parseInt(userId)) {
-      //   const error = new Error(
-      //     "No tienes permisos para realizar esta acción."
-      //   );
-      //   throw error;
-      // }
     }
 
     const { bookId } = req.params;
 
-    await reservesRepository.eraseReserve(authentifiedUserId, bookId);
+    const { date } = req.body;
+    console.log(date);
 
-    res
-      .status(200)
-      .send({ message: "La reserva se ha eliminado correctamente." });
+    const reserve = await reservesRepository.eraseReserve(
+      authentifiedUserId,
+      bookId,
+      req.body.fechareserva
+    );
+
+    if (reserve === undefined) {
+      // no salta error cuando reserve es undefinded
+      const error = new Error(
+        `No existe reserva con estos datos:
+         userId:${authentifiedUserId},
+         bookId${bookId}, 
+         fechareserva:${req.body.fechareserva}`
+      );
+      throw error;
+    }
+
+    res.status(200).send(reserve);
   } catch (err) {
     res.status(400).send({ error: err.message });
   }

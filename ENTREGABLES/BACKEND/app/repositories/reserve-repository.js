@@ -20,6 +20,15 @@ async function findReserveByUserId(userId) {
   return reserveByUser;
 }
 
+async function findReserveByUserDateBook(reserveData) {
+  const { idusuario, idlibro, fechareserva } = reserveData;
+  const pool = await database.getPool();
+  const query = `SELECT * FROM reserva WHERE idusuario=? AND idlibro=? AND fechareserva=?`;
+  const [reserve] = await pool.query(query, [idusuario, idlibro, fechareserva]);
+
+  return reserve;
+}
+
 async function addReserve(reserve) {
   const pool = await database.getPool();
 
@@ -55,14 +64,6 @@ async function addReserve(reserve) {
   }
 }
 
-async function checkStock() {
-  const pool = await database.getPool();
-  const query = `select stock, if (stock > 0, "Hay stock", "No hay stock") as disponibilidad from libro where idlibro=?`;
-  const [stock] = await pool.query(query);
-
-  return stock[0].stock;
-}
-
 async function decreaseBookStock(pool, idlibro) {
   // const pool = await database.getPool();
   const query = `update libro set stock = stock - 1 where idlibro = ?`;
@@ -73,7 +74,6 @@ async function decreaseBookStock(pool, idlibro) {
 
 async function modifyReserve(updateReserve) {
   const { bookId, userId, reserveDate, rating } = updateReserve;
-
   const pool = await database.getPool();
   const query = `UPDATE reserva SET rating=? WHERE idusuario=? AND idlibro=? AND fechareserva=?`;
   await pool.query(query, [rating, userId, bookId, reserveDate]);
@@ -81,14 +81,16 @@ async function modifyReserve(updateReserve) {
   return true;
 }
 
-async function eraseReserve(userId, bookId) {
-  const idusuario = userId;
-  const idlibro = bookId;
+async function eraseReserve(userId, bookId, reserveDate) {
   const pool = await database.getPool();
-  const query = `DELETE FROM reserva WHERE idusuario=${userId} AND idlibro=${bookId}`;
-  const [deletedReserve] = await pool.query(query);
+  const query = `DELETE FROM reserva WHERE idusuario=? AND idlibro=? AND fechareserva=?`;
+  const [deletedReserve] = await pool.query(query, [
+    userId,
+    bookId,
+    reserveDate,
+  ]);
 
-  return true;
+  return deletedReserve;
 }
 
 async function checkReserveDate(idlibro) {
@@ -99,13 +101,31 @@ async function checkReserveDate(idlibro) {
   return reserveDate;
 }
 
+async function checkPurse(idusuario) {
+  const pool = await database.getPool();
+  const query = `select monedero from usuario where idusuario=? `;
+  const [purse] = await pool.query(query, idusuario);
+
+  return purse[0].monedero;
+}
+
+async function decreasePurse(idusuario) {
+  const pool = await database.getPool();
+  const query = `update usuario set monedero = monedero - 1 where idusuario=?`;
+  const [updatedPurse] = await pool.query(query, idusuario);
+
+  return true;
+}
+
 module.exports = {
   addReserve,
-  checkStock,
+  checkPurse,
   checkReserveDate,
   decreaseBookStock,
+  decreasePurse,
   eraseReserve,
   findReserveByUserId,
+  findReserveByUserDateBook,
   modifyReserve,
   readAll,
 };
