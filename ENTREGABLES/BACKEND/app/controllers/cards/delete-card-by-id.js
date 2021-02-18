@@ -12,20 +12,12 @@ async function removeCardById(req, res) {
     const authentifiedUserId = req.auth.idusuario;
     let card = await cardsRepository.findCardByUserId(authentifiedUserId);
 
-    // if (!req.auth) {
-    //   HAY QUE COMPROBAR QUE EL ID DE TARJETA DEL PARAMS CORRESPONDA A UNA TARJETA DEL USUARIO LOGGEADO
-    //   const error = new Error("No tienes permisos para realizar esta accion");
-    //   if (cardId !== card[0]) {
-    //     const error = new Error(
-    //       "No tienes permisos para realizar esta acción."
-    //     );
-    //     throw error;
-    //   }
-    // }
-    //  else {
-    //   const userId = { ...req.body };
-    //   card = await cardsRepository.findCardByUserId(userId);
-    // }
+    if (!req.auth) {
+
+      const error = new Error("No tienes permisos para realizar esta accion");
+
+        throw error;
+      }
 
     await schema.validateAsync(idCard);
 
@@ -35,7 +27,7 @@ async function removeCardById(req, res) {
 
     const deletedCard = await cardsRepository.deleteCardById(parseInt(idCard));
 
-    res.status(200).send("La tarjeta ha sido borrada con exito.");
+    res.status(200).send(deletedCard);
   } catch (err) {
     res.status(400).send({ error: err.message });
   }

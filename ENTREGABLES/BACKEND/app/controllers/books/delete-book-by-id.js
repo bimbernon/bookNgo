@@ -23,7 +23,6 @@ async function deleteBookById(req, res) {
             throw new Error('No se encontro ese libro con ese id');
         }
        const resDeleteBook= await removeBookById(parseInt(idBook));
-        console.log(book);
         res.status(200).send(resDeleteBook);
     } catch (err) {
         res.status(400).send({ error: err.message });

@@ -4,9 +4,11 @@ const Joi = require("joi");
 
 const reserveRepository = require("../../repositories/reserve-repository");
 
-// const schema = Joi.object().keys({
-//     idlibro: Joi.number().positive().require(),
-// })
+const schema = Joi.object().keys({
+  idusuario: Joi.number().positive().required(),
+  idlibro: Joi.number().positive().required(),
+  fechareserva: Joi.required(),
+})
 
 async function getReserveByUserDateBook(req, res) {
   try {
@@ -24,6 +26,8 @@ async function getReserveByUserDateBook(req, res) {
       idlibro: req.body.idlibro,
       fechareserva: req.body.fechareserva,
     };
+
+    await schema.validateAsync(reserveData);
 
     const reserve = await reserveRepository.findReserveByUserDateBook(
       reserveData

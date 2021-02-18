@@ -53,7 +53,6 @@ async function addReserve(reserve) {
       valoracion,
     ]);
 
-    console.log(await decreaseBookStock(pool, reserve.idlibro));
     await pool.query("COMMIT");
 
     return addedReserve;
@@ -73,10 +72,10 @@ async function decreaseBookStock(pool, idlibro) {
 }
 
 async function modifyReserve(updateReserve) {
-  const { bookId, userId, reserveDate, rating } = updateReserve;
+  const { idlibro, idusuario, fechareserva, rating } = updateReserve;
   const pool = await database.getPool();
   const query = `UPDATE reserva SET rating=? WHERE idusuario=? AND idlibro=? AND fechareserva=?`;
-  await pool.query(query, [rating, userId, bookId, reserveDate]);
+  await pool.query(query, [rating, idusuario, idlibro, fechareserva]);
 
   return true;
 }

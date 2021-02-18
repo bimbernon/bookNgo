@@ -4,25 +4,17 @@ const Joi = require("joi");
 
 const reserveRepository = require("../../repositories/reserve-repository");
 
-// const schema = Joi.object.keys({
-//     fechareserva: Joi.required(),
-//     fechadevolucion: Joi.require(),
-//     rating: Joi.number().positive(),
-// })
+const schema = Joi.object().keys({
+  idusuario: Joi.number().positive().required(),
+  idlibro: Joi.number().positive().required(),
+  fechareserva: Joi.required(),
+  rating: Joi.number().positive().required(),
+});
 
 async function updateReserve(req, res) {
   try {
-    // const authentifiedUserId = req.auth.idusuario;
-
     if (!req.auth) {
-      //COMPROBAR QUE LA RESERVA A MODIFICAR SEA DEL USUARUI LOGGEADO
       const error = new Error("NO tienes permisos para realizar esta acción");
-      // if (authentifiedUserId !== parseInt(userId)) {
-      //   const error = new Error(
-      //     "No tienes permisos para realizar esta acción."
-      //   );
-      //   throw error;
-      // }
     }
 
     const { idusuario } = req.auth;
@@ -32,19 +24,28 @@ async function updateReserve(req, res) {
     const { rating } = req.body;
 
     const updatedReserve = {
-      bookId: bookId,
-      userId: idusuario,
-      reserveDate: reserveDate,
+      idusuario: idusuario,
+      idlibro: bookId,
+      fechareserva: reserveDate,
       rating: rating,
     };
-    console.log(updatedReserve, "hola"); // aqui llegamos
 
+    await schema.validateAsync(updatedReserve);
+
+    const checkedReserve = await reserveRepository.findReserveByUserDateBook(
+      updatedReserve
+    );
+
+    if (checkedReserve[0] === undefined) {
+      const error = new Error("Esta reserva no existe.");
+      throw error;
+    }
     await reserveRepository.modifyReserve(updatedReserve);
 
     res.status(200).send({
-      bookId: bookId,
-      userId: idusuario,
-      reserveDate: reserveDate,
+      idusuario: idusuario,
+      idlibro: bookId,
+      fechareserva: reserveDate,
       rating: rating,
     });
   } catch (err) {

@@ -24,7 +24,8 @@ async function findById (id) {
 async function findByName (name) {
 
     const pool = await database.getPool();
-    const query = "SELECT titulo FROM libro JOIN autor using(idautor) WHERE nombreautor=?";
+    const query =
+      "select l.titulo, a.nombreautor, a.apel1, a.apel2 from libro l inner join autor a where a.nombreautor=?";
     const [ authorName ] = await pool.query(query, name);
 
   return authorName;

@@ -17,7 +17,6 @@ async function deleteReserve(req, res) {
     const { bookId } = req.params;
 
     const { date } = req.body;
-    console.log(date);
 
     const reserve = await reservesRepository.eraseReserve(
       authentifiedUserId,
@@ -26,7 +25,6 @@ async function deleteReserve(req, res) {
     );
 
     if (reserve === undefined) {
-      // no salta error cuando reserve es undefinded
       const error = new Error(
         `No existe reserva con estos datos:
          userId:${authentifiedUserId},

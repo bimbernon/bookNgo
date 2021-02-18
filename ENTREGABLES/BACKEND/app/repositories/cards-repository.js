@@ -5,7 +5,7 @@ const database = require("../infrastructure/database");
 
 async function readAll() {
   const pool = await database.getPool();
-  const query = `SELECT * FROM tarjeta`;
+  const query = `select u.nombreusuario, u.apel1, u.apel2, t.numerotarjeta, t.fechaexpiracion from tarjeta t inner join usuario u;`;
   const [card] = await pool.query(query);
 
   return card;

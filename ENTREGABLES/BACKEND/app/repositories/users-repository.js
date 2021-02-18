@@ -101,6 +101,14 @@ async function updateUser(userId, updatedUser) {
   return true;
 }
 
+async function updatePassword(updatedPassword, userId) {
+  const pool = await database.getPool();
+  const insertQuery = "UPDATE usuario SET contraseña=? WHERE idusuario=?";
+  await pool.query(insertQuery, [updatedPassword, userId]);
+
+  return true;
+}
+
 async function findUserProfileImage(userId) {
   const pool = await database.getPool();
   const query = "SELECT codFoto FROM users WHERE idusuario = ?";
@@ -126,5 +134,6 @@ module.exports = {
   findUserById,
   findUserProfileImage,
   rechargePurse,
+  updatePassword,
   updateUser,
 };
