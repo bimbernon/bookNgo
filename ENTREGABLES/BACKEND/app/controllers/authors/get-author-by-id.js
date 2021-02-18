@@ -1,41 +1,36 @@
-'use strict';
+"use strict";
 
-const Joi = require('joi');
-const { findById } = require('../../repositories/author-repository');
+const Joi = require("joi");
+const { findById } = require("../../repositories/author-repository");
 
-const  schema = Joi.number().positive().required();
+const schema = Joi.number().positive().required();
 
-async function getAuthorById (req, res) {
-    try {
-
-          if (admin !== 1) {
-            const error = new Error(
-              "No tienes permisos para realizar esta acción"
-            );
-            error.status = 403;
-            throw error;
-          }
-
-        const { idAuthor } = req.params;
-        
-        await schema.validateAsync( idAuthor );
-
-        const author = await findById(parseInt(idAuthor));
-
-        if(!author) {
-            const error = new Error('No se encontro el autor con ese Id');
-            error.status = 400;
-            throw error;
-        }
-
-        res.status(201).send(author);
-
-    } catch(err) {
-        res.status(400).send({error: err.message});
+async function getAuthorById(req, res) {
+  try {
+    if (req.auth.admin !== 1) {
+      const error = new Error("No tienes permisos para realizar esta acción");
+      error.status = 403;
+      throw error;
     }
+
+    const { idAuthor } = req.params;
+
+    await schema.validateAsync(idAuthor);
+
+    const author = await findById(parseInt(idAuthor));
+
+    if (!author) {
+      const error = new Error("No se encontro el autor con ese Id");
+      error.status = 400;
+      throw error;
+    }
+
+    res.status(201).send(author);
+  } catch (err) {
+    res.status(400).send({ error: err.message });
+  }
 }
 
-
 module.exports = {
-    getAuthorById
+  getAuthorById,
 };

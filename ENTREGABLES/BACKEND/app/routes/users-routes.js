@@ -13,6 +13,9 @@ const { getUserProfile } = require("../controllers/users/get-user-profile");
 const {
   uploadImageUserProfile,
 } = require("../controllers/users/upload-image-user-profile");
+const {
+  updateUserPassword,
+} = require("../controllers/users/update-user-password-by-id");
 
 const router = express.Router();
 
@@ -51,5 +54,9 @@ router
   .route("/image/upload/:userId")
   .all(validateAuth)
   .put((req, res) => uploadImageUserProfile(req, res));
+router
+  .route("/updatePassword/:userId")
+  .all(validateAuth)
+  .put((req, res) => updateUserPassword(req, res));
 
 module.exports = router;
