@@ -63,8 +63,8 @@ async function addReserve(reserve) {
   }
 }
 
-async function decreaseBookStock(pool, idlibro) {
-  // const pool = await database.getPool();
+async function decreaseBookStock( idlibro) {
+  const pool = await database.getPool();
   const query = `update libro set stock = stock - 1 where idlibro = ?`;
   const [bookStock] = await pool.query(query, idlibro);
 

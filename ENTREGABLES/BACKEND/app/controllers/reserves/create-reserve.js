@@ -6,9 +6,13 @@ const reserveRepository = require("../../repositories/reserve-repository");
 const { checkStockBook } = require("../../repositories/books-repository");
 const { addDateDays } = require("../../helpers/date");
 
-const schema = Joi.object().keys({
-  idlibro: Joi.number().positive().required(),
-});
+// const schema = Joi.object().keys({
+//   idlibro: Joi.number().positive().required(),
+// });
+
+// const schema2 = Joi.object().keys({
+//   idusuario: Joi.number().positive().required(),
+// });
 
 async function createReserve(req, res) {
   try {
@@ -17,7 +21,8 @@ async function createReserve(req, res) {
     const { idlibro } = req.body;
 
 
-    await schema.validateAsync(req.body);
+    // await schema.validateAsync(req.body);
+    // await schema2.validateAsync(req.auth);
     
     let lookPurse = await reserveRepository.checkPurse(idusuario)
 
@@ -35,6 +40,7 @@ async function createReserve(req, res) {
       throw error;
     }
 
+    await reserveRepository.decreaseBookStock(idlibro);
 
     const reserveDate = new Date();
     const reserveDevolution = addDateDays(new Date(), 30);
