@@ -4,18 +4,22 @@ const Joi = require("joi");
 const authorRepository = require("../../repositories/author-repository");
 
 const schema = Joi.object().keys({
-  name: Joi.string().min(2).max(20),
-  lastName1: Joi.string().min(2).max(20),
-  lastName2: Joi.string().min(2).max(20),
+  nombreautor: Joi.string().min(2).max(20),
+  apel1: Joi.string().min(2).max(20),
+  apel2: Joi.string().min(2).max(20),
 });
 
 async function getAuthorByNameAndLastName(req, res) {
   try {
-    const { name, lastName1, lastName2 } = req.body;
+    const { nombreautor, apel1, apel2 } = req.body;
 
-    await schema.validateAsync(author);
+    await schema.validateAsync(req.body);
 
-    const author = req.body;
+    const author = {
+      nombreautor,
+      apel1,
+      apel2,
+    };
 
     const checkAuthor = await authorRepository.findAuthorByNameAndLastName(
       author

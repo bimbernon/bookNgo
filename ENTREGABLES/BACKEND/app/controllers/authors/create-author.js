@@ -33,13 +33,14 @@ async function createAuthor(req, res) {
     const noRepeatedAuthor = await authorRepository.findAuthorByNameAndLastName(
       author
     );
-
+    
     if (noRepeatedAuthor) {
       const error = new Error("Autor ya presente en base de datos.");
       throw error;
     }
-
+    
     const authors = await authorRepository.addAuthor(author);
+    
 
     res.status(201).send({
       nombreautor,

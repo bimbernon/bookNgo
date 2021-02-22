@@ -32,10 +32,10 @@ async function findByName (name) {
 }
 
 async function findAuthorByNameAndLastName (author) {
-  const { name, lastName1, lastName2 } = author;
+  const { nombreautor, apel1, apel2 } = author;
   const pool = await database.getPool();
   const query = `SELECT * FROM autor WHERE nombreautor=? AND apel1=? AND apel2=?`;
-  const  [ insertedAuthor ] = await pool.query(query, [name, lastName1, lastName2]);
+  const  [ insertedAuthor ] = await pool.query(query, [nombreautor, apel1, apel2]);
 
   return insertedAuthor;
 }
