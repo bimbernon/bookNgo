@@ -1,7 +1,12 @@
 import React from "react";
+import { CathegoriesMenu } from "../components/main/CathegoriesMenu/CathegoriesMenu";
 
 function Home() {
-  return <h2>HOME</h2>;
+  return (
+    <div>
+      <CathegoriesMenu></CathegoriesMenu>;
+    </div>
+  );
 }
 
 export { Home };
