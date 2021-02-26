@@ -26,3 +26,56 @@ nav > ul {
   color: black;
   text-decoration: none;
 }
+
+h2.title-howItWorks {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+div.main-howItWorks {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+p.title-bold {
+  font-weight: bold;
+}
+
+div.body-howItWorks {
+  font-size: 0.75rem;
+  text-align: center;
+  max-width: 150px;
+}
+
+div.div-list-howItWorks {
+  max-width: 200px;
+  font-size: 0.8rem;
+}
+
+li.list-item {
+  margin-bottom: 5px;
+}
+
+ul.list-latest-news {
+  display: flex;
+  height: 80px;
+  width: 50px;
+  justify-content: center;
+}
+
+h2.title-latest-news {
+  text-align: center;
+}
+
+ul.list-latest-news > li {
+  list-style: none;
+  margin-right: 30px;
+}
+
+img.img-arrow {
+  background-image: url(arrow.svg);
+  height: 33px;
+  width: 43px;
+}
