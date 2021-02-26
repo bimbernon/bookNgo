@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Comfortaa", cursive;
+  src: url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500&display=swap");
+}
+
+.App {
+  margin: 0 auto;
+  font-family: "Comfortaa";
+}
+
+div > nav {
+  display: flex;
+  justify-content: center;
+}
+
+nav > ul {
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+  list-style: none;
+}
+
+.link {
+  font-size: 0.87rem;
+  padding: 0 5px;
+  color: black;
+  text-decoration: none;
+}
