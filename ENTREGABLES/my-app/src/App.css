@@ -62,6 +62,8 @@ ul.list-latest-news {
 
 h2.title-latest-news {
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 ul.list-latest-news > li {

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Cathegory.css";
 
 const Cathegory = (props) => {
   const { cathegoryName, img } = props;
