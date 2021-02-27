@@ -8,31 +8,21 @@ export const LatestNews = () => {
       const latestBooks = await (
         await fetch("http://localhost:3080/api/v1/books")
       ).json();
-      console.log(latestBooks);
+      setLastBooks(latestBooks);
     }
     getLatestBooks();
   }, []);
 
+  const latest = lastBooks.map((book) => (
+    <li key={book.title}>
+      <a href="fefverf">{book.title}</a>
+    </li>
+  ));
+
   return (
     <div className="div-latest-news">
       <h2 className="title-latest-news">Ultimas novedades</h2>
-      <ul className="list-latest-news">
-        <li>
-          <a href="grtgwrg">Libro 1</a>
-        </li>
-        <li>
-          <a href="wregwgt">Libro 2</a>
-        </li>
-        <li>
-          <a href="gwrgwgtr">Libro 3</a>
-        </li>
-        <li>
-          <a href="gwtrgwrgt">Libro 4</a>
-        </li>
-        <li>
-          <a href="ehtheth">Libro 5</a>
-        </li>
-      </ul>
+      <ul>{latest}</ul>
     </div>
   );
 };
