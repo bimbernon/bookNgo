@@ -1,0 +1,10 @@
+ul {
+  display: flex;
+}
+
+ul > li > .cathegory {
+  font-size: 0.87rem;
+  padding: 0 5px;
+  color: black;
+  text-decoration: none;
+}
