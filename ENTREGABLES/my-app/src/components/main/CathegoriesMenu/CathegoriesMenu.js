@@ -3,29 +3,33 @@ import "./CathegoriesMenu.css";
 import { Cathegory } from "../Cathegory/Cathegory";
 
 const CathegoriesMenu = (props) => {
-  // const { imageId } = props;
-  const [cathegory, setCathegory] = useState({});
+  const [cathegories, setCathegory] = useState([]);
 
   useEffect(() => {
     async function getCathegories() {
-      const cathegories = await (
-        await fetch("http://localhost:3080/api/v1/bookcathegories")
+      const cathegoriesResponse = await (
+        await fetch("http://localhost:3080/api/v1/cathegories")
       ).json();
-      console.log(cathegories);
-      setCathegory(cathegories);
+      setCathegory(cathegoriesResponse);
     }
     getCathegories();
   }, []);
 
+  const allCathegories = cathegories.map((cathegory) => {
+    return cathegory;
+  });
+
+  console.log(allCathegories[0]);
+
   return (
-    <ul className="cathgoriesMenu">
-      <Cathegory className="cathegory" cathegoryName="TERROR"></Cathegory>
-      <Cathegory className="cathegory" cathegoryName="ROMANCE"></Cathegory>
-      <Cathegory className="cathegory" cathegoryName="FANTASÍA"></Cathegory>
-      <Cathegory className="cathegory" cathegoryName="AVENTURA"></Cathegory>
-      <Cathegory className="cathegory" cathegoryName="HISTORIA"></Cathegory>
-      <Cathegory className="cathegory" cathegoryName="CÓMIC"></Cathegory>
-    </ul>
+    <div className="cathegoriesContainer">
+      <ul className="cathgoriesMenu">
+        <Cathegory
+          imageId={allCathegories.idcategoria}
+          cathegoryName={allCathegories.nombrecategoria}
+        ></Cathegory>
+      </ul>
+    </div>
   );
 };
 

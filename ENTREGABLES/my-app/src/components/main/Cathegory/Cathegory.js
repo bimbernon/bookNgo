@@ -2,12 +2,12 @@ import React from "react";
 import "./Cathegory.css";
 
 const Cathegory = (props) => {
-  const { cathegoryName } = props;
+  const { cathegoryName, imageId } = props;
 
   return (
     <li className="cathegoryContainer">
       <img
-        src="/booksIcons/1.png"
+        src={`/booksIcons/${imageId}.png`}
         className="cathegory__img"
         alt="cathegory"
       ></img>

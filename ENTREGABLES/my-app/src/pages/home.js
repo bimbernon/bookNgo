@@ -1,6 +1,6 @@
 import React from "react";
 import { CathegoriesMenu } from "../components/main/CathegoriesMenu/CathegoriesMenu";
-import { HowItWorks } from "../components/header/WhoWeAre";
+import { HowItWorks } from "../components/main/WhoWeAre";
 import { LatestNews } from "../components/main/LatestNews/LatestNews";
 
 function Home() {

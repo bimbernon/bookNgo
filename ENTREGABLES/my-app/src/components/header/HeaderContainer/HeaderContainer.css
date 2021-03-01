@@ -1,4 +1,5 @@
 .headerContainer {
   display: flex;
-  padding: 1rem 0.3rem;
+  padding: 1.5rem;
+  justify-content: space-between;
 }
