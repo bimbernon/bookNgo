@@ -1,29 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CathegoriesMenu.css";
 import { Cathegory } from "../Cathegory/Cathegory";
 
 const CathegoriesMenu = (props) => {
-  const { imageId } = props;
+  // const { imageId } = props;
   const [cathegory, setCathegory] = useState({});
 
-  async function handleSubmit(event) {
-    const response = await fetch("http://localhost:3002/api/v1/cathegories/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(cathegory),
-    });
-
-    const cathegoryResponse = await response.json();
-
-    setCathegory(cathegoryResponse);
-  }
+  useEffect(() => {
+    async function getCathegories() {
+      const cathegories = await (
+        await fetch("http://localhost:3080/api/v1/bookcathegories")
+      ).json();
+      console.log(cathegories);
+      setCathegory(cathegories);
+    }
+    getCathegories();
+  }, []);
 
   return (
-    <div className="cathgoriesMenu">
-      <Cathegory className="cathegory" cathegoryName="Terror"></Cathegory>
-    </div>
+    <ul className="cathgoriesMenu">
+      <Cathegory className="cathegory" cathegoryName="TERROR"></Cathegory>
+      <Cathegory className="cathegory" cathegoryName="ROMANCE"></Cathegory>
+      <Cathegory className="cathegory" cathegoryName="FANTASÍA"></Cathegory>
+      <Cathegory className="cathegory" cathegoryName="AVENTURA"></Cathegory>
+      <Cathegory className="cathegory" cathegoryName="HISTORIA"></Cathegory>
+      <Cathegory className="cathegory" cathegoryName="CÓMIC"></Cathegory>
+    </ul>
   );
 };
 

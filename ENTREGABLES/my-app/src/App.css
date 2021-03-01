@@ -1,3 +1,7 @@
+body {
+  background-image: url("./background_photos/background_image.jpg");
+}
+
 .App {
   margin: 0 auto;
   font-family: "Comfortaa";
