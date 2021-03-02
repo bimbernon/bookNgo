@@ -4,9 +4,10 @@
   font-size: 0.6rem;
   display: flex;
   justify-content: space-around;
+  align-self: flex-end;
 }
 
-.footer > a {
+.footer-link {
   display: flex;
   flex-direction: row;
   justify-content: space-around;

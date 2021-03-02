@@ -11,7 +11,7 @@
   border-radius: 0.5rem;
   width: 7rem;
   height: auto;
-  filter: blur(1px) grayscale(20%);
+  filter: blur(0.7px) grayscale(20%);
 }
 
 .cathegory-tittle {

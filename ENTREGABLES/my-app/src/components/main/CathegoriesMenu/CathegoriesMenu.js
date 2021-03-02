@@ -19,7 +19,7 @@ const CathegoriesMenu = (props) => {
     <Cathegory
       key={ctg.idcategoria}
       imageId={ctg.idcategoria}
-      cathegoryName={ctg.nombrecategoria}
+      // cathegoryName={ctg.nombrecategoria}
     ></Cathegory>
   );
 
