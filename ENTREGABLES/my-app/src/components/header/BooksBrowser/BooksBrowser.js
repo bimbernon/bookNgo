@@ -5,7 +5,7 @@ const BookBrowser = (props) => {
   return (
     <div>
       <input type="search" className="ppal-browser"></input>
-      <button className="advanced-browser-button" />
+      <button type="button" className="advanced-browser-button"><img className="logo" src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png" alt="logo"></img></button>
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Book = (props) => {
     <li className="book-item">
       <img
         src={`/booksCovers/${bookId}.jpeg`}
-        className="bookCover"
+        className="book-cover"
         alt="bookCover"
       ></img>
       <h1 className="book-title">{bookName}</h1>

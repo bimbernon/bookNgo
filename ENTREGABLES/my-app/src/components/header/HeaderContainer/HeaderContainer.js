@@ -10,7 +10,7 @@ const HeaderContainer = () => {
         <img
           src="/logosProyecto/logoPrincipal/logo/logo.svg"
           alt="logo"
-          className="logo"
+          className="ppal-logo"
         />
         <NavigationMenu />
       </div>

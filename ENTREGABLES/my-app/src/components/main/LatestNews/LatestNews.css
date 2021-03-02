@@ -15,8 +15,8 @@
 
 .last-books-list {
   display: flex;
-  justify-content: center;
   margin: 0.2rem;
   overflow-x: scroll;
   padding: 0;
+  scroll-behavior: smooth;
 }
