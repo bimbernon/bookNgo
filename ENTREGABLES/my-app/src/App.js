@@ -9,7 +9,6 @@ function App() {
       <div>
         <img src="/logosProyecto/logoPrincipal/logo/logo.svg" alt="logo" />
         <NavigationMenu />
-
         <Switch>
           <Route path="/">
             <Home />
