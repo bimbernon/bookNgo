@@ -1,4 +1,4 @@
-.cathegoryContainer {
+.cathegory-container {
   display: flex;
   position: relative;
   text-align: center;
@@ -7,16 +7,16 @@
   width: 9rem;
 }
 
-.cathegory__img {
+.cathegory-img {
   border-radius: 0.5rem;
   max-width: 100%;
   height: auto;
   object-fit: cover;
   object-position: center;
-  filter: blur(3px) grayscale(30%);
+  filter: blur(1px) grayscale(25%);
 }
 
-.cathegory__tittle {
+.cathegory-tittle {
   font-size: larger;
   position: absolute;
   top: 50%;

@@ -15,20 +15,17 @@ const CathegoriesMenu = (props) => {
     getCathegories();
   }, []);
 
-  const allCathegories = cathegories.map((cathegory) => {
-    return cathegory;
-  });
-
-  console.log(allCathegories[0]);
+  const render = (ctg) => (
+    <Cathegory
+      key={ctg.idcategoria}
+      imageId={ctg.idcategoria}
+      cathegoryName={ctg.nombrecategoria}
+    ></Cathegory>
+  );
 
   return (
     <div className="cathegoriesContainer">
-      <ul className="cathgoriesMenu">
-        <Cathegory
-          imageId={allCathegories.idcategoria}
-          cathegoryName={allCathegories.nombrecategoria}
-        ></Cathegory>
-      </ul>
+      <ul className="cathgoriesMenu">{cathegories.map(render)}</ul>
     </div>
   );
 };

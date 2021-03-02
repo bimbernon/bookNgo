@@ -22,6 +22,7 @@ async function uploadImage({ imageData, destination, width, height, codFoto }) {
 function formatArrayBooks(array) {
   const booksFormateados = array.map((book) => {
     const bookFormated = {
+      bookId: book.idlibro,
       title: book.titulo,
       stock: book.stock,
       price: book.precio,
@@ -29,13 +30,6 @@ function formatArrayBooks(array) {
       Cathegory: {
         name: book.nombrecategoria,
         description: book.descripcioncategoria,
-      },
-      Usuario: {
-        username: book.nombreusuario,
-        profilename: book.nombreperfilusuario,
-        lasname1: book.apellido1usuario,
-        lastname2: book.apellido2usuario,
-        email: book.email,
       },
       Autor: {
         nameAuthor: book.nombreautor,
