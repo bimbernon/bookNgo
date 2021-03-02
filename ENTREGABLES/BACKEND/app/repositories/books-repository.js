@@ -4,7 +4,7 @@ const database = require("../infrastructure/database");
 async function readAll() {
   const pool = await database.getPool();
   const query =
-    "select l.*,u.nombreusuario,u.nombreperfilusuario,u.apel1 as apellido1usuario, u.apel2 as apellido2usuario,u.email,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join usuario u on l.idusuario=u.idusuario inner join autor aut on l.idautor=aut.idautor";
+    "select l.*,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join autor aut on l.idautor=aut.idautor";
   const [books] = await pool.query(query);
   return books;
 }
@@ -118,7 +118,7 @@ async function updateBookById(idBook, updateBook) {
   const pool = await database.getPool();
   const query =
     "UPDATE libro set idcategoria=?,idusuario=?,idautor=?,titulo=?,stock=?,precio=?,editorial=?,añopublicacion=? where idlibro=?";
-  const resBookUpdate =await pool.query(query, [
+  const resBookUpdate = await pool.query(query, [
     idcategoria,
     idusuario,
     idautor,

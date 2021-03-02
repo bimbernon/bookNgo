@@ -5,12 +5,7 @@ import { Link } from "react-router-dom";
 const NavigationMenu = () => {
   return (
     <nav className="navigationMenu">
-      <ul>
-        <li>
-          <Link to="/" className="link">
-            Home
-          </Link>
-        </li>
+      <ul className="navigationList">
         <li>
           <Link to="/donations" className="link">
             Dona tus libros

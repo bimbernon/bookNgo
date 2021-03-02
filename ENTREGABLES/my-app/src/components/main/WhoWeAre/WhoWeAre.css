@@ -1,0 +1,55 @@
+@import url("../../../index.css");
+
+.whoWeAre-container {
+  background-color: var(--white-background);
+  margin: 1rem 0.5rem;
+  padding: 1rem 0.5rem;
+}
+
+.title-howItWorks {
+  color: var(--title-brown-color);
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.main-howItWorks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.body-howItWorks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.75rem;
+  text-align: center;
+  max-width: 120px;
+}
+
+.title-bold {
+  font-weight: 900;
+}
+
+.list-howItWorks {
+  max-width: 200px;
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.list-item {
+  margin-bottom: 5px;
+  text-align: left;
+  list-style: none;
+}
+
+.img-arrow {
+  background-image: url("../../../images/icons/arrow.svg");
+  background-repeat: no-repeat;
+  margin: 0 15px 0 23px;
+  height: 60px;
+  width: 87px;
+}

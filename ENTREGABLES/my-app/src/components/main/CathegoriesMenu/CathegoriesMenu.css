@@ -1,10 +1,12 @@
-ul {
-  display: flex;
-}
+@import url("../../../index.css");
 
-ul > li > .cathegory {
-  font-size: 0.87rem;
-  padding: 0 5px;
-  color: black;
-  text-decoration: none;
+.cathegories-menu {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  max-height: 9rem;
+  margin: 0.2rem;
+  padding: 0;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }

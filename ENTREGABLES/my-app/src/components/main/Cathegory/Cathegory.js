@@ -2,18 +2,21 @@ import React from "react";
 import "./Cathegory.css";
 
 const Cathegory = (props) => {
-  const { cathegoryName, img } = props;
-
-  const divStyle = {
-    backgroundImage: 'url("/booksIcons/libro1.png")',
-  };
+  const { cathegoryName, imageId } = props;
 
   return (
-    <div style={divStyle} className="cathegory__img">
-      <h1 name={cathegoryName} className="cathegory__tittle">
+    <li className="cathegory-item">
+      <a href="nunca">
         {cathegoryName}
-      </h1>
-    </div>
+        <img
+          src={`/booksIcons/${imageId}.png`}
+          className="cathegory-img"
+          alt="cathegory"
+        />
+      </a>
+      {/* <h1 name={cathegoryName} className="cathegory-tittle">
+      </h1> */}
+    </li>
   );
 };
 

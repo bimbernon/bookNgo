@@ -1,15 +1,20 @@
-.cathegory__img {
-  width: 150px;
-  height: 150px;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
+.cathegory-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: black;
+  height: 9rem;
+  width: 8rem;
 }
 
-.cathegory__tittle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.cathegory-img {
+  border-radius: 0.5rem;
+  width: 7rem;
+  height: auto;
+  filter: blur(1px) grayscale(20%);
+}
+
+.cathegory-tittle {
+  font-size: 1.3rem;
+  margin: 0;
 }

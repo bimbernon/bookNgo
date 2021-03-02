@@ -1,28 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CathegoriesMenu.css";
 import { Cathegory } from "../Cathegory/Cathegory";
 
 const CathegoriesMenu = (props) => {
-  const { imageId } = props;
-  const [cathegory, setCathegory] = useState({});
+  const [cathegories, setCathegory] = useState([]);
 
-  async function handleSubmit(event) {
-    const response = await fetch("http://localhost:3002/api/v1/cathegories/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(cathegory),
-    });
+  useEffect(() => {
+    async function getCathegories() {
+      const cathegoriesResponse = await (
+        await fetch("http://localhost:3080/api/v1/cathegories")
+      ).json();
+      setCathegory(cathegoriesResponse);
+    }
+    getCathegories();
+  }, []);
 
-    const cathegoryResponse = await response.json();
-
-    setCathegory(cathegoryResponse);
-  }
+  const render = (ctg) => (
+    <Cathegory
+      key={ctg.idcategoria}
+      imageId={ctg.idcategoria}
+      cathegoryName={ctg.nombrecategoria}
+    ></Cathegory>
+  );
 
   return (
-    <div className="cathgoriesMenu">
-      <Cathegory className="cathegory" cathegoryName="Terror"></Cathegory>
+    <div className="cathegories-container">
+      <ul className="cathegories-menu">{cathegories.map(render)}</ul>
     </div>
   );
 };

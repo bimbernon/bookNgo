@@ -1,18 +1,22 @@
-li.list-item {
-  margin-bottom: 5px;
+@import url("../../../index.css");
+
+.latest-news-container {
+  background-color: var(--white-background);
+  height: fit-content;
+  margin: 0.2rem 0 0.5rem 0;
+  padding: 0.1rem 0.5rem;
 }
 
-ul.list-latest-news {
-  display: flex;
-  height: 80px;
-  justify-content: center;
-  flex-wrap: nowrap;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-h2.title-latest-news {
+.title-latest-news {
+  color: var(--title-brown-color);
+  margin: 0.2rem;
   text-align: center;
+}
+
+.last-books-list {
   display: flex;
   justify-content: center;
+  margin: 0.2rem;
+  overflow-x: scroll;
+  padding: 0;
 }
