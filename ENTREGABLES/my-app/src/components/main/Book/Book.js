@@ -5,13 +5,13 @@ const Book = (props) => {
   const { bookName, bookId } = props;
 
   return (
-    <li className="bookItem">
+    <li className="book-item">
       <img
-        src={`/booksCovers/${bookId}.jpg`}
+        src={`/booksCovers/${bookId}.jpeg`}
         className="bookCover"
         alt="bookCover"
       ></img>
-      <h1>{bookName}</h1>
+      <h1 className="book-title">{bookName}</h1>
     </li>
   );
 };

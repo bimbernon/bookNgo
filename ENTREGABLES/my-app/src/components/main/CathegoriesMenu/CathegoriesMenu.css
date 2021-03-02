@@ -1,9 +1,12 @@
-.cathgoriesMenu {
+@import url("../../../index.css");
+
+.cathegories-menu {
   display: flex;
+  flex-flow: column wrap;
   justify-content: center;
+  max-height: 9rem;
+  margin: 0.2rem;
   padding: 0;
-  overflow-x: hidden;
   overflow-y: auto;
-  width: 1000px;
-  height: fit-content;
+  scroll-behavior: smooth;
 }

@@ -2,6 +2,7 @@
   max-width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-grow: 2;
 }
 
 .navigationList {

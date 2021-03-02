@@ -5,15 +5,17 @@ const Cathegory = (props) => {
   const { cathegoryName, imageId } = props;
 
   return (
-    <li className="cathegory-container">
-      <img
-        src={`/booksIcons/${imageId}.png`}
-        className="cathegory-img"
-        alt="cathegory"
-      ></img>
-      <h1 name={cathegoryName} className="cathegory-tittle">
+    <li className="cathegory-item">
+      <a href="nunca">
         {cathegoryName}
-      </h1>
+        <img
+          src={`/booksIcons/${imageId}.png`}
+          className="cathegory-img"
+          alt="cathegory"
+        />
+      </a>
+      {/* <h1 name={cathegoryName} className="cathegory-tittle">
+      </h1> */}
     </li>
   );
 };

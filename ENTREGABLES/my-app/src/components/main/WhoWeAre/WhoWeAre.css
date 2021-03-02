@@ -10,6 +10,7 @@
   color: var(--title-brown-color);
   text-transform: uppercase;
   text-align: center;
+  margin: 0.5rem;
 }
 
 .main-howItWorks {

@@ -1,5 +1,6 @@
 body {
   background-image: url("./images/background_photos/background_image.jpg");
+  background-repeat: no-repeat;
 }
 
 .App {

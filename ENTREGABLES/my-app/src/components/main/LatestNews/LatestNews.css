@@ -1,24 +1,22 @@
-.last-books-list {
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  overflow-x: scroll;
-}
+@import url("../../../index.css");
 
-.list-latest-news {
-  display: flex;
-  height: 80px;
-  width: 50px;
-  justify-content: center;
+.latest-news-container {
+  background-color: var(--white-background);
+  height: fit-content;
+  margin: 0.2rem 0 0.5rem 0;
+  padding: 0.1rem 0.5rem;
 }
 
 .title-latest-news {
+  color: var(--title-brown-color);
+  margin: 0.2rem;
   text-align: center;
-  display: flex;
-  justify-content: center;
 }
 
-.list-latest-news > li {
-  list-style: none;
-  margin-right: 30px;
+.last-books-list {
+  display: flex;
+  justify-content: center;
+  margin: 0.2rem;
+  overflow-x: scroll;
+  padding: 0;
 }

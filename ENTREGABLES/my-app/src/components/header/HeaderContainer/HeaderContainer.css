@@ -1,5 +1,15 @@
-.headerContainer {
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-items {
   display: flex;
   padding: 1.5rem;
-  justify-content: space-between;
+  max-width: fit-content;
+}
+
+.logo {
+  flex-grow: 1;
 }

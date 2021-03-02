@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Book } from "../Book/Book";
+import "./LatestNews.css";
 
-const LatestNews = (props) => {
+const LatestNews = () => {
   const [lastBooks, setLastBooks] = useState([]);
 
   useEffect(() => {
@@ -14,13 +15,12 @@ const LatestNews = (props) => {
     getLatestBooks();
   }, []);
 
-  const render = (book) => {
-    <Book key={book.bookId} bookName={book.title} bookId={book.bookId}></Book>;
-    console.log(book);
-  };
+  const render = (book) => (
+    <Book key={book.bookId} bookName={book.title} bookId={book.bookId}></Book>
+  );
 
   return (
-    <div className="div-latest-news">
+    <div className="latest-news-container">
       <h2 className="title-latest-news">Ultimas novedades</h2>
       <ul className="last-books-list">{lastBooks.map(render)}</ul>
     </div>

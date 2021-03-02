@@ -24,8 +24,8 @@ const CathegoriesMenu = (props) => {
   );
 
   return (
-    <div className="cathegoriesContainer">
-      <ul className="cathgoriesMenu">{cathegories.map(render)}</ul>
+    <div className="cathegories-container">
+      <ul className="cathegories-menu">{cathegories.map(render)}</ul>
     </div>
   );
 };

@@ -1,0 +1,11 @@
+.ppal-browser {
+  border-radius: 15px;
+  height: 2rem;
+  width: 17rem;
+}
+
+.advanced-browser-button {
+  background-image: url("../../../images/icons/64673.png");
+  width: 30px;
+  height: 30px;
+}
