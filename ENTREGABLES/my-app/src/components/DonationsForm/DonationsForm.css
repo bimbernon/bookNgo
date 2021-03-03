@@ -1,0 +1,37 @@
+@import "../../index.css";
+
+.donations-container {
+  background-color: var(--white-background);
+  border-radius: 20px;
+  height: 530px;
+  margin: 20px 20px 20px 20px;
+}
+
+.donations-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.donations-input {
+  border: none;
+  border-radius: 20px;
+  height: 30px;
+  margin: 20px 20px 0px 20px;
+  width: 300px;
+}
+
+.donations-form-button {
+  border: none;
+  border-radius: 20px;
+  height: 25px;
+  margin-top: 120px;
+  width: 125px;
+}
+
+.donations-form-direction {
+  color: var(--title-brown-color);
+  font-size: large;
+  margin-top: 100px;
+  text-align: center;
+}

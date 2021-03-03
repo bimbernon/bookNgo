@@ -1,13 +1,13 @@
-import React from "react";
+import React, {Router } from "react";
+import { DonationsForm } from "../components/DonationsForm/DonationsForm";
 
 function Donations() {
   return (
-    <div className="donations-container">
-      <form className="donations-form">
-        <input type="text"></input>
-        <input type="text"></input>
-      </form>
-    </div>
+    <Router>
+      <div>
+        <DonationsForm />
+      </div>
+    </Router>
   );
 }
 
