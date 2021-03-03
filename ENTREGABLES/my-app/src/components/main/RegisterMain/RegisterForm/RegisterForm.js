@@ -8,6 +8,7 @@ export const RegisterForm = (props) => {
   return (
     <div className="register-container">
       <form className="register-form" action="/">
+        <h1 className="register-form-title">Hazte Booker!</h1>
         <div className="form-item">
           <input type="text" placeholder="  photo"></input>
         </div>

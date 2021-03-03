@@ -37,7 +37,7 @@ async function uploadImageUserProfile(req, res) {
       imageData: userImage.data,
       destination: process.env.PATH_USER_IMAGE,
       width: 300,
-      hegith: 300,
+      heigth: 300,
       codFoto: authentifiedUserId,
     });
 
