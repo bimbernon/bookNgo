@@ -1,4 +1,4 @@
-@import "../../index.css";
+@import "../../../index.css";
 
 .donations-container {
   background-color: var(--white-background);

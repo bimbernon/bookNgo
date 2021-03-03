@@ -11,6 +11,7 @@ const LatestNews = () => {
         await fetch("http://localhost:3080/api/v1/books")
       ).json();
       setLastBooks(latestBooks);
+      console.log(latestBooks);
     }
     getLatestBooks();
   }, []);
