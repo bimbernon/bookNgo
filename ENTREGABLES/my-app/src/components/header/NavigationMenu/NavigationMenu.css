@@ -1,11 +1,11 @@
-.navigationMenu {
+.navigation-menu {
   max-width: 100%;
   display: flex;
   justify-content: space-between;
   flex-grow: 2;
 }
 
-.navigationList {
+.navigation-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +17,7 @@
   align-items: center;
 }
 
-li {
+.nav-item {
   padding: 0.25rem;
   text-align: center;
 }
@@ -26,4 +26,8 @@ li {
   font-size: 0.758rem;
   color: black;
   text-decoration: none;
+}
+
+.session-nav {
+  list-style: none;
 }
