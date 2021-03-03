@@ -1,7 +1,7 @@
 import React from "react";
-import { CathegoriesMenu } from "../components/main/CathegoriesMenu/CathegoriesMenu";
-import { HowItWorks } from "../components/main/WhoWeAre/WhoWeAre";
-import { LatestNews } from "../components/main/LatestNews/LatestNews";
+import { CathegoriesMenu } from "../components/main/Landing-main/CathegoriesMenu/CathegoriesMenu";
+import { HowItWorks } from "../components/main/Landing-main/WhoWeAre/WhoWeAre";
+import { LatestNews } from "../components/main/Landing-main/LatestNews/LatestNews";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Donations } from "./Donations";
 

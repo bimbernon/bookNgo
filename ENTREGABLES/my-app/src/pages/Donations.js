@@ -1,4 +1,5 @@
-import React, {Router } from "react";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import { DonationsForm } from "../components/DonationsForm/DonationsForm";
 
 function Donations() {

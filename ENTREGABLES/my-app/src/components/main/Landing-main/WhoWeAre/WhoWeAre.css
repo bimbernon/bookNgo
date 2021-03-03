@@ -1,4 +1,4 @@
-@import url("../../../index.css");
+@import url("../../../../index.css");
 
 .whoWeAre-container {
   background-color: var(--white-background);
@@ -47,7 +47,7 @@
 }
 
 .img-arrow {
-  background-image: url("../../../images/icons/arrow.svg");
+  background-image: url("../../../../images/icons/arrow.svg");
   background-repeat: no-repeat;
   margin: 0 15px 0 23px;
   height: 60px;
