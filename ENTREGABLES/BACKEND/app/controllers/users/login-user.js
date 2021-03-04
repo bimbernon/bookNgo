@@ -8,13 +8,14 @@ const { findUserByEmail } = require("../../repositories/users-repository");
 const { async } = require("crypto-random-string");
 
 const schema = Joi.object().keys({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(3).max(40).required(),
+  email: Joi.string().email(),
+  password: Joi.string().min(3).max(40),
 });
 
 async function loginUser(req, res) {
   try {
     await schema.validateAsync(req.body);
+    console.log(req.body);
 
     const { email, password } = req.body;
 

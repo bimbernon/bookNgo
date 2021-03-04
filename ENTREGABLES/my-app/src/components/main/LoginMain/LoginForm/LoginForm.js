@@ -1,20 +1,58 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
+// import { useLocalStorage } from "../../../../Hooks/useLocalStorage";
 
-const LoginForm = (props) => {
+const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleChangeEmail = (e) => setEmail(e.target.value);
+  const handleChangePassword = (e) => setPassword(e.target.value);
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+    console.log(email, password, "prueba");
+
+    const response = await fetch("http://localhost:3080/api/v1/users/login/", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    if (response.ok) {
+      const result = await response.json();
+      setEmail("");
+      setPassword("");
+    } else {
+      const error = new Error('algo ha fallado.');
+      throw error;
+    }
+  };
 
   return (
     <div className="login-container">
       <h1 className="login-form-title">¡Hola, booker!</h1>
 
-      <form className="login-form" action="/">
+      <form className="login-form" onSubmit={loginUser} action="/">
         <div className="login-form-item">
-          <input type="text" placeholder="  email" />
+          <input
+            type="email"
+            placeholder="  email"
+            value={email}
+            onChange={handleChangeEmail}
+          />
         </div>
         <div className="login-form-item">
-          <input type="password" placeholder="  contraseña" />
+          <input
+            type="password"
+            placeholder="  contraseña"
+            value={password}
+            onChange={handleChangePassword}
+          />
         </div>
         <div className="login-button-container">
           <button className="login-submit-button" type="submit">
