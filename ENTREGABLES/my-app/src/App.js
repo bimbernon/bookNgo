@@ -6,7 +6,7 @@ import { Home } from "./pages/Home";
 import { Donations } from "./pages/Donations";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
-import {GetBooksByCathegory} from "./components/main/LandingMain/GetBooksByCathegory/GetBooksByCathegory";
+import { BooksByCathegory } from "./pages/BooksByCathegory";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
       <div>
         <HeaderContainer />
         <Switch>
-          <Route path="/cathegory/books">
-            <GetBooksByCathegory />
+          <Route path="/cathegory/books/:nameCathegory">
+            <BooksByCathegory />
           </Route>
           <Route path="/donations">
             <Donations />

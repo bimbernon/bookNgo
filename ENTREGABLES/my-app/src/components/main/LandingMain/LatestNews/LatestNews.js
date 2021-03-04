@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Book } from "../Book/Book";
+import { Book } from "../../Book/Book";
 import "./LatestNews.css";
 
 const LatestNews = () => {
