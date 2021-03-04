@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./RegisterForm.css";
 
-export const RegisterForm = (props) => {
+export const RegisterForm = () => {
   const [name, setName] = useState("");
   const [userProfileName, setUserProfileName] = useState("");
   const [password, setPassword] = useState("");
-  const [lastName1, setlastName1] = useState("");
+  const [lastName1, setLastName1] = useState("");
   const [lastName2, setLastName2] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAdress] = useState("");
 
-  const handleChange = (stateSetter) => (e) => {
-    stateSetter(e.target.value);
-  };
-
-  const handleEmail = handleChange(setEmail(email));
+  const handleChangeName = (e) => setName(e.target.value);
+  const handleChangeUserProfileName = (e) => setUserProfileName(e.target.value);
+  const handleChangePassword = (e) => setPassword(e.target.value);
+  const handleChangeLastName1 = (e) => setLastName1(e.target.value);
+  const handleChangeLastName2 = (e) => setLastName2(e.target.value);
+  const handleChangeEmail = (e) => setEmail(e.target.value);
+  const handleChangeAdress = (e) => setAdress(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +40,7 @@ export const RegisterForm = (props) => {
       setName("");
       setUserProfileName("");
       setPassword("");
-      setlastName1("");
+      setLastName1("");
       setLastName2("");
       setEmail("");
       setAdress("");
@@ -49,7 +51,7 @@ export const RegisterForm = (props) => {
     <div className="register-container">
       <h1 className="register-form-title">Regístrate</h1>
 
-      <form className="register-form" action="/">
+      <form className="register-form" onSubmit={handleSubmit} action="/">
         <div className="register-form-item">
           <input type="text" placeholder="  photo"></input>
         </div>
@@ -58,7 +60,7 @@ export const RegisterForm = (props) => {
             type="text"
             placeholder="Nombre"
             value={name}
-            //onChange={handleChange(setName(name))}
+            onChange={handleChangeName}
           ></input>
         </div>
         <div className="register-form-item">
@@ -66,7 +68,7 @@ export const RegisterForm = (props) => {
             type="text"
             placeholder="Nombre de perfil"
             value={userProfileName}
-            //onChange={handleChange(setUserProfileName(userProfileName))}
+            onChange={handleChangeUserProfileName}
           ></input>
         </div>
         <div className="register-form-item">
@@ -74,7 +76,7 @@ export const RegisterForm = (props) => {
             type="text"
             placeholder="Contraseña"
             value={password}
-            //onChange={handleChange(setPassword(password))}
+            onChange={handleChangePassword}
           ></input>
         </div>
         <div className="register-form-item">
@@ -82,7 +84,7 @@ export const RegisterForm = (props) => {
             type="text"
             placeholder="Primer Apellido"
             value={lastName1}
-            //onChange={handleChange(setlastName1(lastName1))}
+            onChange={handleChangeLastName1}
           ></input>
         </div>
         <div className="register-form-item">
@@ -90,7 +92,7 @@ export const RegisterForm = (props) => {
             type="text"
             placeholder="Segundo Apellido"
             value={lastName2}
-            //onChange={handleChange(setLastName2(lastName2))}
+            onChange={handleChangeLastName2}
           ></input>
         </div>
         <div className="register-form-item">
@@ -98,7 +100,7 @@ export const RegisterForm = (props) => {
             type="text"
             placeholder="Email"
             value={email}
-            onChange={handleEmail}
+            onChange={handleChangeEmail}
           ></input>
         </div>
         <div className="register-form-item">
@@ -106,15 +108,11 @@ export const RegisterForm = (props) => {
             type="text"
             placeholder="Direccion"
             value={address}
-            // onChange={handleChange(setAdress(address))}
+            onChange={handleChangeAdress}
           ></input>
         </div>
         <div className="register-button-container">
-          <button
-            className="register-form-submit-button"
-            type="submit"
-            onSubmit={handleSubmit}
-          >
+          <button className="register-form-submit-button" type="submit">
             <img
               className="register-button-logo"
               src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png"
