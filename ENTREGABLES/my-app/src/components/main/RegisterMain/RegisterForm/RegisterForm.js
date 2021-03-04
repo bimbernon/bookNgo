@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./RegisterForm.css";
 
 export const RegisterForm = (props) => {
@@ -18,6 +18,7 @@ export const RegisterForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const resp = await fetch("http://localhost:3080/api/v1/users/register", {
       method: "POST",
       headers: {
