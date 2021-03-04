@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
-import { useLocalStorage} from "../../../../Hooks/useLocalStorage";
+// import { useLocalStorage } from "../../../../Hooks/useLocalStorage";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -11,20 +11,26 @@ const LoginForm = () => {
 
   const loginUser = async (e) => {
     e.preventDefault();
+    console.log(email, password, "prueba");
 
-    const response = await fetch("http://localhost:3080/api/v1/users/login", {
+    const response = await fetch("http://localhost:3080/api/v1/users/login/", {
       method: "POST",
-      header: {
-        "content-type": "application/json",
+      headers: {
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         email: email,
         password: password,
       }),
     });
-    await response.json();
-    setEmail("");
-    setPassword("");
+    if (response.ok) {
+      const result = await response.json();
+      setEmail("");
+      setPassword("");
+    } else {
+      const error = new Error('algo ha fallado.');
+      throw error;
+    }
   };
 
   return (

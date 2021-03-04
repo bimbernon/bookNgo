@@ -14,6 +14,7 @@ async function findAllUsers() {
 async function findUserByEmail(email) {
   const pool = await database.getPool();
   const query = "SELECT * FROM usuario WHERE email = ?";
+  console.log(query, email)
   const [users] = await pool.query(query, email);
 
   return users[0];
