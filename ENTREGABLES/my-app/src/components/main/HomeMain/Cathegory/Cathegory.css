@@ -1,0 +1,20 @@
+.cathegory-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: black;
+  height: 9rem;
+  width: 8rem;
+}
+
+.cathegory-tittle {
+  font-size: 1rem;
+}
+
+.div-cathegory-container {
+  height: 9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5rem;
+}

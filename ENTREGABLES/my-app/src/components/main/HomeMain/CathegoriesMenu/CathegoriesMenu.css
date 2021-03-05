@@ -10,7 +10,10 @@
   overflow-x: auto;
   scroll-behavior: smooth;
 }
-
+.cathegories-menu > a {
+  text-decoration: none;
+  text-transform: uppercase;
+}
 .cathegories-container {
   margin-top: 2rem;
 }

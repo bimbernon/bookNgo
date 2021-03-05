@@ -16,7 +16,7 @@ const CathegoriesMenu = () => {
     getCathegories();
   }, []);
 
-  const render = (ctg) => (
+  const renderCathegories = (ctg) => (
     <Link to={`/cathegory/books/${ctg.nombrecategoria}`}>
       <Cathegory
         key={ctg.idcategoria}
@@ -28,7 +28,7 @@ const CathegoriesMenu = () => {
 
   return (
     <div className="cathegories-container">
-      <ul className="cathegories-menu">{cathegories.map(render)}</ul>
+      <ul className="cathegories-menu">{cathegories.map(renderCathegories)}</ul>
     </div>
   );
 };

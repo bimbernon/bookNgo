@@ -21,14 +21,19 @@ export function BooksByCathegory() {
     getBooksByCathegoryName();
   }, []);
 
-  const render = (book) => (
-    <Book key={book.bookId} bookName={book.title} bookId={book.bookId}></Book>
+  const renderBooks = (book) => (
+    <Book
+      key={book.bookId}
+      bookName={book.title}
+      bookId={book.bookId}
+      bookAuthor={`${book.Autor.nameAuthor} ${book.Autor.lastname1} `}
+    ></Book>
   );
 
   return (
-    <div>
-      {nameCathegory}
-      <ul>{books.map(render)}</ul>
+    <div className="book-list-container">
+      <h1 className="cathegory-list-title">{nameCathegory}</h1>
+      <ul className="book-list-ul">{books.map(renderBooks)}</ul>
     </div>
   );
 }

@@ -16,7 +16,12 @@ const LatestNews = () => {
   }, []);
 
   const render = (book) => (
-    <Book key={book.bookId} bookName={book.title} bookId={book.bookId}></Book>
+    <Book
+      key={book.bookId}
+      bookName={book.title}
+      bookId={book.bookId}
+      bookAuthor={`${book.Autor.nameAuthor} ${book.Autor.lastname1} `}
+    ></Book>
   );
 
   return (

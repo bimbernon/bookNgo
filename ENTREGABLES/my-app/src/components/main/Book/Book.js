@@ -3,19 +3,20 @@ import { Link } from "react-router-dom";
 import "./Book.css";
 
 const Book = (props) => {
-  const { bookName, bookId } = props;
+  const { bookName, bookId, bookAuthor } = props;
 
   return (
-    <Link to={`/books/id/${bookId}`}>
-      <li className="book-item">
+    <li className="book-item">
+      <Link to={`/books/id/${bookId}`}>
         <img
           src={`/booksCovers/${bookId}.jpeg`}
           className="book-cover"
           alt="bookCover"
         ></img>
         <h1 className="book-title">{bookName}</h1>
-      </li>
-    </Link>
+        <h1 className="book-author">{bookAuthor}</h1>
+      </Link>
+    </li>
   );
 };
 

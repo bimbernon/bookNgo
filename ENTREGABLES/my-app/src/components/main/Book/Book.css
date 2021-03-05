@@ -1,9 +1,23 @@
+@import url("../../../index.css");
+
 .book-item {
+  background-color: var(--white-background);
   list-style: none;
   display: flex;
   flex-direction: column;
-  max-width: 7rem;
-  margin: 0;
+  align-items: center;
+  width: 9rem;
+  padding: 1.5rem 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 1rem;
+}
+
+.book-item > a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .book-cover {
@@ -13,4 +27,8 @@
 
 .book-title {
   font-size: small;
+}
+
+.book-author {
+  font-size: smaller;
 }
