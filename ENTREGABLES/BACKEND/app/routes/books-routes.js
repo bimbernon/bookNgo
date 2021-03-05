@@ -34,10 +34,7 @@ router
 router
   .route("/yearpublication/:yearPublication")
   .get((req, res) => getBooksByYearPublication(req, res));
-router
-  .route("/id/:idBook")
-  .all(validateAuth)
-  .get((req, res) => getBookById(req, res));
+router.route("/id/:idBook").get((req, res) => getBookById(req, res));
 
 router
   .route("/")
