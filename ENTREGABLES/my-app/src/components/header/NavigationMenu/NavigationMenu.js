@@ -2,6 +2,7 @@ import React from "react";
 import "./NavigationMenu.css";
 import { Link } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
+import Menu from "../menu/Menu";
 
 const NavigationMenu = () => {
   return (
@@ -16,19 +17,9 @@ const NavigationMenu = () => {
           <li className="nav-item">
             <button>
               <Avatar imageId={4} />
-              <ul className="session-nav">
-                <li className="session-nav-item">
-                  <Link to="/users/register" className="navigation-link">
-                    Regístrate
-                  </Link>
-                </li>
-                <li className="session-nav-item">
-                  <Link to="/users/login" className="navigation-link">
-                    Inicia sesión
-                  </Link>
-                </li>
-              </ul>
-            </button>
+                </button>
+              <Menu>
+              </Menu>
           </li>
         </ul>
       </nav>

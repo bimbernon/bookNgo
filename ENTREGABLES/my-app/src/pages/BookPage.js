@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Book } from "../components/main/Book/Book";
 import { BookDetails } from "../components/main/BookDetails/BookDetails";
 
 function BookPage() {
@@ -32,7 +31,7 @@ function BookPage() {
     <div className="book-details-container">
       <ul className="book-details-list">{book.map(render)}</ul>
       <Link to={`/user/${bookId}/mochila`}>
-      <button className="book-details-reserve-button">RESERVA</button>
+      <button className="book-details-reserve-button">RESERVAR</button>
       </Link>
     </div>
   );
