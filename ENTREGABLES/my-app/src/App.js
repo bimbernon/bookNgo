@@ -9,6 +9,7 @@ import { Login } from "./pages/Login";
 import { BooksByCathegory } from "./pages/BooksByCathegory";
 import { UserProvider } from "./components/providers/UserProvider";
 import { BookPage } from "./pages/BookPage";
+import { BackPack } from "./pages/Backpack";
 // import { AuthProvider } from "./components/providers/AuthProvider";
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
             </Route>
             <Route path="/books/id/:bookId">
               <BookPage />
+            </Route>
+            <Route path="/user/:bookId/mochila">
+              <BackPack />
             </Route>
             <Route path="/">
               <Home />

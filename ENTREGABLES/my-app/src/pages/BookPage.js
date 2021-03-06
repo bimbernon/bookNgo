@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Book } from "../components/main/Book/Book";
+import { BookDetails } from "../components/main/BookDetails/BookDetails";
 
 function BookPage() {
-  //CREAR UN USEEFFECT CON POST PARA CUANDO HAGAS ONCLIK EN EL BUTTON TE CREE UNA RESERVA
   const [book, setBook] = useState([]);
   let { bookId } = useParams();
 
@@ -13,19 +13,29 @@ function BookPage() {
         await fetch(`http://localhost:3080/api/v1/books/id/${bookId}`)
       ).json();
 
-      console.log(bookById);
-
       setBook(bookById);
     }
     getBooksByCathegoryName();
   }, []);
 
+  const render = (book) => (
+    <BookDetails
+      key={book.bookId}
+      bookName={book.title}
+      bookId={book.bookId}
+      bookPrice={book.price}
+      bookAuthor={`${book.Autor.nameAuthor} ${book.Autor.lastname1} `}
+    ></BookDetails>
+  );
+
   return (
-    <div>
-      <Book bookId={bookId}></Book>
-      <button className="reserve-button">RESERVA</button>
+    <div className="book-details-container">
+      <ul className="book-details-list">{book.map(render)}</ul>
+      <Link to={`/user/${bookId}/mochila`}>
+      <button className="book-details-reserve-button">RESERVA</button>
+      </Link>
     </div>
   );
-}
+};
 
 export { BookPage };
