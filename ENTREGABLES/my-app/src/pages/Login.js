@@ -7,16 +7,19 @@ export const Login = () => {
   const doSuccess = (responseBody) => setToken(responseBody.accessToken);
   const doError = (error) => console.error(error);
   console.log(token);
-  if (token !== "") {
-    <Redirect to="/"></Redirect>;
-  }
-  return (
-    <div>
-      <LoginForm
-        url="http://localhost:3080/api/v1/users/login/"
-        onSuccess={doSuccess}
-        onError={doError}
-      ></LoginForm>
-    </div>
+
+  const loginReturn = token ? (
+    <Redirect to="/" />
+  ) : (
+    <>
+      <div>
+        <LoginForm
+          url="http://localhost:3080/api/v1/users/login/"
+          onSuccess={doSuccess}
+          onError={doError}
+        ></LoginForm>
+      </div>
+    </>
   );
+  return loginReturn;
 };
