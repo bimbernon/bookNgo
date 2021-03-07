@@ -7,8 +7,8 @@ const Menu = () => {
     <div className="session-nav-container">
       <ul className="session-nav">
         <li className="session-nav-item">
-          <Link to="/users/register" className="navigation-link">
-            <p>Regístrate</p>
+          <Link to="/users/register" className="navigation-menu-link">
+            <p className="link-menu-title">Regístrate</p>
             <div>
               <svg
                 viewBox="0 0 24 24"
@@ -26,13 +26,13 @@ const Menu = () => {
                   stroke-linejoin="round"
                   stroke-miterlimit="10"
                   points="9 18 15 12 9 6"
-                ></polyline>
+                />
               </svg>
             </div>
           </Link>
         </li>
         <li className="session-nav-item">
-          <Link to="/users/login" className="navigation-link">
+          <Link to="/users/login" className="navigation-menu-link">
             Inicia sesión
             <svg
               viewBox="0 0 24 24"

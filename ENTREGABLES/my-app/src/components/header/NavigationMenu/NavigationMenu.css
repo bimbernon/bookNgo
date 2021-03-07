@@ -5,11 +5,9 @@
   flex-grow: 2;
 }
 
-.navigation-list {
+.navigation-menu-list {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  /* width: 80%; */
   list-style: none;
   flex: 1 1 auto;
   padding: 0;
@@ -17,7 +15,11 @@
   align-items: center;
 }
 
-.nav-item {
+.navigation-menu-item:hover > div > ul {
+  display: initial;
+}
+
+.navigation-menu-item {
   padding: 0.25rem;
   text-align: center;
 }
@@ -26,8 +28,4 @@
   font-size: 0.758rem;
   color: black;
   text-decoration: none;
-}
-
-.session-nav {
-  list-style: none;
 }
