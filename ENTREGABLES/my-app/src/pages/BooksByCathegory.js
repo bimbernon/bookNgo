@@ -14,8 +14,6 @@ export function BooksByCathegory() {
         )
       ).json();
 
-      console.log(booksByCahegoryName);
-
       setBooks(booksByCahegoryName);
     }
     getBooksByCathegoryName();

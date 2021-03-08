@@ -48,6 +48,7 @@ async function findBookByYearPublication(añoPublicacion) {
   const [books] = await pool.query(query, añoPublicacion);
   return books;
 }
+
 async function findLastBookId() {
   const pool = await database.getPool();
   const query = "SELECT max(idlibro) as ultimoID from libro";

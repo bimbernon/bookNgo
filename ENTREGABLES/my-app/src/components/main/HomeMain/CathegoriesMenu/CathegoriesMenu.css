@@ -15,5 +15,10 @@
   text-transform: uppercase;
 }
 .cathegories-container {
+  border-radius: 0.5rem;
   margin-top: 2rem;
+}
+
+.div-cathegory-container {
+  border-radius: 0.5rem;
 }

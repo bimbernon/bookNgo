@@ -27,7 +27,7 @@ const LatestNews = () => {
   return (
     <div className="latest-news-container">
       <h2 className="title-latest-news">Ultimas novedades</h2>
-      <ul className="last-books-list">{lastBooks.map(render)}</ul>
+        <ul className="last-books-list">{lastBooks.map(render)}</ul>
     </div>
   );
 };

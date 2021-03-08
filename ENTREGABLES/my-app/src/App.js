@@ -35,9 +35,9 @@ function App() {
             <Route path="/books/id/:bookId">
               <BookPage />
             </Route>
-            <Route path="/user/:bookId/mochila">
-              <BackPack />
-            </Route>
+              <Route path="/user/:bookId/mochila">
+                <BackPack />
+              </Route>
             <Route path="/">
               <Home />
             </Route>
