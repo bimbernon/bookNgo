@@ -13,7 +13,6 @@ const LoginForm = (props) => {
 
   const loginUser = async (e) => {
     e.preventDefault();
-    console.log(email, password, "prueba");
 
     const response = await fetch(url, {
       method: "POST",

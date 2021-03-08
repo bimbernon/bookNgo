@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import UserMenu from "../UserMenu/UserMenu";
 import "./Menu.css";
 
 const Menu = (props) => {
   const { activeMenu } = props;
-  console.log(activeMenu);
   const menuReturn =
     activeMenu === true ? (
       <div className="session-nav-container">
@@ -16,7 +16,7 @@ const Menu = (props) => {
                 <svg
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
-                  class="kirk-icon sc-fjdhpX hvLyfg"
+                  className="kirk-icon sc-fjdhpX hvLyfg"
                   width="24"
                   height="24"
                   aria-hidden="true"
@@ -24,10 +24,10 @@ const Menu = (props) => {
                   <polyline
                     fill="none"
                     stroke="#708C91"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="10"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
                     points="9 18 15 12 9 6"
                   />
                 </svg>
@@ -40,7 +40,7 @@ const Menu = (props) => {
               <svg
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
-                class="kirk-icon sc-fjdhpX hvLyfg"
+                className="kirk-icon sc-fjdhpX hvLyfg"
                 width="24"
                 height="24"
                 aria-hidden="true"
@@ -48,10 +48,10 @@ const Menu = (props) => {
                 <polyline
                   fill="none"
                   stroke="#708C91"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-miterlimit="10"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeMiterlimit="10"
                   points="9 18 15 12 9 6"
                 ></polyline>
               </svg>
@@ -60,7 +60,7 @@ const Menu = (props) => {
         </ul>
       </div>
     ) : (
-      <></>
+      <UserMenu />
     );
   return menuReturn;
 };

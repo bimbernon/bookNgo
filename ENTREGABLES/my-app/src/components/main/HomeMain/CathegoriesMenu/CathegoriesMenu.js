@@ -17,7 +17,7 @@ const CathegoriesMenu = () => {
   }, []);
 
   const renderCathegories = (ctg) => (
-    <Link to={`/cathegory/books/${ctg.nombrecategoria}`}>
+    <Link to={`/cathegory/books/${ctg.nombrecategoria}`} key={ctg.idcategoria}>
       <Cathegory
         key={ctg.idcategoria}
         cathegoryId={ctg.idcategoria}

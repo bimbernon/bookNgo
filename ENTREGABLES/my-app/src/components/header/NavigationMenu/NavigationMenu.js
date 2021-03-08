@@ -24,7 +24,6 @@ const NavigationMenu = () => {
                   <Avatar imageId={imageId} />
                 </button>
                 <Menu activeMenu={activeMenu} />
-                <UserMenu />
               </li>
             </ul>
           </nav>
@@ -33,10 +32,10 @@ const NavigationMenu = () => {
     );
   };
 
-  const [token, setToken] = useContext(AuthContext);
+  const [token] = useContext(AuthContext);
 
   const navigation = token ? (
-    <Navigation imageId={1} activeMenu={false}></Navigation>
+    <Navigation imageId={1} activeMenu={false}></Navigation> 
   ) : (
     <Navigation imageId={4} activeMenu={true}></Navigation>
   );
