@@ -1,16 +1,21 @@
 "use strict";
 
 const bookRepository = require("../../repositories/books-repository");
-const Joi = require('joi');
+const Joi = require("joi");
 
 const schema = Joi.object().keys({
   idcategoria: Joi.number().positive().required(),
   idautor: Joi.number().positive().required(),
   titulo: Joi.string().min(4).max(40).required(),
   stock: Joi.number().positive().required(),
+  sipnosis: Joi.string().min(4).max(2000).required(),
   precio: Joi.number().positive().required(),
   editorial: Joi.string().min(4).max(40).required(),
-  añopublicacion: Joi.number().min(1900).max(new Date().getFullYear()).positive().required()
+  añopublicacion: Joi.number()
+    .min(1900)
+    .max(new Date().getFullYear())
+    .positive()
+    .required(),
 });
 
 async function createBook(req, res) {
@@ -28,9 +33,10 @@ async function createBook(req, res) {
       idautor,
       titulo,
       stock,
+      sipnosis,
       precio,
       editorial,
-      añopublicacion
+      añopublicacion,
     } = req.body;
     await schema.validateAsync(req.body);
     const book = {
@@ -39,9 +45,10 @@ async function createBook(req, res) {
       idautor,
       titulo,
       stock,
+      sipnosis,
       precio,
       editorial,
-      añopublicacion
+      añopublicacion,
     };
 
     const books = await bookRepository.createBook(book);

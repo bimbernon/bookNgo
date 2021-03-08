@@ -10,43 +10,43 @@ import { BooksByCathegory } from "./pages/BooksByCathegory";
 import { UserProvider } from "./components/providers/UserProvider";
 import { BookPage } from "./pages/BookPage";
 import { BackPack } from "./pages/Backpack";
-// import { AuthProvider } from "./components/providers/AuthProvider";
+import { AuthProvider } from "./components/providers/AuthProvider";
 
 function App() {
   return (
-    // <AuthProvider>
-    <UserProvider>
-      <Router>
-        <div>
-          <HeaderContainer />
-          <Switch>
-            <Route path="/cathegory/books/:nameCathegory">
-              <BooksByCathegory />
-            </Route>
-            <Route path="/donations">
-              <Donations />
-            </Route>
-            <Route path="/users/register">
-              <Register />
-            </Route>
-            <Route path="/users/login">
-              <Login />
-            </Route>
-            <Route path="/books/id/:bookId">
-              <BookPage />
-            </Route>
-            <Route path="/user/:bookId/mochila">
-              <BackPack />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-          <Footer />
-        </div>
-      </Router>
-    </UserProvider>
-    // </AuthProvider>
+    <AuthProvider>
+      <UserProvider>
+        <Router>
+          <div>
+            <HeaderContainer />
+            <Switch>
+              <Route path="/cathegory/books/:nameCathegory">
+                <BooksByCathegory />
+              </Route>
+              <Route path="/donations">
+                <Donations />
+              </Route>
+              <Route path="/users/register">
+                <Register />
+              </Route>
+              <Route path="/users/login">
+                <Login />
+              </Route>
+              <Route path="/books/id/:bookId">
+                <BookPage />
+              </Route>
+              <Route path="/user/:bookId/mochila">
+                <BackPack />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
+      </UserProvider>
+    </AuthProvider>
   );
 }
 
