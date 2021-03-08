@@ -8,7 +8,6 @@ const {
 
 const schema = Joi.object().keys({
   cathegoryName: Joi.string().min(3).max(20).required(),
-  cathegoryDescription: Joi.string().min(3).max(60).required(),
 });
 
 async function createCathegory(req, res) {
@@ -20,15 +19,15 @@ async function createCathegory(req, res) {
     }
     await schema.validateAsync(req.body);
 
-    const { cathegoryName, cathegoryDescription } = req.body;
+    const { cathegoryName } = req.body;
 
-    const cathegory = { cathegoryName, cathegoryDescription };
+    const cathegory = { cathegoryName };
 
     const id = await findLastCathegoryId();
 
     await insertCathegory(cathegory);
 
-    res.status(201).send({ id, cathegoryName, cathegoryDescription });
+    res.status(201).send({ id, cathegoryName });
   } catch (err) {
     res.status(err.status || 500);
     res.send({ error: err.message });

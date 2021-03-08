@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { BookBrowser } from "../BooksBrowser/BooksBrowser";
 import { NavigationMenu } from "../NavigationMenu/NavigationMenu";

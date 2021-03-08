@@ -23,14 +23,13 @@ async function insertCathegory(cathegory) {
   const pool = await database.getPool();
   const cathegoryId = await findLastCathegoryId();
 
-  const { cathegoryName, cathegoryDescription } = cathegory;
+  const { cathegoryName } = cathegory;
 
   const insertQuery =
-    "INSERT INTO categoria (idcategoria, nombrecategoria, descripcioncategoria) VALUES (?, ?, ?)";
+    "INSERT INTO categoria (idcategoria, nombrecategoria) VALUES (?, ?)";
   const [insertedCathegory] = await pool.query(insertQuery, [
     cathegoryId,
     cathegoryName,
-    cathegoryDescription,
   ]);
 
   return insertedCathegory;
