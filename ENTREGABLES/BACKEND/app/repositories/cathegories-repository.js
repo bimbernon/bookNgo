@@ -26,11 +26,7 @@ async function insertCathegory(cathegory) {
   const { cathegoryName } = cathegory;
 
   const insertQuery =
-<<<<<<< HEAD
     "INSERT INTO categoria (idcategoria, nombrecategoria) VALUES (?, ?)";
-=======
-    "INSERT INTO categoria (idcategoria, nombrecategoria) VALUES ( ?, ?)";
->>>>>>> 39badb230ba21c34b8e869cd15224c2744f1bdbe
   const [insertedCathegory] = await pool.query(insertQuery, [
     cathegoryId,
     cathegoryName,
