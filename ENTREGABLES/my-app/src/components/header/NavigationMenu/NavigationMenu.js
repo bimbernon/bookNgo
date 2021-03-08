@@ -3,6 +3,7 @@ import "./NavigationMenu.css";
 import { Link } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
 import Menu from "../menu/Menu";
+import UserMenu from "../UserMenu/UserMenu";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const NavigationMenu = () => {
@@ -23,6 +24,7 @@ const NavigationMenu = () => {
                   <Avatar imageId={imageId} />
                 </button>
                 <Menu activeMenu={activeMenu} />
+                <UserMenu />
               </li>
             </ul>
           </nav>

@@ -11,6 +11,10 @@ import { UserProvider } from "./components/providers/UserProvider";
 import { BookPage } from "./pages/BookPage";
 import { BackPack } from "./pages/Backpack";
 import { AuthProvider } from "./components/providers/AuthProvider";
+import { UserProfile } from "./pages/UserProfile";
+import { UserReserves } from "./pages/UserReserves";
+import { UserPurse } from "./pages/UserPurse";
+import { Administration } from "./pages/Administration";
 
 function App() {
   return (
@@ -34,6 +38,18 @@ function App() {
               </Route>
               <Route path="/books/id/:bookId">
                 <BookPage />
+              </Route>
+              <Route path="/users/profile/:userId">
+                <UserProfile />
+              </Route>
+              <Route path="/reserves/:userId">
+                <UserReserves/>
+              </Route>
+              <Route path="/users/purse/:userId">
+                <UserPurse />
+              </Route>
+              <Route path="/administration">
+                <Administration />
               </Route>
               <Route path="/user/:bookId/mochila">
                 <BackPack />
