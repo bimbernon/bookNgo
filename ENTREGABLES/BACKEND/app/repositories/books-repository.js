@@ -12,7 +12,7 @@ async function readAll() {
 async function findByName(nombre) {
   const pool = await database.getPool();
   const query =
-    "select l.*,u.nombreusuario,u.nombreperfilusuario,u.apel1 as apellido1usuario, u.apel2 as apellido2usuario,u.email,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join usuario u on l.idusuario=u.idusuario inner join autor aut on l.idautor=aut.idautor where l.titulo =?";
+    "select l.*,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join autor aut on l.idautor=aut.idautor where l.titulo =?";
   const [books] = await pool.query(query, nombre);
   return books;
 }
@@ -20,7 +20,7 @@ async function findByName(nombre) {
 async function findBookByAuthor(nombreAutor) {
   const pool = await database.getPool();
   const query =
-    "select l.*,u.nombreusuario,u.nombreperfilusuario,u.apel1 as apellido1usuario, u.apel2 as apellido2usuario,u.email,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join usuario u on l.idusuario=u.idusuario inner join autor aut on l.idautor=aut.idautor where aut.nombreautor=?";
+    "select l.*,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join autor aut on l.idautor=aut.idautor where aut.nombreautor=?";
   const [books] = await pool.query(query, nombreAutor);
   return books;
 }
@@ -28,7 +28,7 @@ async function findBookByAuthor(nombreAutor) {
 async function findBookByCathegory(nombreCategoria) {
   const pool = await database.getPool();
   const query =
-    "select l.*,u.nombreusuario,u.nombreperfilusuario,u.apel1 as apellido1usuario, u.apel2 as apellido2usuario,u.email,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join usuario u on l.idusuario=u.idusuario inner join autor aut on l.idautor=aut.idautor where c.nombrecategoria=?";
+    "select l.*,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join autor aut on l.idautor=aut.idautor where c.nombrecategoria=?";
   const [books] = await pool.query(query, nombreCategoria);
   return books;
 }
@@ -36,7 +36,7 @@ async function findBookByCathegory(nombreCategoria) {
 async function findBookByEditorial(nombreEditorial) {
   const pool = await database.getPool();
   const query =
-    "select l.*,u.nombreusuario,u.nombreperfilusuario,u.apel1 as apellido1usuario, u.apel2 as apellido2usuario,u.email,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join usuario u on l.idusuario=u.idusuario inner join autor aut on l.idautor=aut.idautor where l.editorial=?";
+    "select l.*,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join autor aut on l.idautor=aut.idautor where l.editorial=?";
   const [books] = await pool.query(query, nombreEditorial);
   return books;
 }
@@ -44,7 +44,7 @@ async function findBookByEditorial(nombreEditorial) {
 async function findBookByYearPublication(añoPublicacion) {
   const pool = await database.getPool();
   const query =
-    "select l.*,u.nombreusuario,u.nombreperfilusuario,u.apel1 as apellido1usuario, u.apel2 as apellido2usuario,u.email,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join usuario u on l.idusuario=u.idusuario inner join autor aut on l.idautor=aut.idautor where l.añopublicacion=?";
+    "select l.*,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join autor aut on l.idautor=aut.idautor where l.añopublicacion=?";
   const [books] = await pool.query(query, añoPublicacion);
   return books;
 }
@@ -65,7 +65,6 @@ async function createBook(book) {
 
   const {
     idcategoria,
-    idusuario,
     idautor,
     titulo,
     stock,
@@ -76,11 +75,10 @@ async function createBook(book) {
   } = book;
 
   const query =
-    "INSERT INTO libro (idlibro,idcategoria,idusuario,idautor,titulo,stock,sipnosis,precio,editorial,añopublicacion) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    "INSERT INTO libro (idlibro,idcategoria,idautor,titulo,stock,sipnosis,precio,editorial,añopublicacion) VALUES (?,?,?,?,?,?,?,?,?)";
   const [books] = await pool.query(query, [
     id,
     idcategoria,
-    idusuario,
     idautor,
     titulo,
     stock,
@@ -102,7 +100,7 @@ async function removeBookById(idBook) {
 async function findBookById(idBook) {
   const pool = await database.getPool();
   const query =
-    "select l.*,u.nombreusuario,u.nombreperfilusuario,u.apel1 as apellido1usuario, u.apel2 as apellido2usuario,u.email,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join usuario u on l.idusuario=u.idusuario inner join autor aut on l.idautor=aut.idautor where idlibro=?";
+    "select l.*,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join autor aut on l.idautor=aut.idautor where idlibro=?";
   const [book] = await pool.query(query, idBook);
   return book;
 }
@@ -110,7 +108,6 @@ async function findBookById(idBook) {
 async function updateBookById(idBook, updateBook) {
   const {
     idcategoria,
-    idusuario,
     idautor,
     titulo,
     stock,
@@ -121,10 +118,9 @@ async function updateBookById(idBook, updateBook) {
   } = updateBook;
   const pool = await database.getPool();
   const query =
-    "UPDATE libro set idcategoria=?,idusuario=?,idautor=?,titulo=?,stock=?,sipnosis=?,precio=?,editorial=?,añopublicacion=? where idlibro=?";
+    "UPDATE libro set idcategoria=?,idautor=?,titulo=?,stock=?,sipnosis=?,precio=?,editorial=?,añopublicacion=? where idlibro=?";
   const resBookUpdate = await pool.query(query, [
     idcategoria,
-    idusuario,
     idautor,
     titulo,
     stock,

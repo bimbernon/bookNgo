@@ -22,19 +22,19 @@ async function uploadImage({ imageData, destination, width, height, codFoto }) {
 function formatArrayBooks(array) {
   const booksFormateados = array.map((book) => {
     const bookFormated = {
-      bookId: book.idlibro,
-      title: book.titulo,
+      idLibro: book.idlibro,
+      titulo: book.titulo,
       stock: book.stock,
-      price: book.precio,
+      precio: book.precio,
       editorial: book.editorial,
-      Cathegory: {
-        name: book.nombrecategoria,
-        description: book.descripcioncategoria,
+      sinopsis: book.sinopsis,
+      Categoria: {
+        nombreCategoria: book.nombrecategoria,
       },
       Autor: {
-        nameAuthor: book.nombreautor,
-        lastname1: book.apel1,
-        lastname2: book.apel2,
+        nombreAutor: book.nombreautor,
+        apellido1: book.apel1,
+        apellido2: book.apel2,
       },
     };
     return bookFormated;

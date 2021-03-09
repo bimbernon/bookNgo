@@ -1,23 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Book } from "../Book/Book";
 import "./BookDetails.css";
 
 export const BookDetails = (props) => {
-  const { bookName, bookId, bookAuthor, bookPrice } = props;
+  const [book, setBook] = useState({});
+
+  let { bookId } = useParams();
+
+  useEffect(() => {
+    async function getBookById() {
+      const bookById = await (
+        await fetch(`http://localhost:3080/api/v1/books/id/${bookId}`)
+      ).json();
+      setBook(bookById);
+    }
+    getBookById();
+  }, []);
+
+  console.log(book);
+
+  const style = {
+    borderRadius: "1rem",
+    backgroundColor: "white",
+    margin: "20px",
+    width: "85vw",
+  };
+
   return (
-    <li className="book-details-item">
-      <img
-        src={`/booksCovers/${bookId}.jpeg`}
-        className="book-details-cover"
-        alt="bookCover"
-      ></img>
-      <div className="book-details-details">
-        <h1 className="book-details-title">{bookName}</h1>
-        <h1 className="book-details-author">{bookAuthor}</h1>
-        <p className="book-details-price">Precio:{bookPrice}$</p>
-        <p className="book-details-sinopsis">
-          cqevfrevr vwrtbrtbc theh ecth tyhtyhctryn teeybcrtyn cjhgkjh jhhb biblbiubpibib ibpibi bpib ibpi bpiu bpib
-        </p>
-      </div>
-    </li>
+    <div className="book-details-container">
+      <Book
+        bookId={book.idLibro}
+        style={style}
+        key={book.idLibro}
+        bookName={book.titulo}
+        // bookAuthor={`${book.Autor.nombreAutor} ${book.Autor.apellido1}`}
+        bookPrice={`Precio: ${book.precio}`}
+        bookSinopsis={book.sinopsis}
+      ></Book>
+    </div>
   );
 };

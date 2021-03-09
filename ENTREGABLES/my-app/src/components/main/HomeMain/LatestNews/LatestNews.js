@@ -15,19 +15,25 @@ const LatestNews = () => {
     getLatestBooks();
   }, []);
 
+  const style = {
+    backgroundColor: "rgb(219, 187, 135)",
+    height: "15rem",
+  };
+
   const render = (book) => (
     <Book
-      key={book.bookId}
-      bookName={book.title}
-      bookId={book.bookId}
-      bookAuthor={`${book.Autor.nameAuthor} ${book.Autor.lastname1} `}
+      style={style}
+      key={book.idLibro}
+      bookName={book.titulo}
+      bookId={book.idLibro}
+      bookAuthor={`${book.Autor.nombreAutor} ${book.Autor.apellido1}`}
     ></Book>
   );
 
   return (
     <div className="latest-news-container">
       <h2 className="title-latest-news">Ultimas novedades</h2>
-        <ul className="last-books-list">{lastBooks.map(render)}</ul>
+      <ul className="last-books-list">{lastBooks.map(render)}</ul>
     </div>
   );
 };

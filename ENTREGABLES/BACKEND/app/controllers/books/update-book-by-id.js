@@ -20,7 +20,6 @@ async function updateBookById(req, res) {
     const { idBook } = req.params;
     await schemaId.validateAsync(idBook);
     const { admin } = req.auth;
-    const { idusuario } = req.auth;
 
     if (admin !== 1) {
       const error = new Error("No tienes permisos para realizar esta acción");
@@ -61,7 +60,6 @@ async function updateBookById(req, res) {
 
     const updateBook = {
       idcategoria,
-      idusuario,
       idautor,
       titulo,
       stock,

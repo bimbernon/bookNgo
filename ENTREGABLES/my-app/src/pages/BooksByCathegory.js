@@ -8,23 +8,22 @@ export function BooksByCathegory() {
 
   useEffect(() => {
     async function getBooksByCathegoryName() {
-      const booksByCahegoryName = await (
+      const booksByCathegoryName = await (
         await fetch(
           `http://localhost:3080/api/v1/books/cathegory/nameCathegory/${nameCathegory}`
         )
       ).json();
-
-      setBooks(booksByCahegoryName);
+      setBooks(booksByCathegoryName);
     }
     getBooksByCathegoryName();
   }, []);
 
   const renderBooks = (book) => (
     <Book
-      key={book.bookId}
-      bookName={book.title}
-      bookId={book.bookId}
-      bookAuthor={`${book.Autor.nameAuthor} ${book.Autor.lastname1} `}
+      key={book.idLibro}
+      bookName={book.titulo}
+      bookId={book.idLibro}
+      bookAuthor={`${book.Autor.nombreAutor} ${book.Autor.apellido1} `}
     ></Book>
   );
 

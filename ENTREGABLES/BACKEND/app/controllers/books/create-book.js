@@ -21,7 +21,6 @@ const schema = Joi.object().keys({
 async function createBook(req, res) {
   try {
     const { admin } = req.auth;
-    const { idusuario } = req.auth;
 
     if (admin !== 1) {
       const error = new Error("No tienes permisos para realizar esta acción");
@@ -41,7 +40,6 @@ async function createBook(req, res) {
     await schema.validateAsync(req.body);
     const book = {
       idcategoria,
-      idusuario,
       idautor,
       titulo,
       stock,
