@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
-import "./UserProfile.css";
+import { useParams } from "react-router-dom";
+import "./UserProfileForm.css";
 
 export const UserProfileForm = () => {
   const [name, setName] = useState("");
@@ -9,7 +9,7 @@ export const UserProfileForm = () => {
   const [address, setAdress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  let { userId } = useParams;
+  let { userId } = useParams();
 
   const handleChangeName = (e) => setName(e.target.value);
   const handleChangeLastName1 = (e) => setLastName1(e.target.value);

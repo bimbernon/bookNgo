@@ -1,6 +1,11 @@
 import React from "react";
-import { UserProfileForm } from "../components/main/UserProfile/UserProfile";
 
-export const UserProfile = (props) => {
-  return <UserProfileForm />;
+import { Profile } from "../components/main/UserProfileMain/Profile";
+
+export const UserProfile = () => {
+  return (
+    <div className="user-profile-container">
+      <Profile />
+    </div>
+  );
 };

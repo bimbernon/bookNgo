@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import "./NavigationMenu.css";
 import { Link } from "react-router-dom";
-import Avatar from "../Avatar/Avatar";
-import Menu from "../menu/Menu";
-import UserMenu from "../UserMenu/UserMenu";
+import { Avatar } from "../Avatar/Avatar";
+import { Menu } from "../Menu/Menu";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const NavigationMenu = () => {
@@ -35,9 +34,12 @@ const NavigationMenu = () => {
   const [token] = useContext(AuthContext);
 
   const navigation = token ? (
-    <Navigation imageId={1} activeMenu={false}></Navigation> 
+    <Navigation imageId={``} activeMenu={false}></Navigation>
   ) : (
-    <Navigation imageId={4} activeMenu={true}></Navigation>
+    <Navigation
+      imageId={"../../../images/icons/user.png"}
+      activeMenu={true}
+    ></Navigation>
   );
   return navigation;
 };

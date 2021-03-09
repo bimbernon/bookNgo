@@ -1,4 +1,5 @@
 import React from "react";
+
 const Avatar = (props) => {
   const { imageId } = props;
   return (
@@ -11,4 +12,4 @@ const Avatar = (props) => {
   );
 };
 
-export default Avatar;
+export { Avatar };

@@ -2,8 +2,8 @@
 
 .whoWeAre-container {
   background-color: var(--white-background);
-  margin: 1rem 0.5rem;
-  padding: 1rem 0.5rem;
+  margin: 1rem 0;
+  padding: 1rem 1.5rem;
 }
 
 .title-howItWorks {

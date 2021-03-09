@@ -35,7 +35,7 @@ async function uploadImageUserProfile(req, res) {
 
     await uploadImage({
       imageData: userImage.data,
-      destination: process.env.PATH_USER_IMAGE,
+      destination: `../../../../my-app/public/${process.env.PATH_USER_IMAGE}`,
       width: 300,
       heigth: 300,
       codFoto: authentifiedUserId,
