@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import UserMenu from "../UserMenu/UserMenu";
+import { UserMenu } from "../UserMenu/UserMenu";
 import "./Menu.css";
 
 const Menu = (props) => {
@@ -65,4 +65,4 @@ const Menu = (props) => {
   return menuReturn;
 };
 
-export default Menu;
+export { Menu };

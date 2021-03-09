@@ -41,7 +41,11 @@ async function loginUser(req, res) {
 
     const token = jwt.sign(payload, secret, { expiresIn: jwtTokenExpiration });
 
-    const response = { accessToken: token, expiresIn: jwtTokenExpiration };
+    const response = {
+      accessToken: token,
+      expiresIn: jwtTokenExpiration,
+      user: payload,
+    };
 
     res.send(response);
   } catch (err) {

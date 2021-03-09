@@ -9,7 +9,7 @@ export const UserProvider = (props) => {
   const [selectedUser, setSelectedUser] = useLocalStorage("selectedUser");
 
   return (
-    <UserContext.Provider value={{ selectedUser, setSelectedUser }}>
+    <UserContext.Provider value={[selectedUser, setSelectedUser]}>
       {children}
     </UserContext.Provider>
   );

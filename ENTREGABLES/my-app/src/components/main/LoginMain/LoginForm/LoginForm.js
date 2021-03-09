@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
-// import { useLocalStorage } from "../../../../Hooks/useLocalStorage";
 
 const LoginForm = (props) => {
-  const { url, onSuccess, onError } = props;
+  const { url, onSuccess, onError, onSuccessUser } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -28,12 +27,12 @@ const LoginForm = (props) => {
     if (response.ok) {
       const result = await response.json();
       onSuccess(result);
+      onSuccessUser(result);
+      console.log(result);
       setEmail("");
       setPassword("");
       setErrorMsg("");
     } else {
-      // const error = new Error('algo ha fallado.');
-      // throw error;
       const errorMsg = await response.json();
       setErrorMsg("Usuario o contraseña incorrectos");
       onError(errorMsg);
