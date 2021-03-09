@@ -12,8 +12,8 @@ import { BookPage } from "./pages/BookPage";
 import { BackPack } from "./pages/Backpack";
 import { AuthProvider } from "./components/providers/AuthProvider";
 import { UserProfile } from "./pages/UserProfile";
-import { UserReserves } from "./pages/UserReserves";
-import { UserPurse } from "./pages/UserPurse";
+import { UserReservesPage } from "./pages/UserReservesPage";
+import { UserPursePage } from "./pages/UserPursePage";
 import { Administration } from "./pages/Administration";
 
 function App() {
@@ -43,10 +43,10 @@ function App() {
                 <UserProfile />
               </Route>
               <Route path="/reserves/:userId">
-                <UserReserves/>
+                <UserReservesPage/>
               </Route>
               <Route path="/users/purse/:userId">
-                <UserPurse />
+                <UserPursePage />
               </Route>
               <Route path="/administration">
                 <Administration />

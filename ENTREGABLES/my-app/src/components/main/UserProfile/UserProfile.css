@@ -1,0 +1,33 @@
+.user-profile-title {
+  color: black;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.form-user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-user-profile > input {
+  border: none;
+  border-radius: 20px;
+  height: 30px;
+  margin: 20px 20px 20px 20px;
+  width: 300px;
+}
+
+.user-profile-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.user-profile-button {
+  border: none;
+  background: none;
+  border-radius: 50px;
+  margin: 0 0 2rem 0;
+}
