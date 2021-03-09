@@ -7,7 +7,6 @@ const UserMenu = () => {
   const [token] = useContext(AuthContext);
   let activeUserMenu;
   const isToken = !token ? (activeUserMenu = false) : (activeUserMenu = true);
-  console.log(activeUserMenu);
 
   const UserMenuReturn =
     activeUserMenu === true ? (

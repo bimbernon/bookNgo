@@ -49,6 +49,15 @@ async function findBookByYearPublication(añoPublicacion) {
   return books;
 }
 
+async function findLastBooks() {
+  const pool = await database.getPool();
+  const query =
+    "select l.*, a.* from libro l inner join autor a on l.idautor = a.idautor order by l.idlibro desc limit 5";
+  const [lastBooks] = await pool.query(query);
+
+  return lastBooks;
+}
+
 async function findLastBookId() {
   const pool = await database.getPool();
   const query = "SELECT max(idlibro) as ultimoID from libro";
@@ -162,6 +171,7 @@ module.exports = {
   findBookByCathegory,
   findBookByEditorial,
   findBookByYearPublication,
+  findLastBooks,
   findLastBookId,
   createBook,
   removeBookById,

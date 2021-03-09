@@ -18,8 +18,6 @@ export const BookDetails = (props) => {
     getBookById();
   }, []);
 
-  console.log(book);
-
   const style = {
     borderRadius: "1rem",
     backgroundColor: "white",
@@ -30,13 +28,13 @@ export const BookDetails = (props) => {
   return (
     <div className="book-details-container">
       <Book
-        bookId={book.idLibro}
+        bookId={book.idlibro}
         style={style}
-        key={book.idLibro}
+        key={book.idlibro}
         bookName={book.titulo}
-        // bookAuthor={`${book.Autor.nombreAutor} ${book.Autor.apellido1}`}
+        bookAuthor={`${book.nombreautor} ${book.apel1}`}
         bookPrice={`Precio: ${book.precio}`}
-        bookSinopsis={book.sinopsis}
+        bookSinopsis={book.sipnosis}
       ></Book>
     </div>
   );

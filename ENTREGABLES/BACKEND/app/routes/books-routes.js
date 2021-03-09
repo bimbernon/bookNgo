@@ -3,6 +3,7 @@ const { validateAuth } = require("../middlewares/validate-auth");
 const express = require("express");
 const { getBooks } = require("../controllers/books/get-books");
 const { getBookByTitle } = require("../controllers/books/get-book-by-title");
+const { getLastbooks } = require("../controllers/books/get-last-books");
 const { getBookByAuthor } = require("../controllers/books/get-books-by-author");
 const {
   getBooksByCathegory,
@@ -21,6 +22,7 @@ const { uploadImageBook } = require("../controllers/books/upload-image-book");
 const router = express.Router();
 
 router.route("/").get((req, res) => getBooks(req, res));
+router.route("/lastBooks").get((req, res) => getLastbooks(res, res));
 router.route("/title/:title").get((req, res) => getBookByTitle(req, res));
 router
   .route("/author/:nameAuthor")

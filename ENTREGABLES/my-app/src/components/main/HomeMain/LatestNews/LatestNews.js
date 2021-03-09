@@ -8,7 +8,7 @@ const LatestNews = () => {
   useEffect(() => {
     async function getLatestBooks() {
       const latestBooks = await (
-        await fetch("http://localhost:3080/api/v1/books")
+        await fetch("http://localhost:3080/api/v1/books/lastBooks")
       ).json();
       setLastBooks(latestBooks);
     }
@@ -23,10 +23,10 @@ const LatestNews = () => {
   const render = (book) => (
     <Book
       style={style}
-      key={book.idLibro}
+      key={book.idlibro}
       bookName={book.titulo}
-      bookId={book.idLibro}
-      bookAuthor={`${book.Autor.nombreAutor} ${book.Autor.apellido1}`}
+      bookId={book.idlibro}
+      bookAuthor={`${book.nombreautor} ${book.apel1}`}
     ></Book>
   );
 

@@ -16,7 +16,7 @@ async function getBookById(req, res) {
     }
     const bookFormateado = formatArrayBooks(book);
 
-    res.send(bookFormateado[0]);
+    res.send(book[0]);
   } catch (err) {
     res.status(400).send({ error: err.message });
   }

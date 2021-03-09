@@ -32,8 +32,6 @@ const LoginForm = (props) => {
       setPassword("");
       setErrorMsg("");
     } else {
-      // const error = new Error('algo ha fallado.');
-      // throw error;
       const errorMsg = await response.json();
       setErrorMsg("Usuario o contraseña incorrectos");
       onError(errorMsg);
