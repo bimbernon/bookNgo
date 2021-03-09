@@ -16,7 +16,7 @@ const LatestNews = () => {
   }, []);
 
   const style = {
-    backgroundColor: "rgb(219, 187, 135)",
+    backgroundColor: "rgb(202, 176, 135)",
     height: "15rem",
   };
 

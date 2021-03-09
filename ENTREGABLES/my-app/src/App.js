@@ -21,7 +21,7 @@ function App() {
     <AuthProvider>
       <UserProvider>
         <Router>
-          <div>
+          <div className="cuerpo">
             <HeaderContainer />
             <Switch>
               <Route path="/cathegory/books/:nameCathegory">
@@ -43,7 +43,7 @@ function App() {
                 <UserProfile />
               </Route>
               <Route path="/reserves/:userId">
-                <UserReservesPage/>
+                <UserReservesPage />
               </Route>
               <Route path="/users/purse/:userId">
                 <UserPursePage />
