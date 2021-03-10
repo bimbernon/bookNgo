@@ -33,11 +33,13 @@ async function findByName (name) {
 
 async function findAuthorByNameAndLastName (author) {
   const { nombreautor, apel1, apel2 } = author;
+  console.log(author, 'authorRepository');
   const pool = await database.getPool();
-  const query = `SELECT * FROM autor WHERE nombreautor=? AND apel1=? AND apel2=?`;
-  const  [ insertedAuthor ] = await pool.query(query, [nombreautor, apel1, apel2]);
+  const query = `SELECT * FROM autor WHERE nombreautor=${nombreautor} AND apel1=${apel1} AND apel2=${apel2}`;
+  const  [ insertedAuthor ] = await pool.query(query);
 
   return insertedAuthor;
+  console.log(insertedAuthor);
 }
 
 async function findLastAuthorId() {

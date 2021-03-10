@@ -59,7 +59,9 @@ export const UserProfileForm = () => {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({coge lo que venga del body}),
+        body: JSON.stringify({
+          ...userProfile,
+        }),
       }
     );
 

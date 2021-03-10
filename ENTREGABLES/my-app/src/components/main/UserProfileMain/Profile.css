@@ -26,6 +26,7 @@
   background-color: white;
   border: none;
   border-radius: 20px;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
   height: 50px;
   line-height: 3rem;
   text-align: center;
@@ -41,4 +42,5 @@
   font-weight: bold;
   height: 25px;
   width: 125px;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
 }

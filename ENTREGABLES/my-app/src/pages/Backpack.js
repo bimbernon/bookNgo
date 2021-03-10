@@ -5,7 +5,6 @@ export function BackPack() {
 
   return (
     <div>
-      <h1>Tu mochila</h1>
       <BackPackItem />
     </div>
   );

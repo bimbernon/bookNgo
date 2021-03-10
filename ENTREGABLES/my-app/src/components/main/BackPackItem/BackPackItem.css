@@ -1,7 +1,13 @@
+@import "../../../index.css";
+
 .backPack-container {
-  background-color: white;
+  align-items: center;
+  background-color: var(--white-background);
   border-radius: 1rem;
-  height: 8rem;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
+  display: flex;
+  flex-direction: column;
+  height: 33rem;
   margin: 2rem auto;
   width: 20rem;
 }
@@ -10,8 +16,9 @@
   background-color: rgb(24, 212, 24);
   border: none;
   border-radius: 0.5rem;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
   font-weight: bold;
   height: 25px;
-  margin-bottom: 1rem;
+  margin-top: 6rem;
   width: 125px;
 }

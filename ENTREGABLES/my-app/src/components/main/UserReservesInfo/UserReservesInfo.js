@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
-import "./UserReservesInfo.css";
+import { UserContext } from "../../providers/UserProvider";
+import { Reserve } from "../Reserve/Reserve";
+import "../Reserve/Reserve.css";
+
 
 export const UserReservesInfo = () => {
   const [token] = useContext(AuthContext);
+  const [selectedUser] = useContext(UserContext);
   const [reserve, setReserve] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   console.log(reserve);
-  let { userId } = useParams();
 
   useEffect(() => {
     async function getReservesByUserId() {
       const reserveResponse = await fetch(
-        `http://localhost:3080/api/v1/reserves/${userId}`,
+        `http://localhost:3080/api/v1/reserves/${selectedUser.idusuario}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -29,19 +31,14 @@ export const UserReservesInfo = () => {
     getReservesByUserId();
   }, []);
 
-  const Reserve = () => <li reserve={reserve}></li>;
-
-  const render = (reserves) => {
-    return (
-      <Reserve
-        key={reserves.fechareserva}
-        reserveBook={reserves.titulo}
-        reserveDate={reserves.fechareserva}
-        reserveExpiration={reserves.fechadevolucion}
-        rating={reserves.rating}
-      ></Reserve>
+  const render = (reserves) => (
+    <Reserve
+    reserveBook={reserves.titulo}
+    reserveDate={reserves.fechareserva}
+    reserveExpiration={reserves.fechaexpiracion}
+    rating={reserves.rating}
+    ></Reserve>
     );
-  };
 
   return (
     <div className="reserves-container">

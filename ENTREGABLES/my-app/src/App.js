@@ -16,6 +16,7 @@ import { UserReservesPage } from "./pages/UserReservesPage";
 import { UserPursePage } from "./pages/UserPursePage";
 import { Administration } from "./pages/Administration";
 import { UserProfile } from "./pages/UserProfile";
+import { ReserveInfo } from "../src/pages/userReserveDetails";
 
 function App() {
   const style = {
@@ -55,13 +56,16 @@ function App() {
               <Route path="/reserves/:userId">
                 <UserReservesPage />
               </Route>
+              <Route path="/reserves/:userId/info">
+                <ReserveInfo />
+              </Route>
               <Route path="/users/purse/:userId">
                 <UserPursePage />
               </Route>
               <Route path="/administration">
                 <Administration />
               </Route>
-              <Route path="/user/:bookId/mochila">
+              <Route path="/user/book/mochila/:bookId">
                 <BackPack />
               </Route>
               <Route path="/">

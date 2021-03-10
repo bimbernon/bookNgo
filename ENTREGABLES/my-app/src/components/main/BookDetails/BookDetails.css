@@ -31,6 +31,7 @@
   background-color: rgb(24, 212, 24);
   border: none;
   border-radius: 0.5rem;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
   font-weight: bold;
   height: 25px;
   margin-bottom: 1rem;

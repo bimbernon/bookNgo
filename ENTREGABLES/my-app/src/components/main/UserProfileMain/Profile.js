@@ -28,6 +28,9 @@ const Profile = () => {
     backgroundImage: `url("/images/users/${selectedUser.idusuario}.jpg")`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
+    border: '1px solid black',
+    borderRadius: '1rem',
+    boxShadow: '5px 5px 5px rgb(58, 55, 55',
     width: "7rem",
     height: "9rem",
   };

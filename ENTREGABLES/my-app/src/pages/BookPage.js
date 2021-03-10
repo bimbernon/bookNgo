@@ -6,7 +6,7 @@ function BookPage() {
   return (
     <div className="book-details-container">
       <BookDetails></BookDetails>
-      <Link to="/user/:bookId/mochila">
+      <Link to="/user/book/mochila/:bookId">
         <button className="book-details-reserve-button">RESERVAR</button>
       </Link>
     </div>

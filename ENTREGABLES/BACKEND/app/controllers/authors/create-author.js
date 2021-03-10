@@ -21,6 +21,7 @@ async function createAuthor(req, res) {
     }
 
     const { nombreautor, apel1, apel2 } = req.body;
+    console.log(req.body, "req.body");
 
     await schema.validateAsync(req.body);
 
@@ -29,18 +30,17 @@ async function createAuthor(req, res) {
       apel1,
       apel2,
     };
+    console.log(author, "author");
 
-    const noRepeatedAuthor = await authorRepository.findAuthorByNameAndLastName(
-      author
-    );
-    
-    if (noRepeatedAuthor) {
-      const error = new Error("Autor ya presente en base de datos.");
+    const checkRepeatedAuthor = await authorRepository.findAuthorByNameAndLastName(author);
+
+    if(checkRepeatedAuthor) {
+      const error = new Error('autor ya presente en base de datos');
       throw error;
     }
-    
+
+
     const authors = await authorRepository.addAuthor(author);
-    
 
     res.status(201).send({
       nombreautor,
