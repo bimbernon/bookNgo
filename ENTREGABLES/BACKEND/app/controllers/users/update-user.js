@@ -9,16 +9,13 @@ const {
   findUserById,
 } = require("../../repositories/users-repository");
 
-const schema = Joi.object().keys({
-  name: Joi.string().alphanum().min(3).max(20).optional(),
-  userProfileName: Joi.string().alphanum().min(3).max(20).optional(),
-  password: Joi.string().min(3).max(200).optional(),
-  lastName1: Joi.string().alphanum().min(3).max(20).optional(),
-  lastName2: Joi.string().alphanum().min(3).max(20).optional(),
-});
-
-// const schemaPassword = Joi.object().keys({
-//   password: Joi.string().min(3).max(200).required(),
+// const schema = Joi.object().keys({
+//   name: Joi.string().alphanum().min(3).max(20).optional(),
+//   userProfileName: Joi.string().alphanum().min(3).max(20).optional(),
+//   password: Joi.string().min(3).max(200).optional(),
+//   address: Joi.string().min(5).max(80).optional(),
+//   lastName1: Joi.string().alphanum().min(3).max(20).optional(),
+//   lastName2: Joi.string().alphanum().min(3).max(20).optional(),
 // });
 
 async function updateUserById(req, res) {
@@ -42,12 +39,13 @@ async function updateUserById(req, res) {
       throw error;
     }
 
-    await schema.validateAsync(req.body);
+    // await schema.validateAsync(req.body);
 
     //CAMBIAR SI CAMBIA EL SCRIPT A INGLES
     const formatedUser = {
       name: userById.nombreusuario,
       userProfileName: userById.nombreperfilusuario,
+      address: userById.direccion,
       password: userById.contraseña,
       lastName1: userById.apel1,
       lastName2: userById.apel2,

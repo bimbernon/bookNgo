@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Avatar } from "../Avatar/Avatar";
 import { Menu } from "../Menu/Menu";
 import { AuthContext } from "../../providers/AuthProvider";
+import { UserContext } from "../../providers/UserProvider";
 
 const NavigationMenu = () => {
   const Navigation = (props) => {
@@ -32,14 +33,14 @@ const NavigationMenu = () => {
   };
 
   const [token] = useContext(AuthContext);
+  const [selectedUser] = useContext(UserContext);
+
+  console.log(selectedUser);
 
   const navigation = token ? (
-    <Navigation imageId={``} activeMenu={false}></Navigation>
+    <Navigation imageId={selectedUser.idusuario} activeMenu={false} />
   ) : (
-    <Navigation
-      imageId={"../../../images/icons/user.png"}
-      activeMenu={true}
-    ></Navigation>
+    <Navigation imageId={0} activeMenu={true} />
   );
   return navigation;
 };

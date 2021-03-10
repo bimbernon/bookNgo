@@ -3,7 +3,6 @@
 const path = require("path");
 const fs = require("fs");
 const { uploadImage } = require("../../helpers/users/usefulMethods");
-const { findLastUserId } = require("../../repositories/users-repository");
 
 async function uploadImageUserProfile(req, res) {
   try {
@@ -35,7 +34,7 @@ async function uploadImageUserProfile(req, res) {
 
     await uploadImage({
       imageData: userImage.data,
-      destination: `../../../../my-app/public/${process.env.PATH_USER_IMAGE}`,
+      destination: `${__dirname}/../../../../my-app/public/${process.env.PATH_USER_IMAGE}`,
       width: 300,
       heigth: 300,
       codFoto: authentifiedUserId,

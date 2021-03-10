@@ -31,7 +31,7 @@ async function uploadImageBook(req, res) {
 
     await uploadImage({
       imageData: photoBook.data,
-      destination: process.env.PATH_BOOK_IMAGE,
+      destination: `${__dirname}/../../../../my-app/public/${process.env.PATH_BOOK_IMAGE}`,
       width: 300,
       height: 300,
       codFoto: lastBookId,

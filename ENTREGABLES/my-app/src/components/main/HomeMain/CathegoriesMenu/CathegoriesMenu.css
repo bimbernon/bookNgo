@@ -10,10 +10,16 @@
   overflow-x: auto;
   scroll-behavior: smooth;
 }
+
+.cathegories-menu::-webkit-scrollbar {
+  display: none;
+}
+
 .cathegories-menu > a {
   text-decoration: none;
   text-transform: uppercase;
 }
+
 .cathegories-container {
   border-radius: 0.5rem;
   margin-top: 2rem;

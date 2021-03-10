@@ -18,11 +18,17 @@ import { Administration } from "./pages/Administration";
 import { UserProfile } from "./pages/UserProfile";
 
 function App() {
+  const style = {
+    backgroundImage: `url("/background_photos/background_image.jpg")`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+  };
+
   return (
     <AuthProvider>
       <UserProvider>
         <Router>
-          <div className="cuerpo">
+          <div className="cuerpo" style={style}>
             <HeaderContainer />
             <Switch>
               <Route path="/cathegory/books/:nameCathegory">

@@ -45,11 +45,3 @@
   text-align: left;
   list-style: none;
 }
-
-.img-arrow {
-  background-image: url("../../../../images/icons/arrow.svg");
-  background-repeat: no-repeat;
-  margin: 0 15px 0 23px;
-  height: 60px;
-  width: 87px;
-}

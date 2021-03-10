@@ -14,7 +14,7 @@ async function findAllUsers() {
 async function findUserByEmail(email) {
   const pool = await database.getPool();
   const query = "SELECT * FROM usuario WHERE email = ?";
-  console.log(query, email)
+  console.log(query, email);
   const [users] = await pool.query(query, email);
 
   return users[0];
@@ -84,15 +84,23 @@ async function eraseUser(userId) {
 }
 
 async function updateUser(userId, updatedUser) {
-  const { name, userProfileName, password, lastName1, lastName2 } = updatedUser;
+  const {
+    name,
+    userProfileName,
+    address,
+    password,
+    lastName1,
+    lastName2,
+  } = updatedUser;
 
   const pool = await database.getPool();
   const updateQuery =
-    "UPDATE usuario SET nombreusuario = ?, nombreperfilusuario = ?, contraseña = ?, apel1 = ?, apel2 = ? WHERE idusuario = ?";
+    "UPDATE usuario SET nombreusuario = ?, nombreperfilusuario = ?, direccion = ?, contraseña = ?, apel1 = ?, apel2 = ? WHERE idusuario = ?";
 
   await pool.query(updateQuery, [
     name,
     userProfileName,
+    address,
     password,
     lastName1,
     lastName2,

@@ -2,11 +2,11 @@ html {
   min-height: 100%;
 }
 
-body {
-  background-image: url("./images/background_photos/background_image.jpg");
+/* body {
+  background-image: url("/background_photos/background_image.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
 .App {
   margin: 0 auto;

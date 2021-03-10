@@ -16,7 +16,7 @@ const Book = (props) => {
     <li className="book-item" style={style}>
       <Link to={`/books/id/${bookId}`}>
         <img
-          src={`/booksCovers/${bookId}.jpg`}
+          src={`/images/books/${bookId}.jpg`}
           className="book-cover"
           alt="bookCover"
         ></img>

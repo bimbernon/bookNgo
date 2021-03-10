@@ -54,7 +54,7 @@ router
   .put((req, res) => updateBookById(req, res));
 
 router
-  .route("/book/image/upload")
+  .route("/book/image/upload/:idBook")
   .all(validateAuth)
   .put((req, res) => uploadImageBook(req, res));
 module.exports = router;
