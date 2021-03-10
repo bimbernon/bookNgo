@@ -43,7 +43,7 @@ function App() {
               <Route path="/users/profile/:userId">
                 <UserProfile />
               </Route>
-              <Route path="/users/profile/modify/:userId">
+              <Route path="/user/profile/modify/:userId">
                 <ModifyUserProfile />
               </Route>
               <Route path="/reserves/:userId">

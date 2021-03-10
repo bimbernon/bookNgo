@@ -2,5 +2,9 @@ import React from "react";
 import { UserProfileForm } from "../components/main/UserProfile/UserProfileForm";
 
 export const ModifyUserProfile = () => {
-  return <UserProfileForm />;
+  return (
+    <div>
+      <UserProfileForm />
+    </div>
+  );
 };

@@ -24,24 +24,24 @@ const Profile = () => {
     <>
       <h1>{`Hola, ${userProfile.nombreusuario}`}</h1>
       <div className="user-info-item">
-        Nombre:
-        <p>{`${userProfile.nombreusuario} ${userProfile.apel1} ${userProfile.apel2}`}</p>
+        <h3>Nombre:</h3>
+        <p>{`  ${userProfile.nombreusuario} ${userProfile.apel1} ${userProfile.apel2}`}</p>
       </div>
       <div className="user-info-item">
-        Dirección:
+        <h3>Dirección:</h3>
         <p>{userProfile.direccion}</p>
       </div>
       <div className="user-info-item">
-        Nombre de perfil:
+        <h3>Nombre de perfil:</h3>
         <p>{userProfile.nombreperfilusuario}</p>
       </div>
       <div className="user-info-item">
-        Email:
+        <h3>Email:</h3>
         <p>{userProfile.email}</p>
-        <Link to={`/users/profile/modify/${userId}`}>
-          <button>MODIFICAR</button>
-        </Link>
       </div>
+      <Link to={`/user/profile/modify/modifyProfile/${userId}`}>
+        <button className="user-info-button">MODIFICAR</button>
+      </Link>
     </>
   );
 };
