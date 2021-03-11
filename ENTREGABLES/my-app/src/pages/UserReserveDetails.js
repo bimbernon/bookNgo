@@ -23,9 +23,9 @@ export const UserReserveDetails = () => {
       );
 
       if (reserveResponse.ok) {
-        const result = await reserveResponse.json();
-        setReserveInfo(result);
-        console.log(result);
+        const reserveData = await reserveResponse.json();
+        setReserveInfo(reserveData);
+        console.log(reserveData);
       } else {
         const errorMsg = await reserveResponse.json();
         setErrorMsg("Algo ha salido mal...");
