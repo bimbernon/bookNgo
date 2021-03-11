@@ -8,23 +8,30 @@ const schema = Joi.object().keys({
   idusuario: Joi.number().positive().required(),
   idlibro: Joi.number().positive().required(),
   fechareserva: Joi.required(),
-})
+});
+
+// /search/:idusuario/:idlibro/:fechareserva
 
 async function getReserveByUserDateBook(req, res) {
   try {
-    const { admin } = req.auth;
+    const { userId } = req.params.idusuario;
+    const authentifiedUserId = req.auth.idusuario;
 
-    if (admin !== 1) {
-      const error = new Error("No tienes permisos para realizar esta acción");
-      error.status = 403;
-      throw error;
+    if (req.auth.admin !== 1) {
+      if (authentifiedUserId !== parseInt(userId)) {
+        const error = new Error(
+          "No tienes permisos para realizar esta acción."
+        );
+        throw error;
+      }
     }
-    const { userId, bookId, reserveDate } = req.body;
+
+    const { idusuario, idlibro, fechareserva } = req.params;
 
     const reserveData = {
-      idusuario: req.body.idusuario,
-      idlibro: req.body.idlibro,
-      fechareserva: req.body.fechareserva,
+      idusuario: idusuario,
+      idlibro: idlibro,
+      fechareserva: fechareserva,
     };
 
     await schema.validateAsync(reserveData);

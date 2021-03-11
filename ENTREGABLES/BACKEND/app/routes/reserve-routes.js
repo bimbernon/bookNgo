@@ -25,7 +25,7 @@ router
   .get((req, res) => getAllReserves(req, res));
 
 router
-  .route("/search")
+  .route("/search/:idusuario/:idlibro/:fechareserva")
   .all(validateAuth)
   .get((req, res) => getReserveByUserDateBook(req, res));
 
