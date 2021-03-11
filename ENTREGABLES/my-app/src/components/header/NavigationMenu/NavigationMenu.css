@@ -20,10 +20,11 @@
 }
 
 .avatar-button {
-  border: none;
-  border-radius: 50%;
-  height: 0rem;
-  width: 0rem;
+  border: 0;
+  background: none;
+  border-radius: 50px;
+  padding: 0;
+  margin: 0 0.5rem;
 }
 
 .navigation-menu-item {

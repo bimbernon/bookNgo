@@ -4,9 +4,9 @@ const Avatar = (props) => {
   const { imageId } = props;
 
   const style = {
-    borderRadius: '50%',
-    width: "1rem",
-    height: "1rem",
+    borderRadius: "50%",
+    width: "2rem",
+    height: "2rem",
   };
 
   return (

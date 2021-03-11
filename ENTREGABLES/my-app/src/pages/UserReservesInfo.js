@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
-import { UserContext } from "../../providers/UserProvider";
-import { Reserve } from "../Reserve/Reserve";
-import "../Reserve/Reserve.css";
-
+import { AuthContext } from "../components/providers/AuthProvider";
+import { UserContext } from "../components/providers/UserProvider";
+import { Reserve } from "../components/main/Reserve/Reserve";
 
 export const UserReservesInfo = () => {
   const [token] = useContext(AuthContext);
@@ -23,6 +21,7 @@ export const UserReservesInfo = () => {
       if (reserveResponse.ok) {
         const result = await reserveResponse.json();
         setReserve(result);
+        console.log(result);
       } else {
         const errorMsg = await reserveResponse.json();
         setErrorMsg("Algo ha salido mal...");
@@ -33,12 +32,12 @@ export const UserReservesInfo = () => {
 
   const render = (reserves) => (
     <Reserve
-    reserveBook={reserves.titulo}
-    reserveDate={reserves.fechareserva}
-    reserveExpiration={reserves.fechaexpiracion}
-    rating={reserves.rating}
+      reserveBook={reserves.titulo}
+      reserveDate={reserves.fechareserva}
+      reserveExpiration={reserves.fechaexpiracion}
+      rating={reserves.rating}
     ></Reserve>
-    );
+  );
 
   return (
     <div className="reserves-container">
