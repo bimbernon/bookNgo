@@ -12,11 +12,11 @@ import { BookPage } from "./pages/BookPage";
 import { BackPack } from "./pages/Backpack";
 import { AuthProvider } from "./components/providers/AuthProvider";
 import { ModifyUserProfile } from "./pages/ModifyUserProfile";
-import { UserReservesPage } from "./pages/UserReservesPage";
 import { UserPursePage } from "./pages/UserPursePage";
 import { Administration } from "./pages/Administration";
 import { UserProfile } from "./pages/UserProfile";
-import { ReserveInfo } from "../src/pages/userReserveDetails";
+import { UserReservesInfo } from "./pages/UserReservesInfo";
+import { UserReserveDetails } from "./pages/UserReserveDetails";
 
 function App() {
   const style = {
@@ -54,10 +54,10 @@ function App() {
                 <ModifyUserProfile />
               </Route>
               <Route path="/reserves/:userId">
-                <UserReservesPage />
+                <UserReservesInfo />
               </Route>
-              <Route path="/reserves/:userId/info">
-                <ReserveInfo />
+              <Route path="/reserve/:userId/info">
+                <UserReserveDetails />
               </Route>
               <Route path="/users/purse/:userId">
                 <UserPursePage />

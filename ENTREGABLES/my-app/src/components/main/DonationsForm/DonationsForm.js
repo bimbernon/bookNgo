@@ -20,6 +20,7 @@ export const DonationsForm = () => {
         authorsName: authorsName,
       }),
     });
+
     if (resp.ok) {
       const respBody = await resp.json();
       setTitle("");
