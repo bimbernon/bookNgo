@@ -7,7 +7,7 @@ const authorRepository = require("../../repositories/author-repository");
 const schema = Joi.object().keys({
   nombreautor: Joi.string().min(1).max(20).required(),
   apel1: Joi.string().min(1).max(20).required(),
-  apel2: Joi.string().min(1).max(20),
+  apel2: Joi.string().min(1).max(20).optional(),
 });
 
 async function createAuthor(req, res) {
@@ -32,13 +32,14 @@ async function createAuthor(req, res) {
     };
     console.log(author, "author");
 
-    const checkRepeatedAuthor = await authorRepository.findAuthorByNameAndLastName(author);
+    const checkRepeatedAuthor = await authorRepository.findAuthorByNameAndLastName(
+      author
+    );
 
-    if(checkRepeatedAuthor) {
-      const error = new Error('autor ya presente en base de datos');
+    if (checkRepeatedAuthor.length !== 0) {
+      const error = new Error("autor ya presente en base de datos");
       throw error;
     }
-
 
     const authors = await authorRepository.addAuthor(author);
 

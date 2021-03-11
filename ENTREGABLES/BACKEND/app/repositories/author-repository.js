@@ -12,31 +12,28 @@ async function readAll() {
   return author;
 }
 
-async function findById (id) {
-    
-    const pool = await database.getPool();
-    const query = "select nombreautor, apel1, apel2 from autor where idautor=?";
-    const [ authorId ] = await pool.query(query, id);
+async function findById(id) {
+  const pool = await database.getPool();
+  const query = "select nombreautor, apel1, apel2 from autor where idautor=?";
+  const [authorId] = await pool.query(query, id);
 
   return authorId;
 }
 
-async function findByName (name) {
-
-    const pool = await database.getPool();
-    const query =
-      "select l.titulo, a.nombreautor, a.apel1, a.apel2 from libro l inner join autor a where a.nombreautor=?";
-    const [ authorName ] = await pool.query(query, name);
+async function findByName(name) {
+  const pool = await database.getPool();
+  const query =
+    "select l.titulo, a.nombreautor, a.apel1, a.apel2 from libro l inner join autor a where a.nombreautor=?";
+  const [authorName] = await pool.query(query, name);
 
   return authorName;
 }
 
-async function findAuthorByNameAndLastName (author) {
+async function findAuthorByNameAndLastName(author) {
   const { nombreautor, apel1, apel2 } = author;
-  console.log(author, 'authorRepository');
   const pool = await database.getPool();
-  const query = `SELECT * FROM autor WHERE nombreautor=${nombreautor} AND apel1=${apel1} AND apel2=${apel2}`;
-  const  [ insertedAuthor ] = await pool.query(query);
+  const query = `SELECT * FROM autor WHERE nombreautor=? AND apel1=? AND apel2=?`;
+  const [insertedAuthor] = await pool.query(query, [nombreautor, apel1, apel2]);
 
   return insertedAuthor;
   console.log(insertedAuthor);
@@ -55,15 +52,12 @@ async function addAuthor(author) {
   const pool = await database.getPool();
   const idAuthor = await findLastAuthorId();
 
-  const {
-    nombreautor,
-    apel1,
-    apel2
-  } = author;
+  const { nombreautor, apel1, apel2 } = author;
 
-  const query = "INSERT IGNORE INTO autor ( idautor, nombreautor, apel1, apel2 ) VALUES (?,?,?,?)";
-  
-    const [ authors ] = await pool.query(query, [
+  const query =
+    "INSERT IGNORE INTO autor ( idautor, nombreautor, apel1, apel2 ) VALUES (?,?,?,?)";
+
+  const [authors] = await pool.query(query, [
     idAuthor,
     nombreautor,
     apel1,
@@ -74,44 +68,30 @@ async function addAuthor(author) {
 }
 
 async function modifyAuthorById(idAuthor, updateAuthor) {
-  
-  const {
-    nombreautor,
-    apel1,
-    apel2,
-  } = updateAuthor;
+  const { nombreautor, apel1, apel2 } = updateAuthor;
 
   const pool = await database.getPool();
   const query = `UPDATE autor SET nombreautor=?, apel1=?, apel2=? WHERE idautor=?`;
-  
-  await pool.query(query, [
-    nombreautor,
-    apel1,
-    apel2,
-    idAuthor
-  ]);
+
+  await pool.query(query, [nombreautor, apel1, apel2, idAuthor]);
 
   return true;
 }
 
-async function deleteById (idAuthor) {
-    
-    const pool = await database.getPool();
-    const deleteQuery = `DELETE FROM autor WHERE idautor = ?`;
-    const [ deletedAuthor ] = await pool.query(deleteQuery, idAuthor);
+async function deleteById(idAuthor) {
+  const pool = await database.getPool();
+  const deleteQuery = `DELETE FROM autor WHERE idautor = ?`;
+  const [deletedAuthor] = await pool.query(deleteQuery, idAuthor);
 
-    return deletedAuthor;
+  return deletedAuthor;
 }
-
-
-
 
 module.exports = {
-    addAuthor,
-    deleteById,
-    findById,
-    findByName,
-    findAuthorByNameAndLastName,
-    readAll,
-    modifyAuthorById,
-}
+  addAuthor,
+  deleteById,
+  findById,
+  findByName,
+  findAuthorByNameAndLastName,
+  readAll,
+  modifyAuthorById,
+};
