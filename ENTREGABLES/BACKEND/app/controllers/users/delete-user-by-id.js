@@ -21,6 +21,7 @@ async function deleteUserById(req, res) {
         throw error;
       }
     }
+
     await schema.validateAsync(userId);
 
     const user = await findUserById(userId);

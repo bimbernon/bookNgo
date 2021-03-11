@@ -30,7 +30,7 @@ async function findCardById(id) {
 
 async function findCardByUserId(userId) {
   const pool = await database.getPool();
-  const query = `SELECT u.nombreusuario, u.apel1, u.apel2, t.numerotarjeta, t.fechaExpiracion FROM usuario u INNER JOIN tarjeta t ON u.idusuario = t.idusuario WHERE u.idusuario=?`;
+  const query = `SELECT t.idtarjeta, u.nombreusuario, u.apel1, u.apel2, t.numerotarjeta, t.fechaExpiracion FROM usuario u INNER JOIN tarjeta t ON u.idusuario = t.idusuario WHERE u.idusuario=?`;
   const [cardByUser] = await pool.query(query, userId);
 
   return cardByUser;

@@ -28,7 +28,6 @@ const LoginForm = (props) => {
       const result = await response.json();
       onSuccess(result);
       onSuccessUser(result);
-      console.log(result);
       setEmail("");
       setPassword("");
       setErrorMsg("");

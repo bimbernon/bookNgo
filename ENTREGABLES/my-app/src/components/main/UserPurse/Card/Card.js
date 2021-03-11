@@ -1,14 +1,10 @@
 import React from "react";
 
-
 export function Card(props) {
-    const {cardId, cardNumber, userId, expirationDate} = props;
+  const { cardId, cardNumber, userName, expirationDate } = props;
   return (
-    <option
-      cardId={cardId}
-      cardNumber={cardNumber}
-      userId={userId}
-      expirationDate={expirationDate}
-    ></option>
+    <li value={userName} cardId={cardId} expirationDate={expirationDate}>
+      {cardNumber}
+    </li>
   );
 }

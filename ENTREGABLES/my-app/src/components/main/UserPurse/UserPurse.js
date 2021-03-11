@@ -7,8 +7,8 @@ import "./UserPurse.css";
 
 export const UserPurse = () => {
   const [userMoney, setUserMoney] = useState([]);
-  console.log(userMoney, "usermoney");
   const [cards, setCard] = useState([]);
+  console.log(cards);
   const [errorMsg, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
@@ -25,11 +25,9 @@ export const UserPurse = () => {
           },
         }
       );
-      console.log(moneyResponse)
       if (moneyResponse.ok) {
         const moneyResponseData = await moneyResponse.json();
-        console.log(moneyResponseData);
-        setUserMoney(moneyResponseData);
+        setUserMoney(moneyResponseData.monedero);
       } else {
         const errorMsg = await moneyResponse.json();
         setErrorMsg("Algo ha salido mal...");
@@ -51,10 +49,9 @@ export const UserPurse = () => {
           },
         }
       );
-      console.log(userCardResponse);
       if (userCardResponse.ok) {
         const userCardData = await userCardResponse.json();
-        console.log();
+        console.log(userCardData);
         setCard(userCardData);
       } else {
         const errorMsg = await userCardResponse.json();
@@ -69,9 +66,11 @@ export const UserPurse = () => {
       Key={card.idtarjeta}
       cardId={card.idtarjeta}
       cardNumber={card.numeroTarjeta}
-      userId={card.idusuario}
-      expirationDate={card.fechaexpiracion}
-    ></Card>
+      userName={card.nombreusuario}
+      // expirationDate={card.fechaexpiracion}
+    >
+      {card.numeroTarjeta}
+    </Card>
   );
 
   // const Recharge = () => (
@@ -95,19 +94,21 @@ export const UserPurse = () => {
       <div className="money-container">
         <h2>Saldo</h2>
         <div className="money-display-container">
-          <h2 className="money-display">20k</h2>
+          <h2 className="money-display">{userMoney}</h2>
         </div>
       </div>
       <div className="payment-container">
         <h2>Selecciona método de pago</h2>
         <form className="card-select">
-          <select className="card-options">{cards.map(renderCards)}</select>
+          <ul className="card-options" onChange="">
+            {cards.map(renderCards)}
+          </ul>
         </form>
       </div>
       <div className="recharge-container">
-        <ul className="recharge-list">
+        {/* <ul className="recharge-list">
           <li></li>
-        </ul>
+        </ul> */}
         <Link to="">
           <button>Añadir tarjeta</button>
         </Link>

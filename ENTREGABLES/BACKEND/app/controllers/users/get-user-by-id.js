@@ -7,13 +7,18 @@ const schema = Joi.number().positive().required();
 
 async function getUserById(req, res) {
   try {
+    const { userId } = req.params;
+    const authentifiedUserId = req.auth.idusuario;
+
     if (req.auth.admin !== 1) {
-      const error = new Error("No tienes permisos para realizar esta acción");
-      error.status = 403;
-      throw error;
+      if (authentifiedUserId !== parseInt(userId)) {
+        const error = new Error(
+          "No tienes permisos para realizar esta acción."
+        );
+        throw error;
+      }
     }
 
-    const { userId } = req.params;
     schema.validateAsync(userId);
 
     const user = await findUserById(userId);

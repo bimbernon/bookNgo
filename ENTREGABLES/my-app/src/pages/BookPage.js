@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { BookDetails } from "../components/main/BookDetails/BookDetails";
 
 function BookPage() {
-  let {bookId} = useParams();
+  let { bookId } = useParams();
   return (
     <div className="book-details-container">
       <BookDetails></BookDetails>
