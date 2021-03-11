@@ -15,7 +15,7 @@ import { ModifyUserProfile } from "./pages/ModifyUserProfile";
 import { UserPursePage } from "./pages/UserPursePage";
 import { Administration } from "./pages/Administration";
 import { UserProfile } from "./pages/UserProfile";
-import { UserReservesInfo } from "./pages/UserReservesInfo";
+import { UserReserves } from "./pages/UserReserves";
 import { UserReserveDetails } from "./pages/UserReserveDetails";
 
 function App() {
@@ -54,9 +54,9 @@ function App() {
                 <ModifyUserProfile />
               </Route>
               <Route path="/reserves/:userId">
-                <UserReservesInfo />
+                <UserReserves />
               </Route>
-              <Route path="/reserve/:userId/info">
+              <Route path="/reserve/:idusuario/:idlibro/:fechareserva">
                 <UserReserveDetails />
               </Route>
               <Route path="/users/purse/:userId">

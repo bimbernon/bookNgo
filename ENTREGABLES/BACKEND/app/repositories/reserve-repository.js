@@ -14,7 +14,7 @@ async function readAll() {
 
 async function findReserveByUserId(userId) {
   const pool = await database.getPool();
-  const query = `select l.titulo, r.fechareserva, r.fechadevolucion, l.precio from libro l inner join reserva r on l.idlibro = r.idlibro where r.idusuario=?`;
+  const query = `select * from libro l inner join reserva r on l.idlibro = r.idlibro where r.idusuario=?`;
   const [reserveByUser] = await pool.query(query, userId);
 
   return reserveByUser;

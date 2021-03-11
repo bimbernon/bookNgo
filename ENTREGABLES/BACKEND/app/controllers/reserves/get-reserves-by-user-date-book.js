@@ -14,19 +14,17 @@ const schema = Joi.object().keys({
 
 async function getReserveByUserDateBook(req, res) {
   try {
-    const { userId } = req.params.idusuario;
+    const { idusuario, idlibro, fechareserva } = req.params;
     const authentifiedUserId = req.auth.idusuario;
 
     if (req.auth.admin !== 1) {
-      if (authentifiedUserId !== parseInt(userId)) {
+      if (authentifiedUserId !== parseInt(idusuario)) {
         const error = new Error(
           "No tienes permisos para realizar esta acción."
         );
         throw error;
       }
     }
-
-    const { idusuario, idlibro, fechareserva } = req.params;
 
     const reserveData = {
       idusuario: idusuario,

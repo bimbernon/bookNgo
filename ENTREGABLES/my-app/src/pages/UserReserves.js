@@ -3,7 +3,7 @@ import { AuthContext } from "../components/providers/AuthProvider";
 import { UserContext } from "../components/providers/UserProvider";
 import { Reserve } from "../components/main/Reserve/Reserve";
 
-export const UserReservesInfo = () => {
+export const UserReserves = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [reserve, setReserve] = useState([]);
@@ -21,6 +21,7 @@ export const UserReservesInfo = () => {
       if (reserveResponse.ok) {
         const result = await reserveResponse.json();
         setReserve(result);
+        console.log(result);
       } else {
         const errorMsg = await reserveResponse.json();
         setErrorMsg("Algo ha salido mal...");
@@ -31,6 +32,7 @@ export const UserReservesInfo = () => {
 
   const render = (reserves) => (
     <Reserve
+      bookId={reserves.idlibro}
       reserveBook={reserves.titulo}
       reserveDate={reserves.fechareserva}
       reserveExpiration={reserves.fechaexpiracion}

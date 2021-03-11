@@ -1,18 +1,19 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Reserve } from "../components/main/Reserve/Reserve";
 import { AuthContext } from "../components/providers/AuthProvider";
-import { UserContext } from "../components/providers/UserProvider";
+import { useParams }  from "react-router-dom";
 
 export const UserReserveDetails = () => {
   const [token] = useContext(AuthContext);
-  const [selectedUser] = useContext(UserContext);
   const [reserveInfo, setReserveInfo] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
+  let { idusuario, idlibro, fechareserva } = useParams();
+  console.log(idusuario, idlibro, fechareserva);
 
   useEffect(() => {
     async function getReservesByUserId() {
       const reserveResponse = await fetch(
-        `http://localhost:3080/api/v1/reserves/search`,
+        `http://localhost:3080/api/v1/reserves/search/${idusuario}/${idlibro}/${fechareserva}`,
         {
           method: "GET",
           headers: {
@@ -24,8 +25,8 @@ export const UserReserveDetails = () => {
 
       if (reserveResponse.ok) {
         const reserveData = await reserveResponse.json();
-        setReserveInfo(reserveData);
         console.log(reserveData);
+        setReserveInfo(reserveData);
       } else {
         const errorMsg = await reserveResponse.json();
         setErrorMsg("Algo ha salido mal...");
@@ -36,8 +37,13 @@ export const UserReserveDetails = () => {
 
   return (
     <div>
-      <Reserve>
-        <h1>Detalle de la reserva</h1>
+      <h1>Detalle de la reserva</h1>
+      <Reserve
+        reserveBook={reserveInfo.titulo}
+        reserveDate={reserveInfo.fechareserva}
+        reserveExpiration={reserveInfo.reserveExpiracion}
+        bookId={reserveInfo.idlibro}
+      >
       </Reserve>
     </div>
   );
