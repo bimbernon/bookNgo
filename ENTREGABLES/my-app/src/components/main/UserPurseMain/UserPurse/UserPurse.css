@@ -1,0 +1,62 @@
+@import "../../../../index.css";
+
+.purse-container {
+  text-align: center;
+  background-color: var(--white-background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  padding: 0.9rem 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 1rem;
+}
+
+.purse-title {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.money-container {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  margin: 1rem 2rem;
+}
+
+.money-display-container {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  border-radius: 0.5rem;
+  text-align: center;
+  height: 3rem;
+  width: 5rem;
+  background-color: var(--white-background);
+  margin-left: 1rem;
+}
+
+.money-display {
+  align-self: center;
+}
+
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  margin: 1rem 2rem;
+}
+
+.card-options {
+  height: 2rem;
+  width: 20rem;
+  background-color: var(--white-background);
+  border-radius: 0.5rem;
+}
+
+.recharge-list {
+  list-style: none;
+  background-color: white;
+}

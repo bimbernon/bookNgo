@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Reserve } from "../components/main/Reserve/Reserve";
 import { AuthContext } from "../components/providers/AuthProvider";
-import { useParams }  from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const UserReserveDetails = () => {
   const [token] = useContext(AuthContext);
@@ -35,16 +35,17 @@ export const UserReserveDetails = () => {
     getReservesByUserId();
   }, []);
 
+  console.log(reserveInfo);
+
   return (
-    <div>
+    <div className="reserve-details-container">
       <h1>Detalle de la reserva</h1>
       <Reserve
         reserveBook={reserveInfo.titulo}
         reserveDate={reserveInfo.fechareserva}
         reserveExpiration={reserveInfo.reserveExpiracion}
         bookId={reserveInfo.idlibro}
-      >
-      </Reserve>
+      ></Reserve>
     </div>
   );
 };

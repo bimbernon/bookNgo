@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
-import { Card } from "../UserPurse/Card/Card";
-import "./UserPurse.css";
+import { Card } from "../UserPurseMain/Card/Card";
+import "./AddCardForm.css";
 
-export const UserPurse = () => {
+const AddCardForm = () => {
   const [userMoney, setUserMoney] = useState([]);
   const [cards, setCard] = useState([]);
-  console.log(cards);
   const [errorMsg, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
@@ -61,71 +59,54 @@ export const UserPurse = () => {
     getUserCard();
   }, []);
 
+  console.log(cards);
+
   const renderCards = (card) => (
     <Card
       Key={card.idtarjeta}
       cardId={card.idtarjeta}
-      cardNumber={card.numeroTarjeta}
-      userName={card.nombreusuario}
-      // expirationDate={card.fechaexpiracion}
-    >
-      {card.numeroTarjeta}
-    </Card>
+      cardNumber={card.numerotarjeta}
+    />
   );
-
-  // const Recharge = () => (
-  //   <div>
-  //     <button type="submit" value="1e">
-  //       1e
-  //     </button>
-  //     <button type="submit" value="3e">
-  //       3e
-  //     </button>
-  //   </div>
-  // );
-
-  // const renderRecharge = (recharge) => (
-  //   <Recharge key={recharge.idusuario} recharge={recharge.monedero}></Recharge>
-  // );
-
   return (
-    <div className="purse-container">
-      <h1 className="purse-title">Monedero</h1>
-      <div className="money-container">
-        <h2>Saldo</h2>
-        <div className="money-display-container">
-          <h2 className="money-display">{userMoney}</h2>
-        </div>
-      </div>
-      <div className="payment-container">
-        <h2>Selecciona método de pago</h2>
-        <form className="card-select">
-          <ul className="card-options" onChange="">
-            {cards.map(renderCards)}
-          </ul>
+    <div className="add-card-form-container">
+      <form className="add-card-selector">
+        <select className="add-card-options" onChange="">
+          {cards.map(renderCards)}
+        </select>
+
+        {/* LA IDEA ES METER UN HANDLE EN EL SELECT PARA CAMBIAR LOS DATOS DE LA TARJETA
+    O METER UNA TARJETA NUEVA CUBRIENDO LOS CAMPOS, QUE VALGA PARA LOS DOS */}
+      </form>
+      <div>
+        <h1 className="add-card-form-title">Añade tu tarjeta</h1>
+
+        <form className="add-card-form">
+          <div className="add-card-form-item">
+            <input type="text" placeholder="Nombre del titular" />
+          </div>
+          <div className="add-card-form-item">
+            <input type="text" placeholder="Numero de tarjeta" />
+          </div>
+          <div className="add-card-form-item">
+            <input type="text" placeholder="Fecha de caducidad" />
+          </div>
+          <div className="add-card-form-item">
+            <input type="text" placeholder="CSV" />
+          </div>
+          <div className="add-card-button-container">
+            <button className="add-card-submit-button" type="submit">
+              <img
+                className="add-card-button-logo"
+                src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png"
+                alt="logo"
+              />
+            </button>
+          </div>
         </form>
       </div>
-      <div className="recharge-container">
-        {/* <ul className="recharge-list">
-          <li></li>
-        </ul> */}
-        <Link to="">
-          <button>Añadir tarjeta</button>
-        </Link>
-      </div>
-      {/* {errorMsg && (
-        <div
-          style={{
-            color: "red",
-            minHeight: "1.5em",
-            textAlign: "center",
-            marginTop: "20px",
-          }}
-        >
-          {" "}
-          {errorMsg}
-        </div>
-      )} */}
     </div>
   );
 };
+
+export { AddCardForm };

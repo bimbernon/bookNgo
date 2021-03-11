@@ -3,24 +3,22 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../providers/UserProvider";
 import "./Reserve.css";
 
-export const Reserve = (props) => {
+const Reserve = (props) => {
   const [selectedUser] = useContext(UserContext);
 
-  const { reserveBook, reserveDate, reserveExpiration, rating, bookId } = props;
-  console.log(reserveBook)
+  const { reservedBookTitle, reserveDate, reserveExpiration, bookId } = props;
 
   return (
-    <Link to={`/reserve/${selectedUser.idusuario}/${bookId}/${reserveDate}`}>
-      <li
-        className="reserve-li-item"
-        reserveBook={reserveBook}
-        reserveDate={reserveDate}
-        reserveExpiration={reserveExpiration}
-        rating={rating}
-        bookId={bookId}
-      >
-        <h2>{reserveBook}</h2>
-      </li>
-    </Link>
+    <li className="reserve-li-item" bookId={bookId}>
+      <Link to={`/reserve/${selectedUser.idusuario}/${bookId}/${reserveDate}`}>
+        <div className="reserve-info">
+          <h2 className="reserve-book-title">{reservedBookTitle}</h2>
+          <p className="reserve-book-date">{reserveDate} </p>
+          <p className="reserve-book-expiration">{reserveExpiration} </p>
+        </div>
+      </Link>
+    </li>
   );
 };
+
+export { Reserve };

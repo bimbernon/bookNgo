@@ -1,0 +1,65 @@
+@import url("../../../index.css");
+
+.add-card-form-container {
+  background-color: var(--white-background);
+  border-radius: 20px;
+  height: 530px;
+  margin: 20px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-card-form-title {
+  text-align: center;
+}
+.add-card-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-card-form-item {
+  display: flex;
+  justify-content: center;
+}
+
+.add-card-form-item > input {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
+  height: 30px;
+  margin: 20px 20px 0px 20px;
+  width: 300px;
+}
+
+.add-card-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.add-card-button-logo {
+  padding: 0;
+  margin: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.add-card-submit-button {
+  border: 0;
+  background: none;
+  border-radius: 50px;
+  padding: 0;
+  margin: 0.3rem;
+}
+
+.add-card-options {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
+  height: 30px;
+  margin: 20px 20px 0px 20px;
+  width: 300px;
+  padding-left: 0.5rem;
+}

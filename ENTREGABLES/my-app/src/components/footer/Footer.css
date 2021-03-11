@@ -8,10 +8,10 @@
 }
 
 .footer-link {
+  color: black;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  text-decoration: none;
-  color: black;
   margin-bottom: 5px;
+  text-decoration: none;
 }

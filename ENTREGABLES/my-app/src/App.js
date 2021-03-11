@@ -1,22 +1,26 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import { UserProvider } from "./components/providers/UserProvider";
+import { AuthProvider } from "./components/providers/AuthProvider";
+
 import { HeaderContainer } from "./components/header/HeaderContainer/HeaderContainer";
 import { Footer } from "../src/components/footer/Footer";
+
 import { Home } from "./pages/Home";
 import { Donations } from "./pages/Donations";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { BooksByCathegory } from "./pages/BooksByCathegory";
-import { UserProvider } from "./components/providers/UserProvider";
 import { BookPage } from "./pages/BookPage";
 import { BackPack } from "./pages/Backpack";
-import { AuthProvider } from "./components/providers/AuthProvider";
 import { ModifyUserProfile } from "./pages/ModifyUserProfile";
 import { UserPursePage } from "./pages/UserPursePage";
 import { Administration } from "./pages/Administration";
 import { UserProfile } from "./pages/UserProfile";
 import { UserReserves } from "./pages/UserReserves";
 import { UserReserveDetails } from "./pages/UserReserveDetails";
+import { UpdateCards } from "./pages/UpdateCards";
 
 function App() {
   const style = {
@@ -62,8 +66,8 @@ function App() {
               <Route path="/users/purse/:userId">
                 <UserPursePage />
               </Route>
-              <Route path="/users/purse/:userId">
-                <UserPursePage />
+              <Route path="/cards">
+                <UpdateCards />
               </Route>
               <Route path="/administration">
                 <Administration />

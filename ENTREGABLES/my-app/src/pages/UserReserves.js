@@ -8,7 +8,6 @@ export const UserReserves = () => {
   const [selectedUser] = useContext(UserContext);
   const [reserve, setReserve] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
-  console.log(reserve);
 
   useEffect(() => {
     async function getReservesByUserId() {
@@ -19,9 +18,8 @@ export const UserReserves = () => {
         }
       );
       if (reserveResponse.ok) {
-        const result = await reserveResponse.json();
-        setReserve(result);
-        console.log(result);
+        const allReservesData = await reserveResponse.json();
+        setReserve(allReservesData);
       } else {
         const errorMsg = await reserveResponse.json();
         setErrorMsg("Algo ha salido mal...");
@@ -30,21 +28,15 @@ export const UserReserves = () => {
     getReservesByUserId();
   }, []);
 
-  const render = (reserves) => (
-    <Reserve
-      bookId={reserves.idlibro}
-      reserveBook={reserves.titulo}
-      reserveDate={reserves.fechareserva}
-      reserveExpiration={reserves.fechaexpiracion}
-      rating={reserves.rating}
-    ></Reserve>
+  const reservesRender = (reserves) => (
+    <Reserve bookId={reserves.idlibro} reservedBookTitle={reserves.titulo} />
   );
 
   return (
     <div className="reserves-container">
       <h1 className="reserves-title">Mis reservas</h1>
       <div className="reserve-item-list-container">
-        <ul className="reserve-item-list">{reserve.map(render)}</ul>
+        <ul className="reserve-item-list">{reserve.map(reservesRender)}</ul>
       </div>
       {errorMsg && (
         <div
