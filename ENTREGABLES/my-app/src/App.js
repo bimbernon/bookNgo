@@ -62,6 +62,9 @@ function App() {
               <Route path="/users/purse/:userId">
                 <UserPursePage />
               </Route>
+              <Route path="/users/purse/:userId">
+                <UserPursePage />
+              </Route>
               <Route path="/administration">
                 <Administration />
               </Route>

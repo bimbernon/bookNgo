@@ -7,7 +7,6 @@ export const Reserve = (props) => {
   const [selectedUser] = useContext(UserContext);
 
   const { reserveBook, reserveDate, reserveExpiration, rating } = props;
-  console.log(props);
 
   return (
     <Link to={`/reserve/${selectedUser.idusuario}/info`}>

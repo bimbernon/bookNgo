@@ -8,15 +8,12 @@ export const BackPackItem = () => {
   const [book, setBook] = useState({});
   const [token] = useContext(AuthContext);
   let { bookId } = useParams();
-  console.log(bookId, "bookId del params");
-  console.log(book, "book");
 
   useEffect(() => {
     async function getBookById() {
       const response = await fetch(
         `http://localhost:3080/api/v1/books/id/${bookId}`
       );
-      console.log(response, "response");
       if (response.ok) {
         const bookById = await response.json();
         setBook(bookById);
