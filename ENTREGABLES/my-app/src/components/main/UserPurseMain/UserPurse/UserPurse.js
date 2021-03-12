@@ -70,20 +70,15 @@ export const UserPurse = () => {
     />
   );
 
-  // const Recharge = () => (
-  //   <div>
-  //     <button type="submit" value="1e">
-  //       1e
-  //     </button>
-  //     <button type="submit" value="3e">
-  //       3e
-  //     </button>
-  //   </div>
-  // );
-
   // const renderRecharge = (recharge) => (
   //   <Recharge key={recharge.idusuario} recharge={recharge.monedero}></Recharge>
   // );
+  const style = {
+    padding: "0",
+    margin: "0",
+    width: "1.9rem",
+    height: "1.9rem",
+  };
 
   return (
     <div className="purse-container">
@@ -92,6 +87,52 @@ export const UserPurse = () => {
         <h2>Saldo</h2>
         <div className="money-display-container">
           <h2 className="money-display">{userMoney}</h2>
+        </div>
+      </div>
+      <div className="recharge-container">
+        <div className="recharge-button-container">
+          <button type="submit" value="1 B" className="recharge-button">
+            <p className="recharge-button-value">1</p>
+            <img
+              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              alt="logo"
+              className="logo-img"
+              style={style}
+            ></img>
+          </button>
+        </div>
+        <div className="recharge-button-container">
+          <button type="submit" value="5 B" className="recharge-button">
+            <p className="recharge-button-value">5</p>
+            <img
+              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              alt="logo"
+              className="logo-img"
+              style={style}
+            ></img>
+          </button>
+        </div>
+        <div className="recharge-button-container">
+          <button type="submit" value="10 B" className="recharge-button">
+            <p className="recharge-button-value">10</p>
+            <img
+              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              alt="logo"
+              className="logo-img"
+              style={style}
+            ></img>
+          </button>
+        </div>
+        <div className="recharge-button-container">
+          <button type="submit" value="20 B" className="recharge-button">
+            <p className="recharge-button-value">20</p>
+            <img
+              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              alt="logo"
+              className="logo-img"
+              style={style}
+            ></img>
+          </button>
         </div>
       </div>
       <div className="payment-container">
