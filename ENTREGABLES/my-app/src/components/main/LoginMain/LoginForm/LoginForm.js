@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./LoginForm.css";
 
 const LoginForm = (props) => {
@@ -60,26 +61,15 @@ const LoginForm = (props) => {
             onChange={handleChangePassword}
           />
         </div>
-        {errorMsg && (
-          <div
-            style={{
-              color: "red",
-              minHeight: "1.5em",
-              textAlign: "center",
-              marginTop: "20px",
-            }}
-          >
-            {" "}
-            {errorMsg}
-          </div>
-        )}
+        <div className="register-advice-container">
+          <p className="advice-text">¿Todavía no eres booker?</p>
+          <Link to="/users/register" className="link-to-register">
+            ¡Regístrate ya!
+          </Link>
+        </div>
         <div className="login-button-container">
           <button className="login-submit-button" type="submit">
-            <img
-              className="login-button-logo"
-              src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png"
-              alt="logo"
-            />
+            INICIAR SESION
           </button>
         </div>
       </form>

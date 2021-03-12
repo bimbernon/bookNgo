@@ -88,7 +88,7 @@ export const UserPurse = () => {
       }
     }
     getUserCard();
-  }, []);
+  }, [cards]);
 
   const renderCards = (card) => (
     <Card

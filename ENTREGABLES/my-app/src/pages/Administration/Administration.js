@@ -1,9 +1,5 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AdministrationUsersPage } from "./AdministrationUsersPage";
-import { AdministrationBooksPage } from "./AdministrationBooksPage";
-import { AdministrationDonationsPage } from "./AdministrationDonationsPage";
-import { AdministrationInvoicesPage } from "./AdministrationInvoicesPage";
 import { AuthContext } from "../../components/providers/AuthProvider";
 
 export const Administration = () => {

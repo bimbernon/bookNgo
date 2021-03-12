@@ -42,6 +42,7 @@ export const InsertReserve = (props) => {
     <form
       onSubmit={insertReserveEffect}
       action={`/reserves/${selectedUser.idusuario}`}
+      className="reserve-form"
     >
       <button
         className="book-details-reserve-button"

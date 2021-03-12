@@ -15,6 +15,7 @@ import { BooksByCathegory } from "./pages/BooksByCathegory";
 import { BookPage } from "./pages/BookPage";
 import { BackPack } from "./pages/Backpack";
 import { ModifyUserProfile } from "./pages/ModifyUserProfile";
+import { ModifyUserPassword } from "./pages/ModifyUserPassword";
 import { UserPursePage } from "./pages/UserPursePage";
 import { Administration } from "./pages/Administration/Administration";
 import { UserProfile } from "./pages/UserProfile";
@@ -57,6 +58,9 @@ function App() {
               </Route>
               <Route path="/user/profile/modify/:userId">
                 <ModifyUserProfile />
+              </Route>
+              <Route path="/user/updatePassword/:userId">
+                <ModifyUserPassword />
               </Route>
               <Route path="/reserves/:userId">
                 <UserReserves />

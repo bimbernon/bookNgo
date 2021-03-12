@@ -39,7 +39,7 @@ export const BackPackItem = () => {
         ></Book>
       </div>
       <div>
-        <InsertReserve bookId={bookId}/>
+        <InsertReserve bookId={bookId} />
       </div>
     </div>
   ) : (
@@ -57,7 +57,7 @@ export const BackPackItem = () => {
         <h1
           style={{
             color: "red",
-            minHeight: "1.5em",
+            minHeight: "1rem",
             textAlign: "center",
             marginTop: "20px",
           }}

@@ -113,12 +113,8 @@ export const RegisterForm = () => {
           ></input>
         </div>
         <div className="register-button-container">
-          <button className="register-form-submit-button" type="submit">
-            <img
-              className="register-button-logo"
-              src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png"
-              alt="logo"
-            />
+          <button className="register-submit-button" type="submit">
+            INICIAR SESION
           </button>
         </div>
       </form>

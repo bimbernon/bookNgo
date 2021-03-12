@@ -1,3 +1,5 @@
+@import url("../../../../index.css");
+
 .login-container {
   background-color: var(--white-background);
   border-radius: 20px;
@@ -25,23 +27,31 @@
   width: 300px;
 }
 
-.login-button-logo {
-  padding: 0;
-  margin: 0;
-  width: 1.4rem;
-  height: 1.4rem;
-}
-
-.login-submit-button {
-  border: 0;
-  background: none;
-  border-radius: 50px;
-  padding: 0;
-  margin: 0 0.5rem;
-}
-
 .login-button-container {
   display: flex;
   justify-content: center;
   margin-top: 2.5rem;
+}
+
+.login-submit-button {
+  font-family: "Comfortaa";
+  padding: 0.5rem 0.6rem;
+  border: 0;
+  border-radius: 50px;
+  color: white;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
+  background-color: var(--title-brown-color);
+}
+
+.register-advice-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-top: 4rem;
+}
+
+.link-to-register {
+  font-weight: bolder;
+  text-transform: uppercase;
 }

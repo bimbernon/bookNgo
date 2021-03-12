@@ -39,24 +39,33 @@ const Profile = () => {
       <h1>{`Hola, ${userProfile.nombreusuario}`}</h1>
       <div className="user-image-profile" style={sytle} alt="user"></div>
       <div className="user-info-item">
-        <h3>Nombre:</h3>
+        <h3 className="user-item-title">Nombre:</h3>
         <p>{`  ${userProfile.nombreusuario} ${userProfile.apel1} ${userProfile.apel2}`}</p>
       </div>
       <div className="user-info-item">
-        <h3>Dirección:</h3>
+        <h3 className="user-item-title">Dirección:</h3>
         <p>{userProfile.direccion}</p>
       </div>
       <div className="user-info-item">
-        <h3>Nombre de perfil:</h3>
+        <h3 className="user-item-title">Nombre de perfil:</h3>
         <p>{userProfile.nombreperfilusuario}</p>
       </div>
       <div className="user-info-item">
-        <h3>Email:</h3>
+        <h3 className="user-item-title">Email:</h3>
         <p>{userProfile.email}</p>
       </div>
-      <Link to={`/user/profile/modify/modifyProfile/${selectedUser.idusuario}`}>
-        <button className="user-info-button">MODIFICAR</button>
-      </Link>
+      <div className="modify-buttons-container">
+        <Link
+          to={`/user/profile/modify/modifyProfile/${selectedUser.idusuario}`}
+        >
+          <button className="modify-user-info-button">MODIFICAR PERFIL</button>
+        </Link>
+        <Link to={`/user/profile/modify/${selectedUser.idusuario}`}>
+          <button className="modify-user-password-button">
+            CAMBIAR CONTRASEÑA
+          </button>
+        </Link>
+      </div>
     </>
   );
 };

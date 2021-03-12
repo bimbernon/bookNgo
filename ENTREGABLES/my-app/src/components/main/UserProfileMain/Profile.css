@@ -7,7 +7,8 @@
   display: flex;
   flex-direction: column;
   margin: 1rem auto;
-  max-width: 90vw;
+  max-width: 95vw;
+  min-height: 47rem;
 }
 
 .user-profile-container > h1 {
@@ -22,6 +23,10 @@
   flex-direction: column;
 }
 
+.user-item-title {
+  margin: 0.5rem 1rem 0 0;
+}
+
 .user-info-item > p {
   background-color: white;
   border: none;
@@ -30,17 +35,22 @@
   height: 50px;
   line-height: 3rem;
   text-align: center;
-  width: 300px;
+  width: 20.5rem;
 }
 
-.user-info-button {
-  margin: 1rem 0;
-  text-align: center;
-  background-color: rgb(24, 212, 24);
-  border: none;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  height: 25px;
-  width: 125px;
+.modify-buttons-container {
+  margin-top: 0.5rem;
+}
+
+.modify-user-info-button,
+.modify-user-password-button {
+  font-family: "Comfortaa";
+  padding: 0.5rem 0.3rem;
+  border: 0;
+  border-radius: 50px;
+  margin-top: 0.5rem;
+  margin: 0 0.3rem;
+  color: white;
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
+  background-color: var(--title-brown-color);
 }
