@@ -9,7 +9,7 @@ const schema = Joi.object().keys({
     .length(16)
     .pattern(/^[0-9]+$/)
     .required(),
-  fechaExpiracion: Joi.required(),
+  fechaExpiracion: Joi.string().required(),
   csv: Joi.string()
     .length(3)
     .pattern(/^[0-9]+$/),
@@ -23,7 +23,6 @@ async function createCard(req, res) {
     // }
 
     const userId = req.auth.idusuario;
-    console.log(userId);
 
     const { numerotarjeta, fechaExpiracion, csv } = req.body;
 

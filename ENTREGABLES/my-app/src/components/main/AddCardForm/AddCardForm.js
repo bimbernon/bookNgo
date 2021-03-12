@@ -6,7 +6,7 @@ import "./AddCardForm.css";
 
 const AddCardForm = () => {
   const [userMoney, setUserMoney] = useState([]);
-  const [cards, setCard] = useState([]);
+  const [cards, setCards] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
@@ -50,7 +50,7 @@ const AddCardForm = () => {
       if (userCardResponse.ok) {
         const userCardData = await userCardResponse.json();
         console.log(userCardData);
-        setCard(userCardData);
+        setCards(userCardData);
       } else {
         const errorMsg = await userCardResponse.json();
         setErrorMsg("Algo ha salido mal...");
@@ -59,31 +59,74 @@ const AddCardForm = () => {
     getUserCard();
   }, []);
 
-  // useEffect(() => {
-  //   async function deleteCardById() {
-  //     const deleteCardResponse = await fetch(
-  //       `http://localhost:3080/api/v1/cards/delete/${}`,
-  //       {
-  //         method: "DELETE",
-  //         headers: {
-  //           "Content-type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     if (deleteCardResponse.ok) {
-  //       const userCardData = await deleteCardResponse.json();
-  //       console.log(userCardData);
-  //       setCard(userCardData);
-  //     } else {
-  //       const errorMsg = await deleteCardResponse.json();
-  //       setErrorMsg("Algo ha salido mal...");
-  //     }
-  //   }
-  //   deleteCardById();
-  // }, []);
+  const [currentCard, setCurrentCard] = useState({});
+  console.log(currentCard);
 
-  console.log(cards);
+  const handleSelectedCard = (e) => {
+    const selectedCard = cards.find((card) => {
+      return parseInt(card.numerotarjeta) === parseInt(e.target.value);
+    });
+    console.log(selectedCard);
+    setCurrentCard(selectedCard);
+  };
+
+  console.log(currentCard);
+  const deleteCardById = async (e) => {
+    e.preventDefault();
+    console.log("hola");
+
+    if (cards.length > 0) {
+      setCurrentCard(cards[0]);
+    }
+
+    const deleteCardResponse = await fetch(
+      `http://localhost:3080/api/v1/cards/delete/${currentCard.idtarjeta}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (deleteCardResponse.ok) {
+      await deleteCardResponse.json();
+    } else {
+      const errorMsg = await deleteCardResponse.json();
+      setErrorMsg("Algo ha salido mal...");
+    }
+  };
+
+  const [cardNumber, setCardNumber] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
+  const [csv, setCsv] = useState("");
+
+  const handleChangeCardNumber = (e) => setCardNumber(e.target.value);
+  const handleChangeExpirationDate = (e) => setExpirationDate(e.target.value);
+  const handleChangeCsv = (e) => setCsv(e.target.value);
+
+  const handleSubmitCard = async (e) => {
+    e.preventDefault();
+
+    const resp = await fetch("http://localhost:3080/api/v1/cards", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        numerotarjeta: cardNumber,
+        fechaExpiracion: expirationDate,
+        csv: csv,
+      }),
+    });
+    if (resp.ok) {
+      await resp.json();
+      setCardNumber("");
+      setExpirationDate("");
+      setCsv("");
+    }
+  };
 
   const renderCards = (card) => (
     <Card
@@ -93,36 +136,41 @@ const AddCardForm = () => {
     />
   );
 
-  // const handleDeleteCard = (e) => ();
-
   return (
     <div className="add-card-form-container">
-      <form className="add-card-selector">
-        <select className="add-card-options" onChange="">
+      <form className="add-card-selector" onSubmit={deleteCardById}>
+        <select className="add-card-options" onChange={handleSelectedCard}>
           {cards.map(renderCards)}
         </select>
-        {/* <button type="submit" onSubmit={handleDeleteCard}>
-          BORRAR
-        </button> */}
-
-        {/* LA IDEA ES METER UN HANDLE EN EL SELECT PARA CAMBIAR LOS DATOS DE LA TARJETA
-    O METER UNA TARJETA NUEVA CUBRIENDO LOS CAMPOS, QUE VALGA PARA LOS DOS */}
+        <button type="submit">BORRAR</button>
       </form>
       <div>
         <h1 className="add-card-form-title">Añade tu tarjeta</h1>
 
-        <form className="add-card-form">
+        <form className="add-card-form" onSubmit={handleSubmitCard}>
           <div className="add-card-form-item">
-            <input type="text" placeholder="Nombre del titular" />
+            <input
+              type="text"
+              placeholder="Numero de tarjeta"
+              value={cardNumber}
+              onChange={handleChangeCardNumber}
+            />
           </div>
           <div className="add-card-form-item">
-            <input type="text" placeholder="Numero de tarjeta" />
+            <input
+              type="text"
+              placeholder="Fecha de caducidad"
+              value={expirationDate}
+              onChange={handleChangeExpirationDate}
+            />
           </div>
           <div className="add-card-form-item">
-            <input type="text" placeholder="Fecha de caducidad" />
-          </div>
-          <div className="add-card-form-item">
-            <input type="text" placeholder="CSV" />
+            <input
+              type="text"
+              placeholder="CSV"
+              value={csv}
+              onChange={handleChangeCsv}
+            />
           </div>
           <div className="add-card-button-container">
             <button className="add-card-submit-button" type="submit">

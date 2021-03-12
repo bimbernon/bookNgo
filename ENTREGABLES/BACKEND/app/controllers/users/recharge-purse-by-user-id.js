@@ -22,7 +22,7 @@ async function rechargeUserPurse(req, res) {
     const { ammount } = req.body;
 
     await rechargePurse(userId, parseInt(ammount));
-    res.send(ammount);
+    res.send({ammount});
   } catch (err) {
     res.status(400).send({ error: err.message });
   }

@@ -37,7 +37,10 @@ export const UserPurse = () => {
     getUserInfo();
   }, [userMoney]);
 
-  async function rechargePurse() {
+  const rechargePurse = async (e) => {
+    e.preventDefault();
+    console.log("llego");
+    console.log(`${selectedUser.idusuario}`);
     const userRechargeResponse = await fetch(
       `http://localhost:3080/api/v1/users/purse/recharge/${selectedUser.idusuario}`,
       {
@@ -52,15 +55,16 @@ export const UserPurse = () => {
       }
     );
     if (userRechargeResponse.ok) {
+      console.log("llego");
       const userRechargeData = await userRechargeResponse.json();
       console.log(userRechargeData);
       //setUserMoney(userRechargeData);
-      setUserMoney(userMoney + newRecharge);
+      // setUserMoney(userMoney + newRecharge);
     } else {
       const errorMsg = await userRechargeResponse.json();
       setErrorMsg("Algo ha salido mal...");
     }
-  }
+  };
 
   useEffect(() => {
     async function getUserCard() {
@@ -104,9 +108,9 @@ export const UserPurse = () => {
   const handleCuantity = (e) => {
     setNewRecharge(parseInt(e.currentTarget.value));
   };
-  // const handleRecharge = (e) => {
-  //   //  setUserMoney(userMoney + newRecharge);
-  // };
+  const handleRecharge = (e) => {
+    setUserMoney(userMoney + newRecharge);
+  };
 
   return (
     <div className="purse-container">
@@ -117,77 +121,75 @@ export const UserPurse = () => {
           <h2 className="money-display">{userMoney}</h2>
         </div>
       </div>
-      <form>
-        <div className="recharge-container">
-          <div className="recharge-button-container">
-            <button
-              value={1}
-              className="recharge-button"
-              onClick={handleCuantity}
-            >
-              <p className="recharge-button-value">1</p>
-              <img
-                src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
-                alt="logo"
-                className="logo-img"
-                style={style}
-              ></img>
-            </button>
-          </div>
-          <div className="recharge-button-container">
-            <button
-              value={5}
-              className="recharge-button"
-              onClick={handleCuantity}
-            >
-              <p className="recharge-button-value">5</p>
-              <img
-                src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
-                alt="logo"
-                className="logo-img"
-                style={style}
-              ></img>
-            </button>
-          </div>
-          <div className="recharge-button-container">
-            <button
-              value={10}
-              className="recharge-button"
-              onClick={handleCuantity}
-            >
-              <p className="recharge-button-value">10</p>
-              <img
-                src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
-                alt="logo"
-                className="logo-img"
-                style={style}
-              ></img>
-            </button>
-          </div>
-          <div className="recharge-button-container">
-            <button
-              value={20}
-              className="recharge-button"
-              onClick={handleCuantity}
-            >
-              <p className="recharge-button-value">20</p>
-              <img
-                src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
-                alt="logo"
-                className="logo-img"
-                style={style}
-              ></img>
-            </button>
-            <button
-              type="submit"
-              // onSubmit={handleRecharge}
-              onClick={rechargePurse}
-            >
+
+      <div className="recharge-container">
+        <div className="recharge-button-container">
+          <button
+            value={1}
+            className="recharge-button"
+            onClick={handleCuantity}
+          >
+            <p className="recharge-button-value">1</p>
+            <img
+              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              alt="logo"
+              className="logo-img"
+              style={style}
+            ></img>
+          </button>
+        </div>
+        <div className="recharge-button-container">
+          <button
+            value={5}
+            className="recharge-button"
+            onClick={handleCuantity}
+          >
+            <p className="recharge-button-value">5</p>
+            <img
+              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              alt="logo"
+              className="logo-img"
+              style={style}
+            ></img>
+          </button>
+        </div>
+        <div className="recharge-button-container">
+          <button
+            value={10}
+            className="recharge-button"
+            onClick={handleCuantity}
+          >
+            <p className="recharge-button-value">10</p>
+            <img
+              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              alt="logo"
+              className="logo-img"
+              style={style}
+            ></img>
+          </button>
+        </div>
+        <div className="recharge-button-container">
+          <button
+            value={20}
+            className="recharge-button"
+            onClick={handleCuantity}
+          >
+            <p className="recharge-button-value">20</p>
+            <img
+              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              alt="logo"
+              className="logo-img"
+              style={style}
+            ></img>
+          </button>
+          <form onSubmit={rechargePurse}>
+            <button type="submit" onClick={handleRecharge}>
               RECARGAR
             </button>
-          </div>
+          </form>
         </div>
-      </form>
+      </div>
+
       <div className="payment-container">
         <h2>Selecciona método de pago</h2>
         <form className="card-select">

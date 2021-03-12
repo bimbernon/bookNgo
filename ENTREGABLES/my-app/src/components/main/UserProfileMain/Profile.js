@@ -2,22 +2,21 @@ import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
+import { useParams } from "react-router-dom";
 import "./Profile.css";
 
 const Profile = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [userProfile, setUserProfile] = useState({});
+  let { userId } = useParams();
 
   useEffect(() => {
     async function getUserProfile() {
       const userResponse = await (
-        await fetch(
-          `http://localhost:3080/api/v1/users/profile/${selectedUser.idusuario}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
+        await fetch(`http://localhost:3080/api/v1/users/profile/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
       ).json();
       setUserProfile(userResponse);
     }
@@ -25,12 +24,12 @@ const Profile = () => {
   }, []);
 
   const sytle = {
-    backgroundImage: `url("/images/users/${selectedUser.idusuario}.jpg")`,
+    backgroundImage: `url("/images/users/${userId}.jpg")`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    border: '1px solid black',
-    borderRadius: '1rem',
-    boxShadow: '5px 5px 5px rgb(58, 55, 55',
+    border: "1px solid black",
+    borderRadius: "1rem",
+    boxShadow: "5px 5px 5px rgb(58, 55, 55",
     width: "7rem",
     height: "9rem",
   };
