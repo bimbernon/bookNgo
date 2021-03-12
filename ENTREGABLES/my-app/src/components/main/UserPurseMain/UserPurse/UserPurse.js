@@ -81,7 +81,7 @@ export const UserPurse = () => {
       if (userCardResponse.ok) {
         const userCardData = await userCardResponse.json();
         console.log(userCardData);
-        setCard(userCardData);
+        // setCard(userCardData);
       } else {
         const errorMsg = await userCardResponse.json();
         setErrorMsg("Algo ha salido mal...");
@@ -193,11 +193,11 @@ export const UserPurse = () => {
       <div className="payment-container">
         <h2>Selecciona método de pago</h2>
         <form className="card-select">
-          <select className="card-options">{cards.map(renderCards)}</select>
+        <select className="card-options">{cards.map(renderCards)}</select>
 
-          <Link to="/cards">
-            <button>Añadir tarjeta</button>
-          </Link>
+        <Link to="/cards">
+          <button>Añadir tarjeta</button>
+        </Link>
         </form>
       </div>
 

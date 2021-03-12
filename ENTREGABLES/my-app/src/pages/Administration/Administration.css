@@ -37,3 +37,11 @@ a {
   padding: 0;
   margin: 0;
 }
+
+.all-books-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+}
