@@ -59,29 +59,29 @@ const AddCardForm = () => {
     getUserCard();
   }, []);
 
-  useEffect(() => {
-    async function deleteCardById() {
-      const deleteCardResponse = await fetch(
-        `http://localhost:3080/api/v1/cards/delete/${}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (deleteCardResponse.ok) {
-        const userCardData = await deleteCardResponse.json();
-        console.log(userCardData);
-        setCard(userCardData);
-      } else {
-        const errorMsg = await deleteCardResponse.json();
-        setErrorMsg("Algo ha salido mal...");
-      }
-    }
-    deleteCardById();
-  }, []);
+  // useEffect(() => {
+  //   async function deleteCardById() {
+  //     const deleteCardResponse = await fetch(
+  //       `http://localhost:3080/api/v1/cards/delete/${}`,
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           "Content-type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     if (deleteCardResponse.ok) {
+  //       const userCardData = await deleteCardResponse.json();
+  //       console.log(userCardData);
+  //       setCard(userCardData);
+  //     } else {
+  //       const errorMsg = await deleteCardResponse.json();
+  //       setErrorMsg("Algo ha salido mal...");
+  //     }
+  //   }
+  //   deleteCardById();
+  // }, []);
 
   console.log(cards);
 

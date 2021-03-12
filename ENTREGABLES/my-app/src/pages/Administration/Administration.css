@@ -1,0 +1,39 @@
+.administration-page-container {
+  background-color: var(--white-background);
+  border-radius: 20px;
+  height: 30rem;
+  margin: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.administration-item-container {
+  background-color: var(--title-brown-color);
+  color: white;
+  height: 6.5rem;
+  width: 90%;
+  border-radius: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.3rem 0;
+}
+
+.administration-item-container > a {
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.users-list {
+  padding: 0;
+  margin: 0;
+}

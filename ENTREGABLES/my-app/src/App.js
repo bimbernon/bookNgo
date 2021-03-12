@@ -16,11 +16,15 @@ import { BookPage } from "./pages/BookPage";
 import { BackPack } from "./pages/Backpack";
 import { ModifyUserProfile } from "./pages/ModifyUserProfile";
 import { UserPursePage } from "./pages/UserPursePage";
-import { Administration } from "./pages/Administration";
+import { Administration } from "./pages/Administration/Administration";
 import { UserProfile } from "./pages/UserProfile";
 import { UserReserves } from "./pages/UserReserves";
 import { UserReserveDetails } from "./pages/UserReserveDetails";
 import { UpdateCards } from "./pages/UpdateCards";
+import { AdministrationUsersPage } from "./pages/Administration/AdministrationUsersPage";
+import { AdministrationBooksPage } from "./pages/Administration/AdministrationBooksPage";
+import { AdministrationDonationsPage } from "./pages/Administration/AdministrationDonationsPage";
+import { AdministrationInvoicesPage } from "./pages/Administration/AdministrationInvoicesPage";
 
 function App() {
   const style = {
@@ -38,9 +42,6 @@ function App() {
             <Switch>
               <Route path="/cathegory/books/:nameCathegory">
                 <BooksByCathegory />
-              </Route>
-              <Route path="/donations">
-                <Donations />
               </Route>
               <Route path="/users/register">
                 <Register />
@@ -71,6 +72,21 @@ function App() {
               </Route>
               <Route path="/administration">
                 <Administration />
+              </Route>
+              <Route path="/donations">
+                <Donations />
+              </Route>
+              <Route path="/users/">
+                <AdministrationUsersPage />
+              </Route>
+              <Route path="/books/">
+                <AdministrationBooksPage />
+              </Route>
+              <Route path="/donations/">
+                <AdministrationDonationsPage />
+              </Route>
+              <Route path="/invoices/">
+                <AdministrationInvoicesPage />
               </Route>
               <Route path="/user/book/mochila/:bookId">
                 <BackPack />

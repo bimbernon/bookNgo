@@ -8,11 +8,21 @@ body {
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  flex-grow: 1;
+}
+
+.header-container {
+  align-self: flex-start;
+}
+
+.footer {
+  align-self: flex-end;
 }
 
 html {
-  --white-background: rgba(255, 255, 255, 0.692);
-  --title-brown-color: rgb(170, 129, 76);
+  --white-background: rgba(255, 255, 255, 0.623);
+  --title-brown-color: rgb(194, 154, 103);
+  display: flex;
 }
 
 .book-list-container {
