@@ -128,10 +128,10 @@ async function findUserProfileImage(userId) {
 
 async function rechargePurse(userId, ammount) {
   const pool = await database.getPool();
-  const updateQuery = "UPDATE usuaruio SET monedero = ? WHERE idusuario = ?";
-  await pool.query(updateQuery, [userId, ammount]);
+  const updateQuery = "UPDATE usuario SET monedero = ? WHERE idusuario = ?";
+  const result = await pool.query(updateQuery, [ammount, userId]);
 
-  return true;
+  return result;
 }
 
 module.exports = {

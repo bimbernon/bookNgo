@@ -11,6 +11,9 @@ const { registerUser } = require("../controllers/users/register-user");
 const { updateUserById } = require("../controllers/users/update-user");
 const { getUserProfile } = require("../controllers/users/get-user-profile");
 const {
+  rechargeUserPurse,
+} = require("../controllers/users/recharge-purse-by-user-id");
+const {
   uploadImageUserProfile,
 } = require("../controllers/users/upload-image-user-profile");
 const {
@@ -58,5 +61,9 @@ router
   .route("/updatePassword/:userId")
   .all(validateAuth)
   .put((req, res) => updateUserPassword(req, res));
+router
+  .route("/purse/recharge/:userId")
+  .all(validateAuth)
+  .post((req, res) => rechargeUserPurse(req, res));
 
 module.exports = router;

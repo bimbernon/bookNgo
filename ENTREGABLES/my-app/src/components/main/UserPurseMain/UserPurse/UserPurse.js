@@ -12,7 +12,7 @@ export const UserPurse = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
-
+  //falta por añadir la recarga al usuario a la base de datos
   useEffect(() => {
     async function getUserInfo() {
       const moneyResponse = await fetch(
@@ -28,13 +28,39 @@ export const UserPurse = () => {
       if (moneyResponse.ok) {
         const moneyResponseData = await moneyResponse.json();
         setUserMoney(moneyResponseData.monedero);
+        console.log("Monedero Inicial ", userMoney);
       } else {
         const errorMsg = await moneyResponse.json();
         setErrorMsg("Algo ha salido mal...");
       }
     }
     getUserInfo();
-  }, []);
+  }, [userMoney]);
+
+  async function rechargePurse() {
+    const userRechargeResponse = await fetch(
+      `http://localhost:3080/api/v1/users/purse/recharge/${selectedUser.idusuario}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          ammount: userMoney,
+        }),
+      }
+    );
+    if (userRechargeResponse.ok) {
+      const userRechargeData = await userRechargeResponse.json();
+      console.log(userRechargeData);
+      //setUserMoney(userRechargeData);
+      setUserMoney(userMoney + newRecharge);
+    } else {
+      const errorMsg = await userRechargeResponse.json();
+      setErrorMsg("Algo ha salido mal...");
+    }
+  }
 
   useEffect(() => {
     async function getUserCard() {
@@ -75,12 +101,12 @@ export const UserPurse = () => {
     height: "1.9rem",
   };
 
-  const handleCuantity = (e) => setNewRecharge(e.target.value);
-  const handleRecharge = (e) => setUserMoney(userMoney + newRecharge);
-
-  console.log(userMoney);
-  console.log(newRecharge);
-  console.log(userMoney + newRecharge);
+  const handleCuantity = (e) => {
+    setNewRecharge(parseInt(e.currentTarget.value));
+  };
+  // const handleRecharge = (e) => {
+  //   //  setUserMoney(userMoney + newRecharge);
+  // };
 
   return (
     <div className="purse-container">
@@ -91,75 +117,82 @@ export const UserPurse = () => {
           <h2 className="money-display">{userMoney}</h2>
         </div>
       </div>
-      <div className="recharge-container">
-        <div className="recharge-button-container">
-          <button
-            value={1}
-            className="recharge-button"
-            onClick={handleCuantity}
-          >
-            <p className="recharge-button-value">1</p>
-            <img
-              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
-              alt="logo"
-              className="logo-img"
-              style={style}
-            ></img>
-          </button>
+      <form>
+        <div className="recharge-container">
+          <div className="recharge-button-container">
+            <button
+              value={1}
+              className="recharge-button"
+              onClick={handleCuantity}
+            >
+              <p className="recharge-button-value">1</p>
+              <img
+                src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+                alt="logo"
+                className="logo-img"
+                style={style}
+              ></img>
+            </button>
+          </div>
+          <div className="recharge-button-container">
+            <button
+              value={5}
+              className="recharge-button"
+              onClick={handleCuantity}
+            >
+              <p className="recharge-button-value">5</p>
+              <img
+                src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+                alt="logo"
+                className="logo-img"
+                style={style}
+              ></img>
+            </button>
+          </div>
+          <div className="recharge-button-container">
+            <button
+              value={10}
+              className="recharge-button"
+              onClick={handleCuantity}
+            >
+              <p className="recharge-button-value">10</p>
+              <img
+                src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+                alt="logo"
+                className="logo-img"
+                style={style}
+              ></img>
+            </button>
+          </div>
+          <div className="recharge-button-container">
+            <button
+              value={20}
+              className="recharge-button"
+              onClick={handleCuantity}
+            >
+              <p className="recharge-button-value">20</p>
+              <img
+                src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+                alt="logo"
+                className="logo-img"
+                style={style}
+              ></img>
+            </button>
+            <button
+              type="submit"
+              // onSubmit={handleRecharge}
+              onClick={rechargePurse}
+            >
+              RECARGAR
+            </button>
+          </div>
         </div>
-        <div className="recharge-button-container">
-          <button
-            value={5}
-            className="recharge-button"
-            onClick={handleCuantity}
-          >
-            <p className="recharge-button-value">5</p>
-            <img
-              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
-              alt="logo"
-              className="logo-img"
-              style={style}
-            ></img>
-          </button>
-        </div>
-        <div className="recharge-button-container">
-          <button
-            value={10}
-            className="recharge-button"
-            onClick={handleCuantity}
-          >
-            <p className="recharge-button-value">10</p>
-            <img
-              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
-              alt="logo"
-              className="logo-img"
-              style={style}
-            ></img>
-          </button>
-        </div>
-        <div className="recharge-button-container">
-          <button
-            value={20}
-            className="recharge-button"
-            onClick={handleCuantity}
-          >
-            <p className="recharge-button-value">20</p>
-            <img
-              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
-              alt="logo"
-              className="logo-img"
-              style={style}
-            ></img>
-          </button>
-        </div>
-      </div>
+      </form>
       <div className="payment-container">
         <h2>Selecciona método de pago</h2>
         <form className="card-select">
           <select className="card-options">{cards.map(renderCards)}</select>
-          <button type="submit" onSubmit={handleRecharge}>
-            RECARGAR
-          </button>
+
           <Link to="/cards">
             <button>Añadir tarjeta</button>
           </Link>
