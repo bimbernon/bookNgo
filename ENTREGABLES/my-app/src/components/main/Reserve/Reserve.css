@@ -11,9 +11,11 @@
   width: 17rem;
   height: 3rem;
   padding: 0.9rem 0.5rem;
+  padding-bottom: 1rem;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
   border-radius: 1rem;
+  overflow-y: scroll;
 }
 
 .reserve-li-item > a {

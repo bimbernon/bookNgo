@@ -20,14 +20,15 @@ async function createReserve(req, res) {
 
     const { idlibro } = req.body;
 
-
     // await schema.validateAsync(req.body);
     // await schema2.validateAsync(req.auth);
-    
-    let lookPurse = await reserveRepository.checkPurse(idusuario)
 
-    if(lookPurse < 1) {
-      const error = new Error('Saldo insuficiente. Recarga tu monedero para continuar con la reserva');
+    let lookPurse = await reserveRepository.checkPurse(idusuario);
+
+    if (lookPurse < 1) {
+      const error = new Error(
+        "Saldo insuficiente. Recarga tu monedero para continuar con la reserva"
+      );
       throw error;
     }
 
@@ -43,6 +44,7 @@ async function createReserve(req, res) {
     await reserveRepository.decreaseBookStock(idlibro);
 
     const reserveDate = new Date();
+    console.log(reserveDate);
     const reserveDevolution = addDateDays(new Date(), 30);
     const rating = null;
 

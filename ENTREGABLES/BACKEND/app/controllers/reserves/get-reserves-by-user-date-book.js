@@ -32,6 +32,8 @@ async function getReserveByUserDateBook(req, res) {
       fechareserva: fechareserva,
     };
 
+    console.log(fechareserva);
+
     await schema.validateAsync(reserveData);
 
     const reserve = await reserveRepository.findReserveByUserDateBook(

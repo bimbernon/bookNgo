@@ -6,15 +6,28 @@ import "./Reserve.css";
 const Reserve = (props) => {
   const [selectedUser] = useContext(UserContext);
 
-  const { reservedBookTitle, reserveDate, reserveExpiration, bookId } = props;
+  const {
+    reservedBookTitle,
+    reserveDate,
+    reserveExpiration,
+    bookId,
+    children,
+  } = props;
 
+  console.log(children);
   return (
     <li className="reserve-li-item" bookId={bookId}>
       <Link to={`/reserve/${selectedUser.idusuario}/${bookId}/${reserveDate}`}>
-        <div className="reserve-info">
-          <h2 className="reserve-book-title">{reservedBookTitle}</h2>
+        <div
+          className="reserve-info"
+          reservedBookTitle={reservedBookTitle}
+          reserveExpiration={reserveExpiration}
+          reserveDate={reserveDate}
+        >
+          {children}
+          {/* <h2 className="reserve-book-title">{reservedBookTitle}</h2>
           <p className="reserve-book-date">{reserveDate} </p>
-          <p className="reserve-book-expiration">{reserveExpiration} </p>
+          <p className="reserve-book-expiration">{reserveExpiration} </p> */}
         </div>
       </Link>
     </li>

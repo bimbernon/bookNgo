@@ -6,14 +6,14 @@ function addDateDays(date, dias) {
   return date;
 }
 
-function dateFormatted(date,character) {
+function dateFormatted(date, character) {
   console.log(date.getMonth());
   return (
-    date.getFullYear()+
-    character+
-    formatMonthDate(date)+
+    date.getFullYear() +
     character +
-    formatDayDate(date) 
+    formatMonthDate(date) +
+    character +
+    formatDayDate(date)
   );
 }
 

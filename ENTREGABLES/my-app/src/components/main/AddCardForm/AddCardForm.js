@@ -59,6 +59,30 @@ const AddCardForm = () => {
     getUserCard();
   }, []);
 
+  useEffect(() => {
+    async function deleteCardById() {
+      const deleteCardResponse = await fetch(
+        `http://localhost:3080/api/v1/cards/delete/${}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (deleteCardResponse.ok) {
+        const userCardData = await deleteCardResponse.json();
+        console.log(userCardData);
+        setCard(userCardData);
+      } else {
+        const errorMsg = await deleteCardResponse.json();
+        setErrorMsg("Algo ha salido mal...");
+      }
+    }
+    deleteCardById();
+  }, []);
+
   console.log(cards);
 
   const renderCards = (card) => (
@@ -68,12 +92,18 @@ const AddCardForm = () => {
       cardNumber={card.numerotarjeta}
     />
   );
+
+  // const handleDeleteCard = (e) => ();
+
   return (
     <div className="add-card-form-container">
       <form className="add-card-selector">
         <select className="add-card-options" onChange="">
           {cards.map(renderCards)}
         </select>
+        {/* <button type="submit" onSubmit={handleDeleteCard}>
+          BORRAR
+        </button> */}
 
         {/* LA IDEA ES METER UN HANDLE EN EL SELECT PARA CAMBIAR LOS DATOS DE LA TARJETA
     O METER UNA TARJETA NUEVA CUBRIENDO LOS CAMPOS, QUE VALGA PARA LOS DOS */}

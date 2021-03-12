@@ -6,8 +6,9 @@ import { Card } from "../Card/Card";
 import "./UserPurse.css";
 
 export const UserPurse = () => {
-  const [userMoney, setUserMoney] = useState([]);
+  const [userMoney, setUserMoney] = useState(0);
   const [cards, setCard] = useState([]);
+  const [newRecharge, setNewRecharge] = useState(0);
   const [errorMsg, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
@@ -39,7 +40,6 @@ export const UserPurse = () => {
     async function getUserCard() {
       const userCardResponse = await fetch(
         `http://localhost:3080/api/v1/cards/user/${selectedUser.idusuario}`,
-
         {
           method: "GET",
           headers: {
@@ -60,8 +60,6 @@ export const UserPurse = () => {
     getUserCard();
   }, []);
 
-  console.log(cards);
-
   const renderCards = (card) => (
     <Card
       Key={card.idtarjeta}
@@ -70,15 +68,19 @@ export const UserPurse = () => {
     />
   );
 
-  // const renderRecharge = (recharge) => (
-  //   <Recharge key={recharge.idusuario} recharge={recharge.monedero}></Recharge>
-  // );
   const style = {
     padding: "0",
     margin: "0",
     width: "1.9rem",
     height: "1.9rem",
   };
+
+  const handleCuantity = (e) => setNewRecharge(e.target.value);
+  const handleRecharge = (e) => setUserMoney(userMoney + newRecharge);
+
+  console.log(userMoney);
+  console.log(newRecharge);
+  console.log(userMoney + newRecharge);
 
   return (
     <div className="purse-container">
@@ -91,7 +93,11 @@ export const UserPurse = () => {
       </div>
       <div className="recharge-container">
         <div className="recharge-button-container">
-          <button type="submit" value="1 B" className="recharge-button">
+          <button
+            value={1}
+            className="recharge-button"
+            onClick={handleCuantity}
+          >
             <p className="recharge-button-value">1</p>
             <img
               src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
@@ -102,7 +108,11 @@ export const UserPurse = () => {
           </button>
         </div>
         <div className="recharge-button-container">
-          <button type="submit" value="5 B" className="recharge-button">
+          <button
+            value={5}
+            className="recharge-button"
+            onClick={handleCuantity}
+          >
             <p className="recharge-button-value">5</p>
             <img
               src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
@@ -113,7 +123,11 @@ export const UserPurse = () => {
           </button>
         </div>
         <div className="recharge-button-container">
-          <button type="submit" value="10 B" className="recharge-button">
+          <button
+            value={10}
+            className="recharge-button"
+            onClick={handleCuantity}
+          >
             <p className="recharge-button-value">10</p>
             <img
               src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
@@ -124,7 +138,11 @@ export const UserPurse = () => {
           </button>
         </div>
         <div className="recharge-button-container">
-          <button type="submit" value="20 B" className="recharge-button">
+          <button
+            value={20}
+            className="recharge-button"
+            onClick={handleCuantity}
+          >
             <p className="recharge-button-value">20</p>
             <img
               src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
@@ -138,20 +156,16 @@ export const UserPurse = () => {
       <div className="payment-container">
         <h2>Selecciona método de pago</h2>
         <form className="card-select">
-          <select className="card-options" onChange="">
-            {cards.map(renderCards)}
-          </select>
+          <select className="card-options">{cards.map(renderCards)}</select>
+          <button type="submit" onSubmit={handleRecharge}>
+            RECARGAR
+          </button>
+          <Link to="/cards">
+            <button>Añadir tarjeta</button>
+          </Link>
         </form>
       </div>
-      <div className="recharge-container">
-        {/* QUEDA METER AQUI CUATRO BOTONES CON IMPORTES PARA RECARGAR */}
-        {/* <ul className="recharge-list">
-          <li></li>
-        </ul> */}
-        <Link to="/cards">
-          <button>Añadir tarjeta</button>
-        </Link>
-      </div>
+
       {/* {errorMsg && (
         <div
           style={{

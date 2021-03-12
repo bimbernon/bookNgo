@@ -41,11 +41,12 @@ export const UserReserveDetails = () => {
     <div className="reserve-details-container">
       <h1>Detalle de la reserva</h1>
       <Reserve
-        reserveBook={reserveInfo.titulo}
         reserveDate={reserveInfo.fechareserva}
         reserveExpiration={reserveInfo.reserveExpiracion}
         bookId={reserveInfo.idlibro}
-      ></Reserve>
+      >
+        {reserveInfo.titulo}
+      </Reserve>
     </div>
   );
 };

@@ -29,7 +29,9 @@ export const UserReserves = () => {
   }, []);
 
   const reservesRender = (reserves) => (
-    <Reserve bookId={reserves.idlibro} reservedBookTitle={reserves.titulo} />
+    <Reserve bookId={reserves.idlibro} reservedBookTitle={reserves.titulo}>
+      <h1>{reserves.titulo}</h1>
+    </Reserve>
   );
 
   return (
