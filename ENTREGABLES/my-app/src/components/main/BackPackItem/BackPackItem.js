@@ -3,11 +3,13 @@ import "./BackPackItem.css";
 import { Book } from "../Book/Book";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import { InsertReserve } from "../Reserve/InsertReserve/InsertReserve";
 
 export const BackPackItem = () => {
   const [book, setBook] = useState({});
   const [token] = useContext(AuthContext);
   let { bookId } = useParams();
+  console.log(bookId);
 
   useEffect(() => {
     async function getBookById() {
@@ -37,9 +39,7 @@ export const BackPackItem = () => {
         ></Book>
       </div>
       <div>
-        <button className="pay-button" type="submit">
-          Pagar
-        </button>
+        <InsertReserve bookId={bookId}/>
       </div>
     </div>
   ) : (
@@ -52,10 +52,8 @@ export const BackPackItem = () => {
           bookPrice={`Precio: ${book.precio}`}
         ></Book>
       </div>
-      <div>
-        <button className="pay-button" type="submit">
-          Pagar
-        </button>
+      <div bookId={bookId}>
+        <InsertReserve />
         <h1
           style={{
             color: "red",
