@@ -92,7 +92,7 @@ export const UserPurse = () => {
 
   const renderCards = (card) => (
     <Card
-      Key={card.idtarjeta}
+      key={card.idtarjeta}
       cardId={card.idtarjeta}
       cardNumber={card.numerotarjeta}
     />
