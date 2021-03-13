@@ -60,7 +60,7 @@ const Profile = () => {
         >
           <button className="modify-user-info-button">MODIFICAR PERFIL</button>
         </Link>
-        <Link to={`/user/profile/modify/${selectedUser.idusuario}`}>
+        <Link to={`/user/updatePassword/${selectedUser.idusuario}`}>
           <button className="modify-user-password-button">
             CAMBIAR CONTRASEÑA
           </button>
