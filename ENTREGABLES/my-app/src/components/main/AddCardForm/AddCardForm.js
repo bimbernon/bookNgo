@@ -5,35 +5,35 @@ import { Card } from "../UserPurseMain/Card/Card";
 import "./AddCardForm.css";
 
 const AddCardForm = () => {
-  const [userMoney, setUserMoney] = useState([]);
+  // const [userMoney, setUserMoney] = useState([]);
   const [cards, setCards] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [currentCard, setCurrentCard] = useState(0);
-
-  useEffect(() => {
-    async function getUserInfo() {
-      const moneyResponse = await fetch(
-        `http://localhost:3080/api/v1/users/id/${selectedUser.idusuario}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (moneyResponse.ok) {
-        const moneyResponseData = await moneyResponse.json();
-        setUserMoney(moneyResponseData.monedero);
-      } else {
-        const errorMsg = await moneyResponse.json();
-        setErrorMsg("Algo ha salido mal...");
-      }
-    }
-    getUserInfo();
-  }, [cards]);
+  //CREO QUE ESTO NO SERIA NECESARIO YA QUE NO ESTAMOS UTILIZANDO LA VARIABLE USERMONEY
+  // useEffect(() => {
+  //   async function getUserInfo() {
+  //     const moneyResponse = await fetch(
+  //       `http://localhost:3080/api/v1/users/id/${selectedUser.idusuario}`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     if (moneyResponse.ok) {
+  //       const moneyResponseData = await moneyResponse.json();
+  //       setUserMoney(moneyResponseData.monedero);
+  //     } else {
+  //       const errorMsg = await moneyResponse.json();
+  //       setErrorMsg("Algo ha salido mal...");
+  //     }
+  //   }
+  //   getUserInfo();
+  // }, [cards]);
 
   useEffect(() => {
     setCurrentCard(cards[0]);
@@ -58,7 +58,7 @@ const AddCardForm = () => {
         setCards(userCardData);
       } else {
         const errorMsg = await userCardResponse.json();
-        setErrorMsg("Algo ha salido mal...");
+        setErrorMsg();
       }
     }
     getUserCard();
