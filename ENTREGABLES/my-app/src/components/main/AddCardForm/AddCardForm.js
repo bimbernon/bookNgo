@@ -10,6 +10,7 @@ const AddCardForm = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
+  const [currentCard, setCurrentCard] = useState(0);
 
   useEffect(() => {
     async function getUserInfo() {
@@ -32,7 +33,11 @@ const AddCardForm = () => {
       }
     }
     getUserInfo();
-  }, []);
+  }, [cards]);
+
+  useEffect(() => {
+    setCurrentCard(cards[0]);
+  }, [cards]);
 
   useEffect(() => {
     async function getUserCard() {
@@ -59,26 +64,16 @@ const AddCardForm = () => {
     getUserCard();
   }, []);
 
-  const [currentCard, setCurrentCard] = useState({});
-  console.log(currentCard);
-
   const handleSelectedCard = (e) => {
+    console.log("change");
     const selectedCard = cards.find((card) => {
       return parseInt(card.numerotarjeta) === parseInt(e.target.value);
     });
-    console.log(selectedCard);
+    console.log(selectedCard.idtarjeta);
     setCurrentCard(selectedCard);
   };
 
-  console.log(currentCard);
   const deleteCardById = async (e) => {
-    e.preventDefault();
-    console.log("hola");
-
-    if (cards.length > 0) {
-      setCurrentCard(cards[0]);
-    }
-
     const deleteCardResponse = await fetch(
       `http://localhost:3080/api/v1/cards/delete/${currentCard.idtarjeta}`,
       {
@@ -106,8 +101,6 @@ const AddCardForm = () => {
   const handleChangeCsv = (e) => setCsv(e.target.value);
 
   const handleSubmitCard = async (e) => {
-    e.preventDefault();
-
     const resp = await fetch("http://localhost:3080/api/v1/cards", {
       method: "POST",
       headers: {
@@ -130,7 +123,7 @@ const AddCardForm = () => {
 
   const renderCards = (card) => (
     <Card
-      Key={card.idtarjeta}
+      key={card.idtarjeta}
       cardId={card.idtarjeta}
       cardNumber={card.numerotarjeta}
     />

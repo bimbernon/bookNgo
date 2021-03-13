@@ -111,6 +111,7 @@ async function findBookById(idBook) {
   const query =
     "select l.*,aut.nombreautor,aut.apel1,aut.apel2,c.* from libro l inner join categoria c on l.idcategoria=c.idcategoria inner join autor aut on l.idautor=aut.idautor where idlibro=?";
   const [book] = await pool.query(query, idBook);
+
   return book;
 }
 

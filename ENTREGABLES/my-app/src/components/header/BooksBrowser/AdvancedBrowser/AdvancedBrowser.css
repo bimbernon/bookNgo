@@ -1,0 +1,6 @@
+@import url("../../../../index.css");
+
+.search-container {
+  background-color: var(--white-background);
+  display: none;
+}

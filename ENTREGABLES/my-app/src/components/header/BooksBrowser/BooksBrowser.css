@@ -24,6 +24,10 @@
   margin: 0 0.5rem;
 }
 
+.advanced-browser-button:hover + div {
+  display: initial;
+}
+
 .button-logo {
   padding: 0;
   margin: 0;

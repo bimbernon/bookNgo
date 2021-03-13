@@ -8,7 +8,7 @@ import { HeaderContainer } from "./components/header/HeaderContainer/HeaderConta
 import { Footer } from "../src/components/footer/Footer";
 
 import { Home } from "./pages/Home";
-import { Donations } from "./pages/Donations";
+import { UserDonations } from "./pages/UserDonations";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { BooksByCathegory } from "./pages/BooksByCathegory";
@@ -25,7 +25,6 @@ import { UpdateCards } from "./pages/UpdateCards";
 import { AdministrationUsersPage } from "./pages/Administration/AdministrationUsersPage";
 import { AdministrationBooksPage } from "./pages/Administration/AdministrationBooksPage";
 import { AdministrationDonationsPage } from "./pages/Administration/AdministrationDonationsPage";
-import { AdministrationInvoicesPage } from "./pages/Administration/AdministrationInvoicesPage";
 
 function App() {
   const style = {
@@ -71,14 +70,17 @@ function App() {
               <Route path="/users/purse/:userId">
                 <UserPursePage />
               </Route>
+              <Route path="/donations/update/:donationId">
+                <AdministrationDonationsPage />
+              </Route>
               <Route path="/cards">
                 <UpdateCards />
               </Route>
               <Route path="/administration">
                 <Administration />
               </Route>
-              <Route path="/donations">
-                <Donations />
+              <Route path="/donations/create">
+                <UserDonations />
               </Route>
               <Route path="/users/">
                 <AdministrationUsersPage />
@@ -88,9 +90,6 @@ function App() {
               </Route>
               <Route path="/donations/">
                 <AdministrationDonationsPage />
-              </Route>
-              <Route path="/invoices/">
-                <AdministrationInvoicesPage />
               </Route>
               <Route path="/user/book/mochila/:bookId">
                 <BackPack />

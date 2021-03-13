@@ -33,7 +33,7 @@ export const BookDetails = () => {
         bookName={book.titulo}
         bookAuthor={`${book.nombreautor} ${book.apel1}`}
         bookPrice={`Precio: ${book.precio}`}
-        bookSinopsis={book.sipnosis}
+        bookSinopsis={book.sinopsis}
       ></Book>
     </div>
   );
