@@ -5,7 +5,7 @@ import { UserContext } from "../../../../components/providers/UserProvider";
 import "./InsertReserve.css";
 
 export const InsertReserve = (props) => {
-  const { bookId } = props;
+  const { bookId, userMoney } = props;
   const [token] = useContext(AuthContext);
   const [reserve, setReserve] = useState([]);
   const [selectedUser] = useContext(UserContext);
@@ -61,7 +61,25 @@ export const InsertReserve = (props) => {
     }
   };
 
-  return (
+  return userMoney === 0 ? (
+    <form
+      onSubmit={insertReserveEffect}
+      action={`/reserves/${selectedUser.idusuario}`}
+      className="reserve-form"
+    >
+      <Link to={`/reserves/${selectedUser.idusuario}`}>
+        <button
+          disabled
+          className="book-details-reserve-button"
+          type="submit"
+          value={bookId}
+          onClick={handleChangeReserve}
+        >
+          Pagar
+        </button>
+      </Link>
+    </form>
+  ) : (
     <form
       onSubmit={insertReserveEffect}
       action={`/reserves/${selectedUser.idusuario}`}

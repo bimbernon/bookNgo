@@ -10,6 +10,7 @@ const Book = (props) => {
     bookPrice,
     bookSinopsis,
     style,
+    stockMsg
   } = props;
 
   return (
@@ -24,6 +25,9 @@ const Book = (props) => {
           <h1 className="book-title">{bookName}</h1>
           <h2 className="book-author">{bookAuthor}</h2>
           <h2 className="book-price">{bookPrice}</h2>
+          {stockMsg && (
+            <div style={{ color: "red", minHeight: "1.5em" }}> {stockMsg}</div>
+          )}
           <p className="book-sinopsis">{bookSinopsis}</p>
         </div>
       </Link>

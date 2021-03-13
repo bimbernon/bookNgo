@@ -54,6 +54,7 @@
   width: 20rem;
   background-color: var(--white-background);
   border-radius: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .recharge-container {
@@ -62,6 +63,8 @@
 }
 
 .recharge-button {
+  border: 1px solid rgba(0, 0, 0, 0.363);
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,4 +76,20 @@
 
 .recharge-button-value {
   margin-right: 0.8rem;
+}
+
+.effective-recharge-button-container {
+  margin-top: 1rem;
+}
+
+.add-card-button,
+.effective-recharge-button {
+  text-align: center;
+  font-family: "Comfortaa";
+  padding: 0.5rem 0.3rem;
+  border: 0;
+  border-radius: 50px;
+  color: white;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
+  background-color: var(--title-brown-color);
 }

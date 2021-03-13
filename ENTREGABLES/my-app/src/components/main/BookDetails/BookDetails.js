@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Book } from "../Book/Book";
 import "./BookDetails.css";
 
@@ -24,7 +24,33 @@ export const BookDetails = () => {
     width: "85vw",
   };
 
-  return (
+  const styleButton = {
+      backgroundColor: "red",
+  }
+
+  return book.stock === 0 ? (
+    <div className="book-details-container">
+      <Book
+        bookId={book.idlibro}
+        style={style}
+        key={book.idlibro}
+        bookName={book.titulo}
+        bookAuthor={`${book.nombreautor} ${book.apel1}`}
+        bookPrice={`Precio: ${book.precio}`}
+        bookSinopsis={book.sinopsis}
+        stockMsg={"No hay stock disponible"}
+      ></Book>
+
+      <button
+        style={styleButton}
+        type="submit"
+        className="book-details-reserve-button"
+        bookId={bookId}
+      >
+        Reservar
+      </button>
+    </div>
+  ) : (
     <div className="book-details-container">
       <Book
         bookId={book.idlibro}
@@ -35,6 +61,15 @@ export const BookDetails = () => {
         bookPrice={`Precio: ${book.precio}`}
         bookSinopsis={book.sinopsis}
       ></Book>
+      <Link to={`/user/book/mochila/${bookId}`}>
+        <button
+          type="submit"
+          className="book-details-reserve-button"
+          bookId={bookId}
+        >
+          Reservar
+        </button>
+      </Link>
     </div>
   );
 };

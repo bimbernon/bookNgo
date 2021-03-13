@@ -3,12 +3,16 @@ import "./BackPackItem.css";
 import { Book } from "../Book/Book";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import { UserContext } from "../../providers/UserProvider";
 import { InsertReserve } from "../Reserve/InsertReserve/InsertReserve";
 
 export const BackPackItem = () => {
   const [book, setBook] = useState({});
   const [token] = useContext(AuthContext);
+  const [selectedUser] = useContext(UserContext);
+  const [user, setUser] = useState({})
   let { bookId } = useParams();
+
 
   useEffect(() => {
     async function getBookById() {
@@ -26,6 +30,18 @@ export const BackPackItem = () => {
     getBookById();
   }, []);
 
+    useEffect(() => {
+      async function getUserProfile() {
+        const userResponse = await (
+          await fetch(`http://localhost:3080/api/v1/users/id/${selectedUser.idusuario}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+        ).json();
+        setUser(userResponse);
+      }
+      getUserProfile();
+    }, []);
+
   const result = token ? (
     <div className="backPack-container">
       <h1>Mi mochila</h1>
@@ -38,7 +54,7 @@ export const BackPackItem = () => {
         ></Book>
       </div>
       <div>
-        <InsertReserve bookId={bookId} />
+        <InsertReserve bookId={bookId} userMoney={user.monedero}/>
       </div>
     </div>
   ) : (

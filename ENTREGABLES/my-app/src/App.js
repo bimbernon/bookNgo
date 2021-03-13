@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useState} from "react";
 
 import { UserProvider } from "./components/providers/UserProvider";
 import { AuthProvider } from "./components/providers/AuthProvider";
@@ -31,7 +32,9 @@ function App() {
     backgroundImage: `url("/background_photos/background_image.jpg")`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-  };
+  }
+
+  const [bag, setBag] = useState([]);
 
   return (
     <AuthProvider>
@@ -92,7 +95,7 @@ function App() {
                 <AdministrationDonationsPage />
               </Route>
               <Route path="/user/book/mochila/:bookId">
-                <BackPack />
+                <BackPack bag={bag} setBag={setBag}/>
               </Route>
               <Route path="/">
                 <Home />

@@ -29,7 +29,7 @@ const AdvancedBrowser = (props) => {
 
   return (
     <div className="search-container">
-      <h1 className="search-form-title">Regístrate</h1>
+      <h1 className="search-form-title">Filtra tu búsqueda</h1>
       <form className="search-form" onSubmit={handleSubmit}>
         <div className="search-form-item">
           <input

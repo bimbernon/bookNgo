@@ -182,22 +182,28 @@ export const UserPurse = () => {
               style={style}
             ></img>
           </button>
-          <form onSubmit={rechargePurse}>
-            <button type="submit" onClick={handleRecharge}>
-              RECARGAR
-            </button>
-          </form>
+          <div className="effective-recharge-button-container">
+            <form onSubmit={rechargePurse}>
+              <button
+                className="effective-recharge-button"
+                type="submit"
+                onClick={handleRecharge}
+              >
+                Recargar
+              </button>
+            </form>
+          </div>
         </div>
       </div>
 
       <div className="payment-container">
         <h2>Selecciona método de pago</h2>
         <form className="card-select">
-        <select className="card-options">{cards.map(renderCards)}</select>
+          <select className="card-options">{cards.map(renderCards)}</select>
 
-        <Link to="/cards">
-          <button>Añadir tarjeta</button>
-        </Link>
+          <Link to="/cards">
+            <button className="add-card-button">Añadir tarjeta</button>
+          </Link>
         </form>
       </div>
 
