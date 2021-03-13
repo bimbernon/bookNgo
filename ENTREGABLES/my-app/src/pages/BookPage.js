@@ -8,7 +8,7 @@ export function BookPage() {
 
   return (
     <div className="book-details-container">
-      <BookDetails></BookDetails>
+      <BookDetails />
       <Link to={`/user/book/mochila/${bookId}`}>
         <button
           type="submit"

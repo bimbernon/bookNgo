@@ -9,7 +9,6 @@ export const BackPackItem = () => {
   const [book, setBook] = useState({});
   const [token] = useContext(AuthContext);
   let { bookId } = useParams();
-  console.log(bookId);
 
   useEffect(() => {
     async function getBookById() {

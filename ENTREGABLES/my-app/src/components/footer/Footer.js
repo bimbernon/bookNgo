@@ -3,7 +3,7 @@ import "./Footer.css";
 
 export const Footer = () => {
   return (
-    <div className="footer">
+    <footer className="footer">
       <a href="fdferf" className="footer-link">
         Quienes somos
       </a>
@@ -13,6 +13,6 @@ export const Footer = () => {
       <a href="fdferf" className="footer-link">
         Politica de cookies
       </a>
-    </div>
+    </footer>
   );
 };

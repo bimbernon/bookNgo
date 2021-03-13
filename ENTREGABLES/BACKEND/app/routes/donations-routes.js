@@ -14,7 +14,7 @@ const {
 const { validateAuth } = require("../middlewares/validate-auth");
 
 router
-  .route("/")
+  .route("/create")
   .all(validateAuth)
   .post((req, res) => createDonation(req, res));
 router

@@ -64,7 +64,7 @@ export const UserProfileForm = () => {
 
   return (
     <div className="user-profile-container">
-      <h1 className="user-profile-title">Modificar mis datos</h1>
+      <h1 className="user-profile-title">Modificar datos</h1>
       <form className="form-user-profile" onSubmit={handleUserProfile}>
         <div className="input-user-modify-form-container">
           <h2 className="input-user-modify-form-title">Nombre: </h2>

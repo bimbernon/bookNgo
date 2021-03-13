@@ -14,7 +14,6 @@ const Reserve = (props) => {
     children,
   } = props;
 
-  console.log(children);
   return (
     <li className="reserve-li-item" bookId={bookId}>
       <Link to={`/reserve/${selectedUser.idusuario}/${bookId}/${reserveDate}`}>

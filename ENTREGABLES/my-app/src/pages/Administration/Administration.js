@@ -16,9 +16,6 @@ export const Administration = () => {
       <div className="administration-item-container">
         <Link to="/donations">DONACIONES</Link>
       </div>
-      <div className="administration-item-container">
-        <Link to="/invoices">FACTURAS</Link>
-      </div>
     </div>
   );
 };
