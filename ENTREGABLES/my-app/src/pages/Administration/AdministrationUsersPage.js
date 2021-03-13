@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { User } from "../../components/main/User/User";
 import "./Administration.css";
@@ -24,20 +23,20 @@ function AdministrationUsersPage() {
     }
     getAllUsers();
   }, []);
+
   console.log(users);
 
   const renderUsers = (user) => (
-    <Link to={`/users/profile/${user.idusuario}`}>
-      <User
-        key={user.idusuario}
-        userName={user.nombreusuario}
-        userProfileName={user.nombreperfilusuario}
-        userLastname1={user.apel1}
-        userLastname2={user.apel2}
-        userEmail={user.email}
-        userPurse={user.monedero}
-      />
-    </Link>
+    <User
+      key={user.idusuario}
+      userId={user.idusuario}
+      userName={user.nombreusuario}
+      userProfileName={user.nombreperfilusuario}
+      userLastname1={user.apel1}
+      userLastname2={user.apel2}
+      userEmail={user.email}
+      userPurse={user.monedero}
+    ></User>
   );
 
   return (

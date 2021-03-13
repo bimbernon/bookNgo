@@ -39,8 +39,7 @@ export const UserPurse = () => {
 
   const rechargePurse = async (e) => {
     e.preventDefault();
-    console.log("llego");
-    console.log(`${selectedUser.idusuario}`);
+
     const userRechargeResponse = await fetch(
       `http://localhost:3080/api/v1/users/purse/recharge/${selectedUser.idusuario}`,
       {
@@ -55,11 +54,7 @@ export const UserPurse = () => {
       }
     );
     if (userRechargeResponse.ok) {
-      console.log("llego");
       const userRechargeData = await userRechargeResponse.json();
-      console.log(userRechargeData);
-      //setUserMoney(userRechargeData);
-      // setUserMoney(userMoney + newRecharge);
     } else {
       const errorMsg = await userRechargeResponse.json();
       setErrorMsg("Algo ha salido mal...");
@@ -80,8 +75,6 @@ export const UserPurse = () => {
       );
       if (userCardResponse.ok) {
         const userCardData = await userCardResponse.json();
-        console.log(userCardData);
-        // setCard(userCardData);
       } else {
         const errorMsg = await userCardResponse.json();
         setErrorMsg("Algo ha salido mal...");
@@ -114,7 +107,7 @@ export const UserPurse = () => {
 
   return (
     <div className="purse-container">
-      <h1 className="purse-title">Monedero</h1>
+      <h1 className="purse-title">Mi monedero</h1>
       <div className="money-container">
         <h2>Saldo</h2>
         <div className="money-display-container">

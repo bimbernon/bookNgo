@@ -5,6 +5,7 @@ const Cathegory = (props) => {
   const { cathegoryId, cathegoryName } = props;
 
   const style = {
+    // backgroundImage: `url("/booksIcons/9.jpeg")`,
     backgroundImage: `url("/booksIcons/${cathegoryId}.png")`,
     backgroundSize: "cover",
     backgroundPosition: "33%",

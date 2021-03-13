@@ -8,6 +8,7 @@
   flex-direction: column;
   margin: 1rem auto;
   max-width: 93vw;
+  height: 45rem;
 }
 
 .user-profile-container > h1 {
@@ -39,6 +40,8 @@
 
 .modify-buttons-container {
   margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .modify-user-info-button,

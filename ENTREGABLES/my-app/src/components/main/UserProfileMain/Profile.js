@@ -9,6 +9,8 @@ const Profile = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [userProfile, setUserProfile] = useState({});
+  const [errorMsg, setErrorMsg] = useState("");
+
   let { userId } = useParams();
 
   useEffect(() => {
@@ -24,20 +26,40 @@ const Profile = () => {
   }, []);
 
   const sytle = {
-    backgroundImage: `url("/images/users/${userId}.jpg")`,
+    // backgroundImage: `url("/images/users/${userId}.jpg")`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    border: "1px solid black",
-    borderRadius: "1rem",
+    // border: "1px solid black",
+    borderRadius: "50rem",
     boxShadow: "5px 5px 5px rgb(58, 55, 55",
     width: "7rem",
-    height: "9rem",
+    height: "7rem",
   };
+
+  const deleteUserById = async (e) => {
+    const userResponse = await fetch(
+      `http://localhost:3080/api/v1/users/delete/${userProfile.idusuario}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (userResponse.ok) {
+      await userResponse.json();
+    } else {
+      const errorMsg = await userResponse.json();
+      setErrorMsg("Algo ha salido mal...");
+    }
+  };
+  deleteUserById();
 
   return (
     <>
       <h1>{`Hola, ${userProfile.nombreusuario}`}</h1>
-      <div className="user-image-profile" style={sytle} alt="user"></div>
+
+      <div className="user-image-profile" alt="user">
+        <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} />
+      </div>
       <div className="user-info-item">
         <h3 className="user-item-title">Nombre:</h3>
         <p>{`  ${userProfile.nombreusuario} ${userProfile.apel1} ${userProfile.apel2}`}</p>
@@ -58,13 +80,28 @@ const Profile = () => {
         <Link
           to={`/user/profile/modify/modifyProfile/${selectedUser.idusuario}`}
         >
-          <button className="modify-user-info-button">MODIFICAR PERFIL</button>
+          <img
+            src="/icons/edit.png"
+            alt="borrar"
+            style={{ height: "2.5rem", width: "2.5rem" }}
+          />
         </Link>
         <Link to={`/user/updatePassword/${selectedUser.idusuario}`}>
-          <button className="modify-user-password-button">
-            CAMBIAR CONTRASEÑA
-          </button>
+          <img
+            src="/icons/changepassword.png"
+            alt="borrar"
+            style={{ height: "3rem", width: "3rem" }}
+          />
         </Link>
+        <form className="delete-user-form">
+          <button className="delete-user-button" onSubmit={deleteUserById}>
+            <img
+              src="/icons/delete.png"
+              alt="borrar"
+              style={{ height: "2.5rem", width: "2.5rem" }}
+            />
+          </button>
+        </form>
       </div>
     </>
   );

@@ -11,7 +11,16 @@
   margin-left: 0.5rem;
   border-radius: 1rem;
   justify-content: space-around;
-  align-items: center;
+}
+
+.user-principal-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.user-profile-name {
+  font-size: 0.9rem;
 }
 
 .user-name,
@@ -19,8 +28,26 @@
   font-size: 0.7rem;
 }
 
+.user-purse-item {
+  display: flex;
+  flex-direction: column;
+}
+
 .user-purse {
   font-size: 2rem;
   text-align: center;
   margin: 0;
+}
+
+.update-delete-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-user-button {
+  border: 0;
+  background: none;
+  border-radius: 50px;
+  padding: 0;
+  margin: 0 0.5rem;
 }

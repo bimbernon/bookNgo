@@ -15,7 +15,7 @@ const NavigationMenu = () => {
           <nav className="navigation-menu">
             <ul className="navigation-menu-list">
               <li className="navigation-menu-item">
-                <Link to="/donations" className="navigation-link">
+                <Link to="/donations/create" className="navigation-link">
                   Dona tus libros
                 </Link>
               </li>

@@ -5,6 +5,8 @@
   border-radius: 20px;
   height: 530px;
   margin: 20px 20px 20px 20px;
+  display: flex;
+  align-items: center;
 }
 
 .donations-form {
@@ -23,15 +25,13 @@
 }
 
 .donations-form-button {
-  margin: 1rem 0;
-  text-align: center;
-  background-color: rgb(24, 212, 24);
+  font-family: "Comfortaa";
+  padding: 0.5rem 0.6rem;
+  border: 0;
+  border-radius: 50px;
+  color: white;
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
-  border: none;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  height: 25px;
-  width: 125px;
+  background-color: var(--title-brown-color);
 }
 
 .donations-form-direction {

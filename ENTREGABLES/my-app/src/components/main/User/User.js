@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Avatar } from "../../header/Avatar/Avatar";
+import { Link } from "react-router-dom";
 import "./User.css";
 
 const User = (props) => {
@@ -17,14 +19,36 @@ const User = (props) => {
     <div className="user-info-container">
       <li className="user-main-info" userId={userId} userAddress={userAddress}>
         <div className="user-main-item">
+          <div className="user-principal-info">
+            <Avatar imageId={userId} />
+            <h1 className="user-profile-name"> {userProfileName}</h1>
+          </div>
           <h1 className="user-name">
-            {`${userName} ${userLastname1} ${userLastname2} - ${userProfileName}`}
+            {`${userName} ${userLastname1} ${userLastname2}`}
           </h1>
           <h2 className="user-email">{userEmail}</h2>
         </div>
         <div className="user-main-item">
-          saldo
-          <h1 className="user-purse">{userPurse}</h1>
+          <div className="user-purse-container">
+            saldo
+            <h1 className="user-purse">{userPurse}</h1>
+          </div>
+          <form className="update-delete-container">
+            <button className="delete-user-button" onSubmit="/">
+              <img
+                src="/icons/delete.png"
+                alt="borrar"
+                style={{ height: "1.2rem", width: "1.2rem" }}
+              />
+            </button>
+            <Link to={`/users/profile/${userId}`}>
+              <img
+                src="/icons/edit.png"
+                alt="edit"
+                style={{ height: "1.2rem", width: "1.2rem" }}
+              />
+            </Link>
+          </form>
         </div>
       </li>
     </div>

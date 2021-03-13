@@ -11,29 +11,6 @@ const AddCardForm = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [currentCard, setCurrentCard] = useState(0);
-  //CREO QUE ESTO NO SERIA NECESARIO YA QUE NO ESTAMOS UTILIZANDO LA VARIABLE USERMONEY
-  // useEffect(() => {
-  //   async function getUserInfo() {
-  //     const moneyResponse = await fetch(
-  //       `http://localhost:3080/api/v1/users/id/${selectedUser.idusuario}`,
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     if (moneyResponse.ok) {
-  //       const moneyResponseData = await moneyResponse.json();
-  //       setUserMoney(moneyResponseData.monedero);
-  //     } else {
-  //       const errorMsg = await moneyResponse.json();
-  //       setErrorMsg("Algo ha salido mal...");
-  //     }
-  //   }
-  //   getUserInfo();
-  // }, [cards]);
 
   useEffect(() => {
     setCurrentCard(cards[0]);
@@ -131,12 +108,9 @@ const AddCardForm = () => {
 
   return (
     <div className="add-card-form-container">
-      <form className="add-card-selector" onSubmit={deleteCardById}>
-        <select className="add-card-options" onChange={handleSelectedCard}>
-          {cards.map(renderCards)}
-        </select>
-        <button type="submit">BORRAR</button>
-      </form>
+      <a href="javascript:history.back()" className="back-button">
+        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+      </a>
       <div>
         <h1 className="add-card-form-title">Añade tu tarjeta</h1>
 
@@ -144,7 +118,7 @@ const AddCardForm = () => {
           <div className="add-card-form-item">
             <input
               type="text"
-              placeholder="Numero de tarjeta"
+              placeholder={`     Numero de tarjeta`}
               value={cardNumber}
               onChange={handleChangeCardNumber}
             />
@@ -152,7 +126,7 @@ const AddCardForm = () => {
           <div className="add-card-form-item">
             <input
               type="text"
-              placeholder="Fecha de caducidad"
+              placeholder={`     Fecha de caducidad`}
               value={expirationDate}
               onChange={handleChangeExpirationDate}
             />
@@ -160,22 +134,27 @@ const AddCardForm = () => {
           <div className="add-card-form-item">
             <input
               type="text"
-              placeholder="CSV"
+              placeholder={`     CSV`}
               value={csv}
               onChange={handleChangeCsv}
             />
           </div>
           <div className="add-card-button-container">
             <button className="add-card-submit-button" type="submit">
-              <img
-                className="add-card-button-logo"
-                src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png"
-                alt="logo"
-              />
+              +
             </button>
           </div>
         </form>
       </div>
+      <form className="add-card-selector" onSubmit={deleteCardById}>
+        Selecciona una tarjeta
+        <select className="add-card-options" onChange={handleSelectedCard}>
+          {cards.map(renderCards)}
+        </select>
+        <button type="submit" className="delete-card-button">
+          BORRAR
+        </button>
+      </form>
     </div>
   );
 };
