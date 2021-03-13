@@ -7,8 +7,8 @@ export function Card(props) {
     <option
       key={cardId}
       value={userName}
-      cardId={cardId}
-      expirationDate={expirationDate}
+      cardid={cardId}
+      expirationdate={expirationDate}
       csv={csv}
     >
       {cardNumber}

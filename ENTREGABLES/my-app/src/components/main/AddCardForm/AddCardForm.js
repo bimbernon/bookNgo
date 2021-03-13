@@ -101,8 +101,6 @@ const AddCardForm = () => {
   const handleChangeCsv = (e) => setCsv(e.target.value);
 
   const handleSubmitCard = async (e) => {
-    e.preventDefault();
-
     const resp = await fetch("http://localhost:3080/api/v1/cards", {
       method: "POST",
       headers: {
@@ -125,7 +123,7 @@ const AddCardForm = () => {
 
   const renderCards = (card) => (
     <Card
-      Key={card.idtarjeta}
+      key={card.idtarjeta}
       cardId={card.idtarjeta}
       cardNumber={card.numerotarjeta}
     />

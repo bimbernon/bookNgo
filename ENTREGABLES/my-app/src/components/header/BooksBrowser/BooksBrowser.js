@@ -17,8 +17,8 @@ const BookBrowser = () => {
                 src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png"
                 alt="logo"
               />
-              <AdvancedBrowser />
             </button>
+            <AdvancedBrowser />
           </li>
         </ul>
       </div>

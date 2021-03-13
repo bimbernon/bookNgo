@@ -24,7 +24,7 @@
   margin: 0 0.5rem;
 }
 
-.advanced-browser-button:hover > div {
+.advanced-browser-button:hover + div {
   display: initial;
 }
 
