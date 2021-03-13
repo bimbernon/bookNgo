@@ -1,8 +1,7 @@
 import React from "react";
 import { BackPackItem } from "../components/main/BackPackItem/BackPackItem";
 
-export function BackPack(props) {
-  const { bag, setBag} = props;
+export function BackPack() {
   return (
     <div>
       <BackPackItem />

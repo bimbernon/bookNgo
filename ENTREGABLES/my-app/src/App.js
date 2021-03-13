@@ -1,9 +1,10 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState} from "react";
+import { useState } from "react";
 
 import { UserProvider } from "./components/providers/UserProvider";
 import { AuthProvider } from "./components/providers/AuthProvider";
+import { BagProvider } from "./components/providers/BagProvider";
 
 import { HeaderContainer } from "./components/header/HeaderContainer/HeaderContainer";
 import { Footer } from "../src/components/footer/Footer";
@@ -32,78 +33,80 @@ function App() {
     backgroundImage: `url("/background_photos/background_image.jpg")`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-  }
+  };
 
   const [bag, setBag] = useState([]);
 
   return (
     <AuthProvider>
       <UserProvider>
-        <Router>
-          <div className="cuerpo" style={style}>
-            <HeaderContainer />
-            <Switch>
-              <Route path="/cathegory/books/:nameCathegory">
-                <BooksByCathegory />
-              </Route>
-              <Route path="/users/register">
-                <Register />
-              </Route>
-              <Route path="/users/login">
-                <Login />
-              </Route>
-              <Route path="/books/id/:bookId">
-                <BookPage />
-              </Route>
-              <Route path="/users/profile/:userId">
-                <UserProfile />
-              </Route>
-              <Route path="/user/profile/modify/:userId">
-                <ModifyUserProfile />
-              </Route>
-              <Route path="/user/updatePassword/:userId">
-                <ModifyUserPassword />
-              </Route>
-              <Route path="/reserves/:userId">
-                <UserReserves />
-              </Route>
-              <Route path="/reserve/:idusuario/:idlibro/:fechareserva">
-                <UserReserveDetails />
-              </Route>
-              <Route path="/users/purse/:userId">
-                <UserPursePage />
-              </Route>
-              <Route path="/donations/update/:donationId">
-                <AdministrationDonationsPage />
-              </Route>
-              <Route path="/cards">
-                <UpdateCards />
-              </Route>
-              <Route path="/administration">
-                <Administration />
-              </Route>
-              <Route path="/donations/create">
-                <UserDonations />
-              </Route>
-              <Route path="/users/">
-                <AdministrationUsersPage />
-              </Route>
-              <Route path="/books/">
-                <AdministrationBooksPage />
-              </Route>
-              <Route path="/donations/">
-                <AdministrationDonationsPage />
-              </Route>
-              <Route path="/user/book/mochila/:bookId">
-                <BackPack bag={bag} setBag={setBag}/>
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
-            <Footer />
-          </div>
-        </Router>
+        <BagProvider>
+          <Router>
+            <div className="cuerpo" style={style}>
+              <HeaderContainer />
+              <Switch>
+                <Route path="/cathegory/books/:nameCathegory">
+                  <BooksByCathegory />
+                </Route>
+                <Route path="/users/register">
+                  <Register />
+                </Route>
+                <Route path="/users/login">
+                  <Login />
+                </Route>
+                <Route path="/books/id/:bookId">
+                  <BookPage />
+                </Route>
+                <Route path="/users/profile/:userId">
+                  <UserProfile />
+                </Route>
+                <Route path="/user/profile/modify/:userId">
+                  <ModifyUserProfile />
+                </Route>
+                <Route path="/user/updatePassword/:userId">
+                  <ModifyUserPassword />
+                </Route>
+                <Route path="/reserves/:userId">
+                  <UserReserves />
+                </Route>
+                <Route path="/reserve/:idusuario/:idlibro/:fechareserva">
+                  <UserReserveDetails />
+                </Route>
+                <Route path="/users/purse/:userId">
+                  <UserPursePage />
+                </Route>
+                <Route path="/donations/update/:donationId">
+                  <AdministrationDonationsPage />
+                </Route>
+                <Route path="/cards">
+                  <UpdateCards />
+                </Route>
+                <Route path="/administration">
+                  <Administration />
+                </Route>
+                <Route path="/donations/create">
+                  <UserDonations />
+                </Route>
+                <Route path="/users/">
+                  <AdministrationUsersPage />
+                </Route>
+                <Route path="/books/">
+                  <AdministrationBooksPage />
+                </Route>
+                <Route path="/donations/">
+                  <AdministrationDonationsPage />
+                </Route>
+                <Route path="/user/book/mochila/:bookId">
+                  <BackPack />
+                </Route>
+                <Route path="/">
+                  <Home />
+                </Route>
+              </Switch>
+              <Footer />
+            </div>
+          </Router>
+        </BagProvider>
       </UserProvider>
     </AuthProvider>
   );

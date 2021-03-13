@@ -4,15 +4,17 @@ import { Book } from "../Book/Book";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
+import { BagContext } from "../../providers/BagProvider";
 import { InsertReserve } from "../Reserve/InsertReserve/InsertReserve";
 
 export const BackPackItem = () => {
   const [book, setBook] = useState({});
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
+  const [bag, setBag] = useContext(BagContext);
+  //setBag(JSON.stringify(["JOSE"]));
   let { bookId } = useParams();
-
 
   useEffect(() => {
     async function getBookById() {
@@ -30,17 +32,20 @@ export const BackPackItem = () => {
     getBookById();
   }, []);
 
-    useEffect(() => {
-      async function getUserProfile() {
-        const userResponse = await (
-          await fetch(`http://localhost:3080/api/v1/users/id/${selectedUser.idusuario}`, {
+  useEffect(() => {
+    async function getUserProfile() {
+      const userResponse = await (
+        await fetch(
+          `http://localhost:3080/api/v1/users/id/${selectedUser.idusuario}`,
+          {
             headers: { Authorization: `Bearer ${token}` },
-          })
-        ).json();
-        setUser(userResponse);
-      }
-      getUserProfile();
-    }, []);
+          }
+        )
+      ).json();
+      setUser(userResponse);
+    }
+    getUserProfile();
+  }, []);
 
   const result = token ? (
     <div className="backPack-container">
@@ -54,7 +59,7 @@ export const BackPackItem = () => {
         ></Book>
       </div>
       <div>
-        <InsertReserve bookId={bookId} userMoney={user.monedero}/>
+        <InsertReserve bookId={bookId} userMoney={user.monedero} />
       </div>
     </div>
   ) : (
