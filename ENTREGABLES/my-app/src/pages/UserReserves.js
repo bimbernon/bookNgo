@@ -11,7 +11,6 @@ export const UserReserves = () => {
   const [reserve, setReserve] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [reserveInfo, setReserveInfo] = useState([]);
-  console.log(reserve.fechareserva);
 
   useEffect(() => {
     async function getReservesByUserId() {

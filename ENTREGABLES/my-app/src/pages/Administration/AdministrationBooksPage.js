@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { Book } from "../../components/main/Book/Book";
 import "./Administration.css";
@@ -8,6 +7,7 @@ function AdministrationBooksPage() {
   const [token] = useContext(AuthContext);
   const [books, setBooks] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
+  const [deleteBook, setDeleteBook] = useState([]);
 
   useEffect(() => {
     async function getAllBooks() {
@@ -24,16 +24,43 @@ function AdministrationBooksPage() {
     }
     getAllBooks();
   }, []);
-  console.log(books);
+
+  useEffect(() => {
+    async function deleteBook() {
+      const deleteBookResponse = await fetch(
+        `http://localhost:3080/api/v1/books/${books.idlibro}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      if (deleteBookResponse.ok) {
+        const deleteBookData = await deleteBookResponse.json();
+        setDeleteBook(deleteBookData);
+      } else {
+        const errorMsg = await deleteBookResponse.json();
+        setErrorMsg("Algo ha salido mal...");
+      }
+    }
+    deleteBook();
+  }, []);
 
   const renderBooks = (book) => (
+    <div className="admin-book-container">
       <Book
         key={book.idlibro}
         bookName={book.titulo}
         imageId={book.idlibro}
         bookAuthor={`${book.nombreautor} ${book.apel1}`}
         bookPrice={`Precio: ${book.precio}`}
-      />
+      ></Book>
+      <button className="delete-book-button" onSubmit="/">
+        <img
+          src="/icons/delete.png"
+          alt="borrar"
+          style={{ height: "1.2rem", width: "1.2rem" }}
+        />
+      </button>
+    </div>
   );
 
   return (

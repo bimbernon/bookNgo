@@ -42,7 +42,7 @@ export const UserProfileForm = () => {
     const uploadUserProfileResponse = await fetch(
       ` http://localhost:3080/api/v1/users/update/${selectedUser.idusuario}`,
       {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,

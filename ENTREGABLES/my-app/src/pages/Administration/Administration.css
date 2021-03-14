@@ -45,3 +45,17 @@ a {
   justify-content: center;
   padding: 0;
 }
+
+.admin-book-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.delete-book-button {
+  border: 0;
+  background: none;
+  border-radius: 50px;
+  padding: 0;
+  margin: 0 0.5rem;
+}
