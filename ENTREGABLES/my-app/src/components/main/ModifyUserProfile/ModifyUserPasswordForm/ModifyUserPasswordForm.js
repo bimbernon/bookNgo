@@ -16,6 +16,8 @@ export const ModifyUserPasswordForm = () => {
   const handleUserProfile = async (e) => {
     e.preventDefault();
 
+    console.log("ssss");
+
     const uploadUserPasswordResponse = await fetch(
       ` http://localhost:3080/api/v1/users/updatePassword/${selectedUser.idusuario}`,
       {

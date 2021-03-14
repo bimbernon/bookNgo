@@ -24,7 +24,7 @@ export function BooksByCathegory() {
       bookName={book.titulo}
       bookId={book.idLibro}
       bookAuthor={`${book.Autor.nombreAutor} ${book.Autor.apellido1} `}
-    ></Book>
+    />
   );
 
   return (

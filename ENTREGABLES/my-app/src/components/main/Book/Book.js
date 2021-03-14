@@ -10,7 +10,7 @@ const Book = (props) => {
     bookPrice,
     bookSinopsis,
     style,
-    stockMsg
+    stockMsg,
   } = props;
 
   return (

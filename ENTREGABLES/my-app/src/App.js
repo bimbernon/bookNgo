@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState } from "react";
 
 import { UserProvider } from "./components/providers/UserProvider";
 import { AuthProvider } from "./components/providers/AuthProvider";
@@ -34,8 +33,6 @@ function App() {
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
   };
-
-  const [bag, setBag] = useState([]);
 
   return (
     <AuthProvider>

@@ -6,6 +6,7 @@ import "./InsertReserve.css";
 
 export const InsertReserve = (props) => {
   const { bookId, userMoney } = props;
+  console.log(bookId, userMoney);
   const [token] = useContext(AuthContext);
   const [reserve, setReserve] = useState([]);
   const [selectedUser] = useContext(UserContext);
@@ -18,6 +19,7 @@ export const InsertReserve = (props) => {
   const insertReserveEffect = async (e) => {
     e.preventDefault();
 
+    console.log("hyey");
     const reserveResponse = await fetch(
       "http://localhost:3080/api/v1/reserves/",
       {
@@ -61,8 +63,7 @@ export const InsertReserve = (props) => {
         </div>
       )}
       <form
-        onSubmit={insertReserveEffect}
-        action={`/reserves/${selectedUser.idusuario}`}
+        // action={`/reserves/${selectedUser.idusuario}`}
         className="reserve-form"
       >
         <button
@@ -70,8 +71,6 @@ export const InsertReserve = (props) => {
           disabled
           className="book-details-reserve-button"
           type="submit"
-          value={bookId}
-          onClick={handleChangeReserve}
         >
           Pagar
         </button>

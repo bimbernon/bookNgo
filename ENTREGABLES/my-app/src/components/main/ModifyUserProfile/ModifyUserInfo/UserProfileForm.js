@@ -23,18 +23,16 @@ export const UserProfileForm = () => {
     getUserProfile();
   }, []);
 
-  const [name, setName] = useState("");
-  const [lastName1, setLastName1] = useState("");
-  const [lastName2, setLastName2] = useState("");
-  const [address, setAdress] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState(userProfile.nombreusuario);
+  const [lastName1, setLastName1] = useState(userProfile.apel1);
+  const [lastName2, setLastName2] = useState(userProfile.apel2);
+  const [address, setAdress] = useState(userProfile.direccion);
   const [selectedUser] = useContext(UserContext);
 
-  const handleChangeName = (e) => setName(e.target.defaultValue);
-  const handleChangeLastName1 = (e) => setLastName1(e.target.defaultValue);
-  const handleChangeAdress = (e) => setAdress(e.target.defaultValue);
-  const handleChangeLastName2 = (e) => setLastName2(e.target.defaultValue);
-  const handleChangeEmail = (e) => setEmail(e.target.defaultValue);
+  const handleChangeName = (e) => setName(e.target.value);
+  const handleChangeLastName1 = (e) => setLastName1(e.target.value);
+  const handleChangeAdress = (e) => setAdress(e.target.value);
+  const handleChangeLastName2 = (e) => setLastName2(e.target.value);
 
   const handleUserProfile = async (e) => {
     e.preventDefault();
@@ -51,7 +49,6 @@ export const UserProfileForm = () => {
           name: name,
           lastName1: lastName1,
           lastName2: lastName2,
-          email: email,
           address: address,
         }),
       }
@@ -59,11 +56,10 @@ export const UserProfileForm = () => {
 
     if (uploadUserProfileResponse.ok) {
       await uploadUserProfileResponse.json();
-      setName("");
-      setLastName1("");
-      setLastName2("");
-      setAdress("");
-      setEmail("");
+      // setName("");
+      // setLastName1("");
+      // setLastName2("");
+      // setAdress("");
     }
   };
 
@@ -75,7 +71,8 @@ export const UserProfileForm = () => {
           <h2 className="input-user-modify-form-title">Nombre: </h2>
           <input
             type="text"
-            defaultValue={userProfile.nombreusuario}
+            value={name}
+            placeholder={userProfile.nombreusuario}
             onChange={handleChangeName}
             className="input-user-modify-form"
           />
@@ -84,7 +81,8 @@ export const UserProfileForm = () => {
           <h2 className="input-user-modify-form-title">Primer apellido:</h2>
           <input
             type="text"
-            defaultValue={userProfile.apel1}
+            value={lastName1}
+            placeholder={userProfile.apel1}
             onChange={handleChangeLastName1}
             className="input-user-modify-form"
           />
@@ -93,7 +91,8 @@ export const UserProfileForm = () => {
           <h2 className="input-user-modify-form-title">Segundo apellido:</h2>
           <input
             type="text"
-            defaultValue={userProfile.apel2}
+            value={lastName2}
+            placeholder={userProfile.apel2}
             onChange={handleChangeLastName2}
             className="input-user-modify-form"
           />
@@ -102,21 +101,12 @@ export const UserProfileForm = () => {
           <h2 className="input-user-modify-form-title">Dirección:</h2>
           <input
             type="text"
-            defaultValue={userProfile.direccion}
+            value={address}
+            placeholder={userProfile.direccion}
             onChange={handleChangeAdress}
             className="input-user-modify-form"
           />
         </div>
-        <div className="input-user-modify-form-container">
-          <h2 className="input-user-modify-form-title">Email:</h2>
-          <input
-            type="email"
-            defaultValue={userProfile.email}
-            onChange={handleChangeEmail}
-            className="input-user-modify-form"
-          />
-        </div>
-
         <div className="user-profile-button-container">
           <button type="submit" className="user-profile-button">
             ACTUALIZAR

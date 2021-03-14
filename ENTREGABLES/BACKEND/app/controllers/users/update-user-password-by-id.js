@@ -2,16 +2,14 @@
 
 const Joi = require("joi");
 const bcrypt = require("bcryptjs");
-const cryptoRandomString = require("crypto-random-string");
 const {
   updatePassword,
   findUserById,
 } = require("../../repositories/users-repository");
 
-const schema = Joi.object().keys({
-  password: Joi.string().min(3).max(40).required(),
-  newPassword: Joi.string().min(3).max(40).required(),
-});
+// const schema = Joi.object().keys({
+//   newPassword: Joi.string().min(3).max(40).required(),
+// });
 
 async function updateUserPassword(req, res) {
   try {
@@ -29,20 +27,31 @@ async function updateUserPassword(req, res) {
 
     const user = await findUserById(userId);
 
-    const { password, newPassword } = req.body;
-    await schema.validateAsync(newPassword);
+    console.log(user);
 
-    const newPasswordHash = await bcrypt.hash(newPassword, 1);
+    const { password, newPassword } = req.body;
+    console.log("nueva password");
+
+    // await schema.validateAsync(newPassword);
+
+    if (newPassword === user.contraseña) {
+      const error = new Error(
+        "La contraseña nueva no puede ser igual a la actual"
+      );
+    }
+
+    const newPasswordHash = await bcrypt.hash(newPassword, 2);
 
     const confirmPassword = await bcrypt.compare(password, user.contraseña);
+
     if (!confirmPassword) {
-      const error = new Error("Contraseña incorrecta");
+      const error = new Error("Contraseña actual incorrecta");
       error.status = 403;
       throw error;
     }
 
     await updatePassword(newPasswordHash, userId);
-    res.send({ message: "Contraseña cambiada con éxito" });
+    res.send({ password: password, newPassword: newPassword });
   } catch (err) {
     res.status(400).send({ error: err.message });
   }

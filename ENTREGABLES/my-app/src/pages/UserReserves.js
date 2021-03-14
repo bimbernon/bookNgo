@@ -8,7 +8,7 @@ import "../components/main/Reserve/Reserve.css";
 export const UserReserves = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
-  const [reserve, setReserve] = useState([]);
+  const [reserves, setReserves] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [reserveInfo, setReserveInfo] = useState([]);
 
@@ -22,7 +22,8 @@ export const UserReserves = () => {
       );
       if (reserveResponse.ok) {
         const allReservesData = await reserveResponse.json();
-        setReserve(allReservesData);
+        setReserves(allReservesData);
+        console.log(allReservesData);
       } else {
         const errorMsg = await reserveResponse.json();
         setErrorMsg("Algo ha salido mal...");
@@ -31,28 +32,27 @@ export const UserReserves = () => {
     getReservesByUserId();
   }, []);
 
+  // async function getReservesByUserBookDate() {
+  //   const reserveResponse = await fetch(
+  //     `http://localhost:3080/api/v1/reserves/search/${selectedUser.idusuario}/${reserve.idlibro}/${reserve.fechareserva}`,
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     }
+  //   );
 
-  async function getReservesByUserId () {
-    const reserveResponse = await fetch(
-      `http://localhost:3080/api/v1/reserves/search/${selectedUser.idusuario}/${reserve.idlibro}/${reserve.fechareserva}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    if (reserveResponse.ok) {
-      const reserveData = await reserveResponse.json();
-      console.log(reserveData);
-      setReserveInfo(reserveData);
-    } else {
-      const errorMsg = await reserveResponse.json();
-      setErrorMsg("Algo ha salido mal...");
-    }
-  };
+  //   if (reserveResponse.ok) {
+  //     const reserveData = await reserveResponse.json();
+  //     console.log(reserveData);
+  //     setReserveInfo(reserveData);
+  //   } else {
+  //     const errorMsg = await reserveResponse.json();
+  //     setErrorMsg("Algo ha salido mal...");
+  //   }
+  // }
 
   const reservesRender = (reserves) => (
     <button className="reserve-li-item">
@@ -73,7 +73,7 @@ export const UserReserves = () => {
     <div className="reserves-container">
       <h1 className="reserves-title">Mis reservas</h1>
       <div className="reserve-item-list-container">
-        <ul className="reserve-item-list">{reserve.map(reservesRender)}</ul>
+        <ul className="reserve-item-list">{reserves.map(reservesRender)}</ul>
       </div>
       <div className="reserve-details-container"></div>
       {errorMsg && (
