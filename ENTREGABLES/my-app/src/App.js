@@ -26,6 +26,7 @@ import { UpdateCards } from "./pages/UpdateCards";
 import { AdministrationUsersPage } from "./pages/Administration/AdministrationUsersPage";
 import { AdministrationBooksPage } from "./pages/Administration/AdministrationBooksPage";
 import { AdministrationDonationsPage } from "./pages/Administration/AdministrationDonationsPage";
+import { CreateBook } from "./AdministrationCreateBooksPage";
 
 function App() {
   const style = {
@@ -86,6 +87,9 @@ function App() {
                 </Route>
                 <Route path="/users/">
                   <AdministrationUsersPage />
+                </Route>
+                <Route path="/books/create">
+                  <CreateBook />
                 </Route>
                 <Route path="/books/">
                   <AdministrationBooksPage />

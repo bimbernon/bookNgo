@@ -3,11 +3,13 @@ import { AuthContext } from "../../components/providers/AuthProvider";
 import { Book } from "../../components/main/Book/Book";
 import "./Administration.css";
 
-function AdministrationBooksPage() {
+export function AdministrationBooksPage() {
   const [token] = useContext(AuthContext);
   const [books, setBooks] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [deleteBook, setDeleteBook] = useState([]);
+  console.log(books);
+  console.log(deleteBook);
 
   useEffect(() => {
     async function getAllBooks() {
@@ -25,41 +27,50 @@ function AdministrationBooksPage() {
     getAllBooks();
   }, []);
 
+  const handleDeleteBook = (e) => setDeleteBook(e.targuet.value);
+
   useEffect(() => {
-    async function deleteBook() {
+    async function deleteBookById() {
       const deleteBookResponse = await fetch(
         `http://localhost:3080/api/v1/books/${books.idlibro}`,
         {
+          method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
         }
       );
       if (deleteBookResponse.ok) {
-        const deleteBookData = await deleteBookResponse.json();
-        setDeleteBook(deleteBookData);
+        const deletedBook = await deleteBookResponse.json();
       } else {
         const errorMsg = await deleteBookResponse.json();
         setErrorMsg("Algo ha salido mal...");
       }
     }
-    deleteBook();
+    deleteBookById();
   }, []);
+
+  const style = {
+    height: "10rem",
+  };
 
   const renderBooks = (book) => (
     <div className="admin-book-container">
       <Book
+        style={style}
         key={book.idlibro}
         bookName={book.titulo}
         imageId={book.idlibro}
         bookAuthor={`${book.nombreautor} ${book.apel1}`}
         bookPrice={`Precio: ${book.precio}`}
       ></Book>
-      <button className="delete-book-button" onSubmit="/">
-        <img
-          src="/icons/delete.png"
-          alt="borrar"
-          style={{ height: "1.2rem", width: "1.2rem" }}
-        />
-      </button>
+      <form onSubmit={AdministrationBooksPage}>
+        <button className="delete-book-button" value={books.idlibro} onClick={handleDeleteBook}>
+          <img
+            src="/icons/delete.png"
+            alt="borrar"
+            style={{ height: "1.2rem", width: "1.2rem" }}
+          />
+        </button>
+      </form>
     </div>
   );
 
@@ -69,5 +80,3 @@ function AdministrationBooksPage() {
     </div>
   );
 }
-
-export { AdministrationBooksPage };

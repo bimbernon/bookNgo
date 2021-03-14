@@ -30,7 +30,6 @@ async function updateUserPassword(req, res) {
     console.log(user);
 
     const { password, newPassword } = req.body;
-    console.log("nueva password");
 
     // await schema.validateAsync(newPassword);
 

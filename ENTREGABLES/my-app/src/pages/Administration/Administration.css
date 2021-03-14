@@ -9,6 +9,7 @@
   align-items: center;
 }
 
+.administration-item-container-books,
 .administration-item-container {
   background-color: var(--title-brown-color);
   color: white;
@@ -20,6 +21,22 @@
   justify-content: center;
   align-items: center;
   margin: 0.3rem 0;
+}
+
+.administration-item-container-books {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 2rem;
+}
+
+.books-links-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.books-links-container > a {
+  color: white;
 }
 
 .administration-item-container > a {
@@ -58,4 +75,8 @@ a {
   border-radius: 50px;
   padding: 0;
   margin: 0 0.5rem;
+}
+
+.upload-book-photo-button {
+  margin-top: 1rem;
 }
