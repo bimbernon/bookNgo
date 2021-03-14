@@ -63,6 +63,9 @@ export const CreateBook = () => {
   const [publisher, setPublisher] = useState("");
   const [year, setYear] = useState("");
   const [sinopsis, setSinopsis] = useState("");
+  const [name, setName] = useState("");
+  const [lastName1, setLastName1] = useState("");
+  const [lastName2, setLastName2] = useState("");
 
   const handleChangeTitle = (e) => setTitle(e.target.value);
   const handleChangePrice = (e) => setPrice(e.target.value);
@@ -105,10 +108,6 @@ export const CreateBook = () => {
       setSinopsis("");
     }
   };
-
-  const [name, setName] = useState("");
-  const [lastName1, setLastName1] = useState("");
-  const [lastName2, setLastName2] = useState("");
 
   const handleChangeName = (e) => setName(e.target.value);
   const handleChangeLastName1 = (e) => setLastName1(e.target.value);

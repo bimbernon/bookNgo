@@ -1,19 +1,40 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Link } from "react-router-dom";
+
+import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./Profile.css";
 
 const Profile = () => {
-  const [token] = useContext(AuthContext);
-  const [selectedUser] = useContext(UserContext);
+  const [token, setToken] = useContext(AuthContext);
+  const [selectedUser, setSelectedUser] = useContext(UserContext);
   const [userProfile, setUserProfile] = useState({});
   const [errorMsg, setErrorMsg] = useState("");
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: "Estas Seguro?",
+      text: "El perfil no se recuperara!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, eliminar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUserById();
+        // Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  };
 
   let { userId } = useParams();
 
   useEffect(() => {
+    console.log(userProfile.nombreusuario);
     async function getUserProfile() {
       const userResponse = await (
         await fetch(`http://localhost:3080/api/v1/users/profile/${userId}`, {
@@ -21,6 +42,7 @@ const Profile = () => {
         })
       ).json();
       setUserProfile(userResponse);
+      console.log(userProfile.nombreusuario);
     }
     getUserProfile();
   }, []);
@@ -37,8 +59,7 @@ const Profile = () => {
   };
 
   const deleteUserById = async (e) => {
-    // e.preventDefault();
-
+    console.log("se ejecuta la funcion");
     const userResponse = await fetch(
       `http://localhost:3080/api/v1/users/delete/${userProfile.idusuario}`,
       {
@@ -48,12 +69,20 @@ const Profile = () => {
     );
     if (userResponse.ok) {
       await userResponse.json();
+
+      Swal.fire(
+        "Eliminado!",
+        "El perfil se ha eliminado con exito.",
+        "success"
+      );
+      setToken("");
+      setSelectedUser({});
     } else {
       const errorMsg = await userResponse.json();
+      Swal.fire("Eliminar Perfil!", "Error al eliminar el perfil", "error");
       setErrorMsg("Algo ha salido mal...");
     }
   };
-  deleteUserById();
 
   return (
     <>
@@ -95,14 +124,15 @@ const Profile = () => {
             style={{ height: "3rem", width: "3rem" }}
           />
         </Link>
-        <form className="delete-user-form">
-          <button className="delete-user-button" onClick={deleteUserById}>
+        <form className="delete-user-form" onSubmit={handleDelete}>
+          <button className="delete-user-button" type="submit">
             <img
               src="/icons/delete.png"
               alt="borrar"
               style={{ height: "2.5rem", width: "2.5rem" }}
             />
           </button>
+          {token === "" && <Redirect to="/" />}
         </form>
       </div>
     </>

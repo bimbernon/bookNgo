@@ -8,12 +8,22 @@ import "./UserPurse.css";
 export const UserPurse = () => {
   const [userMoney, setUserMoney] = useState(0);
   const [cards, setCard] = useState([]);
+  const [currentCard, setCurrentCard] = useState({});
   const [newRecharge, setNewRecharge] = useState(0);
   const [errorMsg, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
 
   //falta por añadir la recarga al usuario a la base de datos
+
+  const handleSelecteCard = (e) => {
+    const selectedCard = cards.find((card) => {
+      return parseInt(card.idtarjeta) === parseInt(e.target.value);
+    });
+
+    setCurrentCard(selectedCard);
+    console.log("Tarjta Seleccionada" + currentCard.idtarjeta);
+  };
 
   useEffect(() => {
     async function getUserInfo() {
@@ -78,13 +88,18 @@ export const UserPurse = () => {
       if (userCardResponse.ok) {
         const userCardData = await userCardResponse.json();
         setCard(userCardData);
+        console.log(currentCard);
+        if (cards.length === 1) {
+          setCurrentCard(cards[0]);
+        }
       } else {
         const errorMsg = await userCardResponse.json();
         setErrorMsg("Algo ha salido mal...");
       }
     }
+
     getUserCard();
-  }, [cards]);
+  }, []);
 
   const renderCards = (card) => (
     <Card
@@ -105,7 +120,12 @@ export const UserPurse = () => {
     setNewRecharge(parseInt(e.currentTarget.value));
   };
   const handleRecharge = (e) => {
-    setUserMoney(userMoney + newRecharge);
+    //console.log(currentCard.idtarjeta);
+    if (cards.length > 0) {
+      setUserMoney(userMoney + newRecharge);
+    } else {
+      console.log("no se puede no tienes una tarjeta seleccionada");
+    }
   };
 
   return (
@@ -195,7 +215,9 @@ export const UserPurse = () => {
       <div className="payment-container">
         <h2>Selecciona método de pago</h2>
         <form className="card-select">
-          <select className="card-options">{cards.map(renderCards)}</select>
+          <select onChange={handleSelecteCard} className="card-options">
+            {cards.map(renderCards)}
+          </select>
           <Link to="/cards">
             <button className="add-card-button">Añadir tarjeta</button>
           </Link>
