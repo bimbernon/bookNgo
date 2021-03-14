@@ -7,10 +7,9 @@ const {
   findUserById,
 } = require("../../repositories/users-repository");
 
-const schema = Joi.object().keys({
-  password: Joi.string().min(3).max(40).required(),
-  newPassword: Joi.string().min(3).max(40).required(),
-});
+// const schema = Joi.object().keys({
+//   newPassword: Joi.string().min(3).max(40).required(),
+// });
 
 async function updateUserPassword(req, res) {
   try {
@@ -31,6 +30,7 @@ async function updateUserPassword(req, res) {
     console.log(user);
 
     const { password, newPassword } = req.body;
+    console.log("nueva password");
 
     // await schema.validateAsync(newPassword);
 
