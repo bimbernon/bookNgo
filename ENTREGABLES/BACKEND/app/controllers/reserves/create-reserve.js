@@ -44,7 +44,8 @@ async function createReserve(req, res) {
     await reserveRepository.decreaseBookStock(idlibro);
 
     const reserveDate = new Date();
-    console.log(reserveDate);
+
+    console.log(reserveDate.toISOString);
     const reserveDevolution = addDateDays(new Date(), 30);
     const rating = null;
 
@@ -61,7 +62,7 @@ async function createReserve(req, res) {
     res.status(200).send({
       idusuario: idusuario,
       idlibro,
-      fechareserva: reserveDate,
+      fechareserva: reserveDate.toLocaleDateString,
       fechadevolucion: reserveDevolution,
       valoracion: rating,
     });

@@ -69,7 +69,7 @@ function App() {
                 <Route path="/reserves/:userId">
                   <UserReserves />
                 </Route>
-                <Route path="/reserve/:idusuario/:idlibro/:fechareserva">
+                <Route path="/reserve/details">
                   <UserReserveDetails />
                 </Route>
                 <Route path="/users/purse/:userId">

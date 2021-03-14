@@ -6,6 +6,7 @@ import "./UserProfileForm.css";
 export const UserProfileForm = () => {
   const [userProfile, setUserProfile] = useState({});
   const [token] = useContext(AuthContext);
+  console.log(userProfile);
 
   useEffect(() => {
     async function getUserProfile() {
@@ -29,11 +30,11 @@ export const UserProfileForm = () => {
   const [email, setEmail] = useState("");
   const [selectedUser] = useContext(UserContext);
 
-  const handleChangeName = (e) => setName(e.target.value);
-  const handleChangeLastName1 = (e) => setLastName1(e.target.value);
-  const handleChangeAdress = (e) => setAdress(e.target.value);
-  const handleChangeLastName2 = (e) => setLastName2(e.target.value);
-  const handleChangeEmail = (e) => setEmail(e.target.value);
+  const handleChangeName = (e) => setName(e.target.defaultValue);
+  const handleChangeLastName1 = (e) => setLastName1(e.target.defaultValue);
+  const handleChangeAdress = (e) => setAdress(e.target.defaultValue);
+  const handleChangeLastName2 = (e) => setLastName2(e.target.defaultValue);
+  const handleChangeEmail = (e) => setEmail(e.target.defaultValue);
 
   const handleUserProfile = async (e) => {
     e.preventDefault();
@@ -41,13 +42,17 @@ export const UserProfileForm = () => {
     const uploadUserProfileResponse = await fetch(
       ` http://localhost:3080/api/v1/users/update/${selectedUser.idusuario}`,
       {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          ...userProfile,
+          name: name,
+          lastName1: lastName1,
+          lastName2: lastName2,
+          email: email,
+          address: address,
         }),
       }
     );
@@ -70,7 +75,7 @@ export const UserProfileForm = () => {
           <h2 className="input-user-modify-form-title">Nombre: </h2>
           <input
             type="text"
-            value={`   ${userProfile.nombreusuario}`}
+            defaultValue={userProfile.nombreusuario}
             onChange={handleChangeName}
             className="input-user-modify-form"
           />
@@ -79,7 +84,7 @@ export const UserProfileForm = () => {
           <h2 className="input-user-modify-form-title">Primer apellido:</h2>
           <input
             type="text"
-            value={`   ${userProfile.apel1}`}
+            defaultValue={userProfile.apel1}
             onChange={handleChangeLastName1}
             className="input-user-modify-form"
           />
@@ -88,7 +93,7 @@ export const UserProfileForm = () => {
           <h2 className="input-user-modify-form-title">Segundo apellido:</h2>
           <input
             type="text"
-            value={`   ${userProfile.apel2}`}
+            defaultValue={userProfile.apel2}
             onChange={handleChangeLastName2}
             className="input-user-modify-form"
           />
@@ -97,7 +102,7 @@ export const UserProfileForm = () => {
           <h2 className="input-user-modify-form-title">Dirección:</h2>
           <input
             type="text"
-            value={`   ${userProfile.direccion}`}
+            defaultValue={userProfile.direccion}
             onChange={handleChangeAdress}
             className="input-user-modify-form"
           />
@@ -106,7 +111,7 @@ export const UserProfileForm = () => {
           <h2 className="input-user-modify-form-title">Email:</h2>
           <input
             type="email"
-            value={`   ${userProfile.email}`}
+            defaultValue={userProfile.email}
             onChange={handleChangeEmail}
             className="input-user-modify-form"
           />

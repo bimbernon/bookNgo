@@ -13,10 +13,16 @@ const Reserve = (props) => {
     bookId,
     children,
   } = props;
+  console.log(props);
 
   return (
-    <li className="reserve-li-item" bookId={bookId}>
-      <Link to={`/reserve/${selectedUser.idusuario}/${bookId}/${reserveDate}`}>
+    <li
+      bookId={bookId}
+      reservedBookTitle={reservedBookTitle}
+      reserveDate={reserveDate}
+      reserveExpiration={reserveExpiration}
+    >
+      {/* <Link to={`/reserve/${selectedUser.idusuario}/${bookId}/${reserveDate}`}> */}
         <div
           className="reserve-info"
           reservedBookTitle={reservedBookTitle}
@@ -24,11 +30,8 @@ const Reserve = (props) => {
           reserveDate={reserveDate}
         >
           {children}
-          {/* <h2 className="reserve-book-title">{reservedBookTitle}</h2>
-          <p className="reserve-book-date">{reserveDate} </p>
-          <p className="reserve-book-expiration">{reserveExpiration} </p> */}
         </div>
-      </Link>
+      {/* </Link> */}
     </li>
   );
 };

@@ -9,6 +9,8 @@ export const InsertReserve = (props) => {
   const [token] = useContext(AuthContext);
   const [reserve, setReserve] = useState([]);
   const [selectedUser] = useContext(UserContext);
+  const noMoneyMsg =
+    "Saldo insuficiente. Recarga tu monedero para continuar con la reserva.";
 
   const handleChangeReserve = (e) => setReserve(e.target.value);
 
@@ -61,24 +63,34 @@ export const InsertReserve = (props) => {
     }
   };
 
+  const style = {
+    backgroundColor: "red",
+  };
+
   return userMoney === 0 ? (
-    <form
-      onSubmit={insertReserveEffect}
-      action={`/reserves/${selectedUser.idusuario}`}
-      className="reserve-form"
-    >
-      <Link to={`/reserves/${selectedUser.idusuario}`}>
-        <button
-          disabled
-          className="book-details-reserve-button"
-          type="submit"
-          value={bookId}
-          onClick={handleChangeReserve}
-        >
-          Pagar
-        </button>
-      </Link>
-    </form>
+    <div>
+      {noMoneyMsg && (
+        <div style={{ textAlign: "center", color: "red", marginBottom: "1rem", minHeight: "1.5em" }}> {noMoneyMsg}</div>
+      )}
+      <form
+        onSubmit={insertReserveEffect}
+        action={`/reserves/${selectedUser.idusuario}`}
+        className="reserve-form"
+      >
+        <Link to={`/reserves/${selectedUser.idusuario}`}>
+          <button
+            style={style}
+            disabled
+            className="book-details-reserve-button"
+            type="submit"
+            value={bookId}
+            onClick={handleChangeReserve}
+            >
+            Pagar
+          </button>
+        </Link>
+      </form>
+    </div>
   ) : (
     <form
       onSubmit={insertReserveEffect}

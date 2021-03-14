@@ -47,6 +47,8 @@ export const BackPackItem = () => {
     getUserProfile();
   }, []);
 
+
+
   const result = token ? (
     <div className="backPack-container">
       <h1>Mi mochila</h1>
