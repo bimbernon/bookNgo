@@ -40,7 +40,7 @@ async function updateUserPassword(req, res) {
       );
     }
 
-    const newPasswordHash = await bcrypt.hash(newPassword, 1);
+    const newPasswordHash = await bcrypt.hash(newPassword, 2);
 
     const confirmPassword = await bcrypt.compare(password, user.contraseña);
 
