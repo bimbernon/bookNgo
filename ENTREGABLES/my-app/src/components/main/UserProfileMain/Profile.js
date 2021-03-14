@@ -36,22 +36,22 @@ const Profile = () => {
     height: "7rem",
   };
 
-  const deleteUserById = async (e) => {
-    const userResponse = await fetch(
-      `http://localhost:3080/api/v1/users/delete/${userProfile.idusuario}`,
-      {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    if (userResponse.ok) {
-      await userResponse.json();
-    } else {
-      const errorMsg = await userResponse.json();
-      setErrorMsg("Algo ha salido mal...");
-    }
-  };
-  deleteUserById();
+  // const deleteUserById = async (e) => {
+  //   const userResponse = await fetch(
+  //     `http://localhost:3080/api/v1/users/delete/${userProfile.idusuario}`,
+  //     {
+  //       method: "DELETE",
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     }
+  //   );
+  //   if (userResponse.ok) {
+  //     await userResponse.json();
+  //   } else {
+  //     const errorMsg = await userResponse.json();
+  //     setErrorMsg("Algo ha salido mal...");
+  //   }
+  // };
+  // deleteUserById();
 
   return (
     <>
@@ -94,13 +94,13 @@ const Profile = () => {
           />
         </Link>
         <form className="delete-user-form">
-          <button className="delete-user-button" onSubmit={deleteUserById}>
+          {/* <button className="delete-user-button" onSubmit={deleteUserById}>
             <img
               src="/icons/delete.png"
               alt="borrar"
               style={{ height: "2.5rem", width: "2.5rem" }}
             />
-          </button>
+          </button> */}
         </form>
       </div>
     </>

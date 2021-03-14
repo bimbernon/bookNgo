@@ -12,7 +12,9 @@ export const UserPurse = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
+
   //falta por añadir la recarga al usuario a la base de datos
+
   useEffect(() => {
     async function getUserInfo() {
       const moneyResponse = await fetch(
@@ -75,13 +77,14 @@ export const UserPurse = () => {
       );
       if (userCardResponse.ok) {
         const userCardData = await userCardResponse.json();
+        setCard(userCardData);
       } else {
         const errorMsg = await userCardResponse.json();
         setErrorMsg("Algo ha salido mal...");
       }
     }
     getUserCard();
-  }, []);
+  }, [cards]);
 
   const renderCards = (card) => (
     <Card
@@ -193,7 +196,6 @@ export const UserPurse = () => {
         <h2>Selecciona método de pago</h2>
         <form className="card-select">
           <select className="card-options">{cards.map(renderCards)}</select>
-
           <Link to="/cards">
             <button className="add-card-button">Añadir tarjeta</button>
           </Link>

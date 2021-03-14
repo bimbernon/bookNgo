@@ -2,7 +2,6 @@
 
 const Joi = require("joi");
 const bcrypt = require("bcryptjs");
-const cryptoRandomString = require("crypto-random-string");
 const {
   updatePassword,
   findUserById,
@@ -29,20 +28,30 @@ async function updateUserPassword(req, res) {
 
     const user = await findUserById(userId);
 
+    console.log(user);
+
     const { password, newPassword } = req.body;
-    await schema.validateAsync(newPassword);
+
+    // await schema.validateAsync(newPassword);
+
+    if (newPassword === user.contraseña) {
+      const error = new Error(
+        "La contraseña nueva no puede ser igual a la actual"
+      );
+    }
 
     const newPasswordHash = await bcrypt.hash(newPassword, 1);
 
     const confirmPassword = await bcrypt.compare(password, user.contraseña);
+
     if (!confirmPassword) {
-      const error = new Error("Contraseña incorrecta");
+      const error = new Error("Contraseña actual incorrecta");
       error.status = 403;
       throw error;
     }
 
     await updatePassword(newPasswordHash, userId);
-    res.send({ message: "Contraseña cambiada con éxito" });
+    res.send({ password: password, newPassword: newPassword });
   } catch (err) {
     res.status(400).send({ error: err.message });
   }

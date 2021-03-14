@@ -6,6 +6,7 @@ import "./InsertReserve.css";
 
 export const InsertReserve = (props) => {
   const { bookId, userMoney } = props;
+  console.log(bookId, userMoney);
   const [token] = useContext(AuthContext);
   const [reserve, setReserve] = useState([]);
   const [selectedUser] = useContext(UserContext);
@@ -17,6 +18,7 @@ export const InsertReserve = (props) => {
   const insertReserveEffect = async (e) => {
     e.preventDefault();
 
+    console.log("hyey");
     const reserveResponse = await fetch(
       "http://localhost:3080/api/v1/reserves/",
       {
@@ -31,32 +33,9 @@ export const InsertReserve = (props) => {
       }
     );
 
-    //esta peti deberia darnos la info del book a reservar para conocer el stock
-    const bookStockResponse = await fetch(
-      `http://localhost:3080/api/v1/books/id/${bookId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    console.log(bookStockResponse);
-    //este if es para, si no hay en el stock en el libro que devuelve la peti salte el mensaje
-    if (bookStockResponse.ok) {
-      const selectedBookData = await bookStockResponse.json();
-      console.log(selectedBookData);
-      if (selectedBookData.stock < 1) {
-        const error = new Error("No hay stock actualmente");
-        throw error;
-      }
-    }
-
     if (reserveResponse.ok) {
-      await reserveResponse.json();
-      setReserve(reserveResponse);
+      const reserveResponseData = await reserveResponse.json();
+      setReserve(reserveResponseData);
     } else {
       const error = new Error("Algo ha salido mal.");
       throw error;
@@ -70,25 +49,30 @@ export const InsertReserve = (props) => {
   return userMoney === 0 ? (
     <div>
       {noMoneyMsg && (
-        <div style={{ textAlign: "center", color: "red", marginBottom: "1rem", minHeight: "1.5em" }}> {noMoneyMsg}</div>
+        <div
+          style={{
+            textAlign: "center",
+            color: "red",
+            marginBottom: "1rem",
+            minHeight: "1.5em",
+          }}
+        >
+          {" "}
+          {noMoneyMsg}
+        </div>
       )}
       <form
-        onSubmit={insertReserveEffect}
-        action={`/reserves/${selectedUser.idusuario}`}
+        // action={`/reserves/${selectedUser.idusuario}`}
         className="reserve-form"
       >
-        <Link to={`/reserves/${selectedUser.idusuario}`}>
-          <button
-            style={style}
-            disabled
-            className="book-details-reserve-button"
-            type="submit"
-            value={bookId}
-            onClick={handleChangeReserve}
-            >
-            Pagar
-          </button>
-        </Link>
+        <button
+          style={style}
+          disabled
+          className="book-details-reserve-button"
+          type="submit"
+        >
+          Pagar
+        </button>
       </form>
     </div>
   ) : (
@@ -97,16 +81,14 @@ export const InsertReserve = (props) => {
       action={`/reserves/${selectedUser.idusuario}`}
       className="reserve-form"
     >
-      <Link to={`/reserves/${selectedUser.idusuario}`}>
-        <button
-          className="book-details-reserve-button"
-          type="submit"
-          value={bookId}
-          onClick={handleChangeReserve}
-        >
-          Pagar
-        </button>
-      </Link>
+      <button
+        className="book-details-reserve-button"
+        type="submit"
+        value={bookId}
+        onClick={handleChangeReserve}
+      >
+        Pagar
+      </button>
     </form>
   );
 };
