@@ -108,6 +108,7 @@ const AddCardForm = () => {
 
   return (
     <div className="add-card-form-container">
+      {/* METER BIEN LA RUTA VAGA */}
       <a href="javascript:history.back()" className="back-button">
         <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
       </a>

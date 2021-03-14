@@ -84,7 +84,7 @@ async function createBook(book) {
   } = book;
 
   const query =
-    "INSERT INTO libro (idlibro,idcategoria,idautor,titulo,stock,sipnosis,precio,editorial,añopublicacion) VALUES (?,?,?,?,?,?,?,?,?)";
+    "INSERT INTO libro (idlibro,idcategoria,idautor,titulo,stock,sinopsis,precio,editorial,añopublicacion) VALUES (?,?,?,?,?,?,?,?,?)";
   const [books] = await pool.query(query, [
     id,
     idcategoria,
@@ -128,7 +128,7 @@ async function updateBookById(idBook, updateBook) {
   } = updateBook;
   const pool = await database.getPool();
   const query =
-    "UPDATE libro set idcategoria=?,idautor=?,titulo=?,stock=?,sipnosis=?,precio=?,editorial=?,añopublicacion=? where idlibro=?";
+    "UPDATE libro set idcategoria=?,idautor=?,titulo=?,stock=?,sinopsis=?,precio=?,editorial=?,añopublicacion=? where idlibro=?";
   const resBookUpdate = await pool.query(query, [
     idcategoria,
     idautor,

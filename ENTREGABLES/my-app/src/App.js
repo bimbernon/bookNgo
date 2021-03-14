@@ -26,7 +26,7 @@ import { UpdateCards } from "./pages/UpdateCards";
 import { AdministrationUsersPage } from "./pages/Administration/AdministrationUsersPage";
 import { AdministrationBooksPage } from "./pages/Administration/AdministrationBooksPage";
 import { AdministrationDonationsPage } from "./pages/Administration/AdministrationDonationsPage";
-import { CreateBook } from "./AdministrationCreateBooksPage";
+import { CreateBook } from "./pages/Administration/AdministrationCreateBooksPage";
 
 function App() {
   const style = {

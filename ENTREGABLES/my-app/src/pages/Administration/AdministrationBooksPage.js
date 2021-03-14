@@ -7,7 +7,7 @@ export function AdministrationBooksPage() {
   const [token] = useContext(AuthContext);
   const [books, setBooks] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
-  const [deleteBook, setDeleteBook] = useState([]);
+  const [deleteBook, setDeleteBook] = useState("");
   console.log(books);
   console.log(deleteBook);
 
@@ -63,7 +63,11 @@ export function AdministrationBooksPage() {
         bookPrice={`Precio: ${book.precio}`}
       ></Book>
       <form onSubmit={AdministrationBooksPage}>
-        <button className="delete-book-button" value={books.idlibro} onClick={handleDeleteBook}>
+        <button
+          className="delete-book-button"
+          value={books.idlibro}
+          onClick={handleDeleteBook}
+        >
           <img
             src="/icons/delete.png"
             alt="borrar"

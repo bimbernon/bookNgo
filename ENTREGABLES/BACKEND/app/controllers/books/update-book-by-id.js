@@ -9,7 +9,7 @@ const schema = Joi.object().keys({
   idautor: Joi.number().positive().required(),
   titulo: Joi.string().min(4).max(40).required(),
   stock: Joi.number().positive().required(),
-  sipnosis: Joi.string().min(4).max(2000).required(),
+  sinopsis: Joi.string().min(4).max(2000).required(),
   precio: Joi.number().positive().required(),
   editorial: Joi.string().min(4).max(40),
   añopublicacion: Joi.number().min(1900).max(new Date().getFullYear()),

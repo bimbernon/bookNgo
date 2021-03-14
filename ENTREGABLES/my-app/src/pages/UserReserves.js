@@ -55,7 +55,7 @@ export const UserReserves = () => {
   // }
 
   const reservesRender = (reserves) => (
-    <button className="reserve-li-item">
+    <div className="reserve-li-item">
       <Reserve
         bookId={reserves.idlibro}
         reservedBookTitle={reserves.titulo}
@@ -66,7 +66,7 @@ export const UserReserves = () => {
         <p className="reserve-book-title">{reserves.fechareserva}</p>
         <p className="reserve-book-title">{reserves.fechaexpiracion}</p>
       </Reserve>
-    </button>
+    </div>
   );
 
   return (

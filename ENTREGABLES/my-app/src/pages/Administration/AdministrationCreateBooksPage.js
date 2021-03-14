@@ -1,20 +1,69 @@
-import React, { useState, useContext} from "react";
-import { AuthContext } from "./components/providers/AuthProvider";
-import "./pages/Administration/Administration.css";
+import React, { useState, useContext, useEffect } from "react";
+import { AuthContext } from "../../components/providers/AuthProvider";
+import { Cathegory } from "../../components/main/HomeMain/Cathegory/Cathegory";
+import "./Administration.css";
 
 export const CreateBook = () => {
-    const [token] = useContext(AuthContext);
-  const [cathegory, setCathegory] = useState("");
-  const [author, setAuthor] = useState("");
+  const [cathegories, setCathegory] = useState([]);
+  const [currentCathegory, setCurrentCathegory] = useState({});
+
+  useEffect(() => {
+    async function getCathegories() {
+      const cathegoriesResponse = await (
+        await fetch("http://localhost:3080/api/v1/cathegories/")
+      ).json();
+      setCathegory(cathegoriesResponse);
+    }
+    getCathegories();
+  }, []);
+
+  const renderCathegories = (ctg) => (
+    <option value={ctg.idcategoria}>{ctg.nombrecategoria}</option>
+  );
+
+  const handleSelectedCathegory = (e) => {
+    const selectedCathegory = cathegories.find((ctg) => {
+      return parseInt(ctg.idcategoria) === parseInt(e.target.value);
+    });
+    console.log(selectedCathegory);
+    setCurrentCathegory(selectedCathegory);
+  };
+
+  const [authors, setAuthors] = useState([]);
+  const [currentAuthor, setCurrentAuthor] = useState({});
+
+  useEffect(() => {
+    async function getAllAuthors() {
+      const authorsResponse = await (
+        await fetch("http://localhost:3080/api/v1/authors/")
+      ).json();
+      setAuthors(authorsResponse);
+    }
+    getAllAuthors();
+  }, []);
+
+  const renderAuthors = (author) => (
+    <option
+      value={author.idautor}
+    >{`${author.nombreautor} ${author.apel1}`}</option>
+  );
+
+  const handleSelectedAuthor = (e) => {
+    const selectedAuthor = authors.find((author) => {
+      return parseInt(author.idautor) === parseInt(e.target.value);
+    });
+    console.log(selectedAuthor);
+    setCurrentAuthor(selectedAuthor);
+  };
+
+  const [token] = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [publisher, setPublisher] = useState("");
   const [year, setYear] = useState("");
-  const [sinopsis, setSinopsis] = useState("")
+  const [sinopsis, setSinopsis] = useState("");
 
-  const handleChangeCathegory = (e) => setCathegory(e.target.value);
-  const handleChangeAuthor = (e) => setAuthor(e.target.value);
   const handleChangeTitle = (e) => setTitle(e.target.value);
   const handleChangePrice = (e) => setPrice(e.target.value);
   const handleChangeStock = (e) => setStock(e.target.value);
@@ -24,6 +73,7 @@ export const CreateBook = () => {
 
   const handleSubmitBook = async (e) => {
     e.preventDefault();
+    console.log(currentCathegory.idcategoria);
 
     const resp = await fetch("http://localhost:3080/api/v1/books/", {
       method: "POST",
@@ -32,20 +82,21 @@ export const CreateBook = () => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        cathegory: cathegory,
-        author: author,
-        title: title,
+        idcategoria: currentCathegory.idcategoria,
+        idautor: currentAuthor.idautor,
+        titulo: title,
         stock: stock,
-        price: price,
-        publisher: publisher,
-        year: year,
         sinopsis: sinopsis,
+        precio: price,
+        editorial: publisher,
+        añopublicacion: year,
       }),
     });
+
     if (resp.ok) {
-      const respBody = await resp.json();
-      setCathegory("");
-      setAuthor("");
+      await resp.json();
+      setCurrentCathegory({});
+      setCurrentAuthor({});
       setTitle("");
       setStock("");
       setPrice("");
@@ -58,7 +109,6 @@ export const CreateBook = () => {
   const [name, setName] = useState("");
   const [lastName1, setLastName1] = useState("");
   const [lastName2, setLastName2] = useState("");
-  console.log(name, 'nombre')
 
   const handleChangeName = (e) => setName(e.target.value);
   const handleChangeLastName1 = (e) => setLastName1(e.target.value);
@@ -66,7 +116,6 @@ export const CreateBook = () => {
 
   const handleSubmitAuthor = async (e) => {
     e.preventDefault();
-    console.log('holaa')
 
     const resp = await fetch("http://localhost:3080/api/v1/authors", {
       method: "POST",
@@ -82,7 +131,7 @@ export const CreateBook = () => {
     });
     if (resp.ok) {
       const respBody = await resp.json();
-      console.log(respBody)
+      console.log(respBody);
       setName("");
       setLastName1("");
       setLastName2("");
@@ -127,23 +176,16 @@ export const CreateBook = () => {
       </div>
       <div className="register-container">
         <h1 className="register-form-title">Regístro de libros</h1>
-
         <form className="register-form" onSubmit={handleSubmitBook}>
           <div className="register-form-item">
-            <input
-              type="text"
-              placeholder="id de Categoria"
-              value={cathegory}
-              onChange={handleChangeCathegory}
-            ></input>
+            <select onChange={handleSelectedCathegory}>
+              {cathegories.map(renderCathegories)}
+            </select>
           </div>
           <div className="register-form-item">
-            <input
-              type="text"
-              placeholder="id de Autor"
-              value={author}
-              onChange={handleChangeAuthor}
-            ></input>
+            <select onChange={handleSelectedAuthor}>
+              {authors.map(renderAuthors)}
+            </select>
           </div>
           <div className="register-form-item">
             <input

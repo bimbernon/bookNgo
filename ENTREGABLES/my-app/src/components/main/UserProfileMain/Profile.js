@@ -37,6 +37,8 @@ const Profile = () => {
   };
 
   const deleteUserById = async (e) => {
+    // e.preventDefault();
+
     const userResponse = await fetch(
       `http://localhost:3080/api/v1/users/delete/${userProfile.idusuario}`,
       {
@@ -94,7 +96,7 @@ const Profile = () => {
           />
         </Link>
         <form className="delete-user-form">
-          <button className="delete-user-button" onSubmit={deleteUserById}>
+          <button className="delete-user-button" onClick={deleteUserById}>
             <img
               src="/icons/delete.png"
               alt="borrar"

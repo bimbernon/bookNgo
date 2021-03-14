@@ -7,7 +7,7 @@ const authorRepository = require("../../repositories/author-repository");
 const schema = Joi.object().keys({
   nombreautor: Joi.string().min(1).max(20).required(),
   apel1: Joi.string().min(1).max(20).required(),
-  apel2: Joi.string().min(1).max(20),
+  apel2: Joi.string().min(1).max(20).optional().allow(""),
 });
 
 async function createAuthor(req, res) {
