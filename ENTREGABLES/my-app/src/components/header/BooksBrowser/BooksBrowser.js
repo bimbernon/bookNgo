@@ -27,6 +27,10 @@ const BookBrowser = () => {
     setCurrentBook(selectedBook);
   };
 
+  // const renderCoincidences = (book) => (
+  //   <li key={book.idlibro}>{book.titulo}</li>
+  // );
+
   console.log(currentBook);
 
   const renderBooksBrowser = ((book) => {
@@ -43,6 +47,7 @@ const BookBrowser = () => {
                 list="browser-options"
                 type="search"
                 className="ppal-browser"
+                placeholder={`  Busca por título, autor, editorial...`}
                 onChange={filterBooks}
               />
               <datalist id="browser-options">
