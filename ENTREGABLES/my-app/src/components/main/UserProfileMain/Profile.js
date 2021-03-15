@@ -87,13 +87,17 @@ const Profile = () => {
 
   const [file, setFile] = useState();
   //esta funcion
-  async function uploadFile() {
+  async function uploadFile(e) {
+    e.preventDefault();
     let data = new FormData();
-    data.append("image", file);
+    data.append("userImage", file);
     const imageResponse = await fetch(
-      `http://localhost:3080/api/v1/users/profile/${selectedUser.idusuario}`,
+      `http://localhost:3080/api/v1/users/image/upload/${selectedUser.idusuario}`,
       {
-        method: "POST",
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: data,
       }
     );
@@ -119,7 +123,7 @@ const Profile = () => {
       <h1>{`Hola, ${userProfile.nombreusuario}`}</h1>
 
       <div className="user-image-profile" alt="user">
-        <form  className="upload-photo-form" onSubmit={uploadFile}>
+        <form className="upload-photo-form" onSubmit={uploadFile}>
           <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} />
           <input
             type="file"
