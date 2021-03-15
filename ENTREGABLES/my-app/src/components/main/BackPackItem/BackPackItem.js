@@ -13,7 +13,19 @@ export const BackPackItem = () => {
   const [selectedUser] = useContext(UserContext);
   const [user, setUser] = useState({});
   const [bag, setBag] = useContext(BagContext);
-  //setBag(JSON.stringify(["JOSE"]));
+  console.log("El id del libro" + book.idlibro);
+  // useEffect(() => {
+  //   console.log(bag);
+  //   if (bag !== "") {
+  //     const pp = JSON.parse(bag);
+  //     pp.push(book);
+  //     console.log(pp.length);
+  //     //setBag(JSON.stringify(pp));
+  //   } else {
+  //     setBag(JSON.stringify([book.idlibro + ""]));
+  //   }
+  // }, []);
+
   let { bookId } = useParams();
 
   useEffect(() => {
@@ -46,8 +58,14 @@ export const BackPackItem = () => {
     }
     getUserProfile();
   }, []);
-
-
+  // const renderBooks = (book) => (
+  //   <Book
+  //     key={book.idlibro}
+  //     bookId={book.idlibro}
+  //     bookName={book.titulo}
+  //     bookPrice={`Precio: ${book.precio}`}
+  //   ></Book>
+  // );
 
   const result = token ? (
     <div className="backPack-container">
@@ -59,6 +77,7 @@ export const BackPackItem = () => {
           bookName={book.titulo}
           bookPrice={`Precio: ${book.precio}`}
         ></Book>
+        {/* {pp.map(renderBooks)} */}
       </div>
       <div>
         <InsertReserve bookId={bookId} userMoney={user.monedero} />
