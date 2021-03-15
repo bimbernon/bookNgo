@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "./BooksBrowser.css";
 
 const BookBrowser = () => {
+  const history = useHistory();
   const [books, setBooks] = useState([]);
   const [currentBook, setCurrentBook] = useState([]);
 
@@ -20,16 +22,22 @@ const BookBrowser = () => {
   }, []);
 
   const filterBooks = (e) => {
-    const selectedBook = books.filter((book) =>
-      book.titulo.includes(e.target.value)
-    );
+    console.log(e.target.value);
+    const selectedBook = books
+      .filter((book) => {
+        return book.titulo.toLowerCase().includes(e.target.value.toLowerCase());
+      })
+      .slice(0, 5);
+
     setCurrentBook(selectedBook);
   };
 
-  console.log(currentBook);
-
   const renderBooksBrowser = (book) => {
-    return <option value={book.titulo}></option>;
+    return (
+      <li key={book.idlibro}>
+        <Link to={`/books/id/${book.idlibro}`}>{book.titulo}</Link>
+      </li>
+    );
   };
 
   return (
@@ -44,10 +52,16 @@ const BookBrowser = () => {
                 className="ppal-browser"
                 placeholder={`  Busca por título, autor, editorial...`}
                 onChange={filterBooks}
+                // onBlur={(e) => {
+                //   e.target.value = "";
+                //   setTimeout(() => setCurrentBook([]), 500);
+                // }}
               />
-              <datalist id="browser-options">
-                {currentBook.map(renderBooksBrowser)}
-              </datalist>
+              {currentBook.length > 0 && (
+                <ul id="browser-options">
+                  {currentBook.map(renderBooksBrowser)}
+                </ul>
+              )}
               <button type="submit" className="ppal-browser-submit-button">
                 <img
                   className="search-logo"
