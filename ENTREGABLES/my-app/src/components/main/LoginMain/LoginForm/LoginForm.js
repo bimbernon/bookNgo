@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./LoginForm.css";
 
 const LoginForm = (props) => {
@@ -34,7 +35,12 @@ const LoginForm = (props) => {
       setErrorMsg("");
     } else {
       const errorMsg = await response.json();
-      setErrorMsg("Usuario o contraseña incorrectos");
+      setErrorMsg( Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Usuario o contraseña insocrrectos.!",
+          button: true,
+        }));
       onError(errorMsg);
       //mostrar mensaje de error
     }
