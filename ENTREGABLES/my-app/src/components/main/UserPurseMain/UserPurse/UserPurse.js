@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { UserContext } from "../../../providers/UserProvider";
 import { Card } from "../Card/Card";
+import Swal from "sweetalert2";
 import "./UserPurse.css";
 
 export const UserPurse = () => {
@@ -47,10 +48,11 @@ export const UserPurse = () => {
       }
     }
     getUserInfo();
-  }, [userMoney]);
+  }, []);
 
   const rechargePurse = async (e) => {
-    e.preventDefault();
+    setUserMoney(userMoney + newRecharge);
+    console.log("usermoney dentro del post" + userMoney);
 
     const userRechargeResponse = await fetch(
       `http://localhost:3080/api/v1/users/purse/recharge/${selectedUser.idusuario}`,
@@ -66,8 +68,10 @@ export const UserPurse = () => {
       }
     );
     if (userRechargeResponse.ok) {
+      console.log("entro");
       const userRechargeData = await userRechargeResponse.json();
     } else {
+      console.log("rnfrnirivnronvornovnro");
       const errorMsg = await userRechargeResponse.json();
       setErrorMsg("Algo ha salido mal...");
     }
@@ -88,7 +92,7 @@ export const UserPurse = () => {
       if (userCardResponse.ok) {
         const userCardData = await userCardResponse.json();
         setCard(userCardData);
-        console.log(currentCard);
+
         if (cards.length === 1) {
           setCurrentCard(cards[0]);
         }
@@ -99,7 +103,7 @@ export const UserPurse = () => {
     }
 
     getUserCard();
-  }, []);
+  }, [cards]);
 
   const renderCards = (card) => (
     <Card
@@ -120,9 +124,38 @@ export const UserPurse = () => {
     setNewRecharge(parseInt(e.currentTarget.value));
   };
   const handleRecharge = (e) => {
-    //console.log(currentCard.idtarjeta);
+    e.preventDefault();
+    const prueba = currentCard.numerotarjeta + "";
+    let numerotarjetaConAsteriscos = "";
+
+    for (let i = 0; i < prueba.length; i++) {
+      if (i < 15) {
+        numerotarjetaConAsteriscos = numerotarjetaConAsteriscos + "*";
+      } else {
+        numerotarjetaConAsteriscos =
+          numerotarjetaConAsteriscos + prueba.charAt(i);
+      }
+    }
+    console.log(numerotarjetaConAsteriscos);
+
     if (cards.length > 0) {
-      setUserMoney(userMoney + newRecharge);
+      Swal.fire({
+        title: `¿Estás seguro de que quieres recargar con la tarjeta ${numerotarjetaConAsteriscos}?`,
+        text: `Se sumara ${newRecharge} coins a tu monedero`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#e1b470",
+        cancelButtonColor: "#ec511d",
+        confirmButtonText: "SI",
+        cancelButtonText: "NO",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log(
+            "En el dialogo " + userMoney + "y recarga nueva de " + newRecharge
+          );
+          rechargePurse();
+        }
+      });
     } else {
       console.log("no se puede no tienes una tarjeta seleccionada");
     }
@@ -199,12 +232,8 @@ export const UserPurse = () => {
             ></img>
           </button>
           <div className="effective-recharge-button-container">
-            <form onSubmit={rechargePurse}>
-              <button
-                className="effective-recharge-button"
-                type="submit"
-                onClick={handleRecharge}
-              >
+            <form onSubmit={handleRecharge}>
+              <button className="effective-recharge-button" type="submit">
                 Recargar
               </button>
             </form>
