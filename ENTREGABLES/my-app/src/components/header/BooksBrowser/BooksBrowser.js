@@ -4,7 +4,7 @@ import "./BooksBrowser.css";
 
 const BookBrowser = () => {
   const [books, setBooks] = useState([]);
-  const [currentBook, setCurrentBook] = useState({});
+  const [currentBook, setCurrentBook] = useState([]);
 
   useEffect(() => {
     async function getAllBooks() {
@@ -24,11 +24,14 @@ const BookBrowser = () => {
     const selectedBook = books.filter((book) =>
       book.titulo.includes(e.target.value)
     );
-
     setCurrentBook(selectedBook);
   };
 
   console.log(currentBook);
+
+  const renderBooksBrowser = ((book) => {
+    return <option value={book.titulo}></option>;
+  });
 
   return (
     <>
@@ -37,10 +40,14 @@ const BookBrowser = () => {
           <li className="browser-item">
             <form className="ppal-browser-form">
               <input
+                list="browser-options"
                 type="search"
                 className="ppal-browser"
                 onChange={filterBooks}
               />
+              <datalist id="browser-options">
+                {currentBook.map(renderBooksBrowser)}
+              </datalist>
               <button type="submit" className="ppal-browser-submit-button">
                 <img
                   className="search-logo"
