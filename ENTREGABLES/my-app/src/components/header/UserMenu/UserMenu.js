@@ -21,7 +21,7 @@ const UserMenu = () => {
             <li className="user-list-item-menu">Monedero</li>
           </Link>
           <Link to="/administration">
-            <li className="user-list-item-menu">ADMINISTRACION</li>
+            <li className="user-list-item-menu">Administracion</li>
           </Link>
         </ul>
       </div>
