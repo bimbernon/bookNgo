@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Redirect } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { Book } from "../../components/main/Book/Book";
+import Swal from "sweetalert2";
 import "./Administration.css";
 
 export function AdministrationBooksPage() {
   const [token] = useContext(AuthContext);
   const [books, setBooks] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
-  const [deleteBook, setDeleteBook] = useState("");
-  console.log(books);
-  console.log(deleteBook);
+  const [deleteBook, setDeleteBook] = useState(false);
 
   useEffect(() => {
     async function getAllBooks() {
@@ -27,29 +27,52 @@ export function AdministrationBooksPage() {
     getAllBooks();
   }, []);
 
-  const handleDeleteBook = (e) => setDeleteBook(e.targuet.value);
+  const handleDeleteBook = (e) => {
+    e.preventDefault();
+    console.log(e);
 
-  useEffect(() => {
-    async function deleteBookById() {
-      const deleteBookResponse = await fetch(
-        `http://localhost:3080/api/v1/books/${books.idlibro}`,
-        {
-          method: "DELETE",
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      if (deleteBookResponse.ok) {
-        const deletedBook = await deleteBookResponse.json();
-      } else {
-        const errorMsg = await deleteBookResponse.json();
-        setErrorMsg("Algo ha salido mal...");
+    Swal.fire({
+      title: `¿Estás seguro de que quieres eliminar el libro ${e.target.value}?`,
+      text: `ejemplo`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#e1b470",
+      cancelButtonColor: "#ec511d",
+      confirmButtonText: "SI",
+      cancelButtonText: "NO",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteBookById(e);
       }
+    });
+  };
+
+  const deleteBookById = async (e) => {
+    console.log("EVENTO PROPAGADO " + e.lastChild);
+    const deleteBookResponse = await fetch(
+      `http://localhost:3080/api/v1/books/delete/${e.target.value}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (deleteBookResponse.ok) {
+      setDeleteBook(true);
+      const deletedBook = await deleteBookResponse.json();
+    } else {
+      const errorMsg = await deleteBookResponse.json();
+      setErrorMsg("Algo ha salido mal...");
     }
-    deleteBookById();
-  }, []);
+  };
 
   const style = {
     height: "10rem",
+  };
+  const deleteStyle = {
+    background: `url("/icons/delete.png")`,
+    backgroundSize: "cover",
+    height: "1.2rem",
+    width: "1.2rem",
   };
 
   const renderBooks = (book) => (
@@ -62,17 +85,18 @@ export function AdministrationBooksPage() {
         bookAuthor={`${book.nombreautor} ${book.apel1}`}
         bookPrice={`Precio: ${book.precio}`}
       ></Book>
-      <form onSubmit={AdministrationBooksPage}>
+      <form>
         <button
           className="delete-book-button"
-          value={books.idlibro}
+          style={deleteStyle}
+          value={book.idlibro}
           onClick={handleDeleteBook}
         >
-          <img
+          {/* <img
             src="/icons/delete.png"
             alt="borrar"
             style={{ height: "1.2rem", width: "1.2rem" }}
-          />
+          /> */}
         </button>
       </form>
     </div>

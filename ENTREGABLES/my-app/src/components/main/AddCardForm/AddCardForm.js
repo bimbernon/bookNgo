@@ -11,6 +11,7 @@ const AddCardForm = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [currentCard, setCurrentCard] = useState(0);
+  const [back, setBack] = useState(-1);
 
   useEffect(() => {
     setCurrentCard(cards[0]);
@@ -95,6 +96,8 @@ const AddCardForm = () => {
       setCardNumber("");
       setExpirationDate("");
       setCsv("");
+      setBack(back - 1);
+      console.log(back);
     }
   };
 
@@ -109,7 +112,7 @@ const AddCardForm = () => {
   return (
     <div className="add-card-form-container">
       {/* METER BIEN LA RUTA VAGA */}
-      <a href="javascript:history.back()" className="back-button">
+      <a href={`javascript:history.go(${back})`} className="back-button">
         <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
       </a>
       <div>
