@@ -44,15 +44,10 @@ function AdministrationDonationsPage() {
 
   return (
     <div className="donations-list-container">
-      DONACIONES
-      <table className="donations-list">
-        <th>iddonacion</th>
-        <th>titulo libro</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        {donations.map(renderDonations)}
-      </table>
+      <h1 className="donations-title-list">DONACIONES</h1>
+      <ul className="donations-list">
+        <li className="donations-item">{donations.map(renderDonations)}</li>
+      </ul>
     </div>
   );
 }

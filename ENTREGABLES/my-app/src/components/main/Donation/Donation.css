@@ -1,9 +1,26 @@
 @import url("../../../index.css");
 
-.donations-list {
-  list-style: none;
+.donation-info-container {
+  background-color: var(--title-brown-color);
+  color: white;
+  height: 6.5rem;
+  width: 95%;
+  border: 0.5px solid black;
+  border-collapse: separate;
+  border-radius: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0.3rem 0;
 }
 
-.donation-main-info {
-  background-color: var(--white-background);
+.donations-list {
+  list-style: none;
+  display: flex;
+}
+
+.donations-item {
+  margin: 1rem 1rem;
 }

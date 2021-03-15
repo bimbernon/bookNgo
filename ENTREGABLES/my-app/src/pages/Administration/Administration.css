@@ -80,3 +80,21 @@ a {
 .upload-book-photo-button {
   margin-top: 1rem;
 }
+
+.upload-book-image-button,
+.select-form-item {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px rgb(58 55 55);
+  height: 30px;
+  margin: 20px 20px 0px 20px;
+  width: 300px;
+}
+
+.upload-book-image-button {
+  margin-top: 1rem;
+}
+
+.donations-title-list {
+  text-align: center;
+}

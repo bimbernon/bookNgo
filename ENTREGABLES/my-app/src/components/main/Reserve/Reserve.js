@@ -31,6 +31,13 @@ const Reserve = (props) => {
         >
           {children}
         </div>
+            <Link to="/reserve/invoice">
+              <img
+                src="/icons/icono-factura.png"
+                alt="edit"
+                style={{ height: "1.2rem", width: "1.2rem" }}
+              />
+            </Link>
       {/* </Link> */}
     </li>
   );

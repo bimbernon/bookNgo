@@ -137,9 +137,17 @@ export const CreateBook = () => {
     }
   };
 
+  const style = {
+    height: '41rem',
+  }
+
+  const style2 = {
+    height: '21rem',
+  }
+
   return (
     <div>
-      <div className="register-container">
+      <div style={style2} className="register-container">
         <h1 className="register-form-title">Regístro de autores</h1>
         <form className="register-form" onSubmit={handleSubmitAuthor}>
           <div className="register-form-item">
@@ -173,16 +181,22 @@ export const CreateBook = () => {
           </div>
         </form>
       </div>
-      <div className="register-container">
+      <div style={style} className="register-container">
         <h1 className="register-form-title">Regístro de libros</h1>
         <form className="register-form" onSubmit={handleSubmitBook}>
-          <div className="register-form-item">
-            <select onChange={handleSelectedCathegory}>
+          <div className="select-cathegoty-container">
+            <select
+              className="select-form-item"
+              onChange={handleSelectedCathegory}
+            >
               {cathegories.map(renderCathegories)}
             </select>
           </div>
-          <div className="register-form-item">
-            <select onChange={handleSelectedAuthor}>
+          <div className="select-cathegoty-container">
+            <select
+              className="select-form-item"
+              onChange={handleSelectedAuthor}
+            >
               {authors.map(renderAuthors)}
             </select>
           </div>
@@ -240,7 +254,7 @@ export const CreateBook = () => {
             </button>
           </div>
         </form>
-        <button className="upload-book-photo-button">Subir foto</button>
+        <button className="upload-book-image-button">Subir foto</button>
       </div>
     </div>
   );

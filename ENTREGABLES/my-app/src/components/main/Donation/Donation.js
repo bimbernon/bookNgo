@@ -13,6 +13,12 @@ const Donation = (props) => {
 
   return (
     <div className="donation-info-container">
+      <tr>
+        <th>idDonacin</th>
+        <th>Titulo</th>
+        <th>IdUsuario</th>
+        <th>FechaDonacion</th>
+      </tr>
       <tr className="donation-main-info">
         {/* <td className="donation-info">{`${donationId} $ ${userId}`}</td> */}
         <td>{donationId}</td>
@@ -31,7 +37,9 @@ const Donation = (props) => {
                 Correcto
                 <input type="checkbox" value={donationState} />
               </label>
-              <button type="submit">ACTUALIZAR</button>
+              <button className="" type="submit">
+                ACTUALIZAR
+              </button>
             </form>
           </div>
         </td>

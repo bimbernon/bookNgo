@@ -6,9 +6,11 @@ export const UserReserveDetails = (props) => {
   const { booktitle, reserveDate, expirationDate } = props;
   console.log(props);
 
+
+  
   return (
     <div className="reserve-details-container">
-      <h1>Detalle de la reserva</h1>
+      <h1>Tu factura</h1>
       <p>{booktitle}</p>
     </div>
   );

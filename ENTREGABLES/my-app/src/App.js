@@ -67,7 +67,7 @@ function App() {
                 <Route path="/reserves/:userId">
                   <UserReserves />
                 </Route>
-                <Route path="/reserve/details">
+                <Route path="/reserve/invoice">
                   <UserReserveDetails />
                 </Route>
                 <Route path="/users/purse/:userId">
