@@ -6,10 +6,9 @@ import "./InsertReserve.css";
 
 export const InsertReserve = (props) => {
   const { bookId, userMoney } = props;
-  console.log(bookId, userMoney);
   const [token] = useContext(AuthContext);
-  const [reserve, setReserve] = useState([]);
   const [selectedUser] = useContext(UserContext);
+  const [reserve, setReserve] = useState([]);
   console.log(reserve);
   const noMoneyMsg =
     "Saldo insuficiente. Recarga tu monedero para continuar con la reserva.";

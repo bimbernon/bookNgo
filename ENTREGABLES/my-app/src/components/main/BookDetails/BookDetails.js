@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Book } from "../Book/Book";
+// import { BagContext } from "../../providers/BagProvider";
+
 import "./BookDetails.css";
 
 export const BookDetails = () => {
   const [book, setBook] = useState({});
   let { bookId } = useParams();
+  // const [reserve, setReserve] = useState([]);
+  // const doSuccessInsert = (responseBody) => setReserve(bookId);
 
   useEffect(() => {
     async function getBookById() {
-      const bookById = await (
-        await fetch(`http://localhost:3080/api/v1/books/id/${bookId}`)
-      ).json();
-      setBook(bookById);
+      const bookResponse = await fetch(
+        `http://localhost:3080/api/v1/books/id/${bookId}`
+      );
+
+      if (bookResponse.ok) {
+        const bookResponseData = await bookResponse.json();
+        setBook(bookResponseData);
+        // onSuccessInsert(bookResponseData);
+      }
     }
     getBookById();
   }, []);
@@ -25,8 +34,8 @@ export const BookDetails = () => {
   };
 
   const styleButton = {
-      backgroundColor: "red",
-  }
+    backgroundColor: "red",
+  };
 
   return book.stock === 0 ? (
     <div className="book-details-container">
@@ -46,6 +55,7 @@ export const BookDetails = () => {
         type="submit"
         className="book-details-reserve-button"
         bookId={bookId}
+        // onSuccessInsert={doSuccessInsert}
       >
         Reservar
       </button>

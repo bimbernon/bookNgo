@@ -16,13 +16,14 @@ const Profile = () => {
   const handleDelete = (e) => {
     e.preventDefault();
     Swal.fire({
-      title: "Estas Seguro?",
-      text: "El perfil no se recuperara!",
+      title: "¿Estás seguro de que quieres eliminar tu cuenta?",
+      text: "¡El perfil no se recuperará!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar",
+      fontSize: "2rem",
+      confirmButtonColor: "#e1b470",
+      cancelButtonColor: "#ec511d",
+      confirmButtonText: "Eliminar",
     }).then((result) => {
       if (result.isConfirmed) {
         deleteUserById();
