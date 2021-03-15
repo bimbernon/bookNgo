@@ -241,12 +241,12 @@ export const CreateBook = () => {
             ></input>
           </div>
           <div className="register-form-item">
-            <input
+            <textarea
               type="text"
               placeholder="Sinopsis"
               value={sinopsis}
               onChange={handleChangeSinopsis}
-            ></input>
+            ></textarea>
           </div>
           <div className="register-button-container">
             <button className="register-submit-button" type="submit">

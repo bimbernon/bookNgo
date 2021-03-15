@@ -21,7 +21,7 @@
   justify-content: center;
 }
 
-.register-form-item > input {
+.register-form-item > input, textarea {
   border: none;
   border-radius: 20px;
   box-shadow: 5px 5px 5px rgb(58, 55, 55);

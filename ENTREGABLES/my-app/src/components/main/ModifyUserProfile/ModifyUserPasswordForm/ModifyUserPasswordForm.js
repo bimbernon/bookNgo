@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../../providers/UserProvider";
 import { AuthContext } from "../../../providers/AuthProvider";
+import  Swal  from "sweetalert2";
 import "./ModifyUserPasswordForm.css";
 
 export const ModifyUserPasswordForm = () => {
@@ -9,6 +10,8 @@ export const ModifyUserPasswordForm = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [selectedUser] = useContext(UserContext);
+  const [errorMsg, setErrorMsg] = useState("");
+  console.log(currentPassword, newPassword);
 
   const handleChangeNewPassword = (e) => setNewPassword(e.target.value);
   const handleChangeCurrentPassword = (e) => setCurrentPassword(e.target.value);
@@ -35,8 +38,16 @@ export const ModifyUserPasswordForm = () => {
 
     if (uploadUserPasswordResponse.ok) {
       await uploadUserPasswordResponse.json();
-      setCurrentPassword("");
-      setNewPassword("");
+      if (currentPassword !== newPassword) {
+        setCurrentPassword("");
+        setNewPassword("");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "La contraseña introducida no puede ser igual a la anterior.!",
+        });
+      }
     }
   };
 
@@ -63,6 +74,7 @@ export const ModifyUserPasswordForm = () => {
             onChange={handleChangeNewPassword}
             className="input-user-modify-form"
           />
+          <p>{errorMsg}</p>
         </div>
         <div className="user-profile-button-container">
           <button type="submit" className="user-profile-button">

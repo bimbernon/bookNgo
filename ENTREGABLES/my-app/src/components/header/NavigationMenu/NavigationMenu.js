@@ -9,6 +9,8 @@ import { UserContext } from "../../providers/UserProvider";
 const NavigationMenu = () => {
   const Navigation = (props) => {
     const { imageId, activeMenu } = props;
+
+
     return (
       <>
         <div>
@@ -34,6 +36,7 @@ const NavigationMenu = () => {
 
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
+  console.log(selectedUser)
 
   const navigation = token ? (
     <Navigation imageId={selectedUser.idusuario} activeMenu={false} />

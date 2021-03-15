@@ -33,6 +33,7 @@ export const DonationsForm = () => {
       <form className="donations-form" onSubmit={handleSubmitDonations}>
         <h1 className="donations-form-title">Envíanos tus libros</h1>
         <input
+          required
           type="text"
           className="donations-input"
           placeholder="  Título del libro"
@@ -40,6 +41,7 @@ export const DonationsForm = () => {
           onChange={handleChangeDonationTitle}
         ></input>
         <input
+          required
           type="text"
           className="donations-input"
           placeholder="  Nombre del autor"

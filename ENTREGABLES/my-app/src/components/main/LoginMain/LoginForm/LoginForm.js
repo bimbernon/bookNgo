@@ -47,6 +47,7 @@ const LoginForm = (props) => {
       <form className="login-form" onSubmit={loginUser} action="/">
         <div className="login-form-item">
           <input
+            required
             type="email"
             placeholder="  email"
             value={email}
@@ -55,6 +56,7 @@ const LoginForm = (props) => {
         </div>
         <div className="login-form-item">
           <input
+            required
             type="password"
             placeholder="  contraseña"
             value={password}

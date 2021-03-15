@@ -54,10 +54,8 @@ export const RegisterForm = () => {
 
       <form className="register-form" onSubmit={handleSubmit} action="/">
         <div className="register-form-item">
-          <input type="text" placeholder="  photo"></input>
-        </div>
-        <div className="register-form-item">
           <input
+            required
             type="text"
             placeholder="Nombre"
             value={name}
@@ -66,6 +64,7 @@ export const RegisterForm = () => {
         </div>
         <div className="register-form-item">
           <input
+            required
             type="text"
             placeholder="Nombre de perfil"
             value={userProfileName}
@@ -74,6 +73,7 @@ export const RegisterForm = () => {
         </div>
         <div className="register-form-item">
           <input
+            required
             type="text"
             placeholder="Contraseña"
             value={password}
@@ -82,6 +82,7 @@ export const RegisterForm = () => {
         </div>
         <div className="register-form-item">
           <input
+            required
             type="text"
             placeholder="Primer Apellido"
             value={lastName1}
@@ -90,6 +91,7 @@ export const RegisterForm = () => {
         </div>
         <div className="register-form-item">
           <input
+            required
             type="text"
             placeholder="Segundo Apellido"
             value={lastName2}
@@ -98,6 +100,7 @@ export const RegisterForm = () => {
         </div>
         <div className="register-form-item">
           <input
+            required
             type="text"
             placeholder="Email"
             value={email}
@@ -106,6 +109,7 @@ export const RegisterForm = () => {
         </div>
         <div className="register-form-item">
           <input
+            required
             type="text"
             placeholder="Direccion"
             value={address}
