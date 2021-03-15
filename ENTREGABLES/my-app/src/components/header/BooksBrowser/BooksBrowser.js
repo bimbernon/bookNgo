@@ -4,7 +4,7 @@ import "./BooksBrowser.css";
 
 const BookBrowser = () => {
   const [books, setBooks] = useState([]);
-  const [currentBook, setCurrentBook] = useState({});
+  const [currentBook, setCurrentBook] = useState([]);
 
   useEffect(() => {
     async function getAllBooks() {
@@ -28,6 +28,10 @@ const BookBrowser = () => {
     setCurrentBook(selectedBook);
   };
 
+  // const renderCoincidences = (book) => (
+  //   <li key={book.idlibro}>{book.titulo}</li>
+  // );
+
   console.log(currentBook);
 
   return (
@@ -39,8 +43,12 @@ const BookBrowser = () => {
               <input
                 type="search"
                 className="ppal-browser"
+                placeholder={`  Busca por título, autor, editorial...`}
                 onChange={filterBooks}
               />
+              {/* <ul className="search-coincidences">
+                {currentBook.map(renderCoincidences)}
+              </ul> */}
               <button type="submit" className="ppal-browser-submit-button">
                 <img
                   className="search-logo"
