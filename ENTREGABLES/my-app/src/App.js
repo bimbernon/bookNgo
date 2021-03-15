@@ -21,7 +21,7 @@ import { UserPursePage } from "./pages/UserPursePage";
 import { Administration } from "./pages/Administration/Administration";
 import { UserProfile } from "./pages/UserProfile";
 import { UserReserves } from "./pages/UserReserves";
-import { UserReserveDetails } from "./pages/UserReserveDetails";
+import { InvoiceDetails } from "./pages/InvoiceDetails";
 import { UpdateCards } from "./pages/UpdateCards";
 import { AdministrationUsersPage } from "./pages/Administration/AdministrationUsersPage";
 import { AdministrationBooksPage } from "./pages/Administration/AdministrationBooksPage";
@@ -68,7 +68,7 @@ function App() {
                   <UserReserves />
                 </Route>
                 <Route path="/reserve/invoice">
-                  <UserReserveDetails />
+                  <InvoiceDetails />
                 </Route>
                 <Route path="/users/purse/:userId">
                   <UserPursePage />

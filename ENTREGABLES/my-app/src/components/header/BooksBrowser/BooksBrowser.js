@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { AdvancedBrowser } from "./AdvancedBrowser/AdvancedBrowser";
 import "./BooksBrowser.css";
 
 const BookBrowser = () => {
@@ -33,9 +32,9 @@ const BookBrowser = () => {
 
   console.log(currentBook);
 
-  const renderBooksBrowser = ((book) => {
+  const renderBooksBrowser = (book) => {
     return <option value={book.titulo}></option>;
-  });
+  };
 
   return (
     <>
@@ -63,7 +62,7 @@ const BookBrowser = () => {
               </button>
             </form>
           </li>
-          <li className="browser-item">
+          {/* <li className="browser-item">
             <button type="button" className="advanced-browser-button">
               <img
                 className="button-logo"
@@ -71,8 +70,7 @@ const BookBrowser = () => {
                 alt="logo"
               />
             </button>
-            <AdvancedBrowser />
-          </li>
+          </li> */}
         </ul>
       </div>
     </>

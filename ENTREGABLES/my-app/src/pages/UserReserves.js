@@ -31,28 +31,6 @@ export const UserReserves = () => {
     getReservesByUserId();
   }, []);
 
-  // async function getReservesByUserBookDate() {
-  //   const reserveResponse = await fetch(
-  //     `http://localhost:3080/api/v1/reserves/search/${selectedUser.idusuario}/${reserve.idlibro}/${reserve.fechareserva}`,
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   );
-
-  //   if (reserveResponse.ok) {
-  //     const reserveData = await reserveResponse.json();
-  //     console.log(reserveData);
-  //     setReserveInfo(reserveData);
-  //   } else {
-  //     const errorMsg = await reserveResponse.json();
-  //     setErrorMsg("Algo ha salido mal...");
-  //   }
-  // }
-
   const reservesRender = (reserves) => (
     <div className="reserve-li-item">
       <Reserve
@@ -67,6 +45,25 @@ export const UserReserves = () => {
       </Reserve>
     </div>
   );
+  const [invoices, setInvoices] = useState([]);
+  const [currentInvoice, setCurrentInvoice] = useState([]);
+
+  useEffect(() => {
+    async function getUsersInvoices() {
+      const userInvoices = await (
+        await fetch(
+          `http://localhost:3080/api/v1/invoices/user/${selectedUser.idusuario}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+      ).json();
+      setInvoices(userInvoices);
+    }
+    getUsersInvoices();
+  }, []);
+
+  console.log(invoices);
 
   return (
     <div className="reserves-container">
