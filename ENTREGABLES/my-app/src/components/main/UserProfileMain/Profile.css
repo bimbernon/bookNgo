@@ -57,6 +57,14 @@
   background-color: var(--title-brown-color);
 }
 
-.upload-photo-input {
-  text: none;
+.upload-user-button {
+  margin-left: 10rem;
 }
+
+.upload-photo-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+

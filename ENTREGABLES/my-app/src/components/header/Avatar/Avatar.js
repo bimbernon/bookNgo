@@ -9,6 +9,7 @@ const Avatar = (props) => {
     height: "2.5rem",
   };
 
+  
   return (
     <div className="avatar">
       <img src={`/images/users/${imageId}.jpg`} alt="Avatar" style={style} />
