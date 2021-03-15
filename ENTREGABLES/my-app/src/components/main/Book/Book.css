@@ -26,11 +26,6 @@
   overflow-y: scroll;
 }
 
-.book-cover {
-  width: 7rem;
-  height: 9.5rem;
-}
-
 .book-title {
   font-size: 0.9rem;
   margin: 0;

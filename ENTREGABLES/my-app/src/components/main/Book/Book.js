@@ -13,6 +13,11 @@ const Book = (props) => {
     stockMsg,
   } = props;
 
+  const imgStyle = {
+    width: "7rem",
+    height: "9.5rem",
+  };
+
   return (
     <li className="book-item" style={style}>
       <Link to={`/books/id/${bookId}`}>
@@ -20,7 +25,8 @@ const Book = (props) => {
           src={`/images/books/${bookId}.jpg`}
           className="book-cover"
           alt="bookCover"
-        ></img>
+          style={imgStyle}
+        />
         <div className="book-information">
           <h1 className="book-title">{bookName}</h1>
           <h2 className="book-author">{bookAuthor}</h2>
