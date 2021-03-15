@@ -107,25 +107,25 @@ const Profile = () => {
     setFile(f);
   };
 
-  const style = {
-    backgroundImage: `url("/icons/upload-photo.png" )`,
-    backgroundSize: "cover",
-    width: "2rem",
-    height: "2rem",
-  };
+  // const style = {
+  //   backgroundImage: `url("/icons/upload-photo.png" )`,
+  //   backgroundSize: "cover",
+  //   width: "2rem",
+  //   height: "2rem",
+  // };
 
   return (
     <>
       <h1>{`Hola, ${userProfile.nombreusuario}`}</h1>
 
       <div className="user-image-profile" alt="user">
-        <form onSubmit={uploadFile}>
+        <form  className="upload-photo-form" onSubmit={uploadFile}>
           <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} />
           <input
             type="file"
             className="upload-photo-input"
             onChange={onFileChange}
-            style={style}
+            // style={style}
           />
           {/* <img src="/icons/upload-photo.png" alt="upload"></img> */}
 
