@@ -85,12 +85,52 @@ const Profile = () => {
     }
   };
 
+  const [file, setFile] = useState();
+  //esta funcion
+  async function uploadFile() {
+    let data = new FormData();
+    data.append("image", file);
+    const imageResponse = await fetch(
+      `http://localhost:3080/api/v1/users/profile/${selectedUser.idusuario}`,
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    if (imageResponse.ok) {
+      const imageData = imageResponse.json();
+    }
+  }
+
+  const onFileChange = (e) => {
+    const f = e.target.files[0];
+    setFile(f);
+  };
+
+  const style = {
+    backgroundImage: `url("/icons/upload-photo.png" )`,
+    backgroundSize: "cover",
+    width: "2rem",
+    height: "2rem",
+  };
+
   return (
     <>
       <h1>{`Hola, ${userProfile.nombreusuario}`}</h1>
 
       <div className="user-image-profile" alt="user">
-        <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} />
+        <form onSubmit={uploadFile}>
+          <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} />
+          <input
+            type="file"
+            className="upload-photo-input"
+            onChange={onFileChange}
+            style={style}
+          />
+          {/* <img src="/icons/upload-photo.png" alt="upload"></img> */}
+
+          <button type="submit">Subir imagen</button>
+        </form>
       </div>
       <div className="user-info-item">
         <h3 className="user-item-title">Nombre:</h3>

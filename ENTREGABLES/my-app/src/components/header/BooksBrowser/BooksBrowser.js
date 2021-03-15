@@ -26,10 +26,6 @@ const BookBrowser = () => {
     setCurrentBook(selectedBook);
   };
 
-  // const renderCoincidences = (book) => (
-  //   <li key={book.idlibro}>{book.titulo}</li>
-  // );
-
   console.log(currentBook);
 
   const renderBooksBrowser = (book) => {
