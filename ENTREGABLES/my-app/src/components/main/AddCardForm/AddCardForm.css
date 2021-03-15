@@ -88,4 +88,5 @@
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
   background-color: var(--title-brown-color);
   margin-top: 1rem;
+  width: 2rem;
 }
