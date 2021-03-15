@@ -129,7 +129,13 @@ const Profile = () => {
           />
           {/* <img src="/icons/upload-photo.png" alt="upload"></img> */}
 
-          <button type="submit">Subir imagen</button>
+          <button classNAme="upload-user-button" type="submit">
+            <img
+              src="/icons/upload-photo.png"
+              alt="borrar"
+              style={{ height: "1.8rem", width: "1.8rem" }}
+            />
+          </button>
         </form>
       </div>
       <div className="user-info-item">

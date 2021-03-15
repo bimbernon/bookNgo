@@ -60,3 +60,7 @@
 .upload-photo-input {
   text: none;
 }
+
+.upload-user-button {
+  margin-left: 10rem;
+}

@@ -98,3 +98,25 @@ a {
 .donations-title-list {
   text-align: center;
 }
+
+.add-book-button-container,
+.register-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+  position: relative;
+  left: 8.5rem;
+}
+
+.add-book-submit-button,
+.register-submit-button {
+  font-family: "Comfortaa";
+  padding: 0.5rem 0.6rem;
+  border: 0;
+  border-radius: 50px;
+  color: white;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
+  background-color: var(--title-brown-color);
+  margin-top: 1rem;
+  width: 2rem;
+}

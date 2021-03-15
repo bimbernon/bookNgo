@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { Book } from "../../components/main/Book/Book";
 import Swal from "sweetalert2";
@@ -104,6 +104,14 @@ export function AdministrationBooksPage() {
 
   return (
     <div>
+      <Link to="/books/create">
+        <div className="add-book-button-container">
+          <button className="add-book-submit-button" type="submit">
+            +
+          </button>
+        </div>
+      </Link>
+
       <ul className="all-books-list">{books.map(renderBooks)}</ul>
     </div>
   );
