@@ -125,7 +125,7 @@ const Profile = () => {
 
       <div className="user-image-profile" alt="user">
         <form className="upload-photo-form" onSubmit={uploadFile}>
-          <Avatar styleAux={sytle}></Avatar>
+          <Avatar imageId={userProfile.idusuario} styleAux={sytle}></Avatar>
           <div className="upload-photo-input-container">
             <input
               type="file"
