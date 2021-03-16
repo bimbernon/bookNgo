@@ -25,7 +25,7 @@ html {
   height: 100vh;
   display: grid;
   place-content: center;
-  background-color: black;
+  background-color: var(--title-brown-color);
 }
 
 .book-list-container {
