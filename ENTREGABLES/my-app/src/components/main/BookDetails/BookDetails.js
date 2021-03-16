@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Book } from "../Book/Book";
 // import { BagContext } from "../../providers/BagProvider";
+import Loading from "../../Loading";
 
 import "./BookDetails.css";
 
 export const BookDetails = () => {
-  const [book, setBook] = useState({});
+  const [book, setBook] = useState(null);
   let { bookId } = useParams();
   const [back, setBack] = useState(-1);
 
@@ -27,6 +28,8 @@ export const BookDetails = () => {
     }
     getBookById();
   }, []);
+
+  if (!book) return <Loading />;
 
   const style = {
     borderRadius: "1rem",

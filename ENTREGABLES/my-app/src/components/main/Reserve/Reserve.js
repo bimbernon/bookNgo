@@ -32,13 +32,13 @@ const Reserve = (props) => {
       >
         {children}
       </div>
-      <Link to={`/reserve/invoice/${idInvoice}`}>
+      {/* <Link to={`/reserve/invoice/${idInvoice}`}>
         <img
           src="/icons/icono-factura.png"
           alt="edit"
           style={{ height: "1.2rem", width: "1.2rem" }}
         />
-      </Link>
+      </Link> */}
       {/* </Link> */}
     </li>
   );

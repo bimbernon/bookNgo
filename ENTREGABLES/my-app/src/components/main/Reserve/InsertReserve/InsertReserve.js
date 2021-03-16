@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../../../components/providers/AuthProvider";
 import { UserContext } from "../../../../components/providers/UserProvider";
 import "./InsertReserve.css";
@@ -10,6 +10,8 @@ export const InsertReserve = (props) => {
   const [selectedUser] = useContext(UserContext);
   const [reserve, setReserve] = useState([]);
   console.log(reserve);
+  const history = useHistory();
+
   const noMoneyMsg =
     "Saldo insuficiente. Recarga tu monedero para continuar con la reserva.";
 
@@ -38,6 +40,7 @@ export const InsertReserve = (props) => {
       const reserveResponseData = await reserveResponse.json();
       setReserve(reserveResponseData);
       console.log("llega");
+      history.push(`/reserves/${selectedUser.idusuario}`);
       //insertInvoice(e);
     } else {
       const error = new Error("Algo ha salido mal.");

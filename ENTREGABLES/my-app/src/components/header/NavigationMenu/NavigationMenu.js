@@ -7,6 +7,9 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
 
 const NavigationMenu = () => {
+  const [token] = useContext(AuthContext);
+  const [selectedUser] = useContext(UserContext);
+
   const Navigation = (props) => {
     const { imageId, activeMenu } = props;
     const [userProfile, setUserProfile] = useState({});
@@ -21,10 +24,9 @@ const NavigationMenu = () => {
             }
           )
         ).json();
-        console.log(userResponse);
         setUserProfile(userResponse);
       }
-      getUserProfile();
+      token && getUserProfile();
     }, []);
 
     const WelcomeMsg = !token ? (
@@ -70,9 +72,6 @@ const NavigationMenu = () => {
     );
     return WelcomeMsg;
   };
-
-  const [token] = useContext(AuthContext);
-  const [selectedUser] = useContext(UserContext);
 
   const navigation = token ? (
     <Navigation imageId={selectedUser.idusuario} activeMenu={false} />

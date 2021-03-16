@@ -42,9 +42,9 @@ const Profile = () => {
         })
       ).json();
 
-      setUserProfile(userResponse);
+      token && setUserProfile(userResponse);
     }
-    getUserProfile();
+    token && getUserProfile();
   }, [userId, token]);
 
   const sytle = {
@@ -114,6 +114,7 @@ const Profile = () => {
   //   width: "2rem",
   //   height: "2rem",
   // };
+  if (!token) return <Redirect to="/" />;
 
   return (
     <>
@@ -198,7 +199,6 @@ const Profile = () => {
               }}
             />
           </button>
-          {token === "" && <Redirect to="/" />}
         </form>
       </div>
     </>

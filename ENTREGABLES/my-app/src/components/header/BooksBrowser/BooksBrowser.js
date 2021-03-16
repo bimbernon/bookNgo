@@ -46,6 +46,24 @@ const BookBrowser = () => {
     setCurrentBook([]);
   };
 
+  useEffect(() => {
+    setCurrentBook(
+      search
+        ? books
+            .filter((book) => {
+              const s = search.toLocaleLowerCase();
+              return (
+                book.titulo.toLocaleLowerCase().includes(s) ||
+                book.sinopsis.toLocaleLowerCase().includes(s) ||
+                book.nombreautor.toLocaleLowerCase().includes(s) ||
+                book.apel1.toLocaleLowerCase().includes(s)
+              );
+            })
+            .slice(0, 5)
+        : []
+    );
+  }, [search, books]);
+
   const filterBooks = (e) => {
     if (e.target.value === "") {
       hideResults();
@@ -53,21 +71,6 @@ const BookBrowser = () => {
     }
 
     setSearch(e.target.value);
-    console.log(books);
-
-    const selectedBook = books
-      .filter((book) => {
-        const s = search.toLocaleLowerCase();
-        return (
-          book.titulo.toLocaleLowerCase().includes(s) ||
-          book.sipnosis.toLocaleLowerCase().includes(s) ||
-          book.nombreautor.toLocaleLowerCase().includes(s) ||
-          book.apel1.toLocaleLowerCase().includes(s)
-        );
-      })
-      .slice(0, 5);
-
-    setCurrentBook(selectedBook);
   };
 
   const renderBooksBrowser = (book) => {

@@ -1,13 +1,19 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { UserContext } from "../../../providers/UserProvider";
 import Swal from "sweetalert2";
 import "./LoginForm.css";
 
 const LoginForm = (props) => {
-  const { url, onSuccess, onError, onSuccessUser } = props;
+  const { url } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [selectedUser, setSelectedUser] = useContext(UserContext);
+  const [token, setToken] = useContext(AuthContext);
+
+  const history = useHistory();
 
   const handleChangeEmail = (e) => setEmail(e.target.value);
   const handleChangePassword = (e) => setPassword(e.target.value);
@@ -28,20 +34,25 @@ const LoginForm = (props) => {
 
     if (response.ok) {
       const result = await response.json();
-      onSuccess(result);
-      onSuccessUser(result);
       setEmail("");
       setPassword("");
       setErrorMsg("");
+
+      setSelectedUser(result.user);
+      setToken(result.accessToken);
+
+      history.push("/");
     } else {
       const errorMsg = await response.json();
-      setErrorMsg( Swal.fire({
+      setErrorMsg(
+        Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "Usuario o contraseña insocrrectos.!",
           button: true,
-        }));
-      onError(errorMsg);
+        })
+      );
+      //      setErrorMsg(errorMsg.message);
       //mostrar mensaje de error
     }
   };
