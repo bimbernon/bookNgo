@@ -40,20 +40,11 @@ const BookBrowser = () => {
 
   const filterBooks = (e) => {
     console.log(e.target.value);
-    const selectedBook =
-      books.filter((book) => {
+    const selectedBook = books
+      .filter((book) => {
         return book.titulo.toLowerCase().includes(e.target.value.toLowerCase());
-      }) ||
-      authors
-        .filter((author) => {
-          return (
-            author.nombreautor
-              .toLowerCase()
-              .includes(e.target.value.toLowerCase()) ||
-            author.apel1.toLowerCase().includes(e.target.value.toLowerCase())
-          );
-        })
-        .slice(0, 5);
+      })
+      .slice(0, 5);
 
     setCurrentBook(selectedBook);
   };

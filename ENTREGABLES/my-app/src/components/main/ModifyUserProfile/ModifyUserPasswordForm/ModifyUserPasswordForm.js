@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { UserContext } from "../../../providers/UserProvider";
 import { AuthContext } from "../../../providers/AuthProvider";
-import  Swal  from "sweetalert2";
+import Swal from "sweetalert2";
 import "./ModifyUserPasswordForm.css";
 
 export const ModifyUserPasswordForm = () => {
@@ -44,8 +44,8 @@ export const ModifyUserPasswordForm = () => {
       } else {
         Swal.fire({
           icon: "error",
-          title: "Oops...",
-          text: "La contraseña introducida no puede ser igual a la anterior.!",
+          title: "¡Ooops!",
+          text: "La contraseña introducida no puede ser igual a la anterior.",
         });
       }
     }

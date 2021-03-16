@@ -27,7 +27,7 @@
 .ppal-browser-form ul {
   position: absolute;
   top: 40px;
-  background: white;
+  background: rgba(255, 255, 255, 0.835);
   list-style: none;
   padding: 0;
   margin: 0;

@@ -136,7 +136,7 @@ const Profile = () => {
             <label for="upload-photo-input" className="photo-logo">
               <img
                 src="/icons/upload-photo.png"
-                alt="borrar"
+                alt="uploadphoto"
                 style={{ height: "1.8rem", width: "1.8rem" }}
               />
             </label>

@@ -6,7 +6,6 @@ import { UserContext } from "../../providers/UserProvider";
 const UserMenu = () => {
   const [selectedUser] = useContext(UserContext);
 
-
   if (selectedUser.admin === 1) {
     return (
       <div className="user-menu-container">
