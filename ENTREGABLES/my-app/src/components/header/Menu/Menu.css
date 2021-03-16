@@ -12,8 +12,8 @@
   background-color: var(--white-background);
   list-style: none;
   position: absolute;
-  top: 3.5rem;
-  right: 1.3rem;
+ top: 3.5rem;
+  right: 1.3rem; 
   display: none;
   z-index: 10;
 }
