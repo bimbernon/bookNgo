@@ -51,7 +51,7 @@ const Profile = () => {
     // backgroundImage: `url("/images/users/${userId}.jpg")`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    // border: "1px solid black",
+    border: "7px solid  #cc9966",
     borderRadius: "50rem",
     boxShadow: "5px 5px 5px rgb(58, 55, 55",
     width: "7rem",
@@ -125,9 +125,13 @@ const Profile = () => {
           <div className="upload-photo-input-container">
             <label htmlFor="upload-photo-input" className="photo-logo">
               <img
-                src="/icons/camera-icon-lila.png"
+                src="/icons/white-camera.png"
                 alt="uploadphoto"
-                style={{ height: "1.8rem", width: "1.8rem" }}
+                style={{
+                  height: "1.6rem",
+                  width: "2rem",
+                  backgroundColor: "#cc9966",
+                }}
               />
 
               <input

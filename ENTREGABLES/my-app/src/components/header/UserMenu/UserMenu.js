@@ -43,6 +43,11 @@ const UserMenu = () => {
           <Link to={`/users/purse/${selectedUser.idusuario}`}>
             <li className="user-list-item-menu">Monedero</li>
           </Link>
+          <img
+            className="close-menu-button"
+            src="/icons/aspa.png"
+            alt="aspa"
+          ></img>
         </ul>
       </div>
     );
