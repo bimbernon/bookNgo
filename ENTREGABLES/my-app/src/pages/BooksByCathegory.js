@@ -4,6 +4,8 @@ import { Book } from "../components/main/Book/Book";
 
 export function BooksByCathegory() {
   const [books, setBooks] = useState([]);
+  const [back, setBack] = useState(-1);
+
   let { nameCathegory } = useParams();
 
   useEffect(() => {
@@ -14,6 +16,7 @@ export function BooksByCathegory() {
         )
       ).json();
       setBooks(booksByCathegoryName);
+      setBack(back - 1);
     }
     getBooksByCathegoryName();
   }, []);
@@ -30,6 +33,7 @@ export function BooksByCathegory() {
   return (
     <div className="book-list-container">
       <h1 className="cathegory-list-title">{nameCathegory}</h1>
+
       <ul className="book-list-ul">{books.map(renderBooks)}</ul>
     </div>
   );

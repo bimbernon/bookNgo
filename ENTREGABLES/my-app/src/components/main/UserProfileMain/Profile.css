@@ -8,7 +8,16 @@
   flex-direction: column;
   margin: 1rem auto;
   max-width: 93vw;
-  height: 45rem;
+  height: 50rem;
+}
+
+#upload-photo-input {
+  display: none;
+}
+
+.photo-logo {
+  display: inline-block;
+  top: 2rem;
 }
 
 .user-profile-container > h1 {
@@ -66,5 +75,3 @@
   flex-direction: column;
   align-items: center;
 }
-
-

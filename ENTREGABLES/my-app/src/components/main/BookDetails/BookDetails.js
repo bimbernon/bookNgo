@@ -8,6 +8,8 @@ import "./BookDetails.css";
 export const BookDetails = () => {
   const [book, setBook] = useState({});
   let { bookId } = useParams();
+  const [back, setBack] = useState(-1);
+
   // const [reserve, setReserve] = useState([]);
   // const doSuccessInsert = (responseBody) => setReserve(bookId);
 
@@ -20,6 +22,8 @@ export const BookDetails = () => {
       if (bookResponse.ok) {
         const bookResponseData = await bookResponse.json();
         setBook(bookResponseData);
+        setBack(back - 1);
+
         // onSuccessInsert(bookResponseData);
       }
     }
@@ -62,6 +66,9 @@ export const BookDetails = () => {
     </div>
   ) : (
     <div className="book-details-container">
+      <a href={`javascript:history.go(${back})`} className="back-button">
+        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+      </a>
       <Book
         bookId={book.idlibro}
         style={style}
