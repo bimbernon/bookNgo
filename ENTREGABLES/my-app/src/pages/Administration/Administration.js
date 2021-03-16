@@ -7,6 +7,7 @@ export const Administration = () => {
 
   return (
     <div className="administration-page-container">
+      <h1 className="administration-title">Administración </h1>
       <div className="administration-item-container">
         <Link to="/users">USUARIOS</Link>
       </div>
@@ -15,9 +16,9 @@ export const Administration = () => {
           <Link to="/books">LIBROS</Link>
         </div>
       </div>
-      <div className="administration-item-container">
+      {/* <div className="administration-item-container">
         <Link to="/donations">DONACIONES</Link>
-      </div>
+      </div> */}
     </div>
   );
 };

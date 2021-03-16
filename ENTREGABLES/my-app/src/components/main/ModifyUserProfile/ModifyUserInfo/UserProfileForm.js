@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../../providers/UserProvider";
 import { AuthContext } from "../../../providers/AuthProvider";
 import "./UserProfileForm.css";
@@ -65,6 +66,9 @@ export const UserProfileForm = () => {
 
   return (
     <div className="user-profile-container">
+      <Link to={`/users/profile/${selectedUser.idusuario}`}>
+        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+      </Link>
       <h1 className="user-profile-title">Modificar datos</h1>
       <form className="form-user-profile" onSubmit={handleUserProfile}>
         <div className="input-user-modify-form-container">

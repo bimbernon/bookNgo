@@ -12,9 +12,7 @@ const HeaderContainer = () => {
         </Link>
         <NavigationMenu />
       </div>
-      <div className="browser-container">
-        <BookBrowser />
-      </div>
+      <BookBrowser />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 // import { Cathegory } from "../../components/main/HomeMain/Cathegory/Cathegory";
 import "./Administration.css";
@@ -147,6 +148,9 @@ export const CreateBook = () => {
 
   return (
     <div>
+      <Link to={`/books`}>
+        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+      </Link>
       <div style={style2} className="register-container">
         <h1 className="register-form-title">Regístro de autores</h1>
         <form className="register-form" onSubmit={handleSubmitAuthor}>

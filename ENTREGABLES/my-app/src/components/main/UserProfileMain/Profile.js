@@ -125,7 +125,7 @@ const Profile = () => {
           <div className="upload-photo-input-container">
             <label htmlFor="upload-photo-input" className="photo-logo">
               <img
-                src="/icons/upload-photo.png"
+                src="/icons/camera-icon-lila.png"
                 alt="uploadphoto"
                 style={{ height: "1.8rem", width: "1.8rem" }}
               />
@@ -161,8 +161,8 @@ const Profile = () => {
           to={`/user/profile/modify/modifyProfile/${selectedUser.idusuario}`}
         >
           <img
-            src="/icons/edit.png"
-            alt="borrar"
+            src="/icons/edit-blue-square-pen.png"
+            alt="edit"
             style={{
               height: "2.5rem",
               width: "2.5rem",
@@ -172,11 +172,11 @@ const Profile = () => {
         </Link>
         <Link to={`/user/updatePassword/${selectedUser.idusuario}`}>
           <img
-            src="/icons/changepassword.png"
+            src="/icons/edit-password-lock.jpg"
             alt="borrar"
             style={{
-              height: "3rem",
-              width: "3rem",
+              height: "4rem",
+              width: "4rem",
               padding: "0.5rem 1.4rem",
               marginTop: "0.3rem",
             }}
@@ -185,7 +185,7 @@ const Profile = () => {
         <form className="delete-user-form" onSubmit={handleDelete}>
           <button className="delete-user-button" type="submit">
             <img
-              src="/icons/delete.png"
+              src="/icons/delete-red-button.png"
               alt="borrar"
               style={{
                 height: "2.5rem",

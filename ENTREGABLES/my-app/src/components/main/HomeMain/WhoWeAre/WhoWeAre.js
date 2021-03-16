@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./WhoWeAre.css";
 
 export const HowItWorks = () => {
@@ -22,7 +23,14 @@ export const HowItWorks = () => {
         <div className="div-list-howItWorks">
           <ul className="list-howItWorks">
             <li className="list-item">1. Registrate</li>
-            <li className="list-item">2. Dona tus libros</li>
+            <li className="list-item">
+              <Link
+                to="donations/create"
+                style={{ textDecoration: "underline" }}
+              >
+                2. Dona tus libros
+              </Link>
+            </li>
             <li className="list-item">3. Recarga tu saldo</li>
             <li className="list-item">
               4. Escoge un libro de nuestra biblioteca

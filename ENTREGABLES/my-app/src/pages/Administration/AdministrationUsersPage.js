@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { User } from "../../components/main/User/User";
 import "./Administration.css";
@@ -41,6 +42,9 @@ function AdministrationUsersPage() {
 
   return (
     <div>
+      <Link to={`/administration`}>
+        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+      </Link>
       <ul className="users-list">{users.map(renderUsers)}</ul>
     </div>
   );

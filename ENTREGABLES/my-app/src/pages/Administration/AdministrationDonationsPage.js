@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { Donation } from "../../components/main/Donation/Donation";
 import "../../components/main/Donation/Donation.css";
@@ -44,6 +45,9 @@ function AdministrationDonationsPage() {
 
   return (
     <div className="donations-list-container">
+      <Link to={`/administration`}>
+        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+      </Link>
       <h1 className="donations-title-list">DONACIONES</h1>
       <ul className="donations-list">
         <li className="donations-item">{donations.map(renderDonations)}</li>

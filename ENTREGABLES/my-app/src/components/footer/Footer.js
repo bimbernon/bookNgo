@@ -4,15 +4,11 @@ import "./Footer.css";
 export const Footer = () => {
   return (
     <footer className="footer">
-      <a href="fdferf" className="footer-link">
-        Quienes somos
-      </a>
-      <a href="fdferf" className="footer-link">
-        Terminos y condiciones
-      </a>
-      <a href="fdferf" className="footer-link">
-        Politica de cookies
-      </a>
+      <ul className="creators-list">
+        <li className="creator-li">Jose Santos</li>
+        <li className="creator-li">Bárbara Imbernón</li>
+        <li className="creator-li">Jose López</li>
+      </ul>
     </footer>
   );
 };

@@ -7,7 +7,7 @@
 }
 
 .title-howItWorks {
-  color: var(--title-brown-color);
+  color: var(--dark-title-color);
   text-transform: uppercase;
   text-align: center;
   margin: 0.5rem;
