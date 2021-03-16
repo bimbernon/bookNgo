@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./BooksBrowser.css";
 
 const BookBrowser = () => {
-  // const history = useHistory();
+  const history = useHistory();
   const [books, setBooks] = useState([]);
-  const [authors, setAuthors] = useState([]);
   const [currentBook, setCurrentBook] = useState([]);
 
   useEffect(() => {
@@ -22,43 +21,16 @@ const BookBrowser = () => {
     getAllBooks();
   }, []);
 
-  useEffect(() => {
-    async function getAllAuthors() {
-      const allAuthorsResponse = await fetch(
-        "http://localhost:3080/api/v1/authors"
-      );
-
-      if (allAuthorsResponse.ok) {
-        const allAuthorsData = await allAuthorsResponse.json();
-        setAuthors(allAuthorsData);
-      }
-    }
-    getAllAuthors();
-  }, []);
-
-  console.log(books, authors);
-
   const filterBooks = (e) => {
     console.log(e.target.value);
-    const selectedBook =
-      books.filter((book) => {
+    const selectedBook = books
+      .filter((book) => {
         return book.titulo.toLowerCase().includes(e.target.value.toLowerCase());
-      }) ||
-      authors
-        .filter((author) => {
-          return (
-            author.nombreautor
-              .toLowerCase()
-              .includes(e.target.value.toLowerCase()) ||
-            author.apel1.toLowerCase().includes(e.target.value.toLowerCase())
-          );
-        })
-        .slice(0, 5);
+      })
+      .slice(0, 5);
 
     setCurrentBook(selectedBook);
   };
-
-  console.log(currentBook);
 
   const renderBooksBrowser = (book) => {
     return (
