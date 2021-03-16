@@ -8,10 +8,7 @@ const HeaderContainer = () => {
     <div className="header-container">
       <div className="header-items">
         <Link to="/" className="ppal-logo">
-          <img
-            src="/logosProyecto/logoPrincipal/logo_blanco/logo.svg"
-            alt="logo"
-          />
+          <img src="/logosProyecto/logoPrincipal/logo/logo.svg" alt="logo" />
         </Link>
         <NavigationMenu />
       </div>
