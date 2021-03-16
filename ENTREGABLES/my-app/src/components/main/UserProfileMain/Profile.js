@@ -6,6 +6,7 @@ import { UserContext } from "../../providers/UserProvider";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./Profile.css";
+import { Avatar } from "../../header/Avatar/Avatar";
 
 const Profile = () => {
   const [token, setToken] = useContext(AuthContext);
@@ -124,7 +125,8 @@ const Profile = () => {
 
       <div className="user-image-profile" alt="user">
         <form className="upload-photo-form" onSubmit={uploadFile}>
-          <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} />
+          <Avatar styleAux={sytle}></Avatar>
+          {/* <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} /> */}
           <input
             type="file"
             className="upload-photo-input"
