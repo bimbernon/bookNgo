@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
 import { useParams } from "react-router-dom";
+import {Avatar} from "../../header/Avatar/Avatar";
 import Swal from "sweetalert2";
 import "./Profile.css";
 
@@ -124,7 +125,7 @@ const Profile = () => {
 
       <div className="user-image-profile" alt="user">
         <form className="upload-photo-form" onSubmit={uploadFile}>
-          <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} />
+          <Avatar styleAux={sytle}></Avatar>
           <div className="upload-photo-input-container">
             <input
               type="file"

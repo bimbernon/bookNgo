@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../components/providers/AuthProvider";
-import { Cathegory } from "../../components/main/HomeMain/Cathegory/Cathegory";
+// import { Cathegory } from "../../components/main/HomeMain/Cathegory/Cathegory";
 import "./Administration.css";
 
 export const CreateBook = () => {

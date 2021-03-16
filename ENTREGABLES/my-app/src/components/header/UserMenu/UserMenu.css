@@ -11,14 +11,12 @@
   display: none;
   background-color: white;
   border-radius: 1rem;
-  height: 20rem;
-  top: 3.5rem;
-  right: 1.7rem;
-  width: 15rem;
+  height: 100%;
+  width: 55%;
   z-index: 10;
 }
 
-.user-menu-container-administration {
+.user-list-menu-administration {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -30,17 +28,9 @@
   background-color: white;
   border-radius: 1rem;
   height: 100%;
-  width: 15rem;
+  width: 55%;
 }
 
-.user-list-menu {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0;
-  margin-top: 3rem;
-}
 
 .user-list-item-menu {
   padding: 2rem 1rem;

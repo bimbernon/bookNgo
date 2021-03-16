@@ -15,7 +15,7 @@
   align-items: center;
 }
 
-.navigation-menu-item:hover > div {
+.navigation-menu-item:hover > div > ul {
   display: initial;
 }
 
