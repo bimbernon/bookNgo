@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./BooksBrowser.css";
 
 const BookBrowser = () => {
-  // const history = useHistory();
+  const history = useHistory();
   const [books, setBooks] = useState([]);
   const [authors, setAuthors] = useState([]);
+  const [search, setSearch] = useState("");
   const [currentBook, setCurrentBook] = useState([]);
+
+  history.listen((location) => {
+    hideResults();
+  });
 
   useEffect(() => {
     async function getAllBooks() {
@@ -36,25 +41,53 @@ const BookBrowser = () => {
     getAllAuthors();
   }, []);
 
-  console.log(books, authors);
+  const hideResults = () => {
+    setSearch("");
+    setCurrentBook([]);
+  };
 
   const filterBooks = (e) => {
-    console.log(e.target.value);
+    if (e.target.value === "") {
+      hideResults();
+      return;
+    }
+
+    setSearch(e.target.value);
+    console.log(books);
+
     const selectedBook = books
       .filter((book) => {
-        return book.titulo.toLowerCase().includes(e.target.value.toLowerCase());
+        const s = search.toLocaleLowerCase();
+        return (
+          book.titulo.toLocaleLowerCase().includes(s) ||
+          book.sipnosis.toLocaleLowerCase().includes(s) ||
+          book.nombreautor.toLocaleLowerCase().includes(s) ||
+          book.apel1.toLocaleLowerCase().includes(s)
+        );
       })
       .slice(0, 5);
 
     setCurrentBook(selectedBook);
   };
 
-  console.log(currentBook);
-
   const renderBooksBrowser = (book) => {
     return (
       <li key={book.idlibro}>
-        <Link to={`/books/id/${book.idlibro}`}>{book.titulo}</Link>
+        <Link
+          to={`/books/id/${book.idlibro}`}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "60px auto",
+            gap: "1rem",
+          }}
+        >
+          <img
+            src={`/images/books/${book.idlibro}.jpg`}
+            alt={book.titulo}
+            style={{ width: "50px" }}
+          />
+          <p>{book.titulo}</p>
+        </Link>
       </li>
     );
   };
@@ -71,10 +104,10 @@ const BookBrowser = () => {
                 className="ppal-browser"
                 placeholder={`  Busca por título, autor, editorial...`}
                 onChange={filterBooks}
-                // onBlur={(e) => {
-                //   e.target.value = "";
-                //   setTimeout(() => setCurrentBook([]), 500);
-                // }}
+                value={search}
+                onBlur={(e) => {
+                  setTimeout(hideResults, 200);
+                }}
               />
               {currentBook.length > 0 && (
                 <ul id="browser-options">
