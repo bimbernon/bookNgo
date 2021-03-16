@@ -5,7 +5,7 @@ import { UserContext } from "../../../../components/providers/UserProvider";
 import "./InsertReserve.css";
 
 export const InsertReserve = (props) => {
-  const { bookId, userMoney } = props;
+  const { book, userMoney } = props;
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [reserve, setReserve] = useState([]);
@@ -19,6 +19,7 @@ export const InsertReserve = (props) => {
     e.preventDefault();
 
     console.log("hyey");
+    // console.log(-)
     const reserveResponse = await fetch(
       "http://localhost:3080/api/v1/reserves/",
       {
@@ -28,7 +29,7 @@ export const InsertReserve = (props) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          idlibro: bookId,
+          idlibro: book.idlibro,
         }),
       }
     );
@@ -36,6 +37,36 @@ export const InsertReserve = (props) => {
     if (reserveResponse.ok) {
       const reserveResponseData = await reserveResponse.json();
       setReserve(reserveResponseData);
+      console.log("llega");
+      //insertInvoice(e);
+    } else {
+      const error = new Error("Algo ha salido mal.");
+      throw error;
+    }
+  };
+
+  const insertInvoice = async (e) => {
+    e.preventDefault();
+    console.log("libro", book);
+    console.log("hyey");
+    const invoiceResponse = await fetch(
+      "http://localhost:3080/api/v1/invoices",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          iva: "21",
+          precioenvio: "3",
+          detalles: [{ idlibro: book.idlibro, precio: book.precio }],
+        }),
+      }
+    );
+
+    if (invoiceResponse.ok) {
+      const reserveResponseData = await invoiceResponse.json();
     } else {
       const error = new Error("Algo ha salido mal.");
       throw error;
@@ -84,7 +115,7 @@ export const InsertReserve = (props) => {
       <button
         className="book-details-reserve-button"
         type="submit"
-        value={bookId}
+        value={book.idlibro}
         onClick={handleChangeReserve}
       >
         Pagar

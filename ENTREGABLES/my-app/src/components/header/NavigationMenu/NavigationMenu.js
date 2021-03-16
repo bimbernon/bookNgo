@@ -9,21 +9,23 @@ import { UserContext } from "../../providers/UserProvider";
 const NavigationMenu = () => {
   const Navigation = (props) => {
     const { imageId, activeMenu } = props;
-     const [userProfile, setUserProfile] = useState({});
+    const [userProfile, setUserProfile] = useState({});
 
     useEffect(() => {
       async function getUserProfile() {
         const userResponse = await (
-          await fetch(`http://localhost:3080/api/v1/users/profile/${selectedUser.idusuario}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
+          await fetch(
+            `http://localhost:3080/api/v1/users/profile/${selectedUser.idusuario}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          )
         ).json();
-
+        console.log(userResponse);
         setUserProfile(userResponse);
       }
       getUserProfile();
     }, []);
-
 
     const WelcomeMsg = !token ? (
       <>

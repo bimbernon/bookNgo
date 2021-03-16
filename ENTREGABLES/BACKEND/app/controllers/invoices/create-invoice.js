@@ -1,9 +1,9 @@
 "use strict";
-const {dateFormatted} = require("../../helpers/date");
+const { dateFormatted } = require("../../helpers/date");
 const { insertInvoice } = require("../../repositories/invoices-repository");
 const Joi = require("joi");
 const schema = Joi.object().keys({
-  idfactura: Joi.number().positive().required(),
+  //idfactura: Joi.number().positive().required(),
   iva: Joi.number().positive().required(),
   precioenvio: Joi.number().positive().required(),
   detalles: Joi.array().items(
@@ -18,13 +18,12 @@ async function createInvoice(req, res) {
   try {
     const { idusuario } = req.auth;
     const total = 0.0;
-    const fecha = dateFormatted(new Date(),"-");
-    const { idfactura, iva, precioenvio, detalles } = req.body;
-  
+    const fecha = dateFormatted(new Date(), "-");
+    const { iva, precioenvio, detalles } = req.body;
+
     await schema.validateAsync(req.body);
 
     const invoice = {
-      idfactura,
       idusuario,
       fecha,
       iva,
@@ -34,7 +33,7 @@ async function createInvoice(req, res) {
 
     const invoiceCreated = await insertInvoice(invoice, detalles);
 
-    res.send({invoiceCreated});
+    res.send({ invoiceCreated });
   } catch (err) {
     res.status(err.status || 500);
     res.send({ error: err.message });

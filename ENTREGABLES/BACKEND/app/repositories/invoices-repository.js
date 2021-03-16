@@ -5,7 +5,6 @@ const {
   readDetailsByInvoce,
 } = require("../repositories/details-repository");
 
-
 async function readInvoicesByUser(userID) {
   console.log(userID);
   const pool = await database.getPool();
@@ -21,16 +20,30 @@ async function readInvoicesByUser(userID) {
   return invoices;
 }
 
+async function findLastInvoiceId() {
+  const pool = await database.getPool();
+
+  const query =
+    "select max(factura.idfactura) as idfactura from proyectoFinalBookNGo.factura";
+  const [invoiceId] = await pool.query(query);
+  console.log([invoiceId[0]]);
+  const generatedNewInvoiceId = invoiceId[0].idfactura + 1;
+  console.log("gee" + generatedNewInvoiceId);
+  return generatedNewInvoiceId;
+}
+
 async function insertInvoice(invoice, details) {
   const pool = await database.getPool();
-  
+
   try {
     await pool.query("START TRANSACTION");
+    const idfactura = await findLastInvoiceId();
+    console.log("ESTE ES EL ID DE LA FASCTURA" + idfactura);
 
     const query =
       "INSERT INTO factura (idfactura,idusuario,fecha,iva,precioenvio,total) values (?,?,?,?,?,?)";
 
-    const { idfactura, idusuario, fecha, iva, precioenvio, total } = invoice;
+    const { idusuario, fecha, iva, precioenvio, total } = invoice;
 
     const [invoices] = await pool.query(query, [
       idfactura,
@@ -43,8 +56,8 @@ async function insertInvoice(invoice, details) {
     let totalR = total;
 
     for (let i = 0; i < details.length; i++) {
-      details[i].idfactura=idfactura;
-      details[i].iddetalle=i+1;
+      details[i].idfactura = idfactura;
+      details[i].iddetalle = i + 1;
       await createDetail(details[i]);
       totalR = totalR + parseInt(details[i].precio);
     }

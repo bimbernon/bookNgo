@@ -80,7 +80,7 @@ export const BackPackItem = () => {
         {/* {pp.map(renderBooks)} */}
       </div>
       <div>
-        <InsertReserve bookId={bookId} userMoney={user.monedero} />
+        <InsertReserve book={book} userMoney={user.monedero} />
       </div>
     </div>
   ) : (
