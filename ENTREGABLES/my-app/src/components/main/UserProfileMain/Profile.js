@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
 import { useParams } from "react-router-dom";
-import {Avatar} from "../../header/Avatar/Avatar";
+import { Avatar } from "../../header/Avatar/Avatar";
 import Swal from "sweetalert2";
 import "./Profile.css";
 
