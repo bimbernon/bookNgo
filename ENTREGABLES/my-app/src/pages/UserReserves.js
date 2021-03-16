@@ -65,6 +65,7 @@ export const UserReserves = () => {
 
   console.log(invoices);
 
+  //if invoices [] return msg: Aún no tienes reservas /  else -pintar reservas
   return (
     <div className="reserves-container">
       <h1 className="reserves-title">Mis reservas</h1>

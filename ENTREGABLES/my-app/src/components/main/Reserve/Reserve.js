@@ -23,21 +23,21 @@ const Reserve = (props) => {
       reserveExpiration={reserveExpiration}
     >
       {/* <Link to={`/reserve/${selectedUser.idusuario}/${bookId}/${reserveDate}`}> */}
-        <div
-          className="reserve-info"
-          reservedBookTitle={reservedBookTitle}
-          reserveExpiration={reserveExpiration}
-          reserveDate={reserveDate}
-        >
-          {children}
-        </div>
-            <Link to="/reserve/invoice">
-              <img
-                src="/icons/icono-factura.png"
-                alt="edit"
-                style={{ height: "1.2rem", width: "1.2rem" }}
-              />
-            </Link>
+      <div
+        className="reserve-info"
+        reservedBookTitle={reservedBookTitle}
+        reserveExpiration={reserveExpiration}
+        reserveDate={reserveDate}
+      >
+        {children}
+      </div>
+      <Link to="/reserve/invoice">
+        <img
+          src="/icons/icono-factura.png"
+          alt="edit"
+          style={{ height: "1.2rem", width: "1.2rem" }}
+        />
+      </Link>
       {/* </Link> */}
     </li>
   );
