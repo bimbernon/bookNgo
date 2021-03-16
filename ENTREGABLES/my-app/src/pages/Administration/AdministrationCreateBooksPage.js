@@ -138,12 +138,12 @@ export const CreateBook = () => {
   };
 
   const style = {
-    height: '41rem',
-  }
+    height: "41rem",
+  };
 
   const style2 = {
-    height: '21rem',
-  }
+    height: "21rem",
+  };
 
   return (
     <div>
@@ -183,6 +183,7 @@ export const CreateBook = () => {
       </div>
       <div style={style} className="register-container">
         <h1 className="register-form-title">Regístro de libros</h1>
+        <button className="upload-book-image-button">Subir foto</button>
         <form className="register-form" onSubmit={handleSubmitBook}>
           <div className="select-cathegoty-container">
             <select
@@ -254,7 +255,6 @@ export const CreateBook = () => {
             </button>
           </div>
         </form>
-        <button className="upload-book-image-button">Subir foto</button>
       </div>
     </div>
   );

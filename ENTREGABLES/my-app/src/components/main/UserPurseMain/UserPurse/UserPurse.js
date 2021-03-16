@@ -23,7 +23,6 @@ export const UserPurse = () => {
     });
 
     setCurrentCard(selectedCard);
-    console.log("Tarjta Seleccionada" + currentCard.idtarjeta);
   };
 
   useEffect(() => {
@@ -51,7 +50,6 @@ export const UserPurse = () => {
   }, []);
 
   const rechargePurse = async (e) => {
-    setUserMoney(userMoney + newRecharge);
     console.log("usermoney dentro del post" + userMoney);
 
     const userRechargeResponse = await fetch(
@@ -63,16 +61,15 @@ export const UserPurse = () => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          ammount: userMoney,
+          ammount: userMoney + newRecharge,
         }),
       }
     );
     if (userRechargeResponse.ok) {
       console.log("entro");
       const userRechargeData = await userRechargeResponse.json();
+      setUserMoney(userRechargeData.ammount);
     } else {
-      console.log("rnfrnirivnronvornovnro");
-      const errorMsg = await userRechargeResponse.json();
       setErrorMsg("Algo ha salido mal...");
     }
   };
@@ -103,7 +100,7 @@ export const UserPurse = () => {
     }
 
     getUserCard();
-  }, [cards]);
+  }, []);
 
   const renderCards = (card) => (
     <Card

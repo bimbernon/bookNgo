@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./BooksBrowser.css";
 
 const BookBrowser = () => {
+  // const history = useHistory();
   const [books, setBooks] = useState([]);
+  const [authors, setAuthors] = useState([]);
   const [currentBook, setCurrentBook] = useState([]);
 
   useEffect(() => {
@@ -19,17 +22,50 @@ const BookBrowser = () => {
     getAllBooks();
   }, []);
 
+  useEffect(() => {
+    async function getAllAuthors() {
+      const allAuthorsResponse = await fetch(
+        "http://localhost:3080/api/v1/authors"
+      );
+
+      if (allAuthorsResponse.ok) {
+        const allAuthorsData = await allAuthorsResponse.json();
+        setAuthors(allAuthorsData);
+      }
+    }
+    getAllAuthors();
+  }, []);
+
+  console.log(books, authors);
+
   const filterBooks = (e) => {
-    const selectedBook = books.filter((book) =>
-      book.titulo.includes(e.target.value)
-    );
+    console.log(e.target.value);
+    const selectedBook =
+      books.filter((book) => {
+        return book.titulo.toLowerCase().includes(e.target.value.toLowerCase());
+      }) ||
+      authors
+        .filter((author) => {
+          return (
+            author.nombreautor
+              .toLowerCase()
+              .includes(e.target.value.toLowerCase()) ||
+            author.apel1.toLowerCase().includes(e.target.value.toLowerCase())
+          );
+        })
+        .slice(0, 5);
+
     setCurrentBook(selectedBook);
   };
 
   console.log(currentBook);
 
   const renderBooksBrowser = (book) => {
-    return <option value={book.titulo}></option>;
+    return (
+      <li key={book.idlibro}>
+        <Link to={`/books/id/${book.idlibro}`}>{book.titulo}</Link>
+      </li>
+    );
   };
 
   return (
@@ -44,10 +80,16 @@ const BookBrowser = () => {
                 className="ppal-browser"
                 placeholder={`  Busca por título, autor, editorial...`}
                 onChange={filterBooks}
+                // onBlur={(e) => {
+                //   e.target.value = "";
+                //   setTimeout(() => setCurrentBook([]), 500);
+                // }}
               />
-              <datalist id="browser-options">
-                {currentBook.map(renderBooksBrowser)}
-              </datalist>
+              {currentBook.length > 0 && (
+                <ul id="browser-options">
+                  {currentBook.map(renderBooksBrowser)}
+                </ul>
+              )}
               <button type="submit" className="ppal-browser-submit-button">
                 <img
                   className="search-logo"

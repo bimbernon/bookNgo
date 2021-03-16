@@ -66,8 +66,10 @@ export function AdministrationBooksPage() {
   };
 
   const style = {
-    height: "10rem",
+    height: "12.5rem",
+    width: "17rem",
   };
+
   const deleteStyle = {
     background: `url("/icons/delete.png")`,
     backgroundSize: "cover",
@@ -79,12 +81,12 @@ export function AdministrationBooksPage() {
     <div className="admin-book-container">
       <Book
         style={style}
+        bookId={book.idlibro}
         key={book.idlibro}
         bookName={book.titulo}
         imageId={book.idlibro}
-        bookAuthor={`${book.nombreautor} ${book.apel1}`}
-        bookPrice={`Precio: ${book.precio}`}
-      ></Book>
+        // bookAuthor={`${book.nombreautor} ${book.apel1}`}
+      />
       <form>
         <button
           className="delete-book-button"

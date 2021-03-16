@@ -87,13 +87,17 @@ const Profile = () => {
 
   const [file, setFile] = useState();
   //esta funcion
-  async function uploadFile() {
+  async function uploadFile(e) {
+    e.preventDefault();
     let data = new FormData();
-    data.append("image", file);
+    data.append("userImage", file);
     const imageResponse = await fetch(
-      `http://localhost:3080/api/v1/users/profile/${selectedUser.idusuario}`,
+      `http://localhost:3080/api/v1/users/image/upload/${selectedUser.idusuario}`,
       {
-        method: "POST",
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: data,
       }
     );
@@ -119,23 +123,25 @@ const Profile = () => {
       <h1>{`Hola, ${userProfile.nombreusuario}`}</h1>
 
       <div className="user-image-profile" alt="user">
-        <form  className="upload-photo-form" onSubmit={uploadFile}>
+        <form className="upload-photo-form" onSubmit={uploadFile}>
           <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} />
-          <input
-            type="file"
-            className="upload-photo-input"
-            onChange={onFileChange}
-            // style={style}
-          />
-          {/* <img src="/icons/upload-photo.png" alt="upload"></img> */}
-
-          <button classNAme="upload-user-button" type="submit">
-            <img
-              src="/icons/upload-photo.png"
-              alt="borrar"
-              style={{ height: "1.8rem", width: "1.8rem" }}
+          <div className="upload-photo-input-container">
+            <input
+              type="file"
+              id="upload-photo-input"
+              onChange={onFileChange}
+              // style={style}
             />
-          </button>
+            <label for="upload-photo-input" className="photo-logo">
+              <img
+                src="/icons/upload-photo.png"
+                alt="borrar"
+                style={{ height: "1.8rem", width: "1.8rem" }}
+              />
+            </label>
+          </div>
+
+          <button classNAme="upload-user-button" type="submit"></button>
         </form>
       </div>
       <div className="user-info-item">
@@ -161,14 +167,23 @@ const Profile = () => {
           <img
             src="/icons/edit.png"
             alt="borrar"
-            style={{ height: "2.5rem", width: "2.5rem" }}
+            style={{
+              height: "2.5rem",
+              width: "2.5rem",
+              padding: "0.2rem 1.5rem",
+            }}
           />
         </Link>
         <Link to={`/user/updatePassword/${selectedUser.idusuario}`}>
           <img
             src="/icons/changepassword.png"
             alt="borrar"
-            style={{ height: "3rem", width: "3rem" }}
+            style={{
+              height: "3rem",
+              width: "3rem",
+              padding: "0.5rem 1.4rem",
+              marginTop: "0.3rem",
+            }}
           />
         </Link>
         <form className="delete-user-form" onSubmit={handleDelete}>
@@ -176,7 +191,11 @@ const Profile = () => {
             <img
               src="/icons/delete.png"
               alt="borrar"
-              style={{ height: "2.5rem", width: "2.5rem" }}
+              style={{
+                height: "2.5rem",
+                width: "2.5rem",
+                padding: "0.7rem 1rem",
+              }}
             />
           </button>
           {token === "" && <Redirect to="/" />}

@@ -4,7 +4,6 @@
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
-  min-height: 100vw;
 }
 
 .book-details-container > li > a > img {
@@ -36,4 +35,10 @@
   color: white;
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
   background-color: var(--title-brown-color);
+}
+
+.back-button {
+  position: relative;
+  right: 9.5rem;
+  top: 4.5rem;
 }

@@ -15,7 +15,9 @@
   top: 3.5rem;
   right: 1.3rem;
   display: none;
+  z-index: 10;
 }
+
 .link-menu-title {
   margin: 0;
 }

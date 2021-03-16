@@ -11,14 +11,6 @@ body {
   width: 100%;
 }
 
-.header-container {
-  align-self: flex-start;
-}
-
-.footer {
-  align-self: flex-end;
-}
-
 html {
   --white-background: rgba(255, 255, 255, 0.623);
   --title-brown-color: rgb(194, 154, 103);
