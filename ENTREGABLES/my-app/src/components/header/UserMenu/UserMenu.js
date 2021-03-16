@@ -10,7 +10,12 @@ const UserMenu = () => {
   if (selectedUser.admin === 1) {
     return (
       <div className="user-menu-container">
-        <ul className="user-list-menu" >
+          <img
+            className="close-menu-button"
+            src="/icons/aspa.png"
+            alt="aspa"
+          ></img>
+        <ul className="user-list-menu">
           <Link to={`/users/profile/${selectedUser.idusuario}`}>
             <li className="user-list-item-menu">Mi Perfil</li>
           </Link>
@@ -29,7 +34,7 @@ const UserMenu = () => {
   } else {
     return (
       <div className="user-menu-container">
-        <ul className="user-list-menu-administration">
+        <ul className="user-list-menu">
           <Link to={`/users/profile/${selectedUser.idusuario}`}>
             <li className="user-list-item-menu">Mi Perfil</li>
           </Link>

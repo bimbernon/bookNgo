@@ -1,6 +1,6 @@
 @import "../../../index.css";
 
-.user-list-menu {
+.user-menu-container {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -12,11 +12,11 @@
   background-color: white;
   border-radius: 1rem;
   height: 100%;
-  width: 100%;
+  width: 55%;
   z-index: 10;
 }
 
-.user-list-menu-administration {
+.user-menu-container-administration {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,6 @@
   align-content: center;
   padding: 0;
   position: absolute;
-  right: 0rem;
   display: none;
   background-color: white;
   border-radius: 1rem;
@@ -32,9 +31,17 @@
   width: 15rem;
 }
 
+.user-list-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  margin-top: 3rem;
+}
+
 .user-list-item-menu {
-  padding: 2rem 0;
-  text-align: center;
+  padding: 2rem 1rem;
 }
 
 .user-list-menu > a {
@@ -42,3 +49,12 @@
   text-decoration: none;
   font-size: 1.5rem;
 }
+
+.close-menu-button {
+  height: 2rem;
+  height: 2rem;
+  position: absolute;
+  left: 11.5rem;
+  top: 0.6rem;
+}
+
