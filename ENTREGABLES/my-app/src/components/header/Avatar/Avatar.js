@@ -9,7 +9,6 @@
 //     height: "2.5rem",
 //   };
 
-  
 //   return (
 //     <div className="avatar">
 //       <img src={`/images/users/${imageId}.jpg`} alt="Avatar" style={style} />
@@ -38,7 +37,6 @@ export const Avatar = (props) => {
       <img
         src={`/images/users/${imageId}.jpg`}
         onError={(e) => {
-          console.log(e);
           e.target.src = "/images/users/0.jpg";
         }}
         alt="Avatar"
@@ -47,4 +45,3 @@ export const Avatar = (props) => {
     </div>
   );
 };
-

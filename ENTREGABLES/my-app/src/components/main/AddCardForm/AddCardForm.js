@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
 import { Card } from "../UserPurseMain/Card/Card";
+import { Link, useHistory } from "react-router-dom";
 import "./AddCardForm.css";
 
 const AddCardForm = () => {
@@ -36,7 +37,7 @@ const AddCardForm = () => {
         setCards(userCardData);
       } else {
         const errorMsg = await userCardResponse.json();
-        setErrorMsg();
+        setErrorMsg(errorMsg.error);
       }
     }
     getUserCard();
@@ -66,7 +67,7 @@ const AddCardForm = () => {
       await deleteCardResponse.json();
     } else {
       const errorMsg = await deleteCardResponse.json();
-      setErrorMsg("Algo ha salido mal...");
+      setErrorMsg(errorMsg.error);
     }
   };
 
@@ -79,6 +80,9 @@ const AddCardForm = () => {
   const handleChangeCsv = (e) => setCsv(e.target.value);
 
   const handleSubmitCard = async (e) => {
+    setErrorMsg("");
+    e.preventDefault();
+
     const resp = await fetch("http://localhost:3080/api/v1/cards", {
       method: "POST",
       headers: {
@@ -91,13 +95,15 @@ const AddCardForm = () => {
         csv: csv,
       }),
     });
+    const newCard = await resp.json();
     if (resp.ok) {
-      await resp.json();
       setCardNumber("");
       setExpirationDate("");
       setCsv("");
-      setBack(back - 1);
-      console.log(back);
+
+      setCards([newCard, ...cards]);
+    } else {
+      setErrorMsg(newCard.error);
     }
   };
 
@@ -109,12 +115,15 @@ const AddCardForm = () => {
     />
   );
 
+  console.log(cards);
+
   return (
     <div className="add-card-form-container">
       {/* METER BIEN LA RUTA VAGA */}
-      <a href={`javascript:history.go(${back})`} className="back-button">
+      {errorMsg ? <p>{errorMsg}</p> : null}
+      <Link to="/monedero">
         <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
-      </a>
+      </Link>
       <div>
         <h1 className="add-card-form-title">Añade tu tarjeta</h1>
 
