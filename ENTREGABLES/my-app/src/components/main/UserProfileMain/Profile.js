@@ -125,6 +125,7 @@ const Profile = () => {
 
       <div className="user-image-profile" alt="user">
         <form className="upload-photo-form" onSubmit={uploadFile}>
+<<<<<<< HEAD
           <Avatar styleAux={sytle}></Avatar>
           {/* <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} /> */}
           <input
@@ -140,8 +141,26 @@ const Profile = () => {
               src="/icons/upload-photo.png"
               alt="borrar"
               style={{ height: "1.8rem", width: "1.8rem" }}
+=======
+          <img src={`/images/users/${userId}.jpg`} alt="user" style={sytle} />
+          <div className="upload-photo-input-container">
+            <input
+              type="file"
+              id="upload-photo-input"
+              onChange={onFileChange}
+              // style={style}
+>>>>>>> 9ed601431587f69d7d7c156cd2e293f0fc29c860
             />
-          </button>
+            <label for="upload-photo-input" className="photo-logo">
+              <img
+                src="/icons/upload-photo.png"
+                alt="borrar"
+                style={{ height: "1.8rem", width: "1.8rem" }}
+              />
+            </label>
+          </div>
+
+          <button classNAme="upload-user-button" type="submit"></button>
         </form>
       </div>
       <div className="user-info-item">
@@ -167,14 +186,23 @@ const Profile = () => {
           <img
             src="/icons/edit.png"
             alt="borrar"
-            style={{ height: "2.5rem", width: "2.5rem" }}
+            style={{
+              height: "2.5rem",
+              width: "2.5rem",
+              padding: "0.2rem 1.5rem",
+            }}
           />
         </Link>
         <Link to={`/user/updatePassword/${selectedUser.idusuario}`}>
           <img
             src="/icons/changepassword.png"
             alt="borrar"
-            style={{ height: "3rem", width: "3rem" }}
+            style={{
+              height: "3rem",
+              width: "3rem",
+              padding: "0.5rem 1.4rem",
+              marginTop: "0.3rem",
+            }}
           />
         </Link>
         <form className="delete-user-form" onSubmit={handleDelete}>
@@ -182,7 +210,11 @@ const Profile = () => {
             <img
               src="/icons/delete.png"
               alt="borrar"
-              style={{ height: "2.5rem", width: "2.5rem" }}
+              style={{
+                height: "2.5rem",
+                width: "2.5rem",
+                padding: "0.7rem 1rem",
+              }}
             />
           </button>
           {token === "" && <Redirect to="/" />}
