@@ -35,14 +35,9 @@ async function createCard(req, res) {
       csv,
     };
 
-    await cardsRepository.addCard(cards);
+    const newCard = await cardsRepository.addCard(cards);
 
-    res.status(200).send({
-      numerotarjeta,
-      idusuario: userId,
-      fechaExpiracion,
-      csv,
-    });
+    res.status(200).send(newCard);
   } catch (err) {
     res.status(400).send({ error: err.message });
   }
