@@ -52,7 +52,7 @@ async function addCard(cards) {
     csv,
   ]);
 
-  return card;
+  return { id, numerotarjeta, idusuario, fechaExpiracion, csv };
 }
 
 async function modifiyCardById(cardId, card) {

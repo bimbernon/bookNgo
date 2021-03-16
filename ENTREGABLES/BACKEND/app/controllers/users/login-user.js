@@ -36,7 +36,7 @@ async function loginUser(req, res) {
 
     const secret = process.env.JWT_SECRET;
     const { idusuario, nombreusuario, admin } = user;
-    const jwtTokenExpiration = "30m";
+    const jwtTokenExpiration = "20000m";
     const payload = { idusuario, nombreusuario, admin };
 
     const token = jwt.sign(payload, secret, { expiresIn: jwtTokenExpiration });

@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import "./Profile.css";
 
 const Profile = () => {
+  const { userId } = useParams();
   const [token, setToken] = useContext(AuthContext);
   const [selectedUser, setSelectedUser] = useContext(UserContext);
   const [userProfile, setUserProfile] = useState({});
@@ -33,21 +34,18 @@ const Profile = () => {
     });
   };
 
-  let { userId } = useParams();
-
   useEffect(() => {
-    console.log(userProfile.nombreusuario);
     async function getUserProfile() {
       const userResponse = await (
         await fetch(`http://localhost:3080/api/v1/users/profile/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
       ).json();
+
       setUserProfile(userResponse);
-      console.log(userProfile.nombreusuario);
     }
     getUserProfile();
-  }, []);
+  }, [userId, token]);
 
   const sytle = {
     // backgroundImage: `url("/images/users/${userId}.jpg")`,
@@ -80,19 +78,21 @@ const Profile = () => {
       setToken("");
       setSelectedUser({});
     } else {
-      const errorMsg = await userResponse.json();
+      const errorResponse = await userResponse.json();
       Swal.fire("Eliminar Perfil!", "Error al eliminar el perfil", "error");
-      setErrorMsg("Algo ha salido mal...");
+      setErrorMsg(errorResponse.error);
     }
   };
 
-  const [file, setFile] = useState();
-  //esta funcion
-  async function uploadFile(e) {
+  const onFileChange = async (e) => {
     e.preventDefault();
-    let data = new FormData();
+
+    const file = e.target.files[0];
+
+    const data = new FormData();
     data.append("userImage", file);
-    const imageResponse = await fetch(
+
+    await fetch(
       `http://localhost:3080/api/v1/users/image/upload/${selectedUser.idusuario}`,
       {
         method: "PUT",
@@ -102,14 +102,10 @@ const Profile = () => {
         body: data,
       }
     );
-    if (imageResponse.ok) {
-      const imageData = imageResponse.json();
-    }
-  }
-
-  const onFileChange = (e) => {
-    const f = e.target.files[0];
-    setFile(f);
+    // if (!imageResponse.ok) {
+    //   const error = await imageResponse.json();
+    //   console.error(error);
+    // }
   };
 
   // const style = {
@@ -124,25 +120,24 @@ const Profile = () => {
       <h1>{`Hola, ${userProfile.nombreusuario}`}</h1>
 
       <div className="user-image-profile" alt="user">
-        <form className="upload-photo-form" onSubmit={uploadFile}>
-          <Avatar styleAux={sytle}></Avatar>
+        <form className="upload-photo-form">
+          <Avatar imageId={userProfile.idusuario} styleAux={sytle} />
           <div className="upload-photo-input-container">
-            <input
-              type="file"
-              id="upload-photo-input"
-              onChange={onFileChange}
-              // style={style}
-            />
-            <label for="upload-photo-input" className="photo-logo">
+            <label htmlFor="upload-photo-input" className="photo-logo">
               <img
                 src="/icons/upload-photo.png"
-                alt="borrar"
+                alt="uploadphoto"
                 style={{ height: "1.8rem", width: "1.8rem" }}
+              />
+
+              <input
+                type="file"
+                id="upload-photo-input"
+                onChange={onFileChange}
+                style={{ display: "none" }}
               />
             </label>
           </div>
-
-          <button classNAme="upload-user-button" type="submit"></button>
         </form>
       </div>
       <div className="user-info-item">

@@ -4,6 +4,7 @@ import { AuthContext } from "../../components/providers/AuthProvider";
 import { Book } from "../../components/main/Book/Book";
 import Swal from "sweetalert2";
 import "./Administration.css";
+import { BookBrowser } from "../../components/header/BooksBrowser/BooksBrowser";
 
 export function AdministrationBooksPage() {
   const [token] = useContext(AuthContext);
@@ -27,12 +28,11 @@ export function AdministrationBooksPage() {
     getAllBooks();
   }, []);
 
-  const handleDeleteBook = (e) => {
-    e.preventDefault();
-    console.log(e);
-
+  const handleDeleteBook = (id) => {
     Swal.fire({
-      title: `¿Estás seguro de que quieres eliminar el libro ${e.target.value}?`,
+      title: `¿Estás seguro de que quieres eliminar el libro ${
+        books.find((book) => book.idlibro === id).titulo
+      }?`,
       text: `ejemplo`,
       icon: "warning",
       showCancelButton: true,
@@ -42,25 +42,22 @@ export function AdministrationBooksPage() {
       cancelButtonText: "NO",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteBookById(e);
+        deleteBookById(id);
       }
     });
   };
 
-  const deleteBookById = async (e) => {
-    console.log("EVENTO PROPAGADO " + e.lastChild);
+  const deleteBookById = async (id) => {
     const deleteBookResponse = await fetch(
-      `http://localhost:3080/api/v1/books/delete/${e.target.value}`,
+      `http://localhost:3080/api/v1/books/delete/${id}`,
       {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       }
     );
     if (deleteBookResponse.ok) {
-      setDeleteBook(true);
-      const deletedBook = await deleteBookResponse.json();
+      setBooks(books.filter((book) => book.idlibro !== id));
     } else {
-      const errorMsg = await deleteBookResponse.json();
       setErrorMsg("Algo ha salido mal...");
     }
   };
@@ -92,7 +89,10 @@ export function AdministrationBooksPage() {
           className="delete-book-button"
           style={deleteStyle}
           value={book.idlibro}
-          onClick={handleDeleteBook}
+          onClick={(e) => {
+            e.preventDefault();
+            handleDeleteBook(book.idlibro);
+          }}
         >
           {/* <img
             src="/icons/delete.png"

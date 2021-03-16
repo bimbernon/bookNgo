@@ -1,7 +1,9 @@
 drop database if exists proyectoFinalBookNGo;
-create schema proyectoFinalBookNGo;
+create database proyectoFinalBookNGo;
 
 Use proyectoFinalBookNGo;
+
+
 
 create table usuario (
   idusuario int(6) not null primary key,
@@ -44,11 +46,11 @@ create table libro (
   idautor int(6) not null,
   titulo varchar(100) not null unique,
   stock int not null default 0,
-  sipnosis varchar(2000) not null,
+  sinopsis varchar(2000) not null,
   precio float(8,2),
   editorial varchar(40) not null,
   añopublicacion int (6) not null,
-  constraint `fk_Categoria` FOREIGN KEY (`idcategoria`) REFERENCES `proyectoFinalBookNGo`.`categoria` (`idcategoria`) on delete restrict,
+  constraint `fk_Categoria` FOREIGN KEY (`idcategoria`) REFERENCES `proyectoFinalBookNGo`.`categoria` (`idcategoria`) on delete cascade,
   constraint `fk_Autor` FOREIGN KEY (`idautor`) REFERENCES `proyectoFinalBookNGo`.`autor` (`idautor`)
 );
 
@@ -61,7 +63,7 @@ Create table reserva (
 	rating int null,
     primary key (idusuario,idlibro,fechareserva),
 	constraint `fk_UsuarioReserva` FOREIGN KEY (`idusuario`) REFERENCES `proyectoFinalBookNGo`.`usuario` (`idusuario`),
-    constraint `fk_LibroReserva` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`) on delete restrict
+    constraint `fk_LibroReserva` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`) on delete cascade
 );
 
 
@@ -93,7 +95,7 @@ create table detalle (
   idlibro int(6) references libro(idlibro),
   precio float (8,2), 
   primary key (idfactura,iddetalle),
-  constraint `fk_LibroDetalle` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`),
+  constraint `fk_LibroDetalle` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`) on delete cascade,
   constraint `fk_idFactura` FOREIGN KEY (`idfactura`) REFERENCES `proyectoFinalBookNGo`.`factura` (`idfactura`) on delete restrict
 );
 

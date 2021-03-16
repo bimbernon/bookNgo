@@ -28,7 +28,7 @@ export const BookDetails = () => {
       }
     }
     getBookById();
-  }, []);
+  }, [bookId]);
 
   const style = {
     borderRadius: "1rem",
