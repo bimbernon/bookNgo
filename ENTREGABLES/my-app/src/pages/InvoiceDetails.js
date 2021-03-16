@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../components/providers//UserProvider";
+import { AuthContext } from "../components/providers/AuthProvider";
 import { Invoice } from "../components/main/Invoice/Invoice";
 
 const InvoiceDetails = () => {
-  const [selectedUser] = useContext(UserContext);
+  const [token] = useContext(AuthContext);
 
   return (
     <div className="reserve-details-container">
-      <h1>{}</h1>
+      <Invoice></Invoice>
     </div>
   );
 };

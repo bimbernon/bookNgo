@@ -1,9 +1,7 @@
 drop database if exists proyectoFinalBookNGo;
-create database proyectoFinalBookNGo;
+create schema proyectoFinalBookNGo;
 
 Use proyectoFinalBookNGo;
-
-
 
 create table usuario (
   idusuario int(6) not null primary key,
@@ -50,7 +48,7 @@ create table libro (
   precio float(8,2),
   editorial varchar(40) not null,
   añopublicacion int (6) not null,
-  constraint `fk_Categoria` FOREIGN KEY (`idcategoria`) REFERENCES `proyectoFinalBookNGo`.`categoria` (`idcategoria`) on delete cascade,
+  constraint `fk_Categoria` FOREIGN KEY (`idcategoria`) REFERENCES `proyectoFinalBookNGo`.`categoria` (`idcategoria`),
   constraint `fk_Autor` FOREIGN KEY (`idautor`) REFERENCES `proyectoFinalBookNGo`.`autor` (`idautor`)
 );
 
@@ -63,7 +61,7 @@ Create table reserva (
 	rating int null,
     primary key (idusuario,idlibro,fechareserva),
 	constraint `fk_UsuarioReserva` FOREIGN KEY (`idusuario`) REFERENCES `proyectoFinalBookNGo`.`usuario` (`idusuario`),
-    constraint `fk_LibroReserva` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`) on delete cascade
+    constraint `fk_LibroReserva` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`) 
 );
 
 
@@ -95,8 +93,8 @@ create table detalle (
   idlibro int(6) references libro(idlibro),
   precio float (8,2), 
   primary key (idfactura,iddetalle),
-  constraint `fk_LibroDetalle` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`) on delete cascade,
-  constraint `fk_idFactura` FOREIGN KEY (`idfactura`) REFERENCES `proyectoFinalBookNGo`.`factura` (`idfactura`) on delete restrict
+  constraint `fk_LibroDetalle` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`),
+  constraint `fk_idFactura` FOREIGN KEY (`idfactura`) REFERENCES `proyectoFinalBookNGo`.`factura` (`idfactura`) 
 );
 
 INSERT INTO proyectoFinalBookNGo.usuario values (1,true,'Jose','jlopez','$2a$04$FfIcjxmF5dXNEo1h1XtfbuLEOeI.U/xjZ7teTldS3b0mqJkYA9DmW','Lopez','Fernandez','usuario1@gmail.com','Avenida Marina n2',0,3);
@@ -158,14 +156,13 @@ INSERT INTO proyectoFinalBookNGo.reserva values (5,9,"2021-02-27",null,0);
 INSERT INTO proyectoFinalBookNGo.reserva values (11,3,"2021-03-08",null,0);
 INSERT INTO proyectoFinalBookNGo.reserva values (8,8,"2021-02-28",null,0);
 
-INSERT INTO proyectoFinalBookNGo.factura values (1,4,"2021-03-03",20.00,3,3);
-INSERT INTO proyectoFinalBookNGo.factura values (2,5,"2021-02-27",40.00,3,3);
-INSERT INTO proyectoFinalBookNGo.factura values (3,11,"2021-03-08",20.00,3,3);
-INSERT INTO proyectoFinalBookNGo.factura values (4,8,"2021-02-28",20.00,3,3);
+INSERT INTO proyectoFinalBookNGo.factura values (1,4,"2021-03-03",21.00,3,1.21);
+INSERT INTO proyectoFinalBookNGo.factura values (2,5,"2021-02-27",21.00,3,1.21);
+INSERT INTO proyectoFinalBookNGo.factura values (3,11,"2021-03-08",2.00,3,1.21);
+INSERT INTO proyectoFinalBookNGo.factura values (4,8,"2021-02-28",21.00,3,1.21);
 
 INSERT INTO proyectoFinalBookNGo.detalle  values (1, 1, 1, 20.0);
 INSERT INTO proyectoFinalBookNGo.detalle  values (2, 1, 6, 20.0);
-INSERT INTO proyectoFinalBookNGo.detalle  values (2, 2, 9, 20.0);
 INSERT INTO proyectoFinalBookNGo.detalle  values (3, 1, 3, 20.0);
 INSERT INTO proyectoFinalBookNGo.detalle  values (4, 1, 8, 20.0);
 

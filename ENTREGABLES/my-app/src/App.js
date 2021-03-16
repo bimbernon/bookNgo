@@ -72,7 +72,7 @@ function App() {
                   <Route path="/reserves/:userId">
                     <UserReserves />
                   </Route>
-                  <Route path="/reserve/invoice">
+                  <Route path="/reserve/invoice/:idInvoice">
                     <InvoiceDetails />
                   </Route>
                   <Route path="/users/purse/:userId">

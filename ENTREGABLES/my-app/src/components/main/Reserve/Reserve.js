@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../providers/UserProvider";
+// import { UserContext } from "../../providers/UserProvider";
 import "./Reserve.css";
 
 const Reserve = (props) => {
-  const [selectedUser] = useContext(UserContext);
+  // const [selectedUser] = useContext(UserContext);
 
   const {
     reservedBookTitle,
     reserveDate,
     reserveExpiration,
     bookId,
+    idInvoice,
     children,
   } = props;
   console.log(props);
@@ -31,7 +32,7 @@ const Reserve = (props) => {
       >
         {children}
       </div>
-      <Link to="/reserve/invoice">
+      <Link to={`/reserve/invoice/${idInvoice}`}>
         <img
           src="/icons/icono-factura.png"
           alt="edit"

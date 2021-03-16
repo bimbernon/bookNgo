@@ -22,13 +22,11 @@ export const BookDetails = () => {
       if (bookResponse.ok) {
         const bookResponseData = await bookResponse.json();
         setBook(bookResponseData);
-        setBack(back - 1);
-
         // onSuccessInsert(bookResponseData);
       }
     }
     getBookById();
-  }, [bookId]);
+  }, []);
 
   const style = {
     borderRadius: "1rem",
@@ -43,6 +41,9 @@ export const BookDetails = () => {
 
   return book.stock === 0 ? (
     <div className="book-details-container">
+      <a href={`javascript:history.go(${back})`} className="back-button">
+        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+      </a>
       <Book
         bookId={book.idlibro}
         style={style}

@@ -38,6 +38,7 @@ export const UserReserves = () => {
         reservedBookTitle={reserves.titulo}
         reserveDate={reserves.fechareserva}
         expirationDate={reserves.fechaexpiracion}
+        idInvoice={reserves.idfactura}
       >
         <h1 className="reserve-book-title">{reserves.titulo}</h1>
         <p className="reserve-book-title">{reserves.fechareserva}</p>
@@ -45,6 +46,7 @@ export const UserReserves = () => {
       </Reserve>
     </div>
   );
+
   const [invoices, setInvoices] = useState([]);
   const [currentInvoice, setCurrentInvoice] = useState([]);
 
@@ -64,6 +66,7 @@ export const UserReserves = () => {
   }, []);
 
   console.log(invoices);
+  console.log(reserves);
 
   //if invoices [] return msg: Aún no tienes reservas /  else -pintar reservas
   return (
