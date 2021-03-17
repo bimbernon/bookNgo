@@ -16,13 +16,11 @@ export const BackPackItem = () => {
   console.log(bookId);
   useEffect(() => {
     async function getBookById() {
-      console.log("ddhdhdh");
       const response = await fetch(
         `http://localhost:3080/api/v1/books/id/${bookId}`
       );
       if (response.ok) {
         const bookDataById = await response.json();
-        console.log(bookDataById);
         setBook(bookDataById);
       } else {
         const error = new Error("Algo ha salido mal");
@@ -74,17 +72,16 @@ export const BackPackItem = () => {
           bookPrice={`Precio: ${book.precio}`}
         ></Book>
       </div>
-      <div>
-        <h1
-          style={{
-            color: "red",
-            minHeight: "1rem",
-            textAlign: "center",
-            marginTop: "20px",
-          }}
-        >
-          Debes estar logueado para poder reservar un libro
-        </h1>
+      <div
+        style={{
+          color: "red",
+          minHeight: "1rem",
+          textAlign: "center",
+          marginTop: "20px",
+        }}
+      >
+        Debes estar logueado para poder reservar un libro.
+        <div>Hazte Booker!</div>
       </div>
     </div>
   );

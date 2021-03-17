@@ -10,7 +10,6 @@ export const BookDetails = () => {
   const [book, setBook] = useState(null);
   let { bookId } = useParams();
   const [back, setBack] = useState(-1);
-
   // const [reserve, setReserve] = useState([]);
   // const doSuccessInsert = (responseBody) => setReserve(bookId);
 
@@ -55,7 +54,7 @@ export const BookDetails = () => {
         bookAuthor={`${book.nombreautor} ${book.apel1}`}
         bookPrice={`Precio: ${book.precio}`}
         bookSinopsis={book.sinopsis}
-        stockMsg={"No hay stock disponible"}
+        stockMsg={`Actualmente no tenemos stock disponible para este libro.`}
       ></Book>
 
       <button
