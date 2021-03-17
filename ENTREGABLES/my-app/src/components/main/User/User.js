@@ -5,7 +5,7 @@ import "./User.css";
 
 const User = (props) => {
   const {
-    userId,
+    userid,
     userName,
     userProfileName,
     userEmail,
@@ -13,14 +13,23 @@ const User = (props) => {
     userLastname2,
     userAddress,
     userPurse,
+    value,
+    onDeleteUser,
   } = props;
+
+  const deleteButtonStyle = {
+    background: `url("/icons/delete-red-button.png")`,
+    backgroundSize: "cover",
+    height: "1.9rem",
+    width: "1.7rem",
+  };
 
   return (
     <div className="user-info-container">
-      <li className="user-main-info" userId={userId} userAddress={userAddress}>
+      <li className="user-main-info" userId={userid} userAddress={userAddress}>
         <div className="user-main-item">
           <div className="user-principal-info">
-            <Avatar imageId={userId} style={{objectFit: "cover"}}/>
+            <Avatar imageId={userid} style={{ objectFit: "cover" }} />
             <h1 className="user-profile-name"> {userProfileName}</h1>
           </div>
           <h1 className="user-name">
@@ -34,14 +43,13 @@ const User = (props) => {
             <h1 className="user-purse">{userPurse}</h1>
           </div>
           <form className="update-delete-container">
-            <button className="delete-user-button" onSubmit="/">
-              <img
-                src="/icons/delete-red-button.png"
-                alt="borrar"
-                style={{ height: "1.2rem", width: "1.2rem" }}
-              />
-            </button>
-            <Link to={`/users/profile/${userId}`}>
+            <button
+              className="delete-user-button"
+              value={value}
+              onClick={onDeleteUser}
+              style={deleteButtonStyle}
+            />
+            <Link to={`/users/profile/${userid}`}>
               <img
                 src="/icons/edit-blue-square-pen.png"
                 alt="edit"

@@ -13,7 +13,9 @@ const Profile = () => {
   const [token, setToken] = useContext(AuthContext);
   const [selectedUser, setSelectedUser] = useContext(UserContext);
   const [userProfile, setUserProfile] = useState({});
-  const [errorMsg, setErrorMsg] = useState("");
+  const [, setErrorMsg] = useState("");
+
+  console.log(userProfile);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -153,7 +155,7 @@ const Profile = () => {
       </div>
       <div className="modify-buttons-container">
         <Link
-          to={`/user/profile/modify/modifyProfile/${selectedUser.idusuario}`}
+          to={`/user/profile/modify/modifyProfile/${userProfile.idusuario}`}
         >
           <img
             src="/icons/edit-blue-square-pen.png"
@@ -165,7 +167,7 @@ const Profile = () => {
             }}
           />
         </Link>
-        <Link to={`/user/updatePassword/${selectedUser.idusuario}`}>
+        <Link to={`/user/updatePassword/${userProfile.idusuario}`}>
           <img
             src="/icons/edit-password-lock.jpg"
             alt="borrar"

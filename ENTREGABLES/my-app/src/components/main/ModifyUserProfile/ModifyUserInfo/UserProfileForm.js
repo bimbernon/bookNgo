@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../../../providers/UserProvider";
 import { AuthContext } from "../../../providers/AuthProvider";
 import "./UserProfileForm.css";
@@ -7,17 +7,15 @@ import "./UserProfileForm.css";
 export const UserProfileForm = () => {
   const [userProfile, setUserProfile] = useState({});
   const [token] = useContext(AuthContext);
-  console.log(userProfile);
+  const { userId } = useParams();
+  console.log(userId);
 
   useEffect(() => {
     async function getUserProfile() {
       const userResponse = await (
-        await fetch(
-          `http://localhost:3080/api/v1/users/profile/${selectedUser.idusuario}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
+        await fetch(`http://localhost:3080/api/v1/users/profile/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
       ).json();
       setUserProfile(userResponse);
     }
@@ -57,10 +55,6 @@ export const UserProfileForm = () => {
 
     if (uploadUserProfileResponse.ok) {
       await uploadUserProfileResponse.json();
-      // setName("");
-      // setLastName1("");
-      // setLastName2("");
-      // setAdress("");
     }
   };
 
