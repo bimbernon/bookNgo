@@ -43,39 +43,76 @@ export const UserReserves = () => {
 
   if (!token) return <Redirect to="/" />;
 
-  const noReserves =
-    reserves === [] ? (
-      <div className="reserves-container">
-        <h1 className="reserves-title">Mis reservas</h1>
-        <div className="reserve-item-list-container">
-          <ul className="reserve-item-list">
-            <li className="reserve-info">
-              {errorMsg && (
-                <div
-                  style={{
-                    color: "red",
-                    minHeight: "1.5em",
-                    textAlign: "center",
-                    marginTop: "20px",
-                  }}
-                >
-                  {" "}
-                  {errorMsg}
-                </div>
-              )}
-            </li>
-          </ul>
-        </div>
-        <div className="reserve-details-container"></div>
+  console.log(reserves.length, "reserves", errorMsg);
+
+  if(reserves.length === 0) {
+    return (<div className="reserves-container">
+      <h1 className="reserves-title">Mis reservas</h1>
+      <div className="reserve-item-list-container">
+        <ul className="reserve-item-list">
+          <li className="reserve-info" style={{
+            backgroundColor: "rgba(255, 255, 255, 0.623)",
+            borderRadius: "30px",
+            height: "60vh",
+            width: "90vw",
+
+          }}>
+            {/* {errorMsg && ( */}
+            <div
+              style={{
+                color: "red",
+                minHeight: "1.5em",
+                textAlign: "center",
+                marginTop: "20px",
+              }}
+            >
+              {errorMsg}
+            </div>
+            {/* )} */}
+          </li>
+        </ul>
       </div>
-    ) : (
-      <div className="reserves-container">
-        <h1 className="reserves-title">Mis reservas</h1>
-        <div className="reserve-item-list-container">
-          <ul className="reserve-item-list">{reserves.map(reservesRender)}</ul>
-        </div>
-        <div className="reserve-details-container"></div>
+      <div className="reserve-details-container"></div>
+    </div>);
+  } else {
+    return (<div className="reserves-container">
+      <h1 className="reserves-title">Mis reservas</h1>
+      <div className="reserve-item-list-container">
+        <ul className="reserve-item-list">{reserves.map(reservesRender)}</ul>
       </div>
-    );
-  return noReserves;
+      <div className="reserve-details-container"></div>
+    </div>);
+  }
+  // return reserves.lenght === 0 ? (
+  //   <div className="reserves-container">
+  //     <h1 className="reserves-title">Mis reservas</h1>
+  //     <div className="reserve-item-list-container">
+  //       <ul className="reserve-item-list">
+  //         <li className="reserve-info">
+  //           {/* {errorMsg && ( */}
+  //           <div
+  //             style={{
+  //               color: "red",
+  //               minHeight: "1.5em",
+  //               textAlign: "center",
+  //               marginTop: "20px",
+  //             }}
+  //           >
+  //             {errorMsg}
+  //           </div>
+  //           {/* )} */}
+  //         </li>
+  //       </ul>
+  //     </div>
+  //     <div className="reserve-details-container"></div>
+  //   </div>
+  // ) : (
+  //   <div className="reserves-container">
+  //     <h1 className="reserves-title">Mis reservas2</h1>
+  //     <div className="reserve-item-list-container">
+  //       <ul className="reserve-item-list">{reserves.map(reservesRender)}</ul>
+  //     </div>
+  //     <div className="reserve-details-container"></div>
+  //   </div>
+  // );
 };
