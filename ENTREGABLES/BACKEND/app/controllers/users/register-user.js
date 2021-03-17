@@ -9,13 +9,42 @@ const {
 } = require("../../repositories/users-repository");
 
 const schema = Joi.object().keys({
-  name: Joi.string().alphanum().min(3).max(20).required(),
-  userProfileName: Joi.string().alphanum().min(3).max(20).required(),
-  password: Joi.string().min(3).max(40).required(),
-  lastName1: Joi.string().min(3).max(20).required(),
-  lastName2: Joi.string().min(3).max(20).required(),
-  email: Joi.string().email().required(),
-  address: Joi.string().min(5).max(80).required(),
+  name: Joi.string()
+    .alphanum()
+    .min(3)
+    .max(20)
+    .required()
+    .error(new Error("El nombre debe tener al menos 3 caracteres.")),
+  userProfileName: Joi.string()
+    .alphanum()
+    .min(3)
+    .max(20)
+    .required()
+    .error(new Error("El nombre de usuario debe tener al menos 3 caracteres.")),
+  password: Joi.string()
+    .min(3)
+    .max(40)
+    .required()
+    .error(new Error("La contraseña debe contener al menos 3 caracteres")),
+  lastName1: Joi.string()
+    .min(3)
+    .max(20)
+    .required()
+    .error(new Error("El apellido debe contener al menos 3 caracteres")),
+  lastName2: Joi.string()
+    .min(3)
+    .max(20)
+    .required()
+    .error(new Error("El apellido debe contener al menos 3 caracteres")),
+  email: Joi.string()
+    .email()
+    .required()
+    .error(new Error("El email debe tener un formato correcto")),
+  address: Joi.string()
+    .min(5)
+    .max(80)
+    .required()
+    .error(new Error("La direccion debe tener al menos 5 caracteres.")),
   purse: Joi.number().positive().optional(),
 });
 

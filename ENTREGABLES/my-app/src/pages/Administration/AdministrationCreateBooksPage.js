@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
-// import { Cathegory } from "../../components/main/HomeMain/Cathegory/Cathegory";
 import "./Administration.css";
 
 export const CreateBook = () => {
@@ -164,6 +163,8 @@ export const CreateBook = () => {
   const style2 = {
     height: "21rem",
   };
+
+  if (!token) return <Redirect to="/" />;
 
   return (
     <div>

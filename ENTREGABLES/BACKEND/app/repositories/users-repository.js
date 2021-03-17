@@ -84,24 +84,16 @@ async function eraseUser(userId) {
 }
 
 async function updateUser(userId, updatedUser) {
-  const {
-    name,
-    userProfileName,
-    address,
-    password,
-    lastName1,
-    lastName2,
-  } = updatedUser;
+  const { name, userProfileName, address, lastName1, lastName2 } = updatedUser;
 
   const pool = await database.getPool();
   const updateQuery =
-    "UPDATE usuario SET nombreusuario = ?, nombreperfilusuario = ?, direccion = ?, contraseña = ?, apel1 = ?, apel2 = ? WHERE idusuario = ?";
+    "UPDATE usuario SET nombreusuario = ?, nombreperfilusuario = ?, direccion = ?, apel1 = ?, apel2 = ? WHERE idusuario = ?";
 
   await pool.query(updateQuery, [
     name,
     userProfileName,
     address,
-    password,
     lastName1,
     lastName2,
     userId,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { User } from "../../components/main/User/User";
 import Swal from "sweetalert2";
@@ -69,6 +69,8 @@ function AdministrationUsersPage() {
       onDeleteUser={deleteUserById}
     ></User>
   );
+
+  if (!token) return <Redirect to="/" />;
 
   return (
     <div>

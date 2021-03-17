@@ -9,14 +9,37 @@ const {
   findUserById,
 } = require("../../repositories/users-repository");
 
-// const schema = Joi.object().keys({
-//   name: Joi.string().alphanum().min(3).max(20).optional(),
-//   userProfileName: Joi.string().alphanum().min(3).max(20).optional(),
-//   password: Joi.string().min(3).max(200).optional(),
-//   address: Joi.string().min(5).max(80).optional(),
-//   lastName1: Joi.string().alphanum().min(3).max(20).optional(),
-//   lastName2: Joi.string().alphanum().min(3).max(20).optional(),
-// });
+const schema = Joi.object().keys({
+  name: Joi.string()
+    .alphanum()
+    .min(3)
+    .max(20)
+    .optional()
+    .error(new Error("El nombre debe tener al menos 3 caracteres.")),
+  userProfileName: Joi.string()
+    .alphanum()
+    .min(3)
+    .max(20)
+    .optional()
+    .error(new Error("El nombre de usuario debe tener al menos 3 caracteres.")),
+  address: Joi.string()
+    .min(5)
+    .max(80)
+    .optional()
+    .error(new Error("La direccion debe tener al menos 5 caracteres.")),
+  lastName1: Joi.string()
+    .alphanum()
+    .min(3)
+    .max(20)
+    .optional()
+    .error(new Error("El apellido debe contener al menos 3 caracteres")),
+  lastName2: Joi.string()
+    .alphanum()
+    .min(3)
+    .max(20)
+    .optional()
+    .error(new Error("El apellido debe contener al menos 3 caracteres")),
+});
 
 async function updateUserById(req, res) {
   try {
@@ -39,14 +62,12 @@ async function updateUserById(req, res) {
       throw error;
     }
 
-    // await schema.validateAsync(req.body);
+    await schema.validateAsync(req.body);
 
-    //CAMBIAR SI CAMBIA EL SCRIPT A INGLES
     const formatedUser = {
       name: userById.nombreusuario,
       userProfileName: userById.nombreperfilusuario,
       address: userById.direccion,
-      password: userById.contraseña,
       lastName1: userById.apel1,
       lastName2: userById.apel2,
     };

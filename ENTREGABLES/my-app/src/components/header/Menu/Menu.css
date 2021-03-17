@@ -1,21 +1,26 @@
 @import "../../../index.css";
 
 .session-nav {
-  height: 3rem;
-  width: 150px;
-  display: flex;
-  border-radius: 0.5rem;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: left;
-  padding: 1rem;
-  background-color: var(--white-background);
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: center;
+  padding: 0;
   position: absolute;
- top: 3.5rem;
-  right: 1.3rem; 
   display: none;
+  background-color: rgba(255, 255, 255, 0.89);
+  height: 100%;
+  width: 55%;
   z-index: 10;
+  top: 0;
+  left: 0;
+}
+
+.session-nav-item {
+  padding-left: 1rem;
+  padding-top: 2rem;
+  padding-right: 1rem;
 }
 
 .link-menu-title {
@@ -29,4 +34,3 @@
   text-decoration: none;
   color: black;
 }
-

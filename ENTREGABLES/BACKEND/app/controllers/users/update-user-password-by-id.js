@@ -7,9 +7,18 @@ const {
   findUserById,
 } = require("../../repositories/users-repository");
 
-// const schema = Joi.object().keys({
-//   newPassword: Joi.string().min(3).max(40).required(),
-// });
+const schema = Joi.object().keys({
+  password: Joi.string()
+    .min(3)
+    .max(40)
+    .required()
+    .error(new Error("La contraseña debe contener al menos 3 caracteres")),
+  newPassword: Joi.string()
+    .min(3)
+    .max(40)
+    .required()
+    .error(new Error("La contraseña debe contener al menos 3 caracteres")),
+});
 
 async function updateUserPassword(req, res) {
   try {
@@ -27,11 +36,9 @@ async function updateUserPassword(req, res) {
 
     const user = await findUserById(userId);
 
-    console.log(user);
-
     const { password, newPassword } = req.body;
 
-    // await schema.validateAsync(newPassword);
+    await schema.validateAsync(req.body);
 
     if (newPassword === user.contraseña) {
       const error = new Error(

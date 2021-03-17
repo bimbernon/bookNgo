@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./RegisterForm.css";
 
 export const RegisterForm = () => {
@@ -9,6 +11,7 @@ export const RegisterForm = () => {
   const [lastName2, setLastName2] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAdress] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleChangeName = (e) => setName(e.target.value);
   const handleChangeUserProfileName = (e) => setUserProfileName(e.target.value);
@@ -37,7 +40,7 @@ export const RegisterForm = () => {
       }),
     });
     if (resp.ok) {
-      const respBody = await resp.json();
+      await resp.json();
       setName("");
       setUserProfileName("");
       setPassword("");
@@ -45,8 +48,19 @@ export const RegisterForm = () => {
       setLastName2("");
       setEmail("");
       setAdress("");
+      setErrorMessage("");
+    } else {
+      const error = await resp.json();
+      setErrorMessage("No se ha podido registrar el usuario");
+      Swal.fire({
+        icon: "error",
+        title: "¡Ooops!",
+        text: error.error,
+      });
     }
   };
+
+  if (errorMessage === "") return <Redirect to="/users/login" />;
 
   return (
     <div className="register-container">
@@ -74,7 +88,7 @@ export const RegisterForm = () => {
         <div className="register-form-item">
           <input
             required
-            type="text"
+            type="password"
             placeholder="Contraseña"
             value={password}
             onChange={handleChangePassword}
@@ -116,9 +130,10 @@ export const RegisterForm = () => {
             onChange={handleChangeAdress}
           ></input>
         </div>
+        <div className="error-message-container">{errorMessage}</div>
         <div className="register-button-container">
           <button className="register-submit-button" type="submit">
-            INICIAR SESION
+            REGÍSTRATE
           </button>
         </div>
       </form>

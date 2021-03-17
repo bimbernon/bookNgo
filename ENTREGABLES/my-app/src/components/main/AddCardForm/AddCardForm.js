@@ -2,17 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
 import { Card } from "../UserPurseMain/Card/Card";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./AddCardForm.css";
 
 const AddCardForm = () => {
-  // const [userMoney, setUserMoney] = useState([]);
   const [cards, setCards] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [currentCard, setCurrentCard] = useState(0);
-  const [back, setBack] = useState(-1);
 
   useEffect(() => {
     setCurrentCard(cards[0]);
@@ -33,7 +31,6 @@ const AddCardForm = () => {
       );
       if (userCardResponse.ok) {
         const userCardData = await userCardResponse.json();
-        console.log(userCardData);
         setCards(userCardData);
       } else {
         const errorMsg = await userCardResponse.json();
@@ -44,11 +41,9 @@ const AddCardForm = () => {
   }, []);
 
   const handleSelectedCard = (e) => {
-    console.log("change");
     const selectedCard = cards.find((card) => {
       return parseInt(card.numerotarjeta) === parseInt(e.target.value);
     });
-    console.log(selectedCard.idtarjeta);
     setCurrentCard(selectedCard);
   };
 
@@ -115,11 +110,8 @@ const AddCardForm = () => {
     />
   );
 
-  console.log(cards);
-
   return (
     <div className="add-card-form-container">
-      {/* METER BIEN LA RUTA VAGA */}
       {errorMsg ? <p>{errorMsg}</p> : null}
       <Link to="/monedero">
         <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />

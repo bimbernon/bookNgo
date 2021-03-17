@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { Donation } from "../../components/main/Donation/Donation";
 import "../../components/main/Donation/Donation.css";
@@ -42,6 +42,8 @@ function AdministrationDonationsPage() {
       donationState={donation.correcto}
     />
   );
+
+  if (!token) return <Redirect to="/" />;
 
   return (
     <div className="donations-list-container">

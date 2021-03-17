@@ -28,7 +28,7 @@ export const HowItWorks = () => {
                 to="donations/create"
                 style={{ textDecoration: "underline" }}
               >
-                2. Dona tus libros
+                2. DONA TUS LIBROS
               </Link>
             </li>
             <li className="list-item">3. Recarga tu saldo</li>

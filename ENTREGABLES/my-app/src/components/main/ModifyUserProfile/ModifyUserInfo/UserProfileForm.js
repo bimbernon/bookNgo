@@ -1,14 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Redirect } from "react-router-dom";
 import { UserContext } from "../../../providers/UserProvider";
 import { AuthContext } from "../../../providers/AuthProvider";
+import Swal from "sweetalert2";
 import "./UserProfileForm.css";
 
 export const UserProfileForm = () => {
   const [userProfile, setUserProfile] = useState({});
   const [token] = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState(null);
   const { userId } = useParams();
-  console.log(userId);
 
   useEffect(() => {
     async function getUserProfile() {
@@ -37,7 +38,7 @@ export const UserProfileForm = () => {
     e.preventDefault();
 
     const uploadUserProfileResponse = await fetch(
-      ` http://localhost:3080/api/v1/users/update/${selectedUser.idusuario}`,
+      ` http://localhost:3080/api/v1/users/update/${userProfile.idusuario}`,
       {
         method: "PATCH",
         headers: {
@@ -55,8 +56,29 @@ export const UserProfileForm = () => {
 
     if (uploadUserProfileResponse.ok) {
       await uploadUserProfileResponse.json();
+      Swal.fire({
+        icon: "success",
+        title: "¡Enhorabuena!",
+        text: "Tus datos han sido modificados con éxito.",
+      });
+      setName("");
+      setLastName1("");
+      setLastName2("");
+      setAdress("");
+      setErrorMessage("");
+    } else {
+      const error = await uploadUserProfileResponse.json();
+      setErrorMessage(error);
+      Swal.fire({
+        icon: "error",
+        title: "¡Ooops!",
+        text: error.error,
+      });
     }
   };
+
+  if (errorMessage === "") return <Redirect to={`/users/profile/${userId}`} />;
+  if (!token) return <Redirect to="/" />;
 
   return (
     <div className="user-profile-container">

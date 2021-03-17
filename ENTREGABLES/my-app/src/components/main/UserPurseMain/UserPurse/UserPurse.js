@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { UserContext } from "../../../providers/UserProvider";
 import { Card } from "../Card/Card";
@@ -11,11 +11,9 @@ export const UserPurse = () => {
   const [cards, setCard] = useState([]);
   const [currentCard, setCurrentCard] = useState({});
   const [newRecharge, setNewRecharge] = useState(0);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [, setErrorMsg] = useState("");
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
-
-  //falta por añadir la recarga al usuario a la base de datos
 
   const handleSelecteCard = (e) => {
     const selectedCard = cards.find((card) => {
@@ -42,7 +40,7 @@ export const UserPurse = () => {
         setUserMoney(moneyResponseData.monedero);
         console.log("Monedero Inicial ", userMoney);
       } else {
-        const errorMsg = await moneyResponse.json();
+        await moneyResponse.json();
         setErrorMsg("Algo ha salido mal...");
       }
     }
@@ -50,8 +48,6 @@ export const UserPurse = () => {
   }, []);
 
   const rechargePurse = async (e) => {
-    console.log("usermoney dentro del post" + userMoney);
-
     const userRechargeResponse = await fetch(
       `http://localhost:3080/api/v1/users/purse/recharge/${selectedUser.idusuario}`,
       {
@@ -66,7 +62,6 @@ export const UserPurse = () => {
       }
     );
     if (userRechargeResponse.ok) {
-      console.log("entro");
       const userRechargeData = await userRechargeResponse.json();
       setUserMoney(userRechargeData.ammount);
     } else {
@@ -94,7 +89,7 @@ export const UserPurse = () => {
           setCurrentCard(cards[0]);
         }
       } else {
-        const errorMsg = await userCardResponse.json();
+        await userCardResponse.json();
         setErrorMsg("Algo ha salido mal...");
       }
     }
@@ -133,7 +128,6 @@ export const UserPurse = () => {
           numerotarjetaConAsteriscos + prueba.charAt(i);
       }
     }
-    console.log(numerotarjetaConAsteriscos);
 
     if (cards.length > 0) {
       Swal.fire({
@@ -147,9 +141,6 @@ export const UserPurse = () => {
         cancelButtonText: "NO",
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log(
-            "En el dialogo " + userMoney + "y recarga nueva de " + newRecharge
-          );
           rechargePurse();
         }
       });
@@ -157,6 +148,7 @@ export const UserPurse = () => {
       console.log("no se puede no tienes una tarjeta seleccionada");
     }
   };
+  if (!token) return <Redirect to="/" />;
 
   return (
     <div className="purse-container">

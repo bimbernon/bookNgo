@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Redirect } from "react-router-dom";
 import { AuthContext } from "../components/providers/AuthProvider";
 import { UserContext } from "../components/providers/UserProvider";
 import { Reserve } from "../components/main/Reserve/Reserve";
@@ -39,6 +40,8 @@ export const UserReserves = () => {
     </div>
   );
   const errorMsg = "Todavia no tienes reservas disponibles.";
+
+  if (!token) return <Redirect to="/" />;
 
   const noReserves =
     reserves === [] ? (

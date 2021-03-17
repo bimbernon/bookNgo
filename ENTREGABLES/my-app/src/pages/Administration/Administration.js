@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 
 export const Administration = () => {
   const [token] = useContext(AuthContext);
+
+  if (!token) return <Redirect to="/" />;
 
   return (
     <div className="administration-page-container">

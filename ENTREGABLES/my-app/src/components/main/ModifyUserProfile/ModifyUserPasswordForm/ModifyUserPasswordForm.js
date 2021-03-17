@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { UserContext } from "../../../providers/UserProvider";
 import { AuthContext } from "../../../providers/AuthProvider";
 import Swal from "sweetalert2";
@@ -11,16 +11,13 @@ export const ModifyUserPasswordForm = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [selectedUser] = useContext(UserContext);
-  const [errorMsg, setErrorMsg] = useState("");
-  console.log(currentPassword, newPassword);
+  const [errorMessage, setErrorMsg] = useState(null);
 
   const handleChangeNewPassword = (e) => setNewPassword(e.target.value);
   const handleChangeCurrentPassword = (e) => setCurrentPassword(e.target.value);
 
   const handleUserProfile = async (e) => {
     e.preventDefault();
-
-    console.log("ssss");
 
     const uploadUserPasswordResponse = await fetch(
       ` http://localhost:3080/api/v1/users/updatePassword/${selectedUser.idusuario}`,
@@ -40,8 +37,14 @@ export const ModifyUserPasswordForm = () => {
     if (uploadUserPasswordResponse.ok) {
       await uploadUserPasswordResponse.json();
       if (currentPassword !== newPassword) {
+        Swal.fire({
+          icon: "success",
+          title: "¡Enhorabuena!",
+          text: "Tu contraseña ha sido modificada con éxito.",
+        });
         setCurrentPassword("");
         setNewPassword("");
+        setErrorMsg("");
       } else {
         Swal.fire({
           icon: "error",
@@ -49,8 +52,19 @@ export const ModifyUserPasswordForm = () => {
           text: "La contraseña introducida no puede ser igual a la anterior.",
         });
       }
+    } else {
+      const errorResponse = await uploadUserPasswordResponse.json();
+      setErrorMsg(errorResponse.error);
+      Swal.fire({
+        icon: "error",
+        title: "¡Ooops!",
+        text: errorResponse.error,
+      });
     }
   };
+
+  if (errorMessage === "")
+    return <Redirect to={`/users/profile/${selectedUser.idusuario}`} />;
 
   return (
     <div className="user-profile-container">
@@ -78,7 +92,6 @@ export const ModifyUserPasswordForm = () => {
             onChange={handleChangeNewPassword}
             className="input-user-modify-form"
           />
-          <p>{errorMsg}</p>
         </div>
         <div className="user-profile-button-container">
           <button type="submit" className="user-profile-button">

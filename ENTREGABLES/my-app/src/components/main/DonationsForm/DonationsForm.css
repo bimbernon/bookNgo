@@ -9,6 +9,10 @@
   align-items: center;
 }
 
+.donations-form-title {
+  color: var(--dark-title-color);
+}
+
 .donations-form {
   align-items: center;
   display: flex;
@@ -35,8 +39,14 @@
 }
 
 .donations-form-direction {
-  color: var(--title-brown-color);
+  color: var(--dark-title-color);
   font-size: large;
   margin-top: 100px;
   text-align: center;
+}
+
+.donation-error-message-container {
+  margin-top: 1rem;
+  text-align: center;
+  color: red;
 }

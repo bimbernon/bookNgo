@@ -15,8 +15,6 @@ const Profile = () => {
   const [userProfile, setUserProfile] = useState({});
   const [, setErrorMsg] = useState("");
 
-  console.log(userProfile);
-
   const handleDelete = (e) => {
     e.preventDefault();
     Swal.fire({
@@ -31,7 +29,6 @@ const Profile = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteUserById();
-        // Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
   };
@@ -50,7 +47,6 @@ const Profile = () => {
   }, [userId, token]);
 
   const sytle = {
-    // backgroundImage: `url("/images/users/${userId}.jpg")`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     border: "7px solid  #cc9966",
@@ -117,15 +113,26 @@ const Profile = () => {
           <Avatar imageId={userProfile.idusuario} styleAux={sytle} />
           <div className="upload-photo-input-container">
             <label htmlFor="upload-photo-input" className="photo-logo">
-              <img
-                src="/icons/white-camera.png"
-                alt="uploadphoto"
+              <div
                 style={{
-                  height: "1.6rem",
-                  width: "2rem",
+                  height: "2.8rem",
+                  width: "2.8rem",
+                  borderRadius: "50px",
                   backgroundColor: "#cc9966",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
-              />
+              >
+                <img
+                  src="/icons/white-camera.png"
+                  alt="uploadphoto"
+                  style={{
+                    height: "1.5rem",
+                    width: "1.9rem",
+                  }}
+                />
+              </div>
 
               <input
                 type="file"
@@ -186,7 +193,7 @@ const Profile = () => {
               alt="borrar"
               style={{
                 height: "2.5rem",
-                width: "2.5rem",
+                width: "2.3rem",
                 padding: "0.7rem 1rem",
               }}
             />

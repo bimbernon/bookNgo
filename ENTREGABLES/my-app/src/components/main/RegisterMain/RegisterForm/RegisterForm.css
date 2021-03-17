@@ -21,7 +21,8 @@
   justify-content: center;
 }
 
-.register-form-item > input, textarea {
+.register-form-item > input,
+textarea {
   border: none;
   border-radius: 20px;
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
@@ -48,4 +49,10 @@
 
 .register-form-title {
   text-align: center;
+}
+
+.error-message-container {
+  margin-top: 1rem;
+  text-align: center;
+  color: red;
 }

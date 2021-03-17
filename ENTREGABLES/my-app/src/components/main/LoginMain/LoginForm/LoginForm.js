@@ -9,9 +9,9 @@ const LoginForm = (props) => {
   const { url } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [selectedUser, setSelectedUser] = useContext(UserContext);
-  const [token, setToken] = useContext(AuthContext);
+  const [, setErrorMsg] = useState("");
+  const [, setSelectedUser] = useContext(UserContext);
+  const [, setToken] = useContext(AuthContext);
 
   const history = useHistory();
 
@@ -43,7 +43,7 @@ const LoginForm = (props) => {
 
       history.push("/");
     } else {
-      const errorMsg = await response.json();
+      await response.json();
       setErrorMsg(
         Swal.fire({
           icon: "error",
@@ -52,8 +52,6 @@ const LoginForm = (props) => {
           button: true,
         })
       );
-      //      setErrorMsg(errorMsg.message);
-      //mostrar mensaje de error
     }
   };
 

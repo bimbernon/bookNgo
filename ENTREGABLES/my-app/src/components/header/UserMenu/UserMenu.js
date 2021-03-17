@@ -6,8 +6,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const UserMenu = () => {
   const [selectedUser, setSelectedUser] = useContext(UserContext);
-  const [token, setToken] = useContext(AuthContext);
-
+  const [, setToken] = useContext(AuthContext);
 
   if (selectedUser.admin === 1) {
     return (
@@ -30,13 +29,14 @@ const UserMenu = () => {
               setSelectedUser(null);
               setToken(null);
             }}
+            className="logout-button"
           >
             <img
               src="/icons/logout-blue.svg"
               alt="exit"
               style={{
-                height: "1.6rem",
-                width: "2rem",
+                height: "1.8rem",
+                width: "2.2rem",
               }}
             />
           </button>

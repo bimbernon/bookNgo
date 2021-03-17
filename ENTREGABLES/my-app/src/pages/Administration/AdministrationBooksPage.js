@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { Book } from "../../components/main/Book/Book";
 import Swal from "sweetalert2";
 import "./Administration.css";
-import { BookBrowser } from "../../components/header/BooksBrowser/BooksBrowser";
 
 export function AdministrationBooksPage() {
   const [token] = useContext(AuthContext);
   const [books, setBooks] = useState([]);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [deleteBook, setDeleteBook] = useState(false);
+  const [, setErrorMsg] = useState("");
 
   useEffect(() => {
     async function getAllBooks() {
@@ -21,7 +19,7 @@ export function AdministrationBooksPage() {
         const booksData = await booksResponse.json();
         setBooks(booksData);
       } else {
-        const errorMsg = await booksResponse.json();
+        await booksResponse.json();
         setErrorMsg("Algo ha salido mal...");
       }
     }
@@ -82,7 +80,6 @@ export function AdministrationBooksPage() {
         key={book.idlibro}
         bookName={book.titulo}
         imageId={book.idlibro}
-        // bookAuthor={`${book.nombreautor} ${book.apel1}`}
       />
       <form>
         <button
@@ -97,6 +94,8 @@ export function AdministrationBooksPage() {
       </form>
     </div>
   );
+
+  if (!token) return <Redirect to="/" />;
 
   return (
     <div>
