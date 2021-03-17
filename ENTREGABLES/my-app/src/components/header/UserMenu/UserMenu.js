@@ -64,6 +64,7 @@ const UserMenu = () => {
               setSelectedUser(null);
               setToken(null);
             }}
+            className="logout-button"
           >
             <img
               src="/icons/logout-blue.svg"

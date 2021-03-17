@@ -38,6 +38,7 @@
 }
 
 .user-list-item-menu {
+  color: var(--dark-title-color);
   padding: 2rem 1rem;
 }
 

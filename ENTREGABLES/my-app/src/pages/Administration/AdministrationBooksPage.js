@@ -31,7 +31,7 @@ export function AdministrationBooksPage() {
       title: `¿Estás seguro de que quieres eliminar el libro ${
         books.find((book) => book.idlibro === id).titulo
       }?`,
-      text: `ejemplo`,
+      // text: `ejemplo`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#e1b470",

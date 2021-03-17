@@ -112,8 +112,8 @@ const AddCardForm = () => {
 
   return (
     <div className="add-card-form-container">
-      {errorMsg ? <p>{errorMsg}</p> : null}
-      <Link to="/monedero">
+      {/* {errorMsg ? <p>{errorMsg}</p> : null} */}
+      <Link to={`/users/purse/${selectedUser.idusuario}`}>
         <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
       </Link>
       <div>
