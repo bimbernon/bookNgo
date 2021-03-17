@@ -83,7 +83,13 @@ export const UserProfileForm = () => {
   return (
     <div className="user-profile-container">
       <Link to={`/users/profile/${selectedUser.idusuario}`}>
-        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+        <img
+          src={`/icons/back.png`}
+          height="30"
+          width="30"
+          alt="Botón"
+          style={{ right: "9rem", top: "1rem", position: "relative" }}
+        />
       </Link>
       <h1 className="user-profile-title">Modificar datos</h1>
       <form className="form-user-profile" onSubmit={handleUserProfile}>

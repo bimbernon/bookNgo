@@ -100,7 +100,13 @@ export function AdministrationBooksPage() {
   return (
     <div>
       <Link to={`/administration`}>
-        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+        <img
+          src={`/icons/back.png`}
+          height="30"
+          width="30"
+          alt="Botón"
+          style={{ position: "relative", left: "3.5rem", top: "1rem" }}
+        />
       </Link>
       <Link to="/books/create">
         <div className="add-book-button-container">

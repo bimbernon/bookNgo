@@ -76,7 +76,6 @@ export const CreateBook = () => {
 
   const handleSubmitBook = async (e) => {
     e.preventDefault();
-    console.log(currentCathegory.idcategoria);
 
     const resp = await fetch("http://localhost:3080/api/v1/books/", {
       method: "POST",
@@ -169,7 +168,13 @@ export const CreateBook = () => {
   return (
     <div>
       <Link to={`/books`}>
-        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+        <img
+          src={`/icons/back.png`}
+          height="30"
+          width="30"
+          alt="Botón"
+          style={{ position: "relative", left: "1.5rem" }}
+        />
       </Link>
       <div style={style2} className="register-container">
         <h1 className="register-form-title">Regístro de autores</h1>
@@ -266,7 +271,8 @@ export const CreateBook = () => {
             ></input>
           </div>
           <div className="register-form-item">
-            <textarea className="input-text-area"
+            <textarea
+              className="input-text-area"
               type="text"
               placeholder="Sinopsis"
               value={sinopsis}
@@ -288,7 +294,8 @@ export const CreateBook = () => {
                 height: "1.6rem",
                 width: "2rem",
                 position: "relative",
-                bottom: "2rem",
+                bottom: "4.5rem",
+                right: "5rem",
               }}
             />
             <input

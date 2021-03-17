@@ -18,9 +18,6 @@ export const Administration = () => {
           <Link to="/books">LIBROS</Link>
         </div>
       </div>
-      {/* <div className="administration-item-container">
-        <Link to="/donations">DONACIONES</Link>
-      </div> */}
     </div>
   );
 };

@@ -5,7 +5,7 @@
 }
 
 .user-profile-title {
-  color: var(--title-brown-color);
+  color: var(--dark-title-color);
   text-transform: uppercase;
   text-align: center;
   margin: 0.5rem;
