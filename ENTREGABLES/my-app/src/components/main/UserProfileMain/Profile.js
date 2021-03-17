@@ -71,7 +71,7 @@ const Profile = () => {
       await userResponse.json();
 
       Swal.fire(
-        "Eliminado!",
+        "¡Eliminado!",
         "El perfil se ha eliminado con exito.",
         "success"
       );
@@ -102,18 +102,8 @@ const Profile = () => {
         body: data,
       }
     );
-    // if (!imageResponse.ok) {
-    //   const error = await imageResponse.json();
-    //   console.error(error);
-    // }
   };
 
-  // const style = {
-  //   backgroundImage: `url("/icons/upload-photo.png" )`,
-  //   backgroundSize: "cover",
-  //   width: "2rem",
-  //   height: "2rem",
-  // };
   if (!token) return <Redirect to="/" />;
 
   return (

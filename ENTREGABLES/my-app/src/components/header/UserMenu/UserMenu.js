@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./UserMenu.css";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../providers/UserProvider";
@@ -7,6 +7,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 const UserMenu = () => {
   const [selectedUser, setSelectedUser] = useContext(UserContext);
   const [token, setToken] = useContext(AuthContext);
+
 
   if (selectedUser.admin === 1) {
     return (
@@ -30,13 +31,15 @@ const UserMenu = () => {
               setToken(null);
             }}
           >
-            Log-fucking-out
+            <img
+              src="/icons/logout-blue.svg"
+              alt="exit"
+              style={{
+                height: "1.6rem",
+                width: "2rem",
+              }}
+            />
           </button>
-          <img
-            className="close-menu-button"
-            src="/icons/aspa.png"
-            alt="aspa"
-          ></img>
         </ul>
       </div>
     );
@@ -62,13 +65,15 @@ const UserMenu = () => {
               setToken(null);
             }}
           >
-            Log-fucking-out
+            <img
+              src="/icons/logout-blue.svg"
+              alt="exit"
+              style={{
+                height: "1.6rem",
+                width: "2rem",
+              }}
+            />
           </button>
-          <img
-            className="close-menu-button"
-            src="/icons/aspa.png"
-            alt="aspa"
-          ></img>
         </ul>
       </div>
     );

@@ -22,6 +22,7 @@ const Reserve = (props) => {
       reservedBookTitle={reservedBookTitle}
       reserveDate={reserveDate}
       reserveExpiration={reserveExpiration}
+      reservesErrorMsg={"Todavia no tienes reservas disponibles."}
     >
       {/* <Link to={`/reserve/${selectedUser.idusuario}/${bookId}/${reserveDate}`}> */}
       <div

@@ -20,7 +20,7 @@ const User = (props) => {
       <li className="user-main-info" userId={userId} userAddress={userAddress}>
         <div className="user-main-item">
           <div className="user-principal-info">
-            <Avatar imageId={userId} />
+            <Avatar imageId={userId} style={{objectFit: "cover"}}/>
             <h1 className="user-profile-name"> {userProfileName}</h1>
           </div>
           <h1 className="user-name">

@@ -7,6 +7,7 @@ export const Avatar = (props) => {
     borderRadius: "50%",
     width: "2.5rem",
     height: "2.5rem",
+    ObjectFit: "cover"
   };
   if (styleAux !== undefined) {
     style = styleAux;

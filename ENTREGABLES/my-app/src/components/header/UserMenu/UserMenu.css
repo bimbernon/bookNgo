@@ -7,14 +7,13 @@
   align-items: flex-start;
   padding: 0;
   position: absolute;
-  right: 0;
   display: none;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.89);
   height: 100%;
   width: 55%;
   z-index: 10;
   top: 0;
-  right: 0;
+  left: 0;
 }
 
 .user-list-menu-administration {
@@ -26,12 +25,12 @@
   padding: 0;
   position: absolute;
   display: none;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.89);
   height: 100%;
   width: 55%;
   z-index: 10;
   top: 0;
-  right: 0;
+  left: 0;
 }
 
 .user-liuser-list-menu-administration:first-child a {

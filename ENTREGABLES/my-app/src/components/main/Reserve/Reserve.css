@@ -1,3 +1,5 @@
+@import url("../../../index.css");
+
 .reserves-container {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,7 @@
 }
 
 .reserve-li-item {
-  background-color: white;
+  background-color: var(--white-background);
   border: none;
   list-style: none;
   display: flex;
@@ -13,6 +15,19 @@
   flex-direction: column;
   width: 85vw;
   padding: 0.9rem 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 1rem;
+}
+
+.reserve-li-item-error {
+  background-color: var(--white-background);
+  border: none;
+  list-style: none;
+  height: 95vw;
+  display: flex;
+  align-items: center;
+  width: 85vw;
+  padding: 0.5rem 0.5rem;
   margin-bottom: 0.5rem;
   border-radius: 1rem;
 }
@@ -45,5 +60,3 @@
   margin: 0;
   padding: 0;
 }
-
-

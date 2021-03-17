@@ -2,14 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../components/providers/AuthProvider";
 import { UserContext } from "../components/providers/UserProvider";
 import { Reserve } from "../components/main/Reserve/Reserve";
+import "../components/main/Reserve/Reserve";
 import "../components/main/Reserve/Reserve.css";
 
 export const UserReserves = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [reserves, setReserves] = useState([]);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [reserveInfo, setReserveInfo] = useState([]);
 
   useEffect(() => {
     async function getReservesByUserId() {
@@ -22,10 +21,6 @@ export const UserReserves = () => {
       if (reserveResponse.ok) {
         const allReservesData = await reserveResponse.json();
         setReserves(allReservesData);
-        console.log(allReservesData);
-      } else {
-        const errorMsg = await reserveResponse.json();
-        setErrorMsg("Algo ha salido mal...");
       }
     }
     getReservesByUserId();
@@ -47,48 +42,59 @@ export const UserReserves = () => {
     </div>
   );
 
-  const [invoices, setInvoices] = useState([]);
-  const [currentInvoice, setCurrentInvoice] = useState([]);
+  const errorMsg = "Todavia no tienes reservas disponibles.";
 
-  useEffect(() => {
-    async function getUsersInvoices() {
-      const userInvoices = await (
-        await fetch(
-          `http://localhost:3080/api/v1/invoices/user/${selectedUser.idusuario}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-      ).json();
-      setInvoices(userInvoices);
-    }
-    getUsersInvoices();
-  }, []);
-
-  console.log(invoices);
-  console.log(reserves);
-
-  //if invoices [] return msg: Aún no tienes reservas /  else -pintar reservas
-  return (
-    <div className="reserves-container">
-      <h1 className="reserves-title">Mis reservas</h1>
-      <div className="reserve-item-list-container">
-        <ul className="reserve-item-list">{reserves.map(reservesRender)}</ul>
-      </div>
-      <div className="reserve-details-container"></div>
-      {errorMsg && (
-        <div
-          style={{
-            color: "red",
-            minHeight: "1.5em",
-            textAlign: "center",
-            marginTop: "20px",
-          }}
-        >
-          {" "}
-          {errorMsg}
+  const noReserves =
+    reserves === [] ? (
+      <div className="reserves-container">
+        <h1 className="reserves-title">Mis reservas</h1>
+        <div className="reserve-item-list-container">
+          <ul className="reserve-item-list">
+            <li className="reserve-info">
+              {errorMsg && (
+                <div
+                  style={{
+                    color: "red",
+                    minHeight: "1.5em",
+                    textAlign: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  {" "}
+                  {errorMsg}
+                </div>
+              )}
+            </li>
+          </ul>
         </div>
-      )}
-    </div>
-  );
+        <div className="reserve-details-container"></div>
+      </div>
+    ) : (
+      <div className="reserves-container">
+        <h1 className="reserves-title">Mis reservas</h1>
+        <div className="reserve-item-list-container">
+          <ul className="reserve-item-list">
+            <li className="reserve-li-item-error ">
+              {errorMsg && (
+                <div
+                  style={{
+                    color: "red",
+                    minHeight: "1.5em",
+                    textAlign: "center",
+                    marginTop: "20px",
+                    padding: "0 5rem",
+                    fontSize: "1.5rem"
+                  }}
+                >
+                  {" "}
+                  {errorMsg}
+                </div>
+              )}
+            </li>
+          </ul>
+        </div>
+        <div className="reserve-details-container"></div>
+      </div>
+    );
+  return noReserves;
 };

@@ -138,6 +138,25 @@ export const CreateBook = () => {
     }
   };
 
+  const onFileBookChange = async (e) => {
+    e.preventDefault();
+
+    const file = e.target.files[0];
+    console.log(file);
+
+    const data = new FormData();
+    data.append("photoBook", file);
+
+    await fetch(`http://localhost:3080/api/v1/books/book/image/upload`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: data,
+    });
+    console.log("hola bebe!");
+  };
+
   const style = {
     height: "41rem",
   };
@@ -187,7 +206,7 @@ export const CreateBook = () => {
       </div>
       <div style={style} className="register-container">
         <h1 className="register-form-title">Regístro de libros</h1>
-        <button className="upload-book-image-button">Subir foto</button>
+
         <form className="register-form" onSubmit={handleSubmitBook}>
           <div className="select-cathegoty-container">
             <select
@@ -259,6 +278,26 @@ export const CreateBook = () => {
             </button>
           </div>
         </form>
+        {/* <form>
+          <label htmlFor="upload-book-photo-input" className="photo-logo">
+            <img
+              src="/icons/upload-photo.png"
+              alt="uploadphoto"
+              style={{
+                height: "1.6rem",
+                width: "2rem",
+                position: "relative",
+                bottom: "2rem",
+              }}
+            />
+            <input
+              type="file"
+              id="upload-book-photo-input"
+              onChange={onFileBookChange}
+              style={{ display: "none" }}
+            />
+          </label>
+        </form> */}
       </div>
     </div>
   );
