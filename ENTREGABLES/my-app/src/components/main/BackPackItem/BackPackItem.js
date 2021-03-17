@@ -4,7 +4,6 @@ import { Book } from "../Book/Book";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
-import { BagContext } from "../../providers/BagProvider";
 import { InsertReserve } from "../Reserve/InsertReserve/InsertReserve";
 
 export const BackPackItem = () => {
@@ -12,30 +11,19 @@ export const BackPackItem = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [user, setUser] = useState({});
-  const [bag, setBag] = useContext(BagContext);
-  console.log("El id del libro" + book.idlibro);
-  // useEffect(() => {
-  //   console.log(bag);
-  //   if (bag !== "") {
-  //     const pp = JSON.parse(bag);
-  //     pp.push(book);
-  //     console.log(pp.length);
-  //     //setBag(JSON.stringify(pp));
-  //   } else {
-  //     setBag(JSON.stringify([book.idlibro + ""]));
-  //   }
-  // }, []);
 
   let { bookId } = useParams();
-
+  console.log(bookId);
   useEffect(() => {
     async function getBookById() {
+      console.log("ddhdhdh");
       const response = await fetch(
         `http://localhost:3080/api/v1/books/id/${bookId}`
       );
       if (response.ok) {
-        const bookById = await response.json();
-        setBook(bookById);
+        const bookDataById = await response.json();
+        console.log(bookDataById);
+        setBook(bookDataById);
       } else {
         const error = new Error("Algo ha salido mal");
         throw error;
@@ -43,6 +31,8 @@ export const BackPackItem = () => {
     }
     getBookById();
   }, []);
+
+  console.log(book);
 
   useEffect(() => {
     async function getUserProfile() {
@@ -58,14 +48,6 @@ export const BackPackItem = () => {
     }
     getUserProfile();
   }, []);
-  // const renderBooks = (book) => (
-  //   <Book
-  //     key={book.idlibro}
-  //     bookId={book.idlibro}
-  //     bookName={book.titulo}
-  //     bookPrice={`Precio: ${book.precio}`}
-  //   ></Book>
-  // );
 
   const result = token ? (
     <div className="backPack-container">
@@ -77,7 +59,6 @@ export const BackPackItem = () => {
           bookName={book.titulo}
           bookPrice={`Precio: ${book.precio}`}
         ></Book>
-        {/* {pp.map(renderBooks)} */}
       </div>
       <div>
         <InsertReserve book={book} userMoney={user.monedero} />
@@ -93,8 +74,7 @@ export const BackPackItem = () => {
           bookPrice={`Precio: ${book.precio}`}
         ></Book>
       </div>
-      <div bookId={bookId}>
-        <InsertReserve />
+      <div>
         <h1
           style={{
             color: "red",

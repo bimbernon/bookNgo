@@ -278,7 +278,7 @@ export const CreateBook = () => {
             </button>
           </div>
         </form>
-        {/* <form>
+        <form>
           <label htmlFor="upload-book-photo-input" className="photo-logo">
             <img
               src="/icons/upload-photo.png"
@@ -297,7 +297,7 @@ export const CreateBook = () => {
               style={{ display: "none" }}
             />
           </label>
-        </form> */}
+        </form>
       </div>
     </div>
   );

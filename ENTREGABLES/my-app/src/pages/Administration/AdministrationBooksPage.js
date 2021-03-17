@@ -68,10 +68,10 @@ export function AdministrationBooksPage() {
   };
 
   const deleteStyle = {
-    background: `url("/icons/delete.png")`,
+    background: `url("/icons/delete-red-button.png")`,
     backgroundSize: "cover",
-    height: "1.2rem",
-    width: "1.2rem",
+    height: "1.9rem",
+    width: "1.7rem",
   };
 
   const renderBooks = (book) => (
@@ -93,13 +93,7 @@ export function AdministrationBooksPage() {
             e.preventDefault();
             handleDeleteBook(book.idlibro);
           }}
-        >
-          {/* <img
-            src="/icons/delete.png"
-            alt="borrar"
-            style={{ height: "1.2rem", width: "1.2rem" }}
-          /> */}
-        </button>
+        />
       </form>
     </div>
   );

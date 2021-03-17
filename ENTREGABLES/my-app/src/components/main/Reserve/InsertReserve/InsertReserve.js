@@ -8,8 +8,8 @@ export const InsertReserve = (props) => {
   const { book, userMoney } = props;
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
-  const [reserve, setReserve] = useState([]);
-  console.log(reserve);
+  const [, setReserve] = useState([]);
+  const [, setErrorMsg] = useState("");
   const history = useHistory();
 
   const noMoneyMsg =
@@ -20,8 +20,6 @@ export const InsertReserve = (props) => {
   const insertReserveEffect = async (e) => {
     e.preventDefault();
 
-    console.log("hyey");
-    // console.log(-)
     const reserveResponse = await fetch(
       "http://localhost:3080/api/v1/reserves/",
       {
@@ -39,42 +37,39 @@ export const InsertReserve = (props) => {
     if (reserveResponse.ok) {
       const reserveResponseData = await reserveResponse.json();
       setReserve(reserveResponseData);
-      console.log("llega");
       history.push(`/reserves/${selectedUser.idusuario}`);
-      //insertInvoice(e);
     } else {
-      const error = new Error("Algo ha salido mal.");
-      throw error;
+      setErrorMsg(reserveResponse.error);
     }
   };
 
-  const insertInvoice = async (e) => {
-    e.preventDefault();
-    console.log("libro", book);
-    console.log("hyey");
-    const invoiceResponse = await fetch(
-      "http://localhost:3080/api/v1/invoices",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          iva: "21",
-          precioenvio: "3",
-          detalles: [{ idlibro: book.idlibro, precio: book.precio }],
-        }),
-      }
-    );
+  // const insertInvoice = async (e) => {
+  //   e.preventDefault();
+  //   console.log("libro", book);
+  //   console.log("hyey");
+  //   const invoiceResponse = await fetch(
+  //     "http://localhost:3080/api/v1/invoices",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({
+  //         iva: "21",
+  //         precioenvio: "3",
+  //         detalles: [{ idlibro: book.idlibro, precio: book.precio }],
+  //       }),
+  //     }
+  //   );
 
-    if (invoiceResponse.ok) {
-      const reserveResponseData = await invoiceResponse.json();
-    } else {
-      const error = new Error("Algo ha salido mal.");
-      throw error;
-    }
-  };
+  //   if (invoiceResponse.ok) {
+  //     const reserveResponseData = await invoiceResponse.json();
+  //   } else {
+  //     const error = new Error("Algo ha salido mal.");
+  //     throw error;
+  //   }
+  // };
 
   const style = {
     backgroundColor: "red",

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./NavigationMenu.css";
-import { Link } from "react-router-dom";
 import { Avatar } from "../Avatar/Avatar";
 import { Menu } from "../Menu/Menu";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -34,11 +33,7 @@ const NavigationMenu = () => {
         <div>
           <nav className="navigation-menu">
             <ul className="navigation-menu-list">
-              <li className="navigation-menu-item">
-                <Link to="/donations/create" className="navigation-link">
-                  Bienvenido, Booker!
-                </Link>
-              </li>
+              <li className="navigation-menu-item">¡Hola, Booker!</li>
               <li className="navigation-menu-item">
                 <button className="avatar-button">
                   <Avatar imageId={imageId} />
@@ -55,9 +50,7 @@ const NavigationMenu = () => {
           <nav className="navigation-menu">
             <ul className="navigation-menu-list">
               <li className="navigation-menu-item">
-                <Link to="/donations/create" className="navigation-link">
-                  Bienvenido {userProfile.nombreusuario}
-                </Link>
+                ¡Hola {userProfile.nombreusuario}!
               </li>
               <li className="navigation-menu-item">
                 <button className="avatar-button">

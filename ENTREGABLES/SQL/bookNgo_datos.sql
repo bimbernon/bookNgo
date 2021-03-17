@@ -23,7 +23,7 @@ create table tarjeta (
   idusuario int (6) not null,
   fechaExpiracion varchar(5) not null,
   csv int(3) not null,
-  constraint `fk_UsuarioTarjeta` FOREIGN KEY (`idusuario`) REFERENCES `proyectoFinalBookNGo`.`usuario` (`idusuario`)
+  constraint `fk_UsuarioTarjeta` FOREIGN KEY (`idusuario`) REFERENCES `proyectoFinalBookNGo`.`usuario` (`idusuario`) on delete cascade
 );
 
 create table categoria (
@@ -48,8 +48,8 @@ create table libro (
   precio float(8,2),
   editorial varchar(40) not null,
   añopublicacion int (6) not null,
-  constraint `fk_Categoria` FOREIGN KEY (`idcategoria`) REFERENCES `proyectoFinalBookNGo`.`categoria` (`idcategoria`),
-  constraint `fk_Autor` FOREIGN KEY (`idautor`) REFERENCES `proyectoFinalBookNGo`.`autor` (`idautor`)
+  constraint `fk_Categoria` FOREIGN KEY (`idcategoria`) REFERENCES `proyectoFinalBookNGo`.`categoria` (`idcategoria`) on delete cascade,
+  constraint `fk_Autor` FOREIGN KEY (`idautor`) REFERENCES `proyectoFinalBookNGo`.`autor` (`idautor`) on delete cascade
 );
 
 
@@ -60,8 +60,8 @@ Create table reserva (
     fechadevolucion datetime,
 	rating int null,
     primary key (idusuario,idlibro,fechareserva),
-	constraint `fk_UsuarioReserva` FOREIGN KEY (`idusuario`) REFERENCES `proyectoFinalBookNGo`.`usuario` (`idusuario`),
-    constraint `fk_LibroReserva` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`) 
+	constraint `fk_UsuarioReserva` FOREIGN KEY (`idusuario`) REFERENCES `proyectoFinalBookNGo`.`usuario` (`idusuario`) on delete cascade,
+    constraint `fk_LibroReserva` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`) on delete cascade
 );
 
 
@@ -74,7 +74,7 @@ fechadonacion datetime,
 revisado boolean not null default false,
 correcto boolean not null default false,
 primary key (iddonacion),
-constraint `fk_UsuarioDonacion` FOREIGN KEY (`idusuario`) REFERENCES `proyectoFinalBookNGo`.`usuario` (`idusuario`)
+constraint `fk_UsuarioDonacion` FOREIGN KEY (`idusuario`) REFERENCES `proyectoFinalBookNGo`.`usuario` (`idusuario`) on delete cascade
 );
 
 create table factura (
@@ -84,7 +84,7 @@ create table factura (
   iva float(4,2) not null,
   precioenvio float (4,2) not null,
   total float (4,2),
-constraint `fk_UsuarioFactura` FOREIGN KEY (`idusuario`) REFERENCES `proyectoFinalBookNGo`.`usuario` (`idusuario`)
+constraint `fk_UsuarioFactura` FOREIGN KEY (`idusuario`) REFERENCES `proyectoFinalBookNGo`.`usuario` (`idusuario`) on delete cascade
 );
 
 create table detalle ( 
@@ -93,8 +93,8 @@ create table detalle (
   idlibro int(6) references libro(idlibro),
   precio float (8,2), 
   primary key (idfactura,iddetalle),
-  constraint `fk_LibroDetalle` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`),
-  constraint `fk_idFactura` FOREIGN KEY (`idfactura`) REFERENCES `proyectoFinalBookNGo`.`factura` (`idfactura`) 
+  constraint `fk_LibroDetalle` FOREIGN KEY (`idlibro`) REFERENCES `proyectoFinalBookNGo`.`libro` (`idlibro`) on delete cascade,
+  constraint `fk_idFactura` FOREIGN KEY (`idfactura`) REFERENCES `proyectoFinalBookNGo`.`factura` (`idfactura`) on delete cascade
 );
 
 INSERT INTO proyectoFinalBookNGo.usuario values (1,true,'Jose','jlopez','$2a$04$FfIcjxmF5dXNEo1h1XtfbuLEOeI.U/xjZ7teTldS3b0mqJkYA9DmW','Lopez','Fernandez','usuario1@gmail.com','Avenida Marina n2',0,3);

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 import "./DonationsForm.css";
 
 export const DonationsForm = () => {
+  const [token] = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [authorsName, setAuthorsName] = useState("");
 
@@ -10,10 +12,11 @@ export const DonationsForm = () => {
 
   const handleSubmitDonations = async (e) => {
     e.preventDefault();
-    const resp = await fetch("http://localhost:3080/api/v1/donations", {
+    const resp = await fetch("http://localhost:3080/api/v1/donations/create", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         title: title,
@@ -22,7 +25,7 @@ export const DonationsForm = () => {
     });
 
     if (resp.ok) {
-      const respBody = await resp.json();
+      await resp.json();
       setTitle("");
       setAuthorsName("");
     }
