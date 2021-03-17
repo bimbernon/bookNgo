@@ -42,7 +42,7 @@
 }
 
 .user-list-menu > a {
-  color: black;
+  color: var(--dark-title-color);
   text-decoration: none;
 }
 

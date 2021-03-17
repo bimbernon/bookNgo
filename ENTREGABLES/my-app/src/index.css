@@ -18,6 +18,11 @@ html {
   display: flex;
 }
 
+h1,
+h2 {
+  color: var(--dark-title-color);
+}
+
 .loading {
   position: absolute;
   top: 0;

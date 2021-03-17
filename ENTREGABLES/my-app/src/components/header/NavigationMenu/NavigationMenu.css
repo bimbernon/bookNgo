@@ -30,6 +30,7 @@
 .navigation-menu-item {
   padding: 0.25rem;
   text-align: left;
+  color: var(--dark-title-color);
 }
 
 .navigation-link {

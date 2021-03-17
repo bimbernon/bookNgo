@@ -132,7 +132,7 @@ export const RegisterForm = () => {
         </div>
         <div className="error-message-container">{errorMessage}</div>
         <div className="register-button-container">
-          <button className="register-submit-button" type="submit">
+          <button className="register-user-submit-button" type="submit">
             REGÍSTRATE
           </button>
         </div>

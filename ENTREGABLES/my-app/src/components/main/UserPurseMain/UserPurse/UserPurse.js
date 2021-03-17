@@ -38,7 +38,6 @@ export const UserPurse = () => {
       if (moneyResponse.ok) {
         const moneyResponseData = await moneyResponse.json();
         setUserMoney(moneyResponseData.monedero);
-        console.log("Monedero Inicial ", userMoney);
       } else {
         await moneyResponse.json();
         setErrorMsg("Algo ha salido mal...");
@@ -145,7 +144,11 @@ export const UserPurse = () => {
         }
       });
     } else {
-      console.log("no se puede no tienes una tarjeta seleccionada");
+      Swal.fire({
+        icon: "error",
+        title: "Lo sentimos",
+        text: "No se puede no tienes una tarjeta seleccionada",
+      });
     }
   };
   if (!token) return <Redirect to="/" />;

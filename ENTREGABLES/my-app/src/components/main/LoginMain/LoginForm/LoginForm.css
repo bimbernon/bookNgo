@@ -12,7 +12,7 @@
 }
 
 .login-form-title {
-  color: var(--title-brown-color);
+  color: var(--dark-title-color);
   text-transform: uppercase;
   text-align: center;
   margin: 0.5rem;
@@ -38,7 +38,7 @@
   padding: 0.5rem 0.6rem;
   border: 0;
   border-radius: 50px;
-  color: white;
+  color: var(--dark-title-color);
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
   background-color: var(--title-brown-color);
 }

@@ -56,7 +56,7 @@ async function createUser(user) {
   const insertQuery =
     "INSERT INTO usuario ( idusuario, admin, nombreusuario, nombreperfilusuario, contraseña, apel1, apel2, email, direccion, monedero, codFoto ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-  const photoCod = userId;
+  const photoCod = 0;
 
   const [createdUser] = await pool.query(insertQuery, [
     userId,
