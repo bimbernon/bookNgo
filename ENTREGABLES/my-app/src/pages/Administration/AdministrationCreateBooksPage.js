@@ -265,7 +265,7 @@ export const CreateBook = () => {
             ></input>
           </div>
           <div className="register-form-item">
-            <textarea
+            <textarea className="input-text-area"
               type="text"
               placeholder="Sinopsis"
               value={sinopsis}
