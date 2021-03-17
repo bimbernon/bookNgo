@@ -69,8 +69,8 @@ const UserMenu = () => {
               src="/icons/logout-blue.svg"
               alt="exit"
               style={{
-                height: "1.6rem",
-                width: "2rem",
+                height: "1.8rem",
+                width: "2.2rem",
               }}
             />
           </button>
