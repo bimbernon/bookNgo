@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./BackPackItem.css";
 import { Book } from "../Book/Book";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { UserContext } from "../../providers/UserProvider";
 import { InsertReserve } from "../Reserve/InsertReserve/InsertReserve";
@@ -11,6 +11,7 @@ export const BackPackItem = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [user, setUser] = useState({});
+  const [errorMsg, setErrorMsg] = useState(null);
 
   let { bookId } = useParams();
   console.log(bookId);
@@ -33,21 +34,27 @@ export const BackPackItem = () => {
   console.log(book);
 
   useEffect(() => {
-    async function getUserProfile() {
-      const userResponse = await (
-        await fetch(
-          `http://localhost:3080/api/v1/users/id/${selectedUser.idusuario}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-      ).json();
-      setUser(userResponse);
+    if (token) {
+      async function getUserProfile() {
+        const userResponse = await (
+          await fetch(
+            `http://localhost:3080/api/v1/users/id/${selectedUser.idusuario}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          )
+        ).json();
+        setUser(userResponse);
+      }
+      getUserProfile();
+    } else {
+      setErrorMsg()
     }
-    getUserProfile();
   }, []);
 
-  const result = token ? (
+  if (!token) return <Redirect to="/" />;
+
+   return (
     <div className="backPack-container">
       <h1>Mi mochila</h1>
       <div className="book-backpack-container">
@@ -62,28 +69,5 @@ export const BackPackItem = () => {
         <InsertReserve book={book} userMoney={user.monedero} />
       </div>
     </div>
-  ) : (
-    <div className="backPack-container">
-      <div>
-        <Book
-          key={book.idlibro}
-          bookId={book.idlibro}
-          bookName={book.titulo}
-          bookPrice={`Precio: ${book.precio}`}
-        ></Book>
-      </div>
-      <div
-        style={{
-          color: "red",
-          minHeight: "1rem",
-          textAlign: "center",
-          marginTop: "20px",
-        }}
-      >
-        Debes estar logueado para poder reservar un libro.
-        <div>Hazte Booker!</div>
-      </div>
-    </div>
-  );
-  return result;
+  ) 
 };

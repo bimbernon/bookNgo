@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, Link, Redirect } from "react-router-dom";
 import { Book } from "../Book/Book";
-// import { BagContext } from "../../providers/BagProvider";
 import Loading from "../../Loading";
+import Swal from "sweetalert2";
 
 import "./BookDetails.css";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export const BookDetails = () => {
   const [book, setBook] = useState(null);
   let { bookId } = useParams();
   const [back, setBack] = useState(-1);
-  // const [reserve, setReserve] = useState([]);
-  // const doSuccessInsert = (responseBody) => setReserve(bookId);
+  const [token] = useContext(AuthContext);
 
   useEffect(() => {
     async function getBookById() {
@@ -22,7 +22,6 @@ export const BookDetails = () => {
       if (bookResponse.ok) {
         const bookResponseData = await bookResponse.json();
         setBook(bookResponseData);
-        // onSuccessInsert(bookResponseData);
       }
     }
     getBookById();
@@ -40,6 +39,17 @@ export const BookDetails = () => {
   const styleButton = {
     backgroundColor: "red",
   };
+
+    const handleLink = (e) =>
+      !token ? (
+        Swal.fire({
+          icon: "error",
+          title: "Lo sentimos",
+          text: "Tienes que ser Booker para poder hacer reservas.",
+        })
+      ) : (
+        <Redirect to={`/user/book/mochila/${bookId}`} />
+      );
 
   return book.stock === 0 ? (
     <div className="book-details-container">
@@ -61,11 +71,33 @@ export const BookDetails = () => {
         style={styleButton}
         type="submit"
         className="book-details-reserve-button"
-        bookId={bookId}
-        // onSuccessInsert={doSuccessInsert}
+        value={bookId}
       >
         Reservar
       </button>
+    </div>
+  ) : !token ? (
+    <div className="book-details-container">
+      <a href={`javascript:history.go(${back})`} className="back-button">
+        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+      </a>
+      <Book
+        bookId={book.idlibro}
+        style={style}
+        key={book.idlibro}
+        bookName={book.titulo}
+        bookAuthor={`${book.nombreautor} ${book.apel1}`}
+        bookPrice={`Precio: ${book.precio}`}
+        bookSinopsis={book.sinopsis}
+      ></Book>
+        <button
+          type="submit"
+          className="book-details-reserve-button"
+          bookId={bookId}
+          onClick={handleLink}
+        >
+          Reservar
+        </button>
     </div>
   ) : (
     <div className="book-details-container">
@@ -86,6 +118,7 @@ export const BookDetails = () => {
           type="submit"
           className="book-details-reserve-button"
           bookId={bookId}
+          onClick={handleLink}
         >
           Reservar
         </button>
@@ -93,3 +126,4 @@ export const BookDetails = () => {
     </div>
   );
 };
+{/* <Redirect to={`/user/book/mochila/${bookId}`} />; */}
