@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
+import Swal from "sweetalert2";
 import "./Administration.css";
 
 export const CreateBook = () => {
@@ -25,22 +26,25 @@ export const CreateBook = () => {
     const selectedCathegory = cathegories.find((ctg) => {
       return parseInt(ctg.idcategoria) === parseInt(e.target.value);
     });
-    console.log(selectedCathegory);
+
     setCurrentCathegory(selectedCathegory);
   };
 
   const [authors, setAuthors] = useState([]);
   const [currentAuthor, setCurrentAuthor] = useState({});
+  let [addAuthor, setAddAuthor] = useState(false);
 
   useEffect(() => {
     async function getAllAuthors() {
+      console.log("h");
       const authorsResponse = await (
         await fetch("http://localhost:3080/api/v1/authors/")
       ).json();
       setAuthors(authorsResponse);
+      setAddAuthor(false);
     }
     getAllAuthors();
-  }, []);
+  }, [addAuthor]);
 
   const renderAuthors = (author) => (
     <option
@@ -52,7 +56,7 @@ export const CreateBook = () => {
     const selectedAuthor = authors.find((author) => {
       return parseInt(author.idautor) === parseInt(e.target.value);
     });
-    console.log(selectedAuthor);
+
     setCurrentAuthor(selectedAuthor);
   };
 
@@ -66,6 +70,7 @@ export const CreateBook = () => {
   const [name, setName] = useState("");
   const [lastName1, setLastName1] = useState("");
   const [lastName2, setLastName2] = useState("");
+  const [imageSelected, setImageSelected] = useState(null);
 
   const handleChangeTitle = (e) => setTitle(e.target.value);
   const handleChangePrice = (e) => setPrice(e.target.value);
@@ -76,35 +81,57 @@ export const CreateBook = () => {
 
   const handleSubmitBook = async (e) => {
     e.preventDefault();
+    if (imageSelected != null) {
+      const resp = await fetch("http://localhost:3080/api/v1/books/", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          idcategoria: currentCathegory.idcategoria,
+          idautor: currentAuthor.idautor,
+          titulo: title,
+          stock: stock,
+          sinopsis: sinopsis,
+          precio: price,
+          editorial: publisher,
+          añopublicacion: year,
+        }),
+      });
 
-    const resp = await fetch("http://localhost:3080/api/v1/books/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        idcategoria: currentCathegory.idcategoria,
-        idautor: currentAuthor.idautor,
-        titulo: title,
-        stock: stock,
-        sinopsis: sinopsis,
-        precio: price,
-        editorial: publisher,
-        añopublicacion: year,
-      }),
-    });
+      if (resp.ok) {
+        await resp.json();
+        // setCurrentCathegory();
+        //setCurrentAuthor({});
+        setTitle("");
+        setStock("");
+        setPrice("");
+        setPublisher("");
+        setYear("");
+        setSinopsis("");
+        setImageSelected(null);
+        await uploadPhoto(imageSelected);
 
-    if (resp.ok) {
-      await resp.json();
-      setCurrentCathegory({});
-      setCurrentAuthor({});
-      setTitle("");
-      setStock("");
-      setPrice("");
-      setPublisher("");
-      setYear("");
-      setSinopsis("");
+        Swal.fire({
+          icon: "success",
+          title: "¡Enhorabuena!",
+          text: "Tus libro se ha registrado con exito",
+        });
+      } else {
+        const error = await resp.json();
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: error.error,
+        });
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Error de imagen",
+        text: "Tiene que tener una imagen seleccionada",
+      });
     }
   };
 
@@ -128,13 +155,46 @@ export const CreateBook = () => {
       }),
     });
     if (resp.ok) {
-      const respBody = await resp.json();
-      console.log(respBody);
+      await resp.json();
+
       setName("");
       setLastName1("");
       setLastName2("");
+      setAddAuthor(true);
+
+      Swal.fire({
+        icon: "success",
+        title: "¡Enhorabuena!",
+        text: "El autor se ha creado con exito",
+      });
+    } else {
+      const respBody = await resp.json();
+      Swal.fire({
+        icon: "error",
+        title: "Error al crear un autor",
+        text: respBody.error,
+      });
     }
   };
+
+  async function uploadPhoto(image) {
+    const resp = await fetch(
+      `http://localhost:3080/api/v1/books/book/image/upload`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: image,
+      }
+    );
+    if (!resp.ok) {
+      const error = await resp.json();
+      return error;
+    } else {
+      return "";
+    }
+  }
 
   const onFileBookChange = async (e) => {
     e.preventDefault();
@@ -144,15 +204,7 @@ export const CreateBook = () => {
 
     const data = new FormData();
     data.append("photoBook", file);
-
-    await fetch(`http://localhost:3080/api/v1/books/book/image/upload`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: data,
-    });
-    console.log("hola bebe!");
+    setImageSelected(data);
   };
 
   const style = {

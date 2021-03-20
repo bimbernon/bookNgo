@@ -4,18 +4,45 @@ const bookRepository = require("../../repositories/books-repository");
 const Joi = require("joi");
 
 const schema = Joi.object().keys({
-  idcategoria: Joi.number().positive().required(),
-  idautor: Joi.number().positive().required(),
-  titulo: Joi.string().min(4).max(40).required(),
-  stock: Joi.number().positive().required(),
-  sinopsis: Joi.string().min(4).max(2000).required(),
-  precio: Joi.number().positive().required(),
-  editorial: Joi.string().min(4).max(40).required(),
+  idcategoria: Joi.number()
+    .positive()
+    .required()
+    .error(
+      new Error("Error, tiene que tener al menos una categoria seleccionada")
+    ),
+  idautor: Joi.number()
+    .positive()
+    .required()
+    .error(new Error("Error, tiene que tener al menos un autor seleccionado")),
+  titulo: Joi.string()
+    .min(4)
+    .max(40)
+    .required()
+    .error(new Error("Error, el libro tiene que tener un titulo")),
+  stock: Joi.number()
+    .positive()
+    .required()
+    .error(new Error("Error, el libro tiene que tener al menos un stock")),
+  sinopsis: Joi.string()
+    .min(4)
+    .max(2000)
+    .required()
+    .error(new Error("Error, el libro tiene que tener una sipnosis")),
+  precio: Joi.number()
+    .positive()
+    .required()
+    .error(new Error("El libro tiene que tener un precio")),
+  editorial: Joi.string()
+    .min(4)
+    .max(40)
+    .required()
+    .error(new Error("Error, el libro tiene que tener una editorial")),
   añopublicacion: Joi.number()
     .min(1900)
     .max(new Date().getFullYear())
     .positive()
-    .required(),
+    .required()
+    .error(new Error("Error, el libro tiene que tener un año de publicacion")),
 });
 
 async function createBook(req, res) {

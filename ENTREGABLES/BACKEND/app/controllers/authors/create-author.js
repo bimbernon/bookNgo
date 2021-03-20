@@ -5,8 +5,16 @@ const Joi = require("joi");
 const authorRepository = require("../../repositories/author-repository");
 
 const schema = Joi.object().keys({
-  nombreautor: Joi.string().min(1).max(20).required(),
-  apel1: Joi.string().min(1).max(20).required(),
+  nombreautor: Joi.string()
+    .min(1)
+    .max(20)
+    .required()
+    .error(new Error("Error, el autor tiene que tener un nombre")),
+  apel1: Joi.string()
+    .min(1)
+    .max(20)
+    .required()
+    .error(new Error("Error, el autor tiene que tener al menos un apellido")),
   apel2: Joi.string().min(1).max(20).optional().allow(""),
 });
 
