@@ -8,7 +8,7 @@
   flex-direction: column;
   margin: 1rem auto;
   max-width: 93vw;
-  height: 50rem;
+  height: 45rem;
 }
 
 #upload-photo-input {
@@ -41,10 +41,11 @@
   border: none;
   border-radius: 20px;
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
-  height: 50px;
-  line-height: 3rem;
+  height: 40px;
+  line-height: 2.5rem;
   text-align: center;
   width: 20.5rem;
+  font-size: 0.9rem;
 }
 
 .modify-buttons-container {

@@ -52,6 +52,9 @@
   background: var(--white-background);
   border: none;
   margin: 0;
+  padding-left: 1rem;
+  font-family: "Comfortaa";
+  font-size: 0.75rem;
 }
 
 .ppal-browser::-webkit-search-cancel-button {

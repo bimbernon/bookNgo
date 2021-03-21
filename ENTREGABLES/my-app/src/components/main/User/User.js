@@ -20,8 +20,14 @@ const User = (props) => {
   const deleteButtonStyle = {
     background: `url("/icons/delete-red-button.png")`,
     backgroundSize: "cover",
-    height: "1.9rem",
-    width: "1.7rem",
+    height: "1.5rem",
+    width: "1.3rem",
+  };
+
+  const editButtonStyle = {
+    height: "1.5rem",
+    width: "1.3rem",
+    margin: "0 8px",
   };
 
   return (
@@ -53,7 +59,7 @@ const User = (props) => {
               <img
                 src="/icons/edit-blue-square-pen.png"
                 alt="edit"
-                style={{ height: "1.2rem", width: "1.2rem" }}
+                style={editButtonStyle}
               />
             </Link>
           </form>

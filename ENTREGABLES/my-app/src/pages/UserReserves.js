@@ -72,7 +72,7 @@ export const UserReserves = () => {
                   color: "red",
                   minHeight: "1.5em",
                   textAlign: "center",
-                  marginTop: "20px",
+                  margin: "1.2rem 1.2rem",
                 }}
               >
                 {errorMsg}

@@ -84,7 +84,7 @@ export const UserProfileForm = () => {
     <div className="user-profile-container">
       <Link to={`/users/profile/${selectedUser.idusuario}`}>
         <img
-          src={`/icons/back.png`}
+          src={`/icons/brown-back-button.svg`}
           height="30"
           width="30"
           alt="Botón"

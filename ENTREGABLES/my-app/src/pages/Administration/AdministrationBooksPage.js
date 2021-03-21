@@ -60,32 +60,22 @@ export function AdministrationBooksPage() {
     }
   };
 
-  const style = {
-    height: "12.5rem",
-    width: "17rem",
-  };
+  // const style = {
+  //   height: "12.5rem",
+  //   width: "17rem",
+  // };
 
   const deleteStyle = {
     background: `url("/icons/delete-red-button.png")`,
     backgroundSize: "cover",
-    height: "1.9rem",
-    width: "1.7rem",
+    height: "1.7rem",
+    width: "1.5rem",
   };
 
   const renderBooks = (book) => (
     <div className="admin-book-container">
       <li
-        style={{
-          display: "grid",
-          gridTemplateColumns: "60px 235px 10px",
-          gap: "1rem",
-          justifyItems: "center",
-          alignItems: "center",
-          backgroundColor: "white",
-          borderRadius: "0.5rem",
-          width: "22rem",
-          height: "6rem",
-        }}
+        className="admin-books-list-li"
         bookId={book.idlibro}
         key={book.idlibro}
         bookName={book.titulo}
@@ -118,17 +108,17 @@ export function AdministrationBooksPage() {
     <div>
       <Link to={`/administration`}>
         <img
-          src={`/icons/back.png`}
+          src={`/icons/brown-back-button.svg`}
           height="30"
           width="30"
           alt="Botón"
-          style={{ position: "relative", left: "3.5rem", top: "1rem" }}
+          style={{ position: "relative", left: "2rem", top: "1rem" }}
         />
       </Link>
       <Link to="/books/create">
         <div className="add-book-button-container">
           <button className="add-book-submit-button" type="submit">
-            +
+            Añadir libro
           </button>
         </div>
       </Link>

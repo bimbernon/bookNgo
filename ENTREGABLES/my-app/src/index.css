@@ -14,6 +14,7 @@ body {
 html {
   --white-background: rgba(255, 255, 255, 0.623);
   --title-brown-color: rgb(215, 199, 151);
+  --small-logo-color: rgb(187, 164, 94);
   --dark-title-color: rgb(68, 52, 32);
   display: flex;
 }

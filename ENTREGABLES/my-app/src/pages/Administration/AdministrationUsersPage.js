@@ -67,15 +67,21 @@ function AdministrationUsersPage() {
       userPurse={user.monedero}
       value={user.idusuario}
       onDeleteUser={deleteUserById}
-    ></User>
+    />
   );
 
   if (!token) return <Redirect to="/" />;
 
   return (
     <div>
-      <Link to={`/administration`}>
-        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+      <Link to={`/administration`} className="back-button">
+        <img
+          src={`/icons/brown-back-button.svg`}
+          height="30"
+          width="30"
+          alt="Botón"
+          className="back-button"
+        />
       </Link>
       <ul className="users-list">{users.map(renderUsers)}</ul>
     </div>

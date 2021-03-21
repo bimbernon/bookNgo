@@ -107,8 +107,8 @@ export const UserPurse = () => {
   const style = {
     padding: "0",
     margin: "0",
-    width: "1.9rem",
-    height: "1.9rem",
+    width: "3rem",
+    height: "3rem",
   };
 
   const handleCuantity = (e) => {
@@ -162,7 +162,19 @@ export const UserPurse = () => {
           <h2 className="money-display">{userMoney}</h2>
         </div>
       </div>
-
+      <div className="payment-container">
+        <h2 style={{ fontSize: "1rem", marginBottom: "0" }}>
+          Selecciona método de pago
+        </h2>
+        <form className="card-select">
+          <select onChange={handleSelecteCard} className="card-options">
+            {cards.map(renderCards)}
+          </select>
+          <Link to="/cards">
+            <button className="add-card-button">Añadir tarjeta</button>
+          </Link>
+        </form>
+      </div>
       <div className="recharge-container">
         <div className="recharge-button-container">
           <button
@@ -172,7 +184,7 @@ export const UserPurse = () => {
           >
             <p className="recharge-button-value">1</p>
             <img
-              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png"
               alt="logo"
               className="logo-img"
               style={style}
@@ -187,7 +199,7 @@ export const UserPurse = () => {
           >
             <p className="recharge-button-value">5</p>
             <img
-              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png"
               alt="logo"
               className="logo-img"
               style={style}
@@ -202,7 +214,7 @@ export const UserPurse = () => {
           >
             <p className="recharge-button-value">10</p>
             <img
-              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png"
               alt="logo"
               className="logo-img"
               style={style}
@@ -217,32 +229,23 @@ export const UserPurse = () => {
           >
             <p className="recharge-button-value">20</p>
             <img
-              src="/logosProyecto/logoPrincipal/logo_blanco/logo_small_icon_only_inverted.png"
+              src="/logosProyecto/logoPrincipal/logo/logo_small_icon_only_inverted.png"
               alt="logo"
               className="logo-img"
               style={style}
             ></img>
           </button>
-          <div className="effective-recharge-button-container">
-            <form onSubmit={handleRecharge}>
-              <button className="effective-recharge-button" type="submit">
-                Recargar
-              </button>
-            </form>
-          </div>
         </div>
-      </div>
-
-      <div className="payment-container">
-        <h2>Selecciona método de pago</h2>
-        <form className="card-select">
-          <select onChange={handleSelecteCard} className="card-options">
-            {cards.map(renderCards)}
-          </select>
-          <Link to="/cards">
-            <button className="add-card-button">Añadir tarjeta</button>
-          </Link>
-        </form>
+        <div className="effective-recharge-button-container">
+          <p style={{ fontSize: "0.5rem" }}>
+            Términos y condiciones de recarga
+          </p>
+          <form onSubmit={handleRecharge}>
+            <button className="effective-recharge-button" type="submit">
+              Recargar
+            </button>
+          </form>
+        </div>
       </div>
 
       {/* {errorMsg && (

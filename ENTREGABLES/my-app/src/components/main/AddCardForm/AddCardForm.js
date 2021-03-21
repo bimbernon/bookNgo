@@ -114,7 +114,7 @@ const AddCardForm = () => {
     <div className="add-card-form-container">
       {/* {errorMsg ? <p>{errorMsg}</p> : null} */}
       {/* <Link to={`/users/purse/${selectedUser.idusuario}`}>
-        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+        <img src={`/icons/brown-back-button.svg`} height="30" width="30" alt="Botón" />
       </Link> */}
       <div>
         <h1 className="add-card-form-title">Añade tu tarjeta</h1>

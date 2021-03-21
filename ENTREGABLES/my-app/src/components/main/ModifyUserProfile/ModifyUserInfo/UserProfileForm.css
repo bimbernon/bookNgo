@@ -46,3 +46,9 @@
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
   background-color: var(--title-brown-color);
 }
+
+.input-user-modify-form-container > input {
+  padding-left: 1rem;
+  font-family: "Comfortaa";
+  width: 280px;
+}

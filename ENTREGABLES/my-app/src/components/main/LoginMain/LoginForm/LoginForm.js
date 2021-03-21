@@ -64,7 +64,7 @@ const LoginForm = (props) => {
           <input
             required
             type="email"
-            placeholder="  email"
+            placeholder="email"
             value={email}
             onChange={handleChangeEmail}
           />
@@ -73,7 +73,7 @@ const LoginForm = (props) => {
           <input
             required
             type="password"
-            placeholder="  contraseña"
+            placeholder="contraseña"
             value={password}
             onChange={handleChangePassword}
           />

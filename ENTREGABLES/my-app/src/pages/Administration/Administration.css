@@ -45,9 +45,16 @@
   font-weight: 700;
 }
 
+.back-button {
+  position: relative;
+  right: 1.5rem;
+  top: 0rem;
+  margin-bottom: 0.5rem;
+}
+
 a {
   text-decoration: none;
-  color: black;
+  color: var(--dark-title-color);
 }
 
 .users-list {
@@ -106,7 +113,17 @@ a {
   position: relative;
 }
 
-.add-book-submit-button,
+.add-book-submit-button {
+  font-family: "Comfortaa";
+  padding: 0.5rem 0.6rem;
+  border: 0;
+  border-radius: 50px;
+  color: white;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
+  background-color: var(--title-brown-color);
+  margin-top: 1rem;
+}
+
 .register-submit-button {
   font-family: "Comfortaa";
   padding: 0.5rem 0.6rem;
@@ -121,4 +138,33 @@ a {
 
 .input-text-area {
   font-family: "Comfortaa";
+  padding-left: 1rem;
+}
+
+.select-form-item {
+  font-family: "Comfortaa";
+  padding-left: 1rem;
+}
+
+.register-form-item > input {
+  padding-left: 1rem;
+}
+
+.admin-books-list-li {
+  display: grid;
+  grid-template-columns: 60px 190px 10px;
+  gap: 1rem;
+  justify-items: center;
+  align-items: center;
+  background-color: var(--white-background);
+  border-radius: 0.5rem;
+  width: 20rem;
+  height: 6rem;
+  padding-left: 1rem;
+  overflow-y: scroll;
+}
+
+.admin-books-list-li > p {
+  font-size: 0.85rem;
+  width: 10rem;
 }

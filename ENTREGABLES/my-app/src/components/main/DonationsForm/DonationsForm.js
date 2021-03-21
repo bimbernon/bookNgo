@@ -52,7 +52,7 @@ export const DonationsForm = () => {
           required
           type="text"
           className="donations-input"
-          placeholder="  Título del libro"
+          placeholder="Título del libro"
           value={title}
           onChange={handleChangeDonationTitle}
         ></input>
@@ -60,7 +60,7 @@ export const DonationsForm = () => {
           required
           type="text"
           className="donations-input"
-          placeholder="  Nombre del autor"
+          placeholder="Nombre del autor"
           value={authorsName}
           onChange={handleChangeDonationAuthorsName}
         ></input>

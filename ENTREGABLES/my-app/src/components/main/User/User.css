@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   max-width: 90%;
-  padding: 0.9rem 0.5rem;
+  padding: 0.9rem 0.3rem;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
   border-radius: 1rem;
@@ -20,12 +20,12 @@
 }
 
 .user-profile-name {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
 }
 
 .user-name,
 .user-email {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .user-purse-item {
@@ -34,20 +34,21 @@
 }
 
 .user-purse {
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-align: center;
   margin: 0.2rem;
   padding: 0.5rem 0;
-  border: 1px solid rgb(167, 125, 71);
   border-radius: 15px;
+}
+
+.user-right-item {
+  text-align: center;
+  color: var(--dark-title-color);
 }
 
 .update-delete-container {
   display: flex;
-  justify-content: space-between;
-}
-
-.user-right-item {
+  justify-content: center;
 }
 
 .delete-user-button {

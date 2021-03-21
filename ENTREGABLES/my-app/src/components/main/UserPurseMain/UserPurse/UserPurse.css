@@ -22,7 +22,7 @@
   display: flex;
   justify-content: flex-start;
   align-content: center;
-  margin: 1rem 2rem;
+  margin: 0 2rem;
 }
 
 .money-display-container {
@@ -46,7 +46,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-content: center;
-  margin: 1rem 2rem;
+  margin: 0 2rem;
 }
 
 .card-options {
@@ -57,31 +57,37 @@
   margin: 20px 20px 0px 20px;
   width: 300px;
   padding-left: 0.5rem;
+  font-family: "Comfortaa";
 }
 
 .recharge-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-top: 1rem;
 }
 
 .recharge-button {
-  border: 1px solid rgba(0, 0, 0, 0.363);
-  border-radius: 0.5rem;
+  border: 0px;
+  color: white;
+  background-color: var(--small-logo-color);
+  border-radius: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10rem;
+  width: 6rem;
+  height: 6rem;
+  padding-left: 1rem;
   margin: 0.3rem;
   font-family: "Comfortaa";
   font-size: 1.3rem;
-}
-
-.recharge-button-value {
-  margin-right: 0.8rem;
+  box-shadow: 5px 5px 5px rgb(58 55 55);
+  margin: 0.5rem 1rem;
 }
 
 .effective-recharge-button-container {
   margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
 }
 
 .add-card-button,
@@ -94,5 +100,5 @@
   color: white;
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
   background-color: var(--title-brown-color);
-  margin-top: 1rem;
+  margin: 1rem 0;
 }

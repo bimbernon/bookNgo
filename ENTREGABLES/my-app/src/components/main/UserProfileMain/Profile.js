@@ -146,7 +146,7 @@ const Profile = () => {
       </div>
       <div className="user-info-item">
         <h3 className="user-item-title">Nombre:</h3>
-        <p>{`  ${userProfile.nombreusuario} ${userProfile.apel1} ${userProfile.apel2}`}</p>
+        <p>{`${userProfile.nombreusuario} ${userProfile.apel1} ${userProfile.apel2}`}</p>
       </div>
       <div className="user-info-item">
         <h3 className="user-item-title">Dirección:</h3>

@@ -221,7 +221,7 @@ export const CreateBook = () => {
     <div>
       <Link to={`/books`}>
         <img
-          src={`/icons/back.png`}
+          src={`/icons/brown-back-button.svg`}
           height="30"
           width="30"
           alt="Botón"
@@ -264,7 +264,6 @@ export const CreateBook = () => {
       </div>
       <div style={style} className="register-container">
         <h1 className="register-form-title">Regístro de libros</h1>
-
         <form className="register-form" onSubmit={handleSubmitBook}>
           <div className="select-cathegoty-container">
             <select
@@ -343,7 +342,7 @@ export const CreateBook = () => {
               src="/icons/upload-photo.png"
               alt="uploadphoto"
               style={{
-                height: "1.6rem",
+                height: "1.9rem",
                 width: "2rem",
                 position: "relative",
                 bottom: "4.5rem",

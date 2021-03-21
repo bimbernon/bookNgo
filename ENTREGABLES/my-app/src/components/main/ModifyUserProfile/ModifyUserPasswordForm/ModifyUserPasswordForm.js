@@ -70,7 +70,7 @@ export const ModifyUserPasswordForm = () => {
     <div className="user-profile-container">
       <Link to={`/users/profile/${selectedUser.idusuario}`}>
         <img
-          src={`/icons/back.png`}
+          src={`/icons/brown-back-button.svg`}
           height="30"
           width="30"
           alt="Botón"
@@ -83,7 +83,7 @@ export const ModifyUserPasswordForm = () => {
           <h2 className="input-user-modify-form-title">Contraseña actual:</h2>
           <input
             type="password"
-            placeholder="  **********"
+            placeholder="**********"
             value={currentPassword}
             onChange={handleChangeCurrentPassword}
             className="input-user-modify-form"
@@ -93,7 +93,7 @@ export const ModifyUserPasswordForm = () => {
           <h2 className="input-user-modify-form-title">Nueva contraseña:</h2>
           <input
             type="password"
-            placeholder="  **********"
+            placeholder="**********"
             value={newPassword}
             onChange={handleChangeNewPassword}
             className="input-user-modify-form"
