@@ -1,11 +1,12 @@
 import React from "react";
 
-const Invoice = (props) => {
+export const Invoice = (props) => {
   const { invoice } = props;
 
   return (
     <div className={invoice}>
-      <div className="user-information">
+      Mi Factura
+      {/* <div className="user-information">
         <h1 className="user-name">{`Nombre: ${invoice.User.name}`}</h1>
         <h2 className="user-lastnames">{`Apellidos: ${invoice.User.lastname1} ${invoice.User.lastname2}`}</h2>
       </div>
@@ -21,9 +22,7 @@ const Invoice = (props) => {
         <h2 className="reserve-editorial">{`Editorial: ${invoice.Invoice.Detail.Book.editorial}`}</h2>
         <h2 className="reserve-cathegory">{`Categoría: ${invoice.Invoice.Detail.Book.Cathegory.nameCathegory}`}</h2>
       </div>
-      <h1 className="total-price">{`TOTAL A PAGAR: ${invoice.Invoice.Total}`}</h1>
+      <h1 className="total-price">{`TOTAL A PAGAR: ${invoice.Invoice.Total}`}</h1> */}
     </div>
   );
 };
-
-export { Invoice };

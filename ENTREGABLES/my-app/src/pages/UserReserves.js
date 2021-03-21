@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { AuthContext } from "../components/providers/AuthProvider";
 import { UserContext } from "../components/providers/UserProvider";
 import { Reserve } from "../components/main/Reserve/Reserve";
@@ -9,7 +9,8 @@ import "../components/main/Reserve/Reserve.css";
 export const UserReserves = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
-  const [reserves, setReserves] = useState([]);
+  const [reserve, setReserve] = useState([]);
+  console.log(reserve);
 
   useEffect(() => {
     async function getReservesByUserId() {
@@ -21,7 +22,7 @@ export const UserReserves = () => {
       );
       if (reserveResponse.ok) {
         const allReservesData = await reserveResponse.json();
-        setReserves(allReservesData);
+        setReserve(allReservesData);
       }
     }
     getReservesByUserId();
@@ -34,54 +35,64 @@ export const UserReserves = () => {
         bookId={reserves.idlibro}
         reservedBookTitle={reserves.titulo}
         reserveDate={reserves.fechareserva}
-        expirationDate={reserves.fechaexpiracion}
-        idInvoice={reserves.idfactura}
-      />
+        expirationDate={reserves.fechadevolucion}
+      >
+        <Link to={`/reserve/${reserve.idlibro}/${reserve.fechareserva}`}>
+          <img
+            src="/icons/icono-factura.png"
+            alt="icono-factura"
+            style={{ background: "none", height: "2rem", width: "2rem" }}
+          ></img>
+        </Link>
+      </Reserve>
     </div>
   );
   const errorMsg = "Todavia no tienes reservas disponibles.";
 
   if (!token) return <Redirect to="/" />;
 
-  console.log(reserves.length, "reserves", errorMsg);
-
-  if(reserves.length === 0) {
-    return (<div className="reserves-container">
-      <h1 className="reserves-title">Mis reservas</h1>
-      <div className="reserve-item-list-container">
-        <ul className="reserve-item-list">
-          <li className="reserve-info" style={{
-            backgroundColor: "rgba(255, 255, 255, 0.623)",
-            borderRadius: "30px",
-            height: "60vh",
-            width: "90vw",
-
-          }}>
-            {/* {errorMsg && ( */}
-            <div
+  if (reserve.length === 0) {
+    return (
+      <div className="reserves-container">
+        <h1 className="reserves-title">Mis reservas</h1>
+        <div className="reserve-item-list-container">
+          <ul className="reserve-item-list">
+            <li
+              className="reserve-info"
               style={{
-                color: "red",
-                minHeight: "1.5em",
-                textAlign: "center",
-                marginTop: "20px",
+                backgroundColor: "rgba(255, 255, 255, 0.623)",
+                borderRadius: "30px",
+                height: "60vh",
+                width: "90vw",
               }}
             >
-              {errorMsg}
-            </div>
-            {/* )} */}
-          </li>
-        </ul>
+              {/* {errorMsg && ( */}
+              <div
+                style={{
+                  color: "red",
+                  minHeight: "1.5em",
+                  textAlign: "center",
+                  marginTop: "20px",
+                }}
+              >
+                {errorMsg}
+              </div>
+              {/* )} */}
+            </li>
+          </ul>
+        </div>
+        <div className="reserve-details-container"></div>
       </div>
-      <div className="reserve-details-container"></div>
-    </div>);
+    );
   } else {
-    return (<div className="reserves-container">
-      <h1 className="reserves-title">Mis reservas</h1>
-      <div className="reserve-item-list-container">
-        <ul className="reserve-item-list">{reserves.map(reservesRender)}</ul>
+    return (
+      <div className="reserves-container">
+        <h1 className="reserves-title">Mis reservas</h1>
+        <div className="reserve-item-list-container">
+          <ul className="reserve-item-list">{reserve.map(reservesRender)}</ul>
+        </div>
       </div>
-      <div className="reserve-details-container"></div>
-    </div>);
+    );
   }
   // return reserves.lenght === 0 ? (
   //   <div className="reserves-container">

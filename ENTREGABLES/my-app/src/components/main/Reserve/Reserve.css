@@ -19,6 +19,11 @@
   border-radius: 1rem;
 }
 
+.reserve-date-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .reserve-li-item-error {
   background-color: var(--white-background);
   border: none;

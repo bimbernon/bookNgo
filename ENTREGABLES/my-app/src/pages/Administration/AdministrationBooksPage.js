@@ -74,24 +74,41 @@ export function AdministrationBooksPage() {
 
   const renderBooks = (book) => (
     <div className="admin-book-container">
-      <Book
-        style={style}
+      <li
+        style={{
+          display: "grid",
+          gridTemplateColumns: "60px 235px 10px",
+          gap: "1rem",
+          justifyItems: "center",
+          alignItems: "center",
+          backgroundColor: "white",
+          borderRadius: "0.5rem",
+          width: "22rem",
+          height: "6rem",
+        }}
         bookId={book.idlibro}
         key={book.idlibro}
         bookName={book.titulo}
         imageId={book.idlibro}
-      />
-      <form>
-        <button
-          className="delete-book-button"
-          style={deleteStyle}
-          value={book.idlibro}
-          onClick={(e) => {
-            e.preventDefault();
-            handleDeleteBook(book.idlibro);
-          }}
+      >
+        <img
+          src={`/images/books/${book.idlibro}.jpg`}
+          alt={book.titulo}
+          style={{ width: "50px" }}
         />
-      </form>
+        <p style={{ justifySelf: "start" }}>{book.titulo}</p>
+        <form>
+          <button
+            className="delete-book-button"
+            style={deleteStyle}
+            value={book.idlibro}
+            onClick={(e) => {
+              e.preventDefault();
+              handleDeleteBook(book.idlibro);
+            }}
+          />
+        </form>
+      </li>
     </div>
   );
 
