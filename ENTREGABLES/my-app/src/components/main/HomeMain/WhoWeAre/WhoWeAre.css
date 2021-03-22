@@ -45,3 +45,14 @@
   text-align: left;
   list-style: none;
 }
+
+
+@media (min-width: 660px) {
+  .whoWeAre-container {
+  background-color: var(--white-background);
+  border-radius: 1rem;
+  margin: 1rem auto;
+  max-width: 62.5vw;
+  padding: 1rem 1.5rem;
+}
+}
