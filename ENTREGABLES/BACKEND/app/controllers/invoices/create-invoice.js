@@ -19,7 +19,9 @@ async function createInvoice(req, res) {
     const { idusuario } = req.auth;
     const total = 0.0;
     const fecha = dateFormatted(new Date(), "-");
-    const { iva, precioenvio, detalles } = req.body;
+    const iva = 21;
+    const precioenvio = 3;
+    const { detalles } = req.body;
 
     await schema.validateAsync(req.body);
 
