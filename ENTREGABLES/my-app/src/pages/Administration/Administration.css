@@ -161,10 +161,47 @@ a {
   width: 20rem;
   height: 6rem;
   padding-left: 1rem;
-  overflow-y: scroll;
 }
 
 .admin-books-list-li > p {
   font-size: 0.85rem;
   width: 10rem;
+}
+
+@media (min-width: 660px) {
+  .administration-page-container {
+    background-color: var(--white-background);
+    border-radius: 20px;
+    height: 30rem;
+    margin: 1rem auto;
+    max-width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .users-list {
+    max-width: 50vw;
+    margin: 0 auto;
+  }
+
+  .all-books-list {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+    max-width: 50vw;
+  }
+
+  .admin-books-list-li {
+    display: grid;
+    grid-template-columns: 100px auto 60px;
+    gap: 1rem;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--white-background);
+    border-radius: 0.5rem;
+    width: 50vw;
+    padding-left: 1rem;
+  }
 }

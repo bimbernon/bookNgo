@@ -106,3 +106,19 @@
   width: 1.4rem;
   height: 1.4rem;
 }
+
+@media (min-width: 660px) {
+  .ppal-browser {
+    width: 27rem;
+    background: var(--white-background);
+  }
+
+  .ppal-browser-form {
+    width: 27rem;
+    background: var(--white-background);
+  }
+
+  .ppal-browser-submit-button {
+    left: 25rem;
+  }
+}

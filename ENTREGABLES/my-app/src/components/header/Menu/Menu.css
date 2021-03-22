@@ -37,13 +37,7 @@
 
 @media (min-width: 660px) {
   .session-nav {
-  list-style: none;
-  display: inline-block;
-  padding: 0;
-  display: none;
-  background-color: rgba(255, 255, 255, 0.89);
-  height: 10%;
-  width: 100%;
-  z-index: 10;
-}
+    height: 50%;
+    width: 100%;
+  }
 }

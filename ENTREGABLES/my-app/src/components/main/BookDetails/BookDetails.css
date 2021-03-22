@@ -42,3 +42,13 @@
   right: 9.5rem;
   top: 4.5rem;
 }
+
+@media (min-width: 660px) {
+  .book-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 50vw;
+  margin: 0 auto;
+}
+}

@@ -5,6 +5,7 @@ import { UserContext } from "../components/providers/UserProvider";
 import { Reserve } from "../components/main/Reserve/Reserve";
 import "../components/main/Reserve/Reserve";
 import "../components/main/Reserve/Reserve.css";
+import { InsertInvoice } from "../components/main/Invoice/InsertInvoice/InsertInvoice";
 
 export const UserReserves = () => {
   const [token] = useContext(AuthContext);
@@ -37,11 +38,7 @@ export const UserReserves = () => {
         expirationDate={reserves.fechadevolucion}
       >
         <Link to={`/reserve/${reserve.idlibro}/${reserve.fechareserva}`}>
-          <img
-            src="/icons/icono-factura.png"
-            alt="icono-factura"
-            style={{ background: "none", height: "2rem", width: "2rem" }}
-          ></img>
+          <InsertInvoice  reserve={reserve}/>
         </Link>
       </Reserve>
     </div>

@@ -65,3 +65,17 @@
   margin: 0;
   padding: 0;
 }
+
+@media (min-width: 660px) {
+  .reserve-item-list-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem auto;
+    max-width: 50vw;
+  }
+
+  .reserve-li-item {
+    max-width: 40vw;
+  }
+}

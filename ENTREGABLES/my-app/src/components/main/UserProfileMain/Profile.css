@@ -86,3 +86,16 @@
   top: 5.5rem;
   right: 2.5rem;
 }
+
+@media (min-width: 660px) {
+  .user-profile-container {
+  align-items: center;
+  background-color: var(--white-background);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto;
+  max-width: 50vw;
+  height: 45rem;
+}
+}
