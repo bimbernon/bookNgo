@@ -40,21 +40,27 @@ export const BookDetails = () => {
     backgroundColor: "red",
   };
 
-    const handleLink = (e) =>
-      !token ? (
-        Swal.fire({
-          icon: "error",
-          title: "Lo sentimos",
-          text: "Tienes que ser Booker para poder hacer reservas.",
-        })
-      ) : (
-        <Redirect to={`/user/book/mochila/${bookId}`} />
-      );
+  const handleLink = (e) =>
+    !token ? (
+      Swal.fire({
+        icon: "error",
+        title: "Lo sentimos",
+        text: "Tienes que ser Booker para poder hacer reservas.",
+      })
+    ) : (
+      <Redirect to={`/user/book/mochila/${bookId}`} />
+    );
 
   return book.stock === 0 ? (
     <div className="book-details-container">
       <a href={`javascript:history.go(${back})`} className="back-button">
-        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+        <img
+          src={`/icons/brown-back-button.svg`}
+          height="30"
+          width="30"
+          alt="Botón"
+          style={{ position: "relative", top: "4rem", right: "8rem" }}
+        />
       </a>
       <Book
         bookId={book.idlibro}
@@ -79,7 +85,13 @@ export const BookDetails = () => {
   ) : !token ? (
     <div className="book-details-container">
       <a href={`javascript:history.go(${back})`} className="back-button">
-        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+        <img
+          src={`/icons/brown-back-button.svg`}
+          height="30"
+          width="30"
+          alt="Botón"
+          style={{ position: "relative", top: "4rem", right: "8rem" }}
+        />
       </a>
       <Book
         bookId={book.idlibro}
@@ -90,19 +102,25 @@ export const BookDetails = () => {
         bookPrice={`Precio: ${book.precio}`}
         bookSinopsis={book.sinopsis}
       ></Book>
-        <button
-          type="submit"
-          className="book-details-reserve-button"
-          bookId={bookId}
-          onClick={handleLink}
-        >
-          Reservar
-        </button>
+      <button
+        type="submit"
+        className="book-details-reserve-button"
+        bookId={bookId}
+        onClick={handleLink}
+      >
+        Reservar
+      </button>
     </div>
   ) : (
     <div className="book-details-container">
       <a href={`javascript:history.go(${back})`} className="back-button">
-        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+        <img
+          src={`/icons/brown-back-button.svg`}
+          height="30"
+          width="30"
+          alt="Botón"
+          style={{ position: "relative", top: "4rem", right: "8rem" }}
+        />
       </a>
       <Book
         bookId={book.idlibro}
@@ -126,4 +144,6 @@ export const BookDetails = () => {
     </div>
   );
 };
-{/* <Redirect to={`/user/book/mochila/${bookId}`} />; */}
+{
+  /* <Redirect to={`/user/book/mochila/${bookId}`} />; */
+}

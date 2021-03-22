@@ -2,15 +2,15 @@
 
 .footer {
   background-color: var(--title-brown-color);
-  padding: 10px;
-  font-size: 0.6rem;
   display: flex;
+  font-size: 0.7rem;
   justify-content: space-around;
+  padding: 0.5rem;
 }
 
 .creators-list {
-  list-style: none;
   display: flex;
+  list-style: none;
   margin: 0;
   padding: 0;
 }
@@ -18,8 +18,8 @@
 .creator-li {
   display: flex;
   flex-direction: row;
+  font-weight: 900;
   margin: 0;
   padding: 0 1.2rem;
-  font-weight: 900;
   text-align: center;
 }

@@ -35,7 +35,6 @@
 .add-card-form-item {
   display: flex;
   justify-content: center;
-  font-family: "Comfortaa";
 }
 
 .add-card-form-item > input {
@@ -44,7 +43,9 @@
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
   height: 30px;
   margin: 20px 20px 0px 20px;
-  width: 300px;
+  width: 280px;
+  padding-left: 1rem;
+  font-family: "Comfortaa";
 }
 
 .add-card-button-container {
@@ -74,8 +75,9 @@
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
   height: 30px;
   margin: 20px 20px 0px 20px;
-  width: 300px;
-  padding-left: 0.5rem;
+  width: 280px;
+  padding-left: 1rem;
+  font-family: "Comfortaa";
 }
 
 .add-card-submit-button {

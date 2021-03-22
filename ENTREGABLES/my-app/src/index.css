@@ -53,6 +53,15 @@ h2 {
   padding: 0 1rem;
 }
 
+.terms-container {
+  height: 70vh;
+  width: 90vw;
+  background-color: var(--white-background);
+  border-radius: 50px;
+  margin: 0 auto;
+  margin-top: 1.2rem;
+}
+
 /*  {
   outline: 1px solid tomato;
 } */

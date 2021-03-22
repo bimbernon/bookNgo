@@ -10,7 +10,6 @@ export const UserReserves = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [reserve, setReserve] = useState([]);
-  console.log(reserve);
 
   useEffect(() => {
     async function getReservesByUserId() {
@@ -54,18 +53,18 @@ export const UserReserves = () => {
   if (reserve.length === 0) {
     return (
       <div className="reserves-container">
-        <h1 className="reserves-title">Mis reservas</h1>
-        <div className="reserve-item-list-container">
+        <div
+          className="reserve-item-list-container"
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.623)",
+            borderRadius: "30px",
+            height: "60vh",
+            width: "90vw",
+          }}
+        >
+          <h1 className="reserves-title">Mis reservas</h1>
           <ul className="reserve-item-list">
-            <li
-              className="reserve-info"
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0.623)",
-                borderRadius: "30px",
-                height: "60vh",
-                width: "90vw",
-              }}
-            >
+            <li className="reserve-info">
               {/* {errorMsg && ( */}
               <div
                 style={{
@@ -87,8 +86,16 @@ export const UserReserves = () => {
   } else {
     return (
       <div className="reserves-container">
-        <h1 className="reserves-title">Mis reservas</h1>
-        <div className="reserve-item-list-container">
+        <div
+          className="reserve-item-list-container"
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.623)",
+            borderRadius: "30px",
+            height: "60vh",
+            width: "90vw",
+          }}
+        >
+          <h1 className="reserves-title">Mis reservas</h1>
           <ul className="reserve-item-list">{reserve.map(reservesRender)}</ul>
         </div>
       </div>

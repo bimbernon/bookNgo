@@ -27,6 +27,7 @@ import { AdministrationUsersPage } from "./pages/Administration/AdministrationUs
 import { AdministrationBooksPage } from "./pages/Administration/AdministrationBooksPage";
 import { AdministrationDonationsPage } from "./pages/Administration/AdministrationDonationsPage";
 import { CreateBook } from "./pages/Administration/AdministrationCreateBooksPage";
+import { TermsAndConditions } from "./pages/TermsAndConditions";
 
 function App() {
   const style = {
@@ -104,6 +105,9 @@ function App() {
                   </Route> */}
                   <Route path="/user/book/mochila/:bookId">
                     <BackPack />
+                  </Route>
+                  <Route path="/terms">
+                    <TermsAndConditions />
                   </Route>
                   <Route path="/">
                     <Home />

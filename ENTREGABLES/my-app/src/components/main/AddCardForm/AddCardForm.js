@@ -123,7 +123,7 @@ const AddCardForm = () => {
           <div className="add-card-form-item">
             <input
               type="text"
-              placeholder={`     Numero de tarjeta`}
+              placeholder={`Numero de tarjeta`}
               value={cardNumber}
               onChange={handleChangeCardNumber}
             />
@@ -131,7 +131,7 @@ const AddCardForm = () => {
           <div className="add-card-form-item">
             <input
               type="text"
-              placeholder={`     Fecha de caducidad`}
+              placeholder={`Fecha de caducidad`}
               value={expirationDate}
               onChange={handleChangeExpirationDate}
             />
@@ -139,7 +139,7 @@ const AddCardForm = () => {
           <div className="add-card-form-item">
             <input
               type="text"
-              placeholder={`     CSV`}
+              placeholder={`CSV`}
               value={csv}
               onChange={handleChangeCsv}
             />

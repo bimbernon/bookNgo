@@ -236,31 +236,17 @@ export const UserPurse = () => {
             ></img>
           </button>
         </div>
-        <div className="effective-recharge-button-container">
-          <p style={{ fontSize: "0.5rem" }}>
-            Términos y condiciones de recarga
-          </p>
-          <form onSubmit={handleRecharge}>
-            <button className="effective-recharge-button" type="submit">
-              Recargar
-            </button>
-          </form>
-        </div>
       </div>
-
-      {/* {errorMsg && (
-        <div
-          style={{
-            color: "red",
-            minHeight: "1.5em",
-            textAlign: "center",
-            marginTop: "20px",
-          }}
-        >
-          {" "}
-          {errorMsg}
-        </div>
-      )} */}
+      <div className="effective-recharge-button-container">
+        <form onSubmit={handleRecharge}>
+          <button className="effective-recharge-button" type="submit">
+            Recargar
+          </button>
+        </form>
+      </div>
+      <Link to="/terms" className="terms">
+        Términos y condiciones de recarga
+      </Link>
     </div>
   );
 };

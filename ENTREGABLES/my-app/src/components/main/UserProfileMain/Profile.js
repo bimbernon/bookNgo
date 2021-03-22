@@ -49,7 +49,7 @@ const Profile = () => {
   const sytle = {
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    border: "7px solid  #cc9966",
+    border: "7px solid rgb(187, 164, 94)",
     borderRadius: "50rem",
     boxShadow: "5px 5px 5px rgb(58, 55, 55",
     width: "7rem",
@@ -118,7 +118,7 @@ const Profile = () => {
                   height: "2.8rem",
                   width: "2.8rem",
                   borderRadius: "50px",
-                  backgroundColor: "#cc9966",
+                  backgroundColor: "rgb(187, 164, 94)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",

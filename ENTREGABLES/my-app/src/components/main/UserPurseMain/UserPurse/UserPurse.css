@@ -1,16 +1,16 @@
 @import "../../../../index.css";
 
 .purse-container {
-  text-align: center;
+  align-items: center;
   background-color: var(--white-background);
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 90%;
-  padding: 0.9rem 0.5rem;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
-  border-radius: 1rem;
+  padding: 0.9rem 0.5rem;
+  text-align: center;
+  width: 90%;
 }
 
 .purse-title {
@@ -19,22 +19,22 @@
 }
 
 .money-container {
+  align-content: center;
   display: flex;
   justify-content: flex-start;
-  align-content: center;
   margin: 0 2rem;
 }
 
 .money-display-container {
-  display: flex;
-  justify-content: center;
   align-self: center;
-  border-radius: 0.5rem;
-  text-align: center;
-  height: 3rem;
-  width: 5rem;
   background-color: var(--white-background);
+  border-radius: 0.5rem;
+  display: flex;
+  height: 3rem;
+  justify-content: center;
   margin-left: 1rem;
+  text-align: center;
+  width: 5rem;
 }
 
 .money-display {
@@ -42,10 +42,10 @@
 }
 
 .payment-container {
+  align-content: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-content: center;
   margin: 0 2rem;
 }
 
@@ -53,52 +53,52 @@
   border: none;
   border-radius: 20px;
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
+  font-family: "Comfortaa";
   height: 30px;
   margin: 20px 20px 0px 20px;
-  width: 300px;
   padding-left: 0.5rem;
-  font-family: "Comfortaa";
+  width: 300px;
 }
 
 .recharge-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr 1fr;
   margin-top: 1rem;
 }
 
 .recharge-button {
-  border: 0px;
-  color: white;
-  background-color: var(--small-logo-color);
-  border-radius: 3.5rem;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 6rem;
-  height: 6rem;
-  padding-left: 1rem;
-  margin: 0.3rem;
+  background-color: var(--small-logo-color);
+  border: 0px;
+  border-radius: 3.5rem;
+  box-shadow: 5px 5px 5px rgb(58 55 55);
+  color: white;
+  display: flex;
   font-family: "Comfortaa";
   font-size: 1.3rem;
-  box-shadow: 5px 5px 5px rgb(58 55 55);
+  height: 6rem;
+  justify-content: center;
   margin: 0.5rem 1rem;
-}
-
-.effective-recharge-button-container {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: space-around;
+  padding-left: 1rem;
+  width: 6rem;
 }
 
 .add-card-button,
 .effective-recharge-button {
-  text-align: center;
-  font-family: "Comfortaa";
-  padding: 0.5rem 0.3rem;
+  background-color: var(--title-brown-color);
   border: 0;
   border-radius: 50px;
-  color: white;
   box-shadow: 5px 5px 5px rgb(58, 55, 55);
-  background-color: var(--title-brown-color);
+  color: white;
+  font-family: "Comfortaa";
   margin: 1rem 0;
+  padding: 0.5rem 0.3rem;
+  text-align: center;
+}
+
+.terms {
+  font-size: 0.5rem;
+  margin-top: 0.5rem;
+  text-decoration: underline;
 }
