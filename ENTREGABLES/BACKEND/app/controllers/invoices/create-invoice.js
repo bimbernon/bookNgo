@@ -3,7 +3,6 @@ const { dateFormatted } = require("../../helpers/date");
 const { insertInvoice } = require("../../repositories/invoices-repository");
 const Joi = require("joi");
 const schema = Joi.object().keys({
-  idfactura: Joi.number().positive().required(),
   iva: Joi.number().positive().required(),
   precioenvio: Joi.number().positive().required(),
   detalles: Joi.array().items(
