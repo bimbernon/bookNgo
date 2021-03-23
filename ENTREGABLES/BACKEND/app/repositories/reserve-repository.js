@@ -3,6 +3,7 @@
 const { isError } = require("joi");
 const Joi = require("joi");
 const database = require("../infrastructure/database");
+const { dateFormatted } = require("../helpers/date");
 
 async function readAll() {
   const pool = await database.getPool();
@@ -16,7 +17,12 @@ async function findFirstReserveToEnd(bookId) {
   const pool = await database.getPool();
   const query = `select min(fechadevolucion) as fechadevolucion from reserva where idlibro=?`;
   const [reserve] = await pool.query(query, bookId);
-
+  console.log("MES" + reserve[0].fechadevolucion.getMonth());
+  reserve[0].fechadevolucion = dateFormatted(
+    new Date(reserve[0].fechadevolucion),
+    "/"
+  );
+  console.log(dateFormatted(new Date(reserve[0].fechadevolucion + ""), "/"));
   return reserve;
 }
 
@@ -24,7 +30,8 @@ async function findReserveByUserId(userId) {
   const pool = await database.getPool();
   const query = `select * from libro l inner join reserva r on l.idlibro = r.idlibro where r.idusuario=?`;
   const [reserveByUser] = await pool.query(query, userId);
-  console.log(reserveByUser)
+
+  console.log(reserveByUser);
 
   return reserveByUser;
 }

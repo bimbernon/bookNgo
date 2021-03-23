@@ -18,15 +18,15 @@ function dateFormatted(date, character) {
 }
 
 function formatDayDate(date) {
-  if (date.getDay() <= 10) {
-    return "0" + date.getDay();
+  if (date.getDate() < 10) {
+    return "0" + date.getDate();
   }
-  return date.getDay();
+  return date.getDate();
 }
 
 function formatMonthDate(date) {
-  if (date.getMonth() <= 10) {
-    return "0" + date.getMonth();
+  if (date.getMonth() < 10) {
+    return "0" + (date.getMonth() + 1);
   }
 }
 

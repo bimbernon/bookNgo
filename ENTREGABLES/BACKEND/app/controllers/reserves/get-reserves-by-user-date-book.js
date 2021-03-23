@@ -10,8 +10,6 @@ const schema = Joi.object().keys({
   fechareserva: Joi.required(),
 });
 
-// /search/:idusuario/:idlibro/:fechareserva
-
 async function getReserveByUserDateBook(req, res) {
   try {
     const { idusuario, idlibro, fechareserva } = req.params;
