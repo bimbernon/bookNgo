@@ -23,6 +23,8 @@ export const UserReserves = () => {
       if (reserveResponse.ok) {
         const allReservesData = await reserveResponse.json();
         setReserve(allReservesData);
+      } else {
+        throw new Error("Algo ha salido mal..")
       }
     }
     getReservesByUserId();

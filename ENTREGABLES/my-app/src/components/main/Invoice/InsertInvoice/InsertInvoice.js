@@ -7,6 +7,7 @@ export const InsertInvoice = (props) => {
   const [token] = useContext(AuthContext);
   const [, setErrorMsg] = useState("");
   const precioenvio = 1;
+  const iva = 21;
 
   const handleChangeInvoice = (e) => setInvoice(e.target.value);
 
@@ -22,7 +23,7 @@ export const InsertInvoice = (props) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          iva: "21",
+          iva: iva,
           precioenvio: precioenvio,
           detalles: [{ idlibro: reserve.idlibro, precio: reserve.precio }],
         }),
@@ -39,7 +40,11 @@ export const InsertInvoice = (props) => {
 
   return (
     <form onSubmit={createInvoiceEffect}>
-      <button type="submit" onClick={handleChangeInvoice} value={reserve.idlibro}>
+      <button
+        type="submit"
+        onClick={handleChangeInvoice}
+        // value={}
+      >
         {" "}
         <img
           src="/icons/icono-factura.png"

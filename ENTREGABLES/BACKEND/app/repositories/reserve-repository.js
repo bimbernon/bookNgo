@@ -12,6 +12,14 @@ async function readAll() {
   return reserve;
 }
 
+async function findFirstReserveToEnd(bookId) {
+  const pool = await database.getPool();
+  const query = `select min(fechadevolucion) as fechadevolucion from reserva where idlibro=?`;
+  const [reserve] = await pool.query(query, bookId);
+
+  return reserve;
+}
+
 async function findReserveByUserId(userId) {
   const pool = await database.getPool();
   const query = `select * from libro l inner join reserva r on l.idlibro = r.idlibro where r.idusuario=?`;
@@ -123,6 +131,7 @@ module.exports = {
   decreaseBookStock,
   decreasePurse,
   eraseReserve,
+  findFirstReserveToEnd,
   findReserveByUserId,
   findReserveByUserDateBook,
   modifyReserve,

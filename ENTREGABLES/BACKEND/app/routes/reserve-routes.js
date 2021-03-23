@@ -15,8 +15,15 @@ const { validateAuth } = require("../middlewares/validate-auth");
 const {
   getReserveByUserDateBook,
 } = require("../controllers/reserves/get-reserves-by-user-date-book");
+const {
+  getFirstReseveToEndByBookId,
+} = require("../controllers/reserves/get-first-reserve-to-end-by-book-id");
 
 const router = express.Router();
+
+router
+  .route("/:idlibro")
+  .get((req, res) => getFirstReseveToEndByBookId(req, res));
 
 router
   .route("/")
@@ -43,5 +50,6 @@ router
   .route("/:userId")
   .all(validateAuth)
   .get((req, res) => getReservesByUserId(req, res));
+
 
 module.exports = router;

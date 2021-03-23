@@ -11,7 +11,9 @@ export const BookDetails = () => {
   const [book, setBook] = useState(null);
   let { bookId } = useParams();
   const [back, setBack] = useState(-1);
+  const [date, setDate] = useState([]);
   const [token] = useContext(AuthContext);
+
 
   useEffect(() => {
     async function getBookById() {
@@ -26,6 +28,21 @@ export const BookDetails = () => {
     }
     getBookById();
   }, []);
+
+   useEffect(() => {
+     async function getFirstDateToReserve() {
+       const dateResponse = await fetch(
+         `http://localhost:3080/api/v1/reserves/${bookId}`
+       );
+
+       if (dateResponse.ok) {
+         const dateResponseData = await dateResponse.json();
+         setDate(dateResponseData);
+         console.log(dateResponseData)
+       }
+     }
+     getFirstDateToReserve();
+   }, []);
 
   if (!book) return <Loading />;
 
@@ -70,7 +87,7 @@ export const BookDetails = () => {
         bookAuthor={`${book.nombreautor} ${book.apel1}`}
         bookPrice={`Precio: ${book.precio}`}
         bookSinopsis={book.sinopsis}
-        stockMsg={`Actualmente no tenemos stock disponible para este libro.`}
+        stockMsg={`Actualmente no tenemos stock disponible para este libro. Podras reservar el libro a partir del ${date.fechadevolucion}`}
       ></Book>
 
       <button
