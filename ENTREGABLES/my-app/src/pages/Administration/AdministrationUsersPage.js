@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { User } from "../../components/main/User/User";
+import Loading from "../../components/Loading";
 import Swal from "sweetalert2";
 import "./Administration.css";
 
@@ -53,8 +54,6 @@ function AdministrationUsersPage() {
     }
   };
 
-  console.log(users);
-
   const renderUsers = (user) => (
     <User
       key={user.idusuario}
@@ -71,6 +70,8 @@ function AdministrationUsersPage() {
   );
 
   if (!token) return <Redirect to="/" />;
+
+  if (!users) return <Loading />;
 
   return (
     <div>

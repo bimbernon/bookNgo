@@ -13,7 +13,7 @@ export const BookDetails = () => {
   const [back, setBack] = useState(-1);
   const [date, setDate] = useState([]);
   const [token] = useContext(AuthContext);
-
+  const newDate = date.fechadevolucion;
 
   useEffect(() => {
     async function getBookById() {
@@ -29,20 +29,19 @@ export const BookDetails = () => {
     getBookById();
   }, []);
 
-   useEffect(() => {
-     async function getFirstDateToReserve() {
-       const dateResponse = await fetch(
-         `http://localhost:3080/api/v1/reserves/${bookId}`
-       );
+  useEffect(() => {
+    async function getFirstDateToReserve() {
+      const dateResponse = await fetch(
+        `http://localhost:3080/api/v1/reserves/reserveEnd/${bookId}`
+      );
 
-       if (dateResponse.ok) {
-         const dateResponseData = await dateResponse.json();
-         setDate(dateResponseData);
-         console.log(dateResponseData)
-       }
-     }
-     getFirstDateToReserve();
-   }, []);
+      if (dateResponse.ok) {
+        const dateResponseData = await dateResponse.json();
+        setDate(dateResponseData);
+      }
+    }
+    getFirstDateToReserve();
+  }, []);
 
   if (!book) return <Loading />;
 
@@ -87,7 +86,7 @@ export const BookDetails = () => {
         bookAuthor={`${book.nombreautor} ${book.apel1}`}
         bookPrice={`Precio: ${book.precio}`}
         bookSinopsis={book.sinopsis}
-        stockMsg={`Actualmente no tenemos stock disponible para este libro. Podras reservar el libro a partir del ${date.fechadevolucion}`}
+        stockMsg={`Actualmente no tenemos stock disponible para este libro. Podras reservarlo a partir del ${newDate}`}
       ></Book>
 
       <button
@@ -162,5 +161,4 @@ export const BookDetails = () => {
   );
 };
 {
-  /* <Redirect to={`/user/book/mochila/${bookId}`} />; */
 }

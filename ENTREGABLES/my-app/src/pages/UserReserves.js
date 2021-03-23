@@ -3,6 +3,7 @@ import { Redirect, Link } from "react-router-dom";
 import { AuthContext } from "../components/providers/AuthProvider";
 import { UserContext } from "../components/providers/UserProvider";
 import { Reserve } from "../components/main/Reserve/Reserve";
+import Loading from "../components/Loading";
 import "../components/main/Reserve/Reserve";
 import "../components/main/Reserve/Reserve.css";
 import { InsertInvoice } from "../components/main/Invoice/InsertInvoice/InsertInvoice";
@@ -11,6 +12,7 @@ export const UserReserves = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [reserve, setReserve] = useState([]);
+  console.log(reserve);
 
   useEffect(() => {
     async function getReservesByUserId() {
@@ -24,7 +26,7 @@ export const UserReserves = () => {
         const allReservesData = await reserveResponse.json();
         setReserve(allReservesData);
       } else {
-        throw new Error("Algo ha salido mal..")
+        throw new Error("Algo ha salido mal..");
       }
     }
     getReservesByUserId();
@@ -40,7 +42,7 @@ export const UserReserves = () => {
         expirationDate={reserves.fechadevolucion}
       >
         <Link to={`/reserve/${reserve.idlibro}/${reserve.fechareserva}`}>
-          <InsertInvoice  reserve={reserve}/>
+          <InsertInvoice reserve={reserve} />
         </Link>
       </Reserve>
     </div>
@@ -52,19 +54,18 @@ export const UserReserves = () => {
   if (reserve.length === 0) {
     return (
       <div className="reserves-container">
+        if (reserve.length === 0) return <Loading />
         <div
           className="reserve-item-list-container"
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.623)",
             borderRadius: "30px",
-            height: "60vh",
             width: "90vw",
           }}
         >
           <h1 className="reserves-title">Mis reservas</h1>
           <ul className="reserve-item-list">
             <li className="reserve-info">
-              {/* {errorMsg && ( */}
               <div
                 style={{
                   color: "red",
@@ -75,7 +76,6 @@ export const UserReserves = () => {
               >
                 {errorMsg}
               </div>
-              {/* )} */}
             </li>
           </ul>
         </div>
@@ -90,7 +90,6 @@ export const UserReserves = () => {
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.623)",
             borderRadius: "30px",
-            height: "60vh",
             width: "90vw",
           }}
         >
@@ -100,36 +99,4 @@ export const UserReserves = () => {
       </div>
     );
   }
-  // return reserves.lenght === 0 ? (
-  //   <div className="reserves-container">
-  //     <h1 className="reserves-title">Mis reservas</h1>
-  //     <div className="reserve-item-list-container">
-  //       <ul className="reserve-item-list">
-  //         <li className="reserve-info">
-  //           {/* {errorMsg && ( */}
-  //           <div
-  //             style={{
-  //               color: "red",
-  //               minHeight: "1.5em",
-  //               textAlign: "center",
-  //               marginTop: "20px",
-  //             }}
-  //           >
-  //             {errorMsg}
-  //           </div>
-  //           {/* )} */}
-  //         </li>
-  //       </ul>
-  //     </div>
-  //     <div className="reserve-details-container"></div>
-  //   </div>
-  // ) : (
-  //   <div className="reserves-container">
-  //     <h1 className="reserves-title">Mis reservas2</h1>
-  //     <div className="reserve-item-list-container">
-  //       <ul className="reserve-item-list">{reserves.map(reservesRender)}</ul>
-  //     </div>
-  //     <div className="reserve-details-container"></div>
-  //   </div>
-  // );
 };

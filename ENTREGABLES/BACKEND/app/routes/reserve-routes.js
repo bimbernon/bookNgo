@@ -22,7 +22,7 @@ const {
 const router = express.Router();
 
 router
-  .route("/:idlibro")
+  .route("/reserveEnd/:idlibro")
   .get((req, res) => getFirstReseveToEndByBookId(req, res));
 
 router
@@ -50,6 +50,5 @@ router
   .route("/:userId")
   .all(validateAuth)
   .get((req, res) => getReservesByUserId(req, res));
-
 
 module.exports = router;

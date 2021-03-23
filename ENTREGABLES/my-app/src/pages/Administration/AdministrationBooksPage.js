@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { AuthContext } from "../../components/providers/AuthProvider";
-import { Book } from "../../components/main/Book/Book";
+import Loading from "../../components/Loading";
 import Swal from "sweetalert2";
 import "./Administration.css";
 
@@ -60,11 +60,6 @@ export function AdministrationBooksPage() {
     }
   };
 
-  // const style = {
-  //   height: "12.5rem",
-  //   width: "17rem",
-  // };
-
   const deleteStyle = {
     background: `url("/icons/delete-red-button.png")`,
     backgroundSize: "cover",
@@ -103,6 +98,8 @@ export function AdministrationBooksPage() {
   );
 
   if (!token) return <Redirect to="/" />;
+
+  if (!books) return <Loading />;
 
   return (
     <div>

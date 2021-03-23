@@ -18,7 +18,7 @@ async function getFirstReseveToEndByBookId (req, res) {
         if(!reserveData) {
             throw new Error("No se ha encontrado la fecha mas proxima")
         }
-        res.status(200).send(reserveData);
+        res.status(200).send(reserveData[0]);
 
     } catch (err) {
         const error = new Error("Algo ha salido mal..");

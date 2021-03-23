@@ -29,6 +29,7 @@ async function getReservesByUserId(req, res) {
         }
 
         res.status(200).send(userReserve);
+        console.log(userReserve);
 
     } catch (err) {
       res.status(400).send({ error: err.message });
