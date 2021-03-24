@@ -39,11 +39,10 @@
   text-decoration: none;
 }
 
-
 @media (min-width: 660px) {
-.navigation-menu-item:hover > div > ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
+  .navigation-menu-item:hover > div > ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
 }

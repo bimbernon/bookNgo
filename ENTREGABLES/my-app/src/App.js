@@ -100,9 +100,9 @@ function App() {
                   <Route path="/books/">
                     <AdministrationBooksPage />
                   </Route>
-                  {/* <Route path="/donations/">
+                  <Route path="/donations/">
                     <AdministrationDonationsPage />
-                  </Route> */}
+                  </Route>
                   <Route path="/user/book/mochila/:bookId">
                     <BackPack />
                   </Route>

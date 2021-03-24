@@ -1,26 +1,46 @@
 @import url("../../../index.css");
 
-.donation-info-container {
+/* .donation-main-info {
+  list-style: none;
+  display: flex;
   background-color: var(--title-brown-color);
   color: white;
-  height: 6.5rem;
-  width: 95%;
-  border: 0.5px solid black;
-  border-collapse: separate;
-  border-radius: 20px;
+  height: 2.5rem;
+  width: 65vw;
+  border-radius: 1rem;
   text-align: center;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  margin: 0.3rem 0;
+  margin: 0 auto;
+} */
+
+/* .donations-list {
+  list-style: none;
+  display: flex;
+} */
+
+.donations-item {
+  margin: 1rem 1rem;
 }
 
-.donations-list {
+.donation-main-info {
   list-style: none;
   display: flex;
 }
 
-.donations-item {
-  margin: 1rem 1rem;
+.update-donation-form {
+  display: flex;
+}
+
+.update-donation-button {
+  font-family: "Comfortaa";
+  padding: 0.5rem 0.6rem;
+  border: 0;
+  border-radius: 50px;
+  color: white;
+  box-shadow: 5px 5px 5px rgb(58, 55, 55);
+  background-color: var(--title-brown-color);
+  margin-top: 1rem;
+  width: 2.2rem;
 }

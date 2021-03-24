@@ -13,10 +13,11 @@ export const Administration = () => {
       <div className="administration-item-container">
         <Link to="/users">USUARIOS</Link>
       </div>
-      <div className="administration-item-container-books">
-        <div className="books-links-container">
-          <Link to="/books">LIBROS</Link>
-        </div>
+      <div className="administration-item-container">
+        <Link to="/books">LIBROS</Link>
+      </div>
+      <div className="administration-item-container">
+        <Link to="/donations">DONACIONES</Link>
       </div>
     </div>
   );

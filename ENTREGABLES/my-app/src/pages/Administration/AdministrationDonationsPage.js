@@ -48,9 +48,22 @@ function AdministrationDonationsPage() {
   return (
     <div className="donations-list-container">
       <Link to={`/administration`}>
-        <img src={`/icons/back.png`} height="30" width="30" alt="Botón" />
+        <img
+          src={`/icons/brown-back-button.svg`}
+          height="30"
+          width="30"
+          alt="Botón"
+          className="back-button"
+          // style={{ position: "relative", left: "2rem", top: "1rem" }}
+        />
       </Link>
-      <h1 className="donations-title-list">DONACIONES</h1>
+      {/* <h1 className="donations-title-list">DONACIONES</h1> */}
+      <ul className="list-titles">
+        <li className="list-titles-li">ID DONACIÓN</li>
+        <li className="list-titles-li">TITULO LIBRO</li>
+        <li className="list-titles-li">ID USUARIP</li>
+        <li className="list-titles-li">FECHA DONACION</li>
+      </ul>
       <ul className="donations-list">
         <li className="donations-item">{donations.map(renderDonations)}</li>
       </ul>

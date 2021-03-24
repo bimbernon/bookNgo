@@ -109,7 +109,9 @@ export function AdministrationBooksPage() {
           height="30"
           width="30"
           alt="Botón"
-          style={{ position: "relative", left: "2rem", top: "1rem" }}
+          className="back-button"
+
+          // style={{ position: "relative", left: "2rem", top: "1rem" }}
         />
       </Link>
       <Link to="/books/create">

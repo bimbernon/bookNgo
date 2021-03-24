@@ -37,7 +37,7 @@
 
 @media (min-width: 660px) {
   .session-nav {
-    height: 50%;
+    height: 100%;
     width: 100%;
   }
 }

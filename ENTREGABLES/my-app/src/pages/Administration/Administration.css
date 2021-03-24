@@ -1,7 +1,7 @@
 .administration-page-container {
   background-color: var(--white-background);
   border-radius: 20px;
-  height: 30rem;
+  height: 40rem;
   margin: 1.2rem;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,6 @@
   align-items: center;
 }
 
-.administration-item-container-books,
 .administration-item-container {
   background-color: var(--title-brown-color);
   color: white;
@@ -21,18 +20,6 @@
   justify-content: center;
   align-items: center;
   margin: 0.3rem 0;
-}
-
-.administration-item-container-books {
-  display: flex;
-  justify-content: space-around;
-  margin: 0 2rem;
-}
-
-.books-links-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .books-links-container > a {
@@ -47,7 +34,7 @@
 
 .back-button {
   position: relative;
-  right: 1.5rem;
+  right: 0.5rem;
   top: 0rem;
   margin-bottom: 0.5rem;
 }
@@ -168,11 +155,28 @@ a {
   width: 10rem;
 }
 
+.list-titles,
+.donations-list {
+  list-style: none;
+  display: flex;
+  background-color: var(--white-background);
+  color: var(--dark-title-color);
+  height: 2.5rem;
+  width: 65vw;
+  border-radius: 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+}
+
 @media (min-width: 660px) {
   .administration-page-container {
     background-color: var(--white-background);
     border-radius: 20px;
-    height: 30rem;
+    height: 43rem;
     margin: 1rem auto;
     max-width: 50vw;
     display: flex;
@@ -203,5 +207,12 @@ a {
     border-radius: 0.5rem;
     width: 50vw;
     padding-left: 1rem;
+  }
+
+  .back-button {
+    position: relative;
+    right: 2.5rem;
+    top: 0rem;
+    margin-bottom: 0.5rem;
   }
 }

@@ -64,12 +64,12 @@
 
 @media (min-width: 660px) {
   .user-list-menu {
-    height: 50%;
+    height: 100%;
     width: 100%;
   }
 
   .user-list-menu-administration {
-    height: 50%;
+    height: 100%;
     width: 100%;
   }
 

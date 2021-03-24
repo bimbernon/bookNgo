@@ -12,7 +12,6 @@ export const UserReserves = () => {
   const [token] = useContext(AuthContext);
   const [selectedUser] = useContext(UserContext);
   const [reserve, setReserve] = useState([]);
-  console.log(reserve);
 
   useEffect(() => {
     async function getReservesByUserId() {
@@ -61,6 +60,7 @@ export const UserReserves = () => {
             backgroundColor: "rgba(255, 255, 255, 0.623)",
             borderRadius: "30px",
             width: "90vw",
+            height: "80vh",
           }}
         >
           <h1 className="reserves-title">Mis reservas</h1>

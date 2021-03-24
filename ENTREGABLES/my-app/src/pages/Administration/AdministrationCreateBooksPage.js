@@ -337,25 +337,23 @@ export const CreateBook = () => {
           </div>
         </form>
         <form>
-          <label htmlFor="upload-book-photo-input" className="photo-logo">
-            <img
-              src="/icons/upload-photo.png"
-              alt="uploadphoto"
-              style={{
-                height: "1.9rem",
-                width: "2rem",
-                position: "relative",
-                bottom: "4.5rem",
-                right: "5rem",
-              }}
-            />
-            <input
-              type="file"
-              id="upload-book-photo-input"
-              onChange={onFileBookChange}
-              style={{ display: "none" }}
-            />
-          </label>
+          <img
+            src="/icons/upload-photo.png"
+            alt="uploadphoto"
+            style={{
+              height: "1.9rem",
+              width: "2rem",
+              position: "relative",
+              bottom: "-1.5rem",
+              right: "8rem",
+            }}
+          />
+          <input
+            type="file"
+            id="upload-book-photo-input"
+            onChange={onFileBookChange}
+            style={{ display: "none" }}
+          />
         </form>
       </div>
     </div>
