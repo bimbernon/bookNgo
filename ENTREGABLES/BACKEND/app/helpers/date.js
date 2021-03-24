@@ -1,8 +1,10 @@
 "use strict";
 
 function addDateDays(date, dias) {
+  console.log(date, dias)
+  console.log('entro a formatearme la fecha')
   date.setDate(date.getDate() + dias);
-
+  console.log(date, 'date')
   return date;
 }
 

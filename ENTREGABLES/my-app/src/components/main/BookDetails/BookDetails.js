@@ -10,10 +10,11 @@ import { AuthContext } from "../../providers/AuthProvider";
 export const BookDetails = () => {
   const [book, setBook] = useState(null);
   let { bookId } = useParams();
-  const [back, setBack] = useState(-1);
+  const [back] = useState(-1);
   const [date, setDate] = useState([]);
   const [token] = useContext(AuthContext);
   const newDate = date.fechadevolucion;
+  console.log(date)
 
   useEffect(() => {
     async function getBookById() {
@@ -38,6 +39,7 @@ export const BookDetails = () => {
       if (dateResponse.ok) {
         const dateResponseData = await dateResponse.json();
         setDate(dateResponseData);
+        console.log(dateResponseData)
       }
     }
     getFirstDateToReserve();
