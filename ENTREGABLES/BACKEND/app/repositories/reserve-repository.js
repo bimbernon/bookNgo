@@ -61,6 +61,7 @@ async function addReserve(reserve) {
       fechadevolucion,
       valoracion,
     } = reserve;
+    console.log(reserve.fechareserva)
 
     const query = `INSERT INTO reserva ( idusuario, idlibro, fechareserva, fechadevolucion, rating) VALUES (?,?,?,?,?)`;
 

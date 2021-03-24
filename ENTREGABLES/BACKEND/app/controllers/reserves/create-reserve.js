@@ -43,19 +43,21 @@ async function createReserve(req, res) {
       );
       console.log(newReserveDate, "vuelvo del respositorio");
       const validReserveDate = newReserveDate[0].fechadevolucion;
-      console.log(validReserveDate, "validReserveDate");
+      const clonReserveDate = new Date(validReserveDate);
+      console.log(typeof validReserveDate, "validReserveDate");
+      console.log(clonReserveDate.getMonth(), 'mes clone')
+      console.log(clonReserveDate.getMonth() + 1, 'mes sumado')
+      clonReserveDate.setMonth(clonReserveDate.getMonth() + 1);
 
-      const reserveDevolution = addDateDays(
-        newReserveDate[0].fechadevolucion,
-        30
-      );
+      const reserveDevolution = addDateDays(validReserveDate, 30);
       console.log(reserveDevolution, "vuelvo de formatearme la fecha");
+      console.log(clonReserveDate, "clon");
       const rating = null;
 
       const reserve = {
         idusuario: idusuario,
         idlibro,
-        fechareserva: validReserveDate,
+        fechareserva: clonReserveDate,
         fechadevolucion: reserveDevolution,
         valoracion: rating,
       };

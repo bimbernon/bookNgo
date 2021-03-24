@@ -46,7 +46,7 @@ export const UserPurse = () => {
     getUserInfo();
   }, []);
 
-  const rechargePurse = async (e) => {
+  const rechargePurse = async () => {
     const userRechargeResponse = await fetch(
       `http://localhost:3080/api/v1/users/purse/recharge/${selectedUser.idusuario}`,
       {
@@ -147,7 +147,7 @@ export const UserPurse = () => {
       Swal.fire({
         icon: "error",
         title: "Lo sentimos",
-        text: "No se puede no tienes una tarjeta seleccionada",
+        text: "Debes seleccionar una tarjeta para poder recargar tu monedero.",
       });
     }
   };

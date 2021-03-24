@@ -215,4 +215,23 @@ a {
     top: 0rem;
     margin-bottom: 0.5rem;
   }
+
+  .terms-container {
+    max-width: 50vw;
+  }
+}
+
+.terms-container {
+  width: 85vw;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto;
+}
+
+.terms-title {
+  text-align: center;
+}
+
+.recharge-conditions-container {
+  padding: 1rem 2rem;
 }
